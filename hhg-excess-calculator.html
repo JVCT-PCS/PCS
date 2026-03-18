@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>HHG Excess Cost Determination System</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #0a0e1a;
+    --bg2:       #0d1422;
+    --bg3:       #080c18;
+    --border:    #1e3a5f;
+    --text:      #c8d4e8;
+    --muted:     #5a7a9a;
+    --accent:    #4a9fff;
+    --gold:      #c8a84b;
+    --green:     #4aff6b;
+    --red:       #ff6b6b;
+    --yellow:    #ffd700;
+    --mono:      'IBM Plex Mono', 'Courier New', monospace;
+    --sans:      'IBM Plex Sans', sans-serif;
+  }
+
+  html, body { height: 100%; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  #header {
+    background: linear-gradient(135deg, #0d1b2a 0%, #1a2744 100%);
+    border-bottom: 2px solid var(--border);
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .seal {
+    width: 48px; height: 48px;
+    background: radial-gradient(circle, #c8a84b, #8b6914);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+    box-shadow: 0 0 16px rgba(200,168,75,.4);
+  }
+  .header-text { flex: 1; }
+  .header-title { color: #e8d5a0; font-size: 17px; font-weight: 700; letter-spacing: 2px; }
+  .header-sub   { color: #7a9bbf; font-size: 10px; letter-spacing: 1px; margin-top: 2px; }
+  .badge {
+    background: #1e3a5f; color: #7ab8ff; font-size: 10px;
+    border: 1px solid #2a5f9e; padding: 3px 10px; border-radius: 2px;
+    letter-spacing: 1px; font-weight: 700;
+  }
+
+  /* ── Layout ── */
+  #layout { display: flex; min-height: calc(100vh - 82px); }
+
+  /* ── Sidebar ── */
+  #sidebar {
+    width: 200px; background: var(--bg3);
+    border-right: 1px solid var(--border);
+    padding: 20px 0; flex-shrink: 0;
+    display: flex; flex-direction: column;
+  }
+  .nav-item {
+    padding: 10px 18px;
+    cursor: pointer;
+    border-left: 3px solid transparent;
+    color: var(--muted);
+    font-size: 11px; letter-spacing: 1px;
+    display: flex; align-items: center; gap: 8px;
+    transition: all .15s;
+    user-select: none;
+  }
+  .nav-item:hover  { color: var(--accent); background: rgba(74,159,255,.05); }
+  .nav-item.active { background: #0d1f3c; border-left-color: var(--accent); color: var(--accent); }
+  #compute-btn {
+    margin: 20px 14px 0;
+    padding: 10px 0;
+    background: linear-gradient(135deg, #1a4fa0, #2a6fd4);
+    color: #e0eeff; border: none; border-radius: 3px;
+    font-family: var(--mono); font-weight: 700; font-size: 12px;
+    letter-spacing: 2px; cursor: pointer;
+    transition: opacity .15s;
+    box-shadow: 0 4px 16px rgba(42,111,212,.3);
+  }
+  #compute-btn:hover { opacity: .85; }
+
+  /* ── Main ── */
+  #main { flex: 1; padding: 24px 28px; overflow-y: auto; }
+
+  /* ── Tab panels ── */
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ── Section title ── */
+  .section-title {
+    color: var(--accent); font-size: 11px; letter-spacing: 3px; font-weight: 700;
+    text-transform: uppercase; margin-bottom: 14px;
+    border-bottom: 1px solid var(--border); padding-bottom: 7px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-title.sub { font-size: 10px; letter-spacing: 2px; margin-bottom: 12px; border: none; padding-bottom: 0; }
+
+  /* ── Card ── */
+  .card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 4px; padding: 18px 22px; margin-bottom: 18px;
+  }
+
+  /* ── Grid ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 14px; }
+
+  /* ── Field ── */
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .field label { color: var(--muted); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; }
+  .field input, .field select {
+    background: #060a14; border: 1px solid var(--border);
+    color: var(--text); padding: 7px 11px; border-radius: 3px;
+    font-size: 13px; font-family: var(--mono);
+    outline: none; width: 100%;
+    transition: border-color .15s;
+  }
+  .field input:focus, .field select:focus { border-color: var(--accent); }
+  .field input::placeholder { color: #2a4060; }
+
+  /* ── Alerts ── */
+  .alert {
+    padding: 10px 14px; border-radius: 3px;
+    font-size: 12px; letter-spacing: .4px; margin-bottom: 14px;
+  }
+  .alert-info    { background: #0d1422; border: 1px solid var(--border); color: #7ab8ff; }
+  .alert-warning { background: #1a1400; border: 1px solid #7a6000; color: var(--yellow); }
+  .alert-error   { background: #1a0a0a; border: 1px solid #8b1a1a; color: var(--red); }
+  .alert-success { background: #0a1a0a; border: 1px solid #1a6b1a; color: var(--green); }
+
+  /* ── Checkbox row ── */
+  .check-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .check-row input[type=checkbox] { accent-color: var(--accent); width: 15px; height: 15px; cursor: pointer; }
+  .check-row label { color: var(--muted); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; }
+
+  /* ── Divider ── */
+  .divider { border-top: 1px solid #111825; margin: 12px 0; }
+
+  /* ── Result rows ── */
+  .result-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 7px 0; border-bottom: 1px solid #111825;
+  }
+  .result-row.highlight { background: rgba(74,159,255,.05); padding-left: 8px; padding-right: 8px; }
+  .result-label { color: #7a9bbf; font-size: 12px; }
+  .result-value { font-size: 13px; font-weight: 600; color: var(--text); }
+  .result-value.green  { color: var(--green); }
+  .result-value.red    { color: var(--red); }
+  .result-value.yellow { color: var(--yellow); }
+  .result-value.blue   { color: #7ab8ff; }
+
+  /* ── Tags ── */
+  .tag {
+    display: inline-block; padding: 2px 8px; border-radius: 2px;
+    font-size: 10px; font-weight: 700; letter-spacing: 1px;
+  }
+  .tag-red    { background: #3a0a0a; color: var(--red);    border: 1px solid #8b1a1a; }
+  .tag-green  { background: #0a2a0a; color: var(--green);  border: 1px solid #1a6b1a; }
+  .tag-yellow { background: #2a1a00; color: var(--yellow); border: 1px solid #7a5000; }
+  .tag-blue   { background: #0d1f3c; color: #7ab8ff;       border: 1px solid var(--border); }
+
+  /* ── Results grid ── */
+  .results-two { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+  /* ── Liability box ── */
+  .liability-box {
+    border-radius: 4px; padding: 16px 20px; text-align: center;
+  }
+  .liability-label { color: var(--muted); font-size: 10px; letter-spacing: 2px; margin-bottom: 6px; }
+  .liability-amount { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+
+  /* ── Audit log ── */
+  #audit-log {
+    background: #060a14; border: 1px solid var(--border);
+    border-radius: 3px; padding: 14px;
+    max-height: 260px; overflow-y: auto;
+  }
+  .audit-line {
+    color: #4a7a9a; font-size: 11px; padding: 3px 0;
+    border-bottom: 1px solid #0e1828; font-family: monospace;
+  }
+  .audit-num { color: #2a5f8a; margin-right: 8px; }
+
+  /* ── Routing columns ── */
+  .route-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .route-col-label { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
+
+  /* ── Hidden ── */
+  .hidden { display: none !important; }
+
+  /* ── Scrollbar ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg3); }
+  ::-webkit-scrollbar-thumb { background: #1e3a5f; border-radius: 3px; }
+
+  @media (max-width: 900px) {
+    .grid-3 { grid-template-columns: 1fr 1fr; }
+    .grid-4 { grid-template-columns: 1fr 1fr; }
+    .results-two, .route-cols { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    #sidebar { width: 160px; }
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    #main { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div id="header">
+  <div class="seal">⚖</div>
+  <div class="header-text">
+    <div class="header-title">HHG EXCESS COST DETERMINATION SYSTEM</div>
+    <div class="header-sub">DEFENSE PERSONAL PROPERTY PROGRAM · 400NG TARIFF · JTR PARA. 0514 / 051401</div>
+  </div>
+  <div class="badge">CONTROLLED</div>
+</div>
+
+<div id="layout">
+
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <div class="nav-item active" data-tab="member">👤 MEMBER INFO</div>
+    <div class="nav-item" data-tab="weights">⚖️ WEIGHTS / GBL</div>
+    <div class="nav-item" data-tab="routing">🗺️ ROUTING</div>
+    <div class="nav-item" data-tab="rates400">📋 400NG RATES</div>
+    <div class="nav-item" data-tab="results">📊 RESULTS</div>
+    <button id="compute-btn">▶ COMPUTE</button>
+  </div>
+
+  <!-- Main -->
+  <div id="main">
+
+    <!-- TAB: MEMBER INFO -->
+    <div id="tab-member" class="tab-panel active">
+      <div class="section-title">👤 MEMBER INFORMATION</div>
+      <div class="card">
+        <div class="grid-3">
+          <div class="field"><label>Member Name</label><input id="memberName" placeholder="Last, First MI"/></div>
+          <div class="field"><label>Last 4 SSN</label><input id="ssnLast4" placeholder="XXXX" maxlength="4"/></div>
+          <div class="field"><label>Orders Date</label><input id="ordersDate" type="date"/></div>
+        </div>
+      </div>
+
+      <div class="section-title">🎖️ GRADE &amp; ENTITLEMENT</div>
+      <div class="card">
+        <div class="grid-3">
+          <div class="field">
+            <label>Member Type</label>
+            <select id="memberType" onchange="toggleGrade()">
+              <option value="MILITARY">Military</option>
+              <option value="CIVILIAN">Civilian (18,000 lbs)</option>
+            </select>
+          </div>
+          <div class="field" id="gradeField">
+            <label>Grade / Rank</label>
+            <select id="grade" onchange="updateEntitlementBadge()">
+              <optgroup label="Officers">
+                <option>O-10</option><option>O-9</option><option>O-8</option><option>O-7</option>
+                <option>O-6</option><option>O-5</option><option>O-4</option><option>O-3</option>
+                <option>O-3E</option><option>O-2</option><option>O-2E</option><option>O-1</option><option>O-1E</option>
+              </optgroup>
+              <optgroup label="Warrant Officers">
+                <option>W-5</option><option>W-4</option><option>W-3</option><option>W-2</option><option>W-1</option>
+              </optgroup>
+              <optgroup label="Enlisted">
+                <option>E-9</option><option>E-8</option><option>E-7</option><option>E-6</option>
+                <option value="E-5" selected>E-5</option><option>E-4</option><option>E-3</option><option>E-2</option><option>E-1</option>
+              </optgroup>
+            </select>
+          </div>
+          <div class="field">
+            <label>Dependents</label>
+            <select id="hasDependents" onchange="updateEntitlementBadge()">
+              <option value="yes">With Dependents</option>
+              <option value="no">Without Dependents</option>
+            </select>
+          </div>
+        </div>
+        <div id="entitlementBadge" class="alert alert-info" style="margin-top:14px;margin-bottom:0;">
+          Authorized Weight: <strong id="authWeightDisplay">7,200 lbs</strong> | Grade: <span id="gradeDisplay">E-5</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: WEIGHTS / GBL -->
+    <div id="tab-weights" class="tab-panel">
+      <div class="section-title">⚖️ SHIPMENT WEIGHTS</div>
+      <div class="card">
+        <div class="alert alert-info">Include ALL shipment types per JTR 0514. Total weight = HHG + UB + NTS + PPM.</div>
+        <div class="grid-4">
+          <div class="field"><label>HHG Weight (lbs)</label><input id="hhgWeight" type="number" placeholder="0"/></div>
+          <div class="field"><label>Unaccompanied Baggage (lbs)</label><input id="ubWeight" type="number" placeholder="0"/></div>
+          <div class="field"><label>Non-Temporary Storage (lbs)</label><input id="ntsWeight" type="number" placeholder="0"/></div>
+          <div class="field"><label>PPM / DITY (lbs)</label><input id="ppmWeight" type="number" placeholder="0"/></div>
+        </div>
+      </div>
+
+      <div class="section-title">🔄 REWEIGH</div>
+      <div class="card">
+        <div class="check-row">
+          <input type="checkbox" id="hasReweigh" onchange="toggleReweigh()"/>
+          <label for="hasReweigh">Member Requested / TSP Performed Reweigh</label>
+        </div>
+        <div id="reweighSection" class="hidden">
+          <div class="field" style="max-width:260px">
+            <label>Reweigh Weight (lbs)</label>
+            <input id="reweighWeight" type="number" placeholder="0"/>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title">🚫 EXCLUSIONS FROM ENTITLEMENT</div>
+      <div class="card">
+        <div class="alert alert-warning">Items below are excluded from the member's weight entitlement calculation per JTR policy. Caps applied automatically.</div>
+        <div class="grid-2">
+          <div class="field"><label>Gun Safe Weight (lbs) — Capped at 500 lbs</label><input id="gunSafe" type="number" placeholder="0"/></div>
+          <div class="field"><label>Medical Equipment (lbs)</label><input id="medEquip" type="number" placeholder="0"/></div>
+          <div class="field"><label>Pro Gear – Member (lbs) — Capped at 2,000 lbs</label><input id="proGearMember" type="number" placeholder="0"/></div>
+          <div class="field"><label>Pro Gear – Spouse (lbs) — Capped at 500 lbs</label><input id="proGearSpouse" type="number" placeholder="0"/></div>
+          <div class="field"><label>Other Exclusion (lbs)</label><input id="otherExcl" type="number" placeholder="0"/></div>
+          <div class="field"><label>Other Exclusion Description</label><input id="otherExclDesc" placeholder="Describe..."/></div>
+        </div>
+      </div>
+
+      <div class="section-title">📄 GOVERNMENT BILL OF LADING</div>
+      <div class="card">
+        <div class="grid-3">
+          <div class="field"><label>GBL Number</label><input id="gblNumber" placeholder="e.g. DDAH12345678"/></div>
+          <div class="field"><label>Actual Origin ZIP-3</label><input id="originZip3" placeholder="e.g. 853"/></div>
+          <div class="field"><label>Actual Destination ZIP-3</label><input id="destZip3" placeholder="e.g. 882"/></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: ROUTING -->
+    <div id="tab-routing" class="tab-panel">
+      <div class="section-title">🗺️ AUTHORIZED vs ACTUAL ROUTING</div>
+      <div class="alert alert-warning">If the member ships to a location NOT authorized by orders, the full cost of transportation may be the member's liability. Per JTR, shipments must originate and terminate within authorized locations.</div>
+      <div class="card" style="margin-top:14px">
+        <div class="route-cols">
+          <div>
+            <div class="route-col-label" style="color:var(--green)">✔ AUTHORIZED ROUTING</div>
+            <div class="field" style="margin-bottom:12px"><label>Auth. Origin ZIP-3</label><input id="authOriginZip3" placeholder="e.g. 853"/></div>
+            <div class="field" style="margin-bottom:12px"><label>Auth. Origin Installation / Location</label><input id="authOriginDesc" placeholder="e.g. Luke AFB Arizona"/></div>
+            <div class="field" style="margin-bottom:12px"><label>Auth. Destination ZIP-3</label><input id="authDestZip3" placeholder="e.g. 882"/></div>
+            <div class="field"><label>Auth. Destination Installation / Location</label><input id="authDestDesc" placeholder="e.g. Cannon AFB New Mexico"/></div>
+          </div>
+          <div>
+            <div class="route-col-label" style="color:var(--red)">⚠ ACTUAL ROUTING</div>
+            <div class="field" style="margin-bottom:12px"><label>Actual Origin ZIP-3</label><input id="actOriginZip3" placeholder="e.g. 853"/></div>
+            <div class="field" style="margin-bottom:12px"><label>Actual Origin Location</label><input id="actOriginDesc" placeholder="e.g. Luke AFB Arizona"/></div>
+            <div class="field" style="margin-bottom:12px"><label>Actual Destination ZIP-3</label><input id="actDestZip3" placeholder="e.g. 322"/></div>
+            <div class="field"><label>Actual Destination Location</label><input id="actDestDesc" placeholder="e.g. Tyndall AFB Florida"/></div>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="check-row" style="margin-bottom:0">
+          <input type="checkbox" id="isUnauthorizedRoute"/>
+          <label for="isUnauthorizedRoute" style="color:#ff9940">⚠ MANUALLY FLAG AS UNAUTHORIZED ROUTE (overrides ZIP-3 check)</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: 400NG RATES -->
+    <div id="tab-rates400" class="tab-panel">
+      <div class="section-title">📋 400NG TARIFF RATES</div>
+
+      <div class="card">
+        <div class="section-title sub">PACKING &amp; LINEHAUL</div>
+        <div class="grid-3">
+          <div class="field">
+            <label>Packing Allowance</label>
+            <select id="packingAllowance">
+              <option value="10%">10% → 11.11% reinstatement</option>
+              <option value="20%">20% → 25% reinstatement</option>
+              <option value="40%">40% → 66.67% reinstatement</option>
+              <option value="50%">50% → 100% reinstatement</option>
+              <option value="Flat">Flat (N/A)</option>
+            </select>
+          </div>
+          <div class="field"><label>Linehaul Discount (%)</label><input id="linehaulDiscount" type="number" placeholder="e.g. 64" step="0.01"/></div>
+          <div class="field"><label>SIT Discount (%)</label><input id="sitDiscount" type="number" placeholder="e.g. 50" step="0.01"/></div>
+          <div class="field"><label>Base Linehaul Charge ($)</label><input id="baseLinehaul" type="number" placeholder="0.00" step="0.01"/></div>
+          <div class="field"><label>Short Haul Charge ($)</label><input id="shortHaulCharge" type="number" placeholder="0.00" step="0.01"/></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-title sub">ORIGIN INFORMATION</div>
+        <div class="grid-3">
+          <div class="field"><label>Origin LH Factor Charge ($)</label><input id="origLHFactor" type="number" placeholder="0.00" step="0.01"/></div>
+          <div class="field"><label>Origin Services Charge ($)</label><input id="origServices" type="number" placeholder="0.00" step="0.01"/></div>
+          <div class="field"><label># Days in Origin SIT</label><input id="origSitDays" type="number" placeholder="0"/></div>
+          <div class="field"><label>Origin SIT 1st Day Rate ($)</label><input id="origSit1stDay" type="number" placeholder="0.00" step="0.01"/></div>
+          <div class="field"><label>Origin SIT Add'l Day Rate ($)</label><input id="origSitAddlDay" type="number" placeholder="0.00" step="0.01"/></div>
+          <div class="field"><label>Origin SIT Pickup (0–30 mi) ($)</label><input id="origSitPickup" type="number" placeholder="0.00" step="0.01"/></div>
+          <div class="field"><label>SIT Pickup 31–50 mi ($)</label><input id="origSitPickup3150" type="number" placeholder="0.00" step="0.01"/></div>
+          <div class="field"><label>SIT Pickup Over 50 mi ($)</label><input id="origSitPickupOver50" type="number" placeholder="0.00" step="0.01"/></div>
+          <div class="field"><label>Origin SIT Fuel Surcharge (%)</label><input id="origSitFuelSurch" type="number" placeholder="0.00" step="0.01"/></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-title sub">DESTINATION INFORMATION</div>
+        <div class="grid-3">
+          <div class="field"><label>Destination LH Factor Charge ($)</label><input id="destLHFactor" type="number" placeholder="0.00" step="0.01"/></div>
+          <div class="field"><label>Destination Services Charge ($)</label><input id="destServices" type="number" placeholder="0.00" step="0.01"/></div>
+          <div class="field"><label># Days in Destination SIT</label><input id="destSitDays" type="number" placeholder="0"/></div>
+          <div class="field"><label>Dest. SIT 1st Day Rate ($)</label><input id="destSit1stDay" type="number" placeholder="0.00" step="0.01"/></div>
+          <div class="field"><label>Dest. SIT Add'l Day Rate ($)</label><input id="destSitAddlDay" type="number" placeholder="0.00" step="0.01"/></div>
+          <div class="field"><label>Dest. SIT Delivery (0–30 mi) ($)</label><input id="destSitDelivery" type="number" placeholder="0.00" step="0.01"/></div>
+          <div class="field"><label>SIT Delivery 31–50 mi ($)</label><input id="destSitDelivery3150" type="number" placeholder="0.00" step="0.01"/></div>
+          <div class="field"><label>SIT Delivery Over 50 mi ($)</label><input id="destSitDeliveryOver50" type="number" placeholder="0.00" step="0.01"/></div>
+          <div class="field"><label>Dest. SIT Fuel Surcharge (%)</label><input id="destSitFuelSurch" type="number" placeholder="0.00" step="0.01"/></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-title sub">ADDITIONAL ACCESSORIAL CHARGES</div>
+        <div class="grid-4">
+          <div class="field"><label>Pack Rate ($)</label><input id="packRate" type="number" placeholder="0.00" step="0.01"/></div>
+          <div class="field"><label>Unpack Rate ($)</label><input id="unpackRate" type="number" placeholder="0.00" step="0.01"/></div>
+          <div class="field"><label>Crating ($)</label><input id="cratingCharge" type="number" placeholder="0.00" step="0.01"/></div>
+          <div class="field"><label>Uncrating ($)</label><input id="uncratingCharge" type="number" placeholder="0.00" step="0.01"/></div>
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:flex-end">
+        <button id="compute-btn2" onclick="computeResults()" style="padding:10px 28px;background:linear-gradient(135deg,#1a4fa0,#2a6fd4);color:#e0eeff;border:none;border-radius:3px;font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:2px;cursor:pointer;box-shadow:0 4px 16px rgba(42,111,212,.3);">▶ COMPUTE EXCESS COST</button>
+      </div>
+    </div>
+
+    <!-- TAB: RESULTS -->
+    <div id="tab-results" class="tab-panel">
+      <div id="results-placeholder" class="alert alert-info">
+        Complete all sections and click <strong>▶ COMPUTE</strong> to generate the settlement determination.
+      </div>
+      <div id="results-content" class="hidden">
+        <!-- Status banners -->
+        <div id="banner-unauth" class="alert alert-error hidden">⛔ UNAUTHORIZED ROUTE DETECTED — Actual routing does not match orders-authorized origin/destination. Member may be liable for full transportation cost.</div>
+        <div id="banner-excess" class="alert alert-warning hidden">⚠ WEIGHT ENTITLEMENT EXCEEDED — <span id="bannerExcessText"></span></div>
+        <div id="banner-ok" class="alert alert-success hidden">✓ NO EXCESS — Member is within authorized weight entitlement and routed to authorized destination.</div>
+
+        <!-- Two-column -->
+        <div class="results-two">
+          <!-- Weight column -->
+          <div class="card">
+            <div class="section-title">⚖️ WEIGHT DETERMINATION</div>
+            <div class="result-row"><span class="result-label">Grade / Type</span><span class="result-value" id="r-grade">—</span></div>
+            <div class="result-row highlight"><span class="result-label">Authorized Entitlement</span><span class="result-value green" id="r-auth">—</span></div>
+            <div class="divider"></div>
+            <div class="result-row"><span class="result-label">HHG Weight</span><span class="result-value" id="r-hhg">—</span></div>
+            <div class="result-row"><span class="result-label">Unaccompanied Baggage</span><span class="result-value" id="r-ub">—</span></div>
+            <div class="result-row"><span class="result-label">Non-Temporary Storage</span><span class="result-value" id="r-nts">—</span></div>
+            <div class="result-row"><span class="result-label">PPM / DITY</span><span class="result-value" id="r-ppm">—</span></div>
+            <div class="result-row highlight"><span class="result-label">Total Shipped</span><span class="result-value" id="r-total">—</span></div>
+            <div class="result-row" id="r-reweigh-row" style="display:none"><span class="result-label">After Reweigh</span><span class="result-value yellow" id="r-reweigh">—</span></div>
+            <div class="divider"></div>
+            <div class="result-row"><span class="result-label">Gun Safe Exclusion (≤500)</span><span class="result-value" id="r-gun">—</span></div>
+            <div class="result-row"><span class="result-label">Medical Equipment Exclusion</span><span class="result-value" id="r-med">—</span></div>
+            <div class="result-row"><span class="result-label">Pro Gear – Member (≤2,000)</span><span class="result-value" id="r-pgm">—</span></div>
+            <div class="result-row"><span class="result-label">Pro Gear – Spouse (≤500)</span><span class="result-value" id="r-pgs">—</span></div>
+            <div class="result-row"><span class="result-label">Other Exclusion</span><span class="result-value" id="r-oexcl">—</span></div>
+            <div class="result-row highlight"><span class="result-label">Total Exclusions</span><span class="result-value yellow" id="r-excl-total">—</span></div>
+            <div class="divider"></div>
+            <div class="result-row"><span class="result-label">Net Chargeable Weight</span><span class="result-value" id="r-net">—</span></div>
+            <div class="result-row"><span class="result-label" id="r-pack-label">After 10% Packing Reduction</span><span class="result-value" id="r-unpacked">—</span></div>
+            <div class="result-row" id="r-reinstate-row"><span class="result-label" id="r-reinstate-label">Packing Reinstatement (11.11%)</span><span class="result-value" id="r-reinstate">—</span></div>
+            <div class="result-row highlight"><span class="result-label">Net After Packing Calc</span><span class="result-value" id="r-netpack">—</span></div>
+            <div class="divider"></div>
+            <div class="result-row highlight"><span class="result-label">EXCESS WEIGHT</span><span class="result-value" id="r-excess">—</span></div>
+          </div>
+
+          <!-- Route + Cost column -->
+          <div class="card">
+            <div class="section-title">🗺️ ROUTING DETERMINATION</div>
+            <div style="margin-bottom:12px">
+              <div class="result-label" style="margin-bottom:5px">AUTHORIZED ROUTE</div>
+              <div style="color:var(--green);font-size:13px" id="r-auth-route">—</div>
+            </div>
+            <div style="margin-bottom:12px">
+              <div class="result-label" style="margin-bottom:5px">ACTUAL ROUTE</div>
+              <div style="font-size:13px" id="r-actual-route">—</div>
+            </div>
+            <div class="result-row highlight"><span class="result-label">Route Status</span><span class="result-value" id="r-route-status">—</span></div>
+
+            <div class="divider"></div>
+            <div class="section-title" style="margin-bottom:10px">💰 TRANSPORTATION CHARGES</div>
+            <div class="result-row"><span class="result-label">Base Linehaul (discounted)</span><span class="result-value" id="r-lh">—</span></div>
+            <div class="result-row"><span class="result-label">Short Haul</span><span class="result-value" id="r-sh">—</span></div>
+            <div class="result-row"><span class="result-label">Origin SIT (after discount)</span><span class="result-value" id="r-osit">—</span></div>
+            <div class="result-row"><span class="result-label">Destination SIT (after discount)</span><span class="result-value" id="r-dsit">—</span></div>
+            <div class="divider"></div>
+            <div class="result-row"><span class="result-label">Origin LH Factor</span><span class="result-value" id="r-olf">—</span></div>
+            <div class="result-row"><span class="result-label">Origin Services</span><span class="result-value" id="r-osvc">—</span></div>
+            <div class="result-row"><span class="result-label">Destination LH Factor</span><span class="result-value" id="r-dlf">—</span></div>
+            <div class="result-row"><span class="result-label">Destination Services</span><span class="result-value" id="r-dsvc">—</span></div>
+            <div class="result-row"><span class="result-label">Pack / Unpack</span><span class="result-value" id="r-pack">—</span></div>
+            <div class="result-row"><span class="result-label">Crating / Uncrating</span><span class="result-value" id="r-crate">—</span></div>
+            <div class="result-row"><span class="result-label">Total Accessorial</span><span class="result-value" id="r-acc">—</span></div>
+            <div class="divider"></div>
+            <div class="result-row highlight"><span class="result-label">TOTAL GOVT TRANSPORTATION COST</span><span class="result-value" id="r-total-cost">—</span></div>
+          </div>
+        </div>
+
+        <!-- Liability card -->
+        <div class="card" id="r-liability-card">
+          <div class="section-title">⚠️ EXCESS COST DETERMINATION — FINAL LIABILITY</div>
+          <div class="grid-3">
+            <div>
+              <div class="result-row"><span class="result-label">Excess Weight (lbs)</span><span class="result-value" id="r-exc-lbs">—</span></div>
+              <div class="result-row"><span class="result-label">Excess Ratio</span><span class="result-value" id="r-exc-ratio">—</span></div>
+              <div class="result-row"><span class="result-label">Excess Weight Cost</span><span class="result-value" id="r-exc-cost">—</span></div>
+            </div>
+            <div>
+              <div class="result-row"><span class="result-label">Unauthorized Route Cost</span><span class="result-value" id="r-unauth-cost">—</span></div>
+              <div class="result-row"><span class="result-label">Basis for Liability</span><span class="result-value" id="r-basis">—</span></div>
+            </div>
+            <div>
+              <div class="liability-box" id="r-liability-box">
+                <div class="liability-label">MEMBER LIABILITY</div>
+                <div class="liability-amount" id="r-liability-amt">—</div>
+                <span class="tag" id="r-liability-tag">—</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Audit log -->
+        <div class="card">
+          <div class="section-title">📜 AUDIT TRAIL — INTERMEDIATE CALCULATIONS</div>
+          <div id="audit-log"></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /main -->
+</div><!-- /layout -->
+
+<script>
+// ── Data ────────────────────────────────────────────────────────────────────
+const ENTITLEMENTS = {
+  "O-10":{"w":18000,"wo":18000},"O-9":{"w":18000,"wo":18000},"O-8":{"w":18000,"wo":18000},
+  "O-7":{"w":18000,"wo":18000},"O-6":{"w":18000,"wo":18000},"O-5":{"w":17500,"wo":16000},
+  "O-4":{"w":17000,"wo":14000},"O-3":{"w":14500,"wo":13000},"O-3E":{"w":14500,"wo":13000},
+  "O-2":{"w":13500,"wo":12500},"O-2E":{"w":13500,"wo":12500},
+  "O-1":{"w":12000,"wo":10000},"O-1E":{"w":12000,"wo":10000},
+  "W-5":{"w":17500,"wo":16000},"W-4":{"w":17000,"wo":14000},"W-3":{"w":14500,"wo":13000},
+  "W-2":{"w":13500,"wo":12500},"W-1":{"w":12000,"wo":10000},
+  "E-9":{"w":13000,"wo":12000},"E-8":{"w":12000,"wo":11000},"E-7":{"w":11000,"wo":10500},
+  "E-6":{"w":8000,"wo":7500},"E-5":{"w":7200,"wo":7000},"E-4":{"w":7200,"wo":7000},
+  "E-3":{"w":5000,"wo":5000},"E-2":{"w":5000,"wo":5000},"E-1":{"w":5000,"wo":5000},
+  "CIVILIAN":{"w":18000,"wo":18000}
+};
+
+const PACKING = {
+  "10%":  {divisor:0.90,factor:0.1111},
+  "20%":  {divisor:0.80,factor:0.25},
+  "40%":  {divisor:0.60,factor:0.6667},
+  "50%":  {divisor:0.50,factor:1.00},
+  "Flat": {divisor:1.00,factor:null}
+};
+
+// ── Helpers ─────────────────────────────────────────────────────────────────
+const $ = id => document.getElementById(id);
+const num = v => { const n = parseFloat(v); return isNaN(n) ? 0 : n; };
+const fmtLbs = n => Math.round(n).toLocaleString() + ' lbs';
+const fmtDollar = n => '$' + n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+const fmtPct = n => n.toFixed(4) + '%';
+const val = id => $( id) ? $(id).value.trim() : '';
+
+// ── Nav ──────────────────────────────────────────────────────────────────────
+document.querySelectorAll('.nav-item').forEach(item => {
+  item.addEventListener('click', () => {
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    item.classList.add('active');
+    $('tab-' + item.dataset.tab).classList.add('active');
+  });
+});
+$('compute-btn').addEventListener('click', () => {
+  computeResults();
+  switchTab('results');
+});
+
+function switchTab(id) {
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelector(`.nav-item[data-tab="${id}"]`).classList.add('active');
+  $('tab-' + id).classList.add('active');
+}
+
+// ── UI toggles ───────────────────────────────────────────────────────────────
+function toggleGrade() {
+  const isCiv = $('memberType').value === 'CIVILIAN';
+  $('gradeField').style.display = isCiv ? 'none' : '';
+  updateEntitlementBadge();
+}
+function toggleReweigh() {
+  $('reweighSection').classList.toggle('hidden', !$('hasReweigh').checked);
+}
+function updateEntitlementBadge() {
+  const type = $('memberType').value;
+  const key  = type === 'CIVILIAN' ? 'CIVILIAN' : $('grade').value;
+  const dep  = $('hasDependents').value === 'yes';
+  const ent  = ENTITLEMENTS[key];
+  const w    = ent ? (dep ? ent.w : ent.wo) : 0;
+  $('authWeightDisplay').textContent = w.toLocaleString() + ' lbs';
+  $('gradeDisplay').textContent = key;
+}
+
+// ── Compute ──────────────────────────────────────────────────────────────────
+function computeResults() {
+  const log = [];
+  const push = m => log.push(m);
+
+  // 1. Entitlement
+  const type  = $('memberType').value;
+  const key   = type === 'CIVILIAN' ? 'CIVILIAN' : $('grade').value;
+  const dep   = $('hasDependents').value === 'yes';
+  const ent   = ENTITLEMENTS[key] || {w:0,wo:0};
+  const authorized = dep ? ent.w : ent.wo;
+  push(`[ENTITLEMENT] Grade: ${key} | Dependents: ${dep} | Authorized: ${authorized} lbs`);
+
+  // 2. Weights
+  const hhg = num(val('hhgWeight'));
+  const ub  = num(val('ubWeight'));
+  const nts = num(val('ntsWeight'));
+  const ppm = num(val('ppmWeight'));
+  const totalShipped = hhg + ub + nts + ppm;
+  push(`[WEIGHTS] HHG:${hhg} UB:${ub} NTS:${nts} PPM:${ppm} Total:${totalShipped} lbs`);
+
+  // 3. Reweigh
+  let working = totalShipped;
+  const hasRW = $('hasReweigh').checked;
+  const rww   = num(val('reweighWeight'));
+  if (hasRW && rww > 0) { working = rww; push(`[REWEIGH] Applied: ${working} lbs`); }
+
+  // 4. Exclusions
+  const gunCap  = Math.min(num(val('gunSafe')), 500);
+  const medExcl = num(val('medEquip'));
+  const pgMem   = Math.min(num(val('proGearMember')), 2000);
+  const pgSp    = Math.min(num(val('proGearSpouse')), 500);
+  const othExcl = num(val('otherExcl'));
+  const totalExcl = gunCap + medExcl + pgMem + pgSp + othExcl;
+  push(`[EXCLUSIONS] Gun:${gunCap} Med:${medExcl} PGMbr:${pgMem} PGSp:${pgSp} Oth:${othExcl} Total:${totalExcl}`);
+
+  // 5. Net chargeable
+  const netChargeable = Math.max(0, working - totalExcl);
+  push(`[NET CHARGEABLE] ${working} - ${totalExcl} = ${netChargeable} lbs`);
+
+  // 6. Packing math
+  const paKey = val('packingAllowance') || '10%';
+  const pa    = PACKING[paKey] || PACKING['10%'];
+  let netUnpacked = netChargeable;
+  let packReinstatement = 0;
+  let netAfterPack = netChargeable;
+  if (pa.factor !== null) {
+    netUnpacked      = netChargeable * pa.divisor;
+    packReinstatement = netUnpacked * pa.factor;
+    netAfterPack     = netUnpacked + packReinstatement;
+    push(`[PACKING ${paKey}] ${netChargeable} × ${pa.divisor} = ${netUnpacked.toFixed(2)} (unpacked)`);
+    push(`[REINSTATEMENT] ${netUnpacked.toFixed(2)} × ${(pa.factor*100).toFixed(2)}% = ${packReinstatement.toFixed(2)}`);
+    push(`[RESTORED] ${netUnpacked.toFixed(2)} + ${packReinstatement.toFixed(2)} = ${netAfterPack.toFixed(2)} lbs`);
+  } else {
+    push(`[PACKING] Flat rate — no reinstatement`);
+  }
+
+  // 7. Excess weight
+  const excessWeight = Math.max(0, netAfterPack - authorized);
+  const isExcess = excessWeight > 0;
+  push(`[EXCESS WEIGHT] ${netAfterPack.toFixed(2)} - ${authorized} = ${excessWeight.toFixed(2)} lbs excess`);
+
+  // 8. Route validation
+  const authOZ  = val('authOriginZip3');
+  const authDZ  = val('authDestZip3');
+  const actOZ   = val('actOriginZip3') || val('originZip3');
+  const actDZ   = val('actDestZip3')   || val('destZip3');
+  const manualUnauth = $('isUnauthorizedRoute').checked;
+  const zip3Mismatch = (authOZ && actOZ && authOZ !== actOZ) || (authDZ && actDZ && authDZ !== actDZ);
+  const unauthorizedRoute = manualUnauth || zip3Mismatch;
+  push(`[ROUTING] Auth: ${authOZ||'?'} → ${authDZ||'?'} | Actual: ${actOZ||'?'} → ${actDZ||'?'} | Unauthorized: ${unauthorizedRoute}`);
+
+  // 9. Transportation charges
+  const lhDisc = num(val('linehaulDiscount')) / 100;
+  const sdDisc = num(val('sitDiscount')) / 100;
+  const baseLH = num(val('baseLinehaul'));
+  const shortH = num(val('shortHaulCharge'));
+  const discLH = baseLH * (1 - lhDisc);
+  push(`[LINEHAUL] Base:$${baseLH} Disc:${(lhDisc*100).toFixed(2)}% Discounted:$${discLH.toFixed(2)}`);
+
+  // Origin SIT
+  const oSD    = num(val('origSitDays'));
+  const oS1    = num(val('origSit1stDay'));
+  const oSA    = num(val('origSitAddlDay'));
+  const oSP    = num(val('origSitPickup'));
+  const oSP31  = num(val('origSitPickup3150'));
+  const oSP50  = num(val('origSitPickupOver50'));
+  const oFuel  = num(val('origSitFuelSurch')) / 100;
+  const oSitBase = oSD > 0 ? oS1 + Math.max(0, oSD - 1) * oSA : 0;
+  const oPickup  = oSP + oSP31 + oSP50;
+  const oFuelAmt = oPickup * oFuel;
+  const origSit  = (oSitBase + oPickup + oFuelAmt) * (1 - sdDisc);
+  push(`[ORIGIN SIT] Days:${oSD} Base:$${oSitBase.toFixed(2)} Pickup:$${oPickup.toFixed(2)} Fuel:$${oFuelAmt.toFixed(2)} Net:$${origSit.toFixed(2)}`);
+
+  // Dest SIT
+  const dSD    = num(val('destSitDays'));
+  const dS1    = num(val('destSit1stDay'));
+  const dSA    = num(val('destSitAddlDay'));
+  const dSD_   = num(val('destSitDelivery'));
+  const dSD31  = num(val('destSitDelivery3150'));
+  const dSD50  = num(val('destSitDeliveryOver50'));
+  const dFuel  = num(val('destSitFuelSurch')) / 100;
+  const dSitBase = dSD > 0 ? dS1 + Math.max(0, dSD - 1) * dSA : 0;
+  const dDeliv   = dSD_ + dSD31 + dSD50;
+  const dFuelAmt = dDeliv * dFuel;
+  const destSit  = (dSitBase + dDeliv + dFuelAmt) * (1 - sdDisc);
+  push(`[DEST SIT] Days:${dSD} Base:$${dSitBase.toFixed(2)} Delivery:$${dDeliv.toFixed(2)} Fuel:$${dFuelAmt.toFixed(2)} Net:$${destSit.toFixed(2)}`);
+
+  // Accessorial
+  const olf  = num(val('origLHFactor'));
+  const osvc = num(val('origServices'));
+  const dlf  = num(val('destLHFactor'));
+  const dsvc = num(val('destServices'));
+  const pk   = num(val('packRate'));
+  const upk  = num(val('unpackRate'));
+  const crt  = num(val('cratingCharge'));
+  const ucrt = num(val('uncratingCharge'));
+  const totalAcc = olf + osvc + dlf + dsvc + pk + upk + crt + ucrt;
+  const totalCost = discLH + shortH + origSit + destSit + totalAcc;
+  push(`[TOTAL COST] LH:$${discLH.toFixed(2)} SH:$${shortH.toFixed(2)} OSIT:$${origSit.toFixed(2)} DSIT:$${destSit.toFixed(2)} ACC:$${totalAcc.toFixed(2)} TOTAL:$${totalCost.toFixed(2)}`);
+
+  // 10. Liability
+  let excessCost = 0, excessRatio = 0, unauthCost = 0;
+  if (netAfterPack > 0) {
+    excessRatio = excessWeight / netAfterPack;
+    excessCost  = totalCost * excessRatio;
+    push(`[EXCESS COST] ${excessWeight.toFixed(2)} / ${netAfterPack.toFixed(2)} = ${(excessRatio*100).toFixed(4)}% → $${excessCost.toFixed(2)}`);
+  }
+  if (unauthorizedRoute) {
+    unauthCost = totalCost;
+    push(`[UNAUTHORIZED ROUTE] Full cost liability: $${unauthCost.toFixed(2)}`);
+  }
+  const totalLiability = Math.max(excessCost, unauthCost);
+  push(`[MEMBER LIABILITY] $${totalLiability.toFixed(2)}`);
+
+  // ── Render ───────────────────────────────────────────────────────────────
+  $('results-placeholder').classList.add('hidden');
+  $('results-content').classList.remove('hidden');
+
+  // Banners
+  $('banner-unauth').classList.toggle('hidden', !unauthorizedRoute);
+  $('banner-excess').classList.toggle('hidden', !isExcess || unauthorizedRoute);
+  $('banner-ok').classList.toggle('hidden', isExcess || unauthorizedRoute);
+  if (isExcess) $('bannerExcessText').textContent = `Member shipped ${Math.round(excessWeight).toLocaleString()} lbs above authorized entitlement of ${authorized.toLocaleString()} lbs.`;
+
+  // Weight col
+  set('r-grade',   `${key} ${dep ? '(w/dep)' : '(no dep)'}`);
+  set('r-auth',    fmtLbs(authorized), 'green');
+  set('r-hhg',     fmtLbs(hhg));
+  set('r-ub',      fmtLbs(ub));
+  set('r-nts',     fmtLbs(nts));
+  set('r-ppm',     fmtLbs(ppm));
+  set('r-total',   fmtLbs(totalShipped));
+  $('r-reweigh-row').style.display = hasRW && rww > 0 ? '' : 'none';
+  set('r-reweigh', fmtLbs(working), 'yellow');
+  set('r-gun',     fmtLbs(gunCap));
+  set('r-med',     fmtLbs(medExcl));
+  set('r-pgm',     fmtLbs(pgMem));
+  set('r-pgs',     fmtLbs(pgSp));
+  set('r-oexcl',   fmtLbs(othExcl));
+  set('r-excl-total', fmtLbs(totalExcl), 'yellow');
+  set('r-net',     fmtLbs(netChargeable));
+  $('r-pack-label').textContent = `After ${paKey} Packing Reduction`;
+  set('r-unpacked', pa.factor !== null ? fmtLbs(netUnpacked) : fmtLbs(netChargeable));
+  $('r-reinstate-row').style.display = pa.factor !== null ? '' : 'none';
+  if (pa.factor !== null) {
+    $('r-reinstate-label').textContent = `Packing Reinstatement (${(pa.factor*100).toFixed(2)}%)`;
+    set('r-reinstate', fmtLbs(packReinstatement));
+  }
+  set('r-netpack', fmtLbs(netAfterPack));
+  set('r-excess',  isExcess ? fmtLbs(excessWeight) : 'NONE', isExcess ? 'red' : 'green');
+
+  // Route col
+  const authRouteStr   = `${val('authOriginDesc') || authOZ || '—'} → ${val('authDestDesc') || authDZ || '—'}`;
+  const actualRouteStr = `${val('actOriginDesc') || actOZ || '—'} → ${val('actDestDesc') || actDZ || '—'}`;
+  $('r-auth-route').textContent   = authRouteStr;
+  $('r-actual-route').textContent = actualRouteStr;
+  $('r-actual-route').style.color = unauthorizedRoute ? 'var(--red)' : 'var(--text)';
+  set('r-route-status', unauthorizedRoute ? 'UNAUTHORIZED' : 'AUTHORIZED', unauthorizedRoute ? 'red' : 'green');
+
+  // Cost rows
+  set('r-lh',         fmtDollar(discLH));
+  set('r-sh',         fmtDollar(shortH));
+  set('r-osit',       fmtDollar(origSit));
+  set('r-dsit',       fmtDollar(destSit));
+  set('r-olf',        fmtDollar(olf));
+  set('r-osvc',       fmtDollar(osvc));
+  set('r-dlf',        fmtDollar(dlf));
+  set('r-dsvc',       fmtDollar(dsvc));
+  set('r-pack',       fmtDollar(pk + upk));
+  set('r-crate',      fmtDollar(crt + ucrt));
+  set('r-acc',        fmtDollar(totalAcc));
+  set('r-total-cost', fmtDollar(totalCost));
+
+  // Liability
+  set('r-exc-lbs',    isExcess ? fmtLbs(excessWeight) : 'NONE',         isExcess ? 'red' : 'green');
+  set('r-exc-ratio',  fmtPct(excessRatio * 100));
+  set('r-exc-cost',   fmtDollar(excessCost),                              isExcess ? 'yellow' : 'green');
+  set('r-unauth-cost',fmtDollar(unauthCost),                              unauthorizedRoute ? 'red' : 'green');
+  set('r-basis',      unauthorizedRoute ? 'UNAUTHORIZED ROUTE' : isExcess ? 'EXCESS WEIGHT' : 'NONE',
+                      unauthorizedRoute ? 'red' : isExcess ? 'yellow' : 'green');
+
+  const liabBox = $('r-liability-box');
+  liabBox.style.background   = totalLiability > 0 ? '#1a0808' : '#081a08';
+  liabBox.style.border       = `1px solid ${totalLiability > 0 ? '#8b1a1a' : '#1a6b1a'}`;
+  liabBox.style.borderRadius = '4px';
+  $('r-liability-amt').textContent  = fmtDollar(totalLiability);
+  $('r-liability-amt').style.color  = totalLiability > 0 ? 'var(--red)' : 'var(--green)';
+  const tag = $('r-liability-tag');
+  tag.textContent = totalLiability > 0 ? 'DEBT ESTABLISHED' : 'NO DEBT';
+  tag.className   = totalLiability > 0 ? 'tag tag-red' : 'tag tag-green';
+
+  // Audit log
+  const logEl = $('audit-log');
+  logEl.innerHTML = log.map((entry, i) =>
+    `<div class="audit-line"><span class="audit-num">${String(i+1).padStart(2,'0')}</span>${entry}</div>`
+  ).join('');
+}
+
+function set(id, text, colorClass) {
+  const el = $(id);
+  if (!el) return;
+  el.textContent = text;
+  el.className = 'result-value' + (colorClass ? ' ' + colorClass : '');
+}
+
+// Init badge
+updateEntitlementBadge();
+</script>
+</body>
+</html>
