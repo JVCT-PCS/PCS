@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>USAF Personal Property Counselor's Handbook 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --af-blue: #003087;
+  --af-gold: #C8982A;
+  --af-sky: #1C6EA4;
+  --af-dark: #0A1628;
+  --af-mid: #1a3a6b;
+  --cream: #F8F5EE;
+  --warm-white: #FDFBF7;
+  --border: #C8D4E8;
+  --text: #1A1A2E;
+  --muted: #5A6478;
+  --warn-bg: #FFF8E8;
+  --warn-border: #C8982A;
+  --info-bg: #EBF4FF;
+  --info-border: #1C6EA4;
+  --danger-bg: #FFF0F0;
+  --danger-border: #C0392B;
+  --tip-bg: #EDFAF1;
+  --tip-border: #27AE60;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--cream);
+}
+
+/* ─── NAV BAR ─── */
+#navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+  background: var(--af-dark);
+  display: flex; align-items: center; gap: 12px;
+  padding: 0 20px; height: 56px;
+  border-bottom: 3px solid var(--af-gold);
+  box-shadow: 0 4px 20px rgba(0,0,0,.4);
+}
+.nav-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px; font-weight: 700;
+  color: var(--af-gold);
+  white-space: nowrap; flex: 1;
+  letter-spacing: .3px;
+}
+#searchBox {
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.2);
+  color: #fff; border-radius: 20px;
+  padding: 6px 14px; font-size: 12px; width: 220px; outline: none;
+  font-family: 'Source Serif 4', serif;
+}
+#searchBox::placeholder { color: rgba(255,255,255,.45); }
+#searchBox:focus { background: rgba(255,255,255,.18); border-color: var(--af-gold); }
+.nav-btn {
+  background: var(--af-gold); color: var(--af-dark);
+  border: none; border-radius: 6px;
+  padding: 7px 14px; font-size: 12px;
+  font-weight: 700; cursor: pointer;
+  font-family: 'Source Serif 4', serif;
+  white-space: nowrap;
+  letter-spacing: .3px;
+  transition: background .2s;
+}
+.nav-btn:hover { background: #E0A830; }
+
+/* ─── LAYOUT ─── */
+#shell { display: flex; max-width: 1440px; margin: 0 auto; padding-top: 56px; }
+
+/* ─── SIDEBAR ─── */
+#sidebar {
+  width: 260px; flex-shrink: 0;
+  position: sticky; top: 56px;
+  height: calc(100vh - 56px);
+  overflow-y: auto; overflow-x: hidden;
+  background: var(--af-dark);
+  padding: 0 0 30px;
+  border-right: 3px solid var(--af-gold);
+}
+#sidebar::-webkit-scrollbar { width: 4px; }
+#sidebar::-webkit-scrollbar-thumb { background: var(--af-gold); border-radius: 2px; }
+
+.sb-section {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--af-gold);
+  padding: 16px 16px 4px;
+}
+.sb-link {
+  display: block; padding: 7px 16px 7px 20px;
+  color: rgba(255,255,255,.72);
+  text-decoration: none; font-size: 12.5px;
+  border-left: 3px solid transparent;
+  transition: all .15s;
+  font-family: 'Source Serif 4', serif;
+}
+.sb-link:hover { color: #fff; background: rgba(200,152,42,.1); border-left-color: var(--af-gold); }
+.sb-link.active { color: var(--af-gold); background: rgba(200,152,42,.15); border-left-color: var(--af-gold); font-weight: 600; }
+.sb-link.sub { padding-left: 32px; font-size: 11.5px; }
+
+/* ─── MAIN CONTENT ─── */
+#main {
+  flex: 1; min-width: 0;
+  padding: 0 0 60px;
+  background: var(--warm-white);
+}
+
+/* ─── HERO COVER ─── */
+.hero {
+  background: linear-gradient(135deg, var(--af-dark) 0%, var(--af-mid) 50%, var(--af-sky) 100%);
+  padding: 60px 56px 50px;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.hero .seal {
+  width: 90px; height: 90px;
+  background: rgba(200,152,42,.15);
+  border: 3px solid var(--af-gold);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 44px; margin-bottom: 20px;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 34px; font-weight: 900;
+  color: #fff; line-height: 1.15;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 12px rgba(0,0,0,.3);
+}
+.hero .subtitle {
+  font-size: 15px; color: rgba(255,255,255,.8);
+  font-style: italic; margin-bottom: 24px;
+  letter-spacing: .3px;
+}
+.hero-meta {
+  display: flex; flex-wrap: wrap; gap: 20px;
+}
+.hero-meta span {
+  font-size: 12px; color: rgba(255,255,255,.6);
+  font-family: 'JetBrains Mono', monospace;
+}
+.hero-meta strong { color: var(--af-gold); font-style: normal; }
+
+/* ─── CHAPTER HEADER ─── */
+.ch-header {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--af-blue);
+  padding: 20px 32px;
+  margin-top: 32px;
+  border-left: 6px solid var(--af-gold);
+}
+.ch-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px; font-weight: 900;
+  color: rgba(200,152,42,.4);
+  line-height: 1; min-width: 52px;
+}
+.ch-title h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px; font-weight: 700;
+  color: #fff; margin-bottom: 2px;
+}
+.ch-title p { font-size: 12px; color: rgba(255,255,255,.6); font-style: italic; }
+.ch-badge {
+  margin-left: auto; background: var(--af-gold);
+  color: var(--af-dark); font-size: 10px;
+  font-weight: 700; padding: 4px 10px;
+  border-radius: 12px; white-space: nowrap;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: .5px;
+}
+
+/* ─── CONTENT BODY ─── */
+.ch-body { padding: 28px 40px 8px; }
+
+h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px; font-weight: 700;
+  color: var(--af-blue); margin: 24px 0 8px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid var(--border);
+  display: flex; align-items: center; gap: 8px;
+}
+h3 .h3-icon { font-size: 16px; }
+h4 {
+  font-size: 14px; font-weight: 700;
+  color: var(--af-mid); margin: 16px 0 6px;
+}
+p { margin-bottom: 10px; font-size: 13.5px; }
+ul, ol { padding-left: 20px; margin-bottom: 10px; }
+li { margin-bottom: 4px; font-size: 13.5px; }
+
+/* ─── REG TAGS ─── */
+.reg-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 14px; }
+.reg {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 9px; border-radius: 10px;
+  font-size: 11px; font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: .2px;
+}
+.reg-jtr  { background: #E0EAF8; color: #0A2A6E; }
+.reg-afi  { background: #FFF0D0; color: #6B3800; }
+.reg-dtr  { background: #E8F5E9; color: #1A5C29; }
+.reg-law  { background: #F3E8FF; color: #4A0080; }
+
+/* ─── CALLOUTS ─── */
+.callout {
+  border-left: 4px solid; border-radius: 0 8px 8px 0;
+  padding: 12px 16px; margin: 14px 0; font-size: 13px;
+}
+.callout h4 { font-size: 12.5px; margin: 0 0 5px; }
+.callout-warn  { background: var(--warn-bg); border-color: var(--warn-border); }
+.callout-warn h4 { color: #8B5500; }
+.callout-info  { background: var(--info-bg); border-color: var(--info-border); }
+.callout-info h4 { color: #0A3A6B; }
+.callout-danger { background: var(--danger-bg); border-color: var(--danger-border); }
+.callout-danger h4 { color: #8B0000; }
+.callout-tip   { background: var(--tip-bg); border-color: var(--tip-border); }
+.callout-tip h4 { color: #1A5C29; }
+.callout-civ   { background: #F0F0FF; border-color: #5050D0; }
+.callout-civ h4 { color: #2A2A90; }
+
+/* ─── EXAMPLE BLOCKS ─── */
+.example {
+  background: #F0F4FF;
+  border: 1px solid #C0CCEE;
+  border-radius: 8px; padding: 16px 18px; margin: 14px 0;
+}
+.example .ex-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 600;
+  color: var(--af-blue); letter-spacing: 1px;
+  text-transform: uppercase; margin-bottom: 8px;
+  display: flex; align-items: center; gap: 6px;
+}
+.example .ex-title::before {
+  content: '◈'; color: var(--af-gold); font-size: 14px;
+}
+.example p, .example li { font-size: 13px; }
+.example .result {
+  background: var(--af-dark); color: var(--af-gold);
+  padding: 6px 12px; border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; margin-top: 8px;
+}
+
+/* ─── TABLES ─── */
+.tbl-wrap { overflow-x: auto; margin: 14px 0; }
+table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+th {
+  background: var(--af-blue); color: #fff;
+  padding: 9px 12px; text-align: left;
+  font-family: 'Source Serif 4', serif;
+  font-size: 12px; font-weight: 600;
+}
+td { padding: 8px 12px; border-bottom: 1px solid var(--border); }
+tr:nth-child(even) td { background: #F4F7FF; }
+tr:hover td { background: #EEF3FF; }
+.td-highlight { font-weight: 600; color: var(--af-blue); }
+
+/* ─── WEIGHT TABLE ─── */
+.weight-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px; margin: 14px 0;
+}
+.weight-card {
+  background: var(--info-bg);
+  border: 1px solid var(--info-border);
+  border-radius: 8px; padding: 12px;
+  text-align: center;
+}
+.weight-card .grade { font-size: 11px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+.weight-card .lbs { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--af-blue); }
+.weight-card .lbs-dep { font-size: 11px; color: var(--muted); }
+
+/* ─── ACCORDION ─── */
+details { margin: 8px 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+summary {
+  padding: 11px 16px;
+  background: #F0F4FF;
+  cursor: pointer; font-weight: 600;
+  font-size: 13px; color: var(--af-blue);
+  list-style: none;
+  display: flex; align-items: center;
+}
+summary::before { content: '▸ '; margin-right: 6px; transition: transform .2s; }
+details[open] summary::before { content: '▾ '; }
+details .det-body { padding: 14px 16px; font-size: 13px; }
+
+/* ─── SEARCH HIGHLIGHT ─── */
+mark { background: #FFE580; color: #000; border-radius: 2px; padding: 0 2px; }
+#search-msg {
+  background: var(--warn-bg); border: 1px solid var(--warn-border);
+  padding: 8px 16px; font-size: 12px;
+  margin: 0 40px 0; border-radius: 6px; display: none;
+}
+
+/* ─── DIVIDER ─── */
+.divider {
+  border: none; border-top: 1px solid var(--border);
+  margin: 24px 0;
+}
+
+/* ─── PRINT ─── */
+@media print {
+  #navbar, #sidebar { display: none !important; }
+  #main { padding: 0 !important; }
+  #shell { padding-top: 0 !important; }
+  .ch-header { break-before: page; }
+}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="nav-brand">✦ USAF Personal Property Counselor's Handbook 2026</div>
+  <input type="search" id="searchBox" placeholder="Search handbook…" oninput="doSearch(this.value)">
+  <button class="nav-btn" onclick="window.print()">⬇ Print / PDF</button>
+</nav>
+
+<div id="shell">
+<!-- ─── SIDEBAR ─── -->
+<nav id="sidebar">
+  <div class="sb-section">Navigation</div>
+  <a class="sb-link" href="#cover">Introduction &amp; Foreword</a>
+  <a class="sb-link" href="#acronyms">Acronyms &amp; Definitions</a>
+
+  <div class="sb-section">Part I — HHG</div>
+  <a class="sb-link" href="#hhg-auth">Authorizations &amp; Who Qualifies</a>
+  <a class="sb-link sub" href="#hhg-weight">Weight Allowances</a>
+  <a class="sb-link sub" href="#hhg-destinations">Authorized Destinations</a>
+  <a class="sb-link sub" href="#hhg-pbpe">PBP&amp;E &amp; Gun Safes</a>
+  <a class="sb-link sub" href="#hhg-excess">Excess Costs</a>
+  <a class="sb-link sub" href="#hhg-sit">Storage-in-Transit (SIT)</a>
+  <a class="sb-link sub" href="#hhg-documents">Documents &amp; Process</a>
+
+  <div class="sb-section">Part II — UB</div>
+  <a class="sb-link" href="#ub">Unaccompanied Baggage</a>
+
+  <div class="sb-section">Part III — NTS</div>
+  <a class="sb-link" href="#nts">Non-Temporary Storage</a>
+
+  <div class="sb-section">Part IV — Firearms</div>
+  <a class="sb-link" href="#firearms">Weapons &amp; Firearms</a>
+
+  <div class="sb-section">Part V — POV</div>
+  <a class="sb-link" href="#pov">POV Shipment</a>
+  <a class="sb-link sub" href="#pov-prep">POV Preparation</a>
+  <a class="sb-link sub" href="#pov-storage">POV Storage</a>
+
+  <div class="sb-section">Part VI — Boats</div>
+  <a class="sb-link" href="#boats">Boats &amp; Watercraft</a>
+
+  <div class="sb-section">Part VII — Mobile Homes</div>
+  <a class="sb-link" href="#mobile">Mobile Homes</a>
+
+  <div class="sb-section">Part VIII — RITA</div>
+  <a class="sb-link" href="#rita">RITA / Move Expenses</a>
+
+  <div class="sb-section">Part IX — Claims</div>
+  <a class="sb-link" href="#claims">Liability &amp; Claims</a>
+
+  <div class="sb-section">Part X — PPM</div>
+  <a class="sb-link" href="#ppm">Personally Procured Move</a>
+
+  <div class="sb-section">Resources</div>
+  <a class="sb-link" href="#civilians">Civilian Employee Quick Ref</a>
+  <a class="sb-link" href="#regindex">Regulation Index</a>
+</nav>
+
+<!-- ─── MAIN ─── -->
+<main id="main">
+<div id="search-msg"></div>
+
+<!-- ══════════════════════════════════════════ COVER ══════════════════════════════════════════ -->
+<section id="cover">
+  <div class="hero">
+    <div class="seal">✈</div>
+    <h1>Personal Property<br>Counselor's Handbook</h1>
+    <p class="subtitle">United States Air Force — Defense Personal Property Program (DP3)</p>
+    <div class="hero-meta">
+      <span><strong>2026 Edition</strong></span>
+      <span><strong>Authority:</strong> JTR Ch. 5 · AFI 24-602 V4 · DTR Part IV</span>
+      <span><strong>Published by:</strong> PPA HQ, JBSA Randolph AFB</span>
+      <span><strong>Effective:</strong> 15 May 2026</span>
+    </div>
+  </div>
+
+  <div class="ch-body">
+    <div class="callout callout-warn">
+      <h4>⚠ Important Disclaimer</h4>
+      <p>This handbook is a condensed training and reference guide for Air Force personal property counselors. It <strong>DOES NOT</strong> encompass all possible counseling situations and is <strong>NOT</strong> intended to replace current regulations. Always consult the JTR, AFI 24-602 V4, DTR Part IV, and current amendments for authoritative guidance. Regulations change frequently — verify currency before advising members.</p>
+    </div>
+
+    <h3><span class="h3-icon">📖</span> Foreword</h3>
+    <p>Counseling is one of the most important and challenging tasks Traffic Management professionals perform. The success or failure of each member's move depends in large part on how well they are counseled. Customers rely on trained counselors to inform and prepare them for their upcoming move.</p>
+    <p>This handbook follows the format of <strong>DD Form 1797</strong> (military) and <strong>DD Form 2278</strong> (PPM). Each numbered section heading corresponds to the appropriate counseling form block. Parts I–VIII correspond to DD Form 1797; Part X corresponds to DD Form 2278.</p>
+    <p>Topics are primarily oriented to Air Force military personnel entitlements, but DoD civilian entitlements are also addressed. Civilian-specific notes are clearly marked throughout.</p>
+    <p>For questions on excess cost adjudication: <strong>hqppa.ecaf-adj@us.af.mil</strong></p>
+
+    <div class="callout callout-info">
+      <h4>🔗 Key Resources</h4>
+      <ul>
+        <li><strong>DPS:</strong> <a href="https://dps.move.mil">dps.move.mil</a></li>
+        <li><strong>PPCIG (Personal Property Consignment Instruction Guide):</strong> Available through PPSO/JPPSO</li>
+        <li><strong>Military OneSource:</strong> <a href="https://www.militaryonesource.mil/moving-pcs/moving-personal-property/">militaryonesource.mil</a></li>
+        <li><strong>POV Recall Check:</strong> <a href="https://vinrcl.safercar.gov/vin/">vinrcl.safercar.gov/vin</a></li>
+        <li><strong>Customs (CBP Form 4455):</strong> <a href="http://www.cbp.gov">cbp.gov</a></li>
+        <li><strong>JAG Claims:</strong> <a href="https://claims.jag.af.mil/">claims.jag.af.mil</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ ACRONYMS ══════════════════════════════════════════ -->
+<section id="acronyms">
+  <div class="ch-header">
+    <div class="ch-number">—</div>
+    <div class="ch-title">
+      <h2>Acronyms &amp; Key Definitions</h2>
+      <p>Standard terms used throughout this handbook</p>
+    </div>
+  </div>
+  <div class="ch-body">
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>Acronym</th><th>Full Term</th></tr>
+      <tr><td class="td-highlight">AFI</td><td>Air Force Instruction</td></tr>
+      <tr><td class="td-highlight">BOTO</td><td>Boat One-Time-Only (shipment program)</td></tr>
+      <tr><td class="td-highlight">CG Decision</td><td>Comptroller General Decision</td></tr>
+      <tr><td class="td-highlight">CSS</td><td>Customer Satisfaction Survey</td></tr>
+      <tr><td class="td-highlight">DPS</td><td>Defense Personal Property System</td></tr>
+      <tr><td class="td-highlight">DTR</td><td>Defense Transportation Regulation (DoD 4500.9-R)</td></tr>
+      <tr><td class="td-highlight">FRV</td><td>Full Replacement Value (claims protection)</td></tr>
+      <tr><td class="td-highlight">GBL / GCC</td><td>Government Bill of Lading / Government Constructed Cost</td></tr>
+      <tr><td class="td-highlight">GBD</td><td>Government Business Day</td></tr>
+      <tr><td class="td-highlight">HHG</td><td>Household Goods</td></tr>
+      <tr><td class="td-highlight">HOR</td><td>Home of Record</td></tr>
+      <tr><td class="td-highlight">HOS</td><td>Home of Selection</td></tr>
+      <tr><td class="td-highlight">JTR</td><td>Joint Travel Regulations</td></tr>
+      <tr><td class="td-highlight">JPPSO</td><td>Joint Personal Property Shipping Office</td></tr>
+      <tr><td class="td-highlight">LOA</td><td>Line of Accounting</td></tr>
+      <tr><td class="td-highlight">MCO</td><td>Military Claims Office</td></tr>
+      <tr><td class="td-highlight">MPF</td><td>Military Personnel Flight</td></tr>
+      <tr><td class="td-highlight">MT</td><td>Measurement Ton (L × W × H in feet ÷ 40)</td></tr>
+      <tr><td class="td-highlight">NTS</td><td>Non-Temporary Storage</td></tr>
+      <tr><td class="td-highlight">OBD</td><td>Out-of-Service Collection (PPA HQ/LHEX)</td></tr>
+      <tr><td class="td-highlight">PBP&amp;E</td><td>Professional Books, Papers, and Equipment</td></tr>
+      <tr><td class="td-highlight">PCS</td><td>Permanent Change of Station</td></tr>
+      <tr><td class="td-highlight">PDS</td><td>Permanent Duty Station</td></tr>
+      <tr><td class="td-highlight">PLEAD</td><td>Place of Entry on Active Duty</td></tr>
+      <tr><td class="td-highlight">POA</td><td>Power of Attorney</td></tr>
+      <tr><td class="td-highlight">POF</td><td>Privately Owned Firearms</td></tr>
+      <tr><td class="td-highlight">POV</td><td>Privately Owned Vehicle</td></tr>
+      <tr><td class="td-highlight">PPA HQ/LHEX</td><td>Personal Property Activity HQ / Excess Cost Adjudication Function</td></tr>
+      <tr><td class="td-highlight">PPCIG</td><td>Personal Property Consignment Instruction Guide</td></tr>
+      <tr><td class="td-highlight">PPPO</td><td>Personal Property Processing Office</td></tr>
+      <tr><td class="td-highlight">PPSO</td><td>Personal Property Shipping Office</td></tr>
+      <tr><td class="td-highlight">PPM</td><td>Personally Procured Move (formerly DITY)</td></tr>
+      <tr><td class="td-highlight">RDD</td><td>Required Delivery Date</td></tr>
+      <tr><td class="td-highlight">RITA</td><td>Relocation Income Tax Allowance</td></tr>
+      <tr><td class="td-highlight">SIT</td><td>Storage-in-Transit (temporary storage)</td></tr>
+      <tr><td class="td-highlight">TDY</td><td>Temporary Duty</td></tr>
+      <tr><td class="td-highlight">TO</td><td>Transportation Officer</td></tr>
+      <tr><td class="td-highlight">TSP</td><td>Transportation Service Provider (moving company)</td></tr>
+      <tr><td class="td-highlight">UB</td><td>Unaccompanied Baggage</td></tr>
+      <tr><td class="td-highlight">VPC</td><td>Vehicle Processing Center</td></tr>
+    </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ PART I — HHG ══════════════════════════════════════════ -->
+<section id="hhg-auth">
+  <div class="ch-header">
+    <div class="ch-number">I</div>
+    <div class="ch-title">
+      <h2>Household Goods (HHG)</h2>
+      <p>Corresponds to DD Form 1797, Part II</p>
+    </div>
+    <div class="ch-badge">DD FORM 1797 PART II</div>
+  </div>
+  <div class="ch-body">
+    <div class="callout callout-info">
+      <h4>ℹ Scope</h4>
+      <p>Unless otherwise noted, all JTR Chapter 5 and AFI 24-602 V4 references apply to both <strong>Air Force military members and civilian employees</strong>. Review orders carefully to determine the member's or employee's allowances. If a conflict is suspected, return orders to the member for resolution with MPF before counseling.</p>
+    </div>
+
+    <div class="reg-row">
+      <span class="reg reg-jtr">JTR 051301</span>
+      <span class="reg reg-afi">AFI 24-602 V4</span>
+      <span class="reg reg-dtr">DTR Part IV Ch. 401</span>
+    </div>
+
+    <p>The Government's HHG transportation obligation is limited to the cost of transporting the member's maximum HHG weight allowance <strong>in one lot</strong> between authorized places at the Government's "Best Value" cost. Exceptions to the one-lot concept include UB, NTS, and PPM shipments.</p>
+
+    <hr class="divider" id="hhg-destinations">
+    <h3><span class="h3-icon">📍</span> Authorized Destinations for Personal Property</h3>
+    <div class="reg-row">
+      <span class="reg reg-jtr">JTR 051301-B</span>
+      <span class="reg reg-jtr">JTR 051002</span>
+      <span class="reg reg-jtr">JTR 051003</span>
+    </div>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>Destination</th><th>JTR Reference</th><th>Notes</th></tr>
+      <tr><td>New Permanent Duty Station (PDS)</td><td>JTR 051301-B</td><td>Primary authorized destination</td></tr>
+      <tr><td>Temporary Duty Station (TDY)</td><td>JTR 020501</td><td>Separate TDY weight allowance applies</td></tr>
+      <tr><td>Home of Record (HOR)</td><td>JTR 051002</td><td>Separation/retirement use</td></tr>
+      <tr><td>Place of Entry on Active Duty (PLEAD)</td><td>JTR 051002</td><td>Upon entry to service</td></tr>
+      <tr><td>Designated Location</td><td>JTR 052002</td><td>As specified by orders and JTR</td></tr>
+      <tr><td>Non-Temporary Storage (NTS)</td><td>JTR 0518-B</td><td>Exception to one-lot concept</td></tr>
+      <tr><td>Home of Selection (HOS)</td><td>JTR 051003</td><td>Retirement only</td></tr>
+      <tr><td>Other (excess cost possible)</td><td>JTR 051306</td><td>Member bears excess cost</td></tr>
+    </table>
+    </div>
+    <div class="callout callout-danger">
+      <h4>⛔ Restriction: NTS to Separation Station</h4>
+      <p>HHG may NOT be shipped from NTS on the AF Form 899 returning members from overseas to be separated at a CONUS processing station. <strong>(AFI 24-602 V4, Para 4.1.2.3)</strong></p>
+    </div>
+
+    <hr class="divider" id="hhg-weight">
+    <h3><span class="h3-icon">⚖</span> Weight Allowances</h3>
+    <div class="reg-row">
+      <span class="reg reg-jtr">JTR 051401, Table 5-37</span>
+      <span class="reg reg-jtr">JTR 051302-A</span>
+      <span class="reg reg-afi">AFI 24-602 V4, Para 3.2</span>
+    </div>
+
+    <div class="callout callout-warn">
+      <h4>⚠ Effective Date Rule</h4>
+      <ul>
+        <li><strong>Active Duty PCS:</strong> Date member signs in at new duty station, minus travel time, plus one day</li>
+        <li><strong>Separation/Retirement:</strong> Last day of active duty</li>
+        <li><strong>Civilian Employee PCS:</strong> Date the employee must travel</li>
+        <li>Members selected for promotion: early reporting may affect ability to use higher-grade weight entitlement</li>
+      </ul>
+    </div>
+
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>Grade</th><th>With Dependents (lbs)</th><th>Without Dependents (lbs)</th></tr>
+      <tr><td>O-10 / W-5</td><td>18,000</td><td>18,000</td></tr>
+      <tr><td>O-7 to O-9 / W-4 to W-5</td><td>18,000</td><td>18,000</td></tr>
+      <tr><td>O-6 / W-4</td><td>18,000</td><td>18,000</td></tr>
+      <tr><td>O-5 / W-3</td><td>16,000</td><td>14,000</td></tr>
+      <tr><td>O-4 / W-2</td><td>14,000</td><td>12,000</td></tr>
+      <tr><td>O-3 / W-1 / O-1E / O-2E / O-3E</td><td>13,000</td><td>11,000</td></tr>
+      <tr><td>O-1 / O-2</td><td>10,000</td><td>8,000</td></tr>
+      <tr><td>E-9</td><td>13,000</td><td>11,000</td></tr>
+      <tr><td>E-8</td><td>12,000</td><td>10,000</td></tr>
+      <tr><td>E-7</td><td>11,000</td><td>9,000</td></tr>
+      <tr><td>E-6</td><td>10,000</td><td>8,000</td></tr>
+      <tr><td>E-5</td><td>9,000</td><td>7,000</td></tr>
+      <tr><td>E-4</td><td>8,000</td><td>7,000</td></tr>
+      <tr><td>E-1 to E-3</td><td>8,000</td><td>5,000</td></tr>
+    </table>
+    </div>
+    <p style="font-size:11px;color:var(--muted);">▲ These are general JTR Table 5-37 values. Always verify current table in the JTR for the precise grade/dependent status combination. Consult JTR Para 054304-B Table 5-88 for civilian employees.</p>
+
+    <h4>Special Weight Provisions</h4>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>Item</th><th>Extra Weight</th><th>Reference</th></tr>
+      <tr><td>PBP&amp;E (member)</td><td>Up to 2,000 lbs net weight</td><td>JTR 051304-A1</td></tr>
+      <tr><td>PBP&amp;E (spouse)</td><td>Up to 500 lbs net weight</td><td>JTR Appendix A</td></tr>
+      <tr><td>Gun safe(s)</td><td>Up to 500 lbs net weight</td><td>JTR 051304-C</td></tr>
+      <tr><td>Join spouse (combined allowances)</td><td>Both members' allowances combined</td><td>JTR 051402-F2</td></tr>
+      <tr><td>Dead/missing/ill/injured (&gt;30 days)</td><td>Capped at 18,000 lbs total</td><td>JTR 052010-C3b</td></tr>
+    </table>
+    </div>
+
+    <div class="callout callout-tip">
+      <h4>✅ Counseling Tip: Overseas Administrative Weight Limits</h4>
+      <p>Overseas administrative weight limitations apply and may be lower than the full JTR allowance. Exceptions require member request, approval prior to the effective date of PCS, and inclusion in orders. Use SF Form 1200 when the original GBL has already been processed. Overseas weight limits do <strong>NOT</strong> apply to members separating or retiring from an overseas area. <strong>(JTR 051402 · AFI 24-602 V4, Para 3.2)</strong></p>
+    </div>
+
+    <hr class="divider" id="hhg-pbpe">
+    <h3><span class="h3-icon">📚</span> PBP&amp;E and Gun Safes</h3>
+    <div class="reg-row">
+      <span class="reg reg-jtr">JTR 051304-A1</span>
+      <span class="reg reg-afi">AFI 24-602 V4, Para 3.1.3 &amp; Attachment 6</span>
+      <span class="reg reg-jtr">JTR 051304-C</span>
+    </div>
+    <h4>PBP&amp;E — Professional Books, Papers, and Equipment</h4>
+    <ul>
+      <li>NOT charged against the member's authorized weight allowance</li>
+      <li>Maximum: <strong>2,000 lbs net</strong> (member) + <strong>500 lbs net</strong> (spouse)</li>
+      <li>Must be necessary for performance of official duties — member's declaration is certification</li>
+      <li>Must be declared at counseling and clearly identified on inventory (PRO, PBP&amp;E, S-PRO, M-PRO, etc.)</li>
+      <li>Constructive weight: <strong>7 lbs per cubic foot</strong> if scales not available; TSP must note cubic size per carton</li>
+      <li>TSP failing to ID PBP&amp;E at origin: destination PPSO may inspect upon delivery if still in original packed cartons</li>
+      <li>After-the-fact declarations require indisputable intent; document on DD Form 619, DD 1299, GBL, or inventory</li>
+    </ul>
+
+    <div class="example">
+      <div class="ex-title">Example — PBP&amp;E Weight Credit</div>
+      <p>E-7 member ships 12,000 lbs total. PBP&amp;E declared: 1,800 lbs member, 400 lbs spouse. E-7 with dependents allowance = 11,000 lbs.</p>
+      <p>Chargeable HHG = 12,000 − 1,800 − 400 = <strong>9,800 lbs</strong> — under the 11,000 lb allowance. No excess cost.</p>
+      <div class="result">Chargeable Weight: 9,800 lbs ✓ WITHIN ALLOWANCE</div>
+    </div>
+
+    <h4>Gun Safes</h4>
+    <ul>
+      <li>Transported same way and to same location as HHG</li>
+      <li>NOT charged against the authorized HHG weight allowance</li>
+      <li>Maximum: <strong>500 lbs net weight</strong> additional allowance</li>
+      <li><strong>Remove all weapons and other items from safe before shipment</strong> per DTR Part IV, Ch. 401, F.5.a</li>
+    </ul>
+
+    <hr class="divider" id="hhg-excess">
+    <h3><span class="h3-icon">💰</span> Excess Costs</h3>
+    <div class="reg-row">
+      <span class="reg reg-jtr">JTR 051306-A2</span>
+      <span class="reg reg-afi">AFI 24-602 V4, Para 12.3.1</span>
+      <span class="reg reg-jtr">JTR 051306-B Table 5-36 Item 2</span>
+    </div>
+    <div class="callout callout-danger">
+      <h4>⚠ Financial Liability</h4>
+      <p>By signing DD Form 1299, the member agrees to pay ALL excess costs incurred. The member is financially responsible for excess weight charges when the authorized weight allowance is exceeded.</p>
+    </div>
+    <ul>
+      <li>PPPO/JPPSO is responsible for collecting all known excess costs <em>prior</em> to releasing the shipment for members separating in a non-pay status</li>
+      <li>Once property reaches the proper destination, it <strong>cannot be held ransom</strong> for non-payment of excess costs</li>
+      <li>For multiple shipments: excess costs computed on the shipment resulting in the <strong>least cost to the member</strong></li>
+      <li>Unauthorized items discovered at destination: member reimburses all shipping costs related to those items</li>
+    </ul>
+    <div class="callout callout-civ">
+      <h4>👤 Civilians: JTR 054304-C1 and C2</h4>
+    </div>
+
+    <hr class="divider" id="hhg-sit">
+    <h3><span class="h3-icon">🏢</span> Storage-in-Transit (SIT / Temporary Storage)</h3>
+    <div class="reg-row">
+      <span class="reg reg-jtr">JTR 0518</span>
+      <span class="reg reg-afi">AFI 24-602 V4, Para 6.1</span>
+      <span class="reg reg-jtr">JTR 020502-E</span>
+    </div>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>Scenario</th><th>Max Duration</th><th>Authority</th></tr>
+      <tr><td>Standard SIT (PCS)</td><td>180 days (approval required beyond 90 days)</td><td>TO at (J)PPSO</td></tr>
+      <tr><td>TDY/deployment ≥90 days (not PCS)</td><td>90 days after TDY completion + possible 90-day extension</td><td>Member's commander</td></tr>
+      <tr><td>Intra-city move</td><td><strong>NOT AUTHORIZED</strong></td><td>JTR 0518-A11</td></tr>
+    </table>
+    </div>
+    <ul>
+      <li>Approval/denial authority for SIT through and beyond 180 days: appointed TO at (J)PPSO — <strong>no appeal process above the TO</strong></li>
+      <li>Requests beyond the 180th day must involve circumstances <em>beyond the member's control</em></li>
+      <li>Conversion to member's expense: occurs at 2400 hours on final day of approved storage</li>
+      <li>Members with TDY en route orders: encourage NTS for the TDY period to prevent excess SIT costs</li>
+      <li>Members should update DPS with current contact info to prevent unnecessary SIT charges</li>
+    </ul>
+
+    <hr class="divider" id="hhg-documents">
+    <h3><span class="h3-icon">📋</span> Key Documents &amp; Counseling Actions</h3>
+    <div class="reg-row">
+      <span class="reg reg-dtr">DTR Part IV Ch. 401 Appendix K1</span>
+    </div>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>Document</th><th>Purpose</th></tr>
+      <tr><td>DD Form 1299</td><td>Application for Shipment and/or Storage. Member's agreement to pay excess costs</td></tr>
+      <tr><td>DD Form 1797</td><td>Personal Property Counseling Checklist (military)</td></tr>
+      <tr><td>DD Form 619 / 619-1</td><td>Statement of Accessorial Services Performed — verify all services listed were actually rendered</td></tr>
+      <tr><td>TSP Inventory</td><td>Origin/destination inventory. Note ALL discrepancies before signing. Do not sign blank documents</td></tr>
+      <tr><td>GBL (Government Bill of Lading)</td><td>Shipping contract. Retain copy</td></tr>
+      <tr><td>DD Form 2278</td><td>Application/Agreement for PPM program</td></tr>
+      <tr><td>DD Form 788</td><td>POV Shipping Document (condition of vehicle at turn-in)</td></tr>
+      <tr><td>DD Form 1164</td><td>Service Order — NTS. Contains storage facility, responsible TMF, weight</td></tr>
+    </table>
+    </div>
+    <div class="callout callout-danger">
+      <h4>⚠ Never Sign a Blank Document</h4>
+      <p>Members must never sign blank inventory sheets, blank DD Forms, or any other blank documents during the move. (DTR Part IV, Ch. 401, Appendix K1, Para X.1.jj)</p>
+    </div>
+
+    <h4>7-Day Spread Dates / Pickup Dates</h4>
+    <ul>
+      <li>7-day spread dates apply to standard HHG shipments — NOT NTS Handling In, NTS release, or DPM shipments</li>
+      <li>Member identifies desired pickup date in DPS; TSP may negotiate actual pack/pickup dates during pre-move survey</li>
+      <li>Missed pickup or failed delivery (not beyond member's control): <strong>excess costs charged to the member</strong> (JTR 051306-F)</li>
+      <li>Member or authorized agent MUST be present 0800–1700 on agreed pack/load dates</li>
+    </ul>
+    <div class="callout callout-tip">
+      <h4>✅ Required Delivery Date (RDD)</h4>
+      <p>DPS displays the Government-allowed RDD. Advise customers the <strong>Desired Delivery Date (DDD)</strong> becomes the RDD when booking. Caution against driver promises of specific delivery dates — drivers follow dispatcher routing.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ PART II — UB ══════════════════════════════════════════ -->
+<section id="ub">
+  <div class="ch-header">
+    <div class="ch-number">II</div>
+    <div class="ch-title">
+      <h2>Unaccompanied Baggage (UB)</h2>
+      <p>Corresponds to DD Form 1797, Part II</p>
+    </div>
+    <div class="ch-badge">DD FORM 1797 PART II</div>
+  </div>
+  <div class="ch-body">
+    <div class="reg-row">
+      <span class="reg reg-jtr">JTR 051403</span>
+      <span class="reg reg-afi">AFI 24-602 V4, Attachment 4, Table A4.1</span>
+    </div>
+    <div class="callout callout-danger">
+      <h4>⚠ EXTREMELY Expensive — Air Shipment</h4>
+      <p>UB shipped by air is extremely expensive and can result in significant excess cost when weight allowances are exceeded. Counsel members thoroughly. (JTR 051306-A)</p>
+    </div>
+    <p>Although UB may be shipped separately from HHG, it is <strong>chargeable against the member's total JTR weight allowance</strong>. UB is typically items needed to establish a temporary residence: clothing, pots/pans, light housekeeping items, cribs, playpens, collapsible strollers — <em>no major furnishings</em>.</p>
+
+    <h3><span class="h3-icon">⚖</span> UB Weight Allowances</h3>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>Situation</th><th>Weight Allowance</th><th>Reference</th></tr>
+      <tr><td>Dependents ≥12 years old (PCS)</td><td>350 lbs per dependent</td><td>AFI 24-602 V4, Attach. 4, Table A4.1, Rule 9</td></tr>
+      <tr><td>Dependents &lt;12 years old (PCS)</td><td>175 lbs per dependent</td><td>AFI 24-602 V4, Attach. 4, Table A4.1, Rule 9</td></tr>
+      <tr><td>Formal education (student)</td><td>350 lbs</td><td>JTR 050816-A1</td></tr>
+      <tr><td>Vocational education (student)</td><td>350 lbs</td><td>JTR 050816-A1d</td></tr>
+      <tr><td>Unaccompanied tours (surface option)</td><td>10% of full JTR weight allowance</td><td>AFI 24-602 V4, Attach. 4, Table A4.1, Note 2</td></tr>
+    </table>
+    </div>
+
+    <h4>Student Baggage Storage</h4>
+    <p>During annual student trip between school and member's PDS, the member may store student UB (up to 350 lbs) in the school vicinity. Storage cost limited to the cost of round-trip transportation for UB. <strong>Student travel order MUST contain a LOA for storage.</strong> (JTR 050816-D10)</p>
+
+    <h3><span class="h3-icon">✈</span> Methods of UB Transportation</h3>
+    <ul>
+      <li><strong>CONUS-to-CONUS:</strong> Normally included with HHG as "designated items for extra pickup/delivery" on one GBL. Expedited mode authorized when HHG transit time doesn't meet UB RDD.</li>
+      <li><strong>OCONUS:</strong> Normal mode is airlift. Split shipments (part air, part surface) NOT authorized for dependents or members authorized concurrent travel. Exception: host country restrictions.</li>
+      <li><strong>Hard Lift Areas:</strong> 10% of full JTR weight allowance may be shipped by surface or airlift — not both (split prohibited)</li>
+    </ul>
+
+    <div class="callout callout-tip">
+      <h4>✅ Counseling Tip: Valuable Items</h4>
+      <p>Advise members to hand-carry cameras, jewelry, money, and pilferable items. Photograph or video valuables before shipment to assist in recovery of stolen items. (AFI 24-602 V4, Para 3.5.3.3)</p>
+    </div>
+    <div class="callout callout-civ">
+      <h4>👤 Civilians: JTR 054305-E1 and 054305-E</h4>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ PART III — NTS ══════════════════════════════════════════ -->
+<section id="nts">
+  <div class="ch-header">
+    <div class="ch-number">III</div>
+    <div class="ch-title">
+      <h2>Non-Temporary Storage (NTS)</h2>
+      <p>Corresponds to DD Form 1797, Part III</p>
+    </div>
+    <div class="ch-badge">DD FORM 1797 PART III</div>
+  </div>
+  <div class="ch-body">
+    <div class="reg-row">
+      <span class="reg reg-jtr">JTR 0518-B</span>
+      <span class="reg reg-afi">AFI 24-602 V4, Para 6.2</span>
+    </div>
+
+    <h3><span class="h3-icon">📦</span> NTS Authorization Scenarios</h3>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>Scenario</th><th>Duration</th><th>Reference</th></tr>
+      <tr><td>Moving into/out of government/privatized quarters (CONUS)</td><td>Per orders and JTR</td><td>JTR 0518-B7 · AFI 24-602 V4, Para 6.2.5.1.3</td></tr>
+      <tr><td>As alternative to HHG transportation (Secretarial Process)</td><td>Per orders</td><td>JTR 0518-B5 · AFI 24-602 V4, Para 6.2.3</td></tr>
+      <tr><td>TDY/deployment ≥90 days (not PCS)</td><td>90 days after TDY + up to 90-day extension with commander approval</td><td>JTR 020502-C · AFI 24-602 V4, Para 2.6.2</td></tr>
+      <tr><td>Separation (no severance/separation pay)</td><td>180 days after active-duty termination date</td><td>JTR 0518-B13</td></tr>
+      <tr><td>Retirement or separation with severance/separation pay</td><td>Issuance of orders through 1 year after termination of active duty</td><td>JTR 0518-B14</td></tr>
+    </table>
+    </div>
+
+    <div class="callout callout-warn">
+      <h4>⚠ NTS Is Part of HHG Weight Allowance</h4>
+      <p>Property placed in NTS is chargeable against the member's JTR authorized weight allowance. <strong>(JTR 0518-B3)</strong></p>
+    </div>
+
+    <h3><span class="h3-icon">📍</span> Location of NTS</h3>
+    <ul>
+      <li>In an approved commercial or government storage facility nearest to where HHGs are located on the date of issuance of PCS orders (JTR 0518-B2)</li>
+      <li>OCONUS PCS/retirement/separation: property normally returned to CONUS for NTS (AFI 24-602 V4, Para 6.2.1)</li>
+      <li>Provide member with address and telephone numbers of storage facility</li>
+    </ul>
+
+    <h4>Counseling Requirements for NTS</h4>
+    <ul>
+      <li>Advise members to keep PPSO informed of assignment status changes or tour extensions affecting NTS entitlement</li>
+      <li>Civilians: coordinate with personnel office for new LOA at beginning of each fiscal year</li>
+      <li>Appliances: drain and remove all moisture to prevent mold/mildew under long-term storage</li>
+      <li>Member retains a legible copy of the inventory — critically important for crosscheck upon release</li>
+      <li>Advise members to review and dispose of unwanted items — excess NTS weight increases excess cost exposure</li>
+    </ul>
+
+    <div class="callout callout-tip">
+      <h4>✅ Withdrawal from NTS</h4>
+      <p>Withdrawal from NTS as an alternative to continued storage includes local release, unpacking, and uncrating at Government expense. <strong>(JTR 0518-B6)</strong></p>
+    </div>
+    <div class="callout callout-civ">
+      <h4>👤 Civilians: JTR 054306 and JTR 054306-B3</h4>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ PART IV — FIREARMS ══════════════════════════════════════════ -->
+<section id="firearms">
+  <div class="ch-header">
+    <div class="ch-number">IV</div>
+    <div class="ch-title">
+      <h2>Weapons / Privately Owned Firearms (POF)</h2>
+      <p>Corresponds to DD Form 1797, Part IV</p>
+    </div>
+    <div class="ch-badge">DD FORM 1797 PART IV</div>
+  </div>
+  <div class="ch-body">
+    <div class="reg-row">
+      <span class="reg reg-jtr">JTR 051303</span>
+      <span class="reg reg-dtr">DTR Chapter 409</span>
+    </div>
+    <div class="callout callout-danger">
+      <h4>🔴 Critical — Review PPCIG Before Every Firearms Counseling</h4>
+      <p>Failure to counsel correctly can result in: shipments held at customs, confiscation, fines imposed by the host country, and possible UCMJ action against the service member. Ensure DD Form 1797 is initialed when member is shipping firearms OCONUS.</p>
+    </div>
+
+    <h3><span class="h3-icon">🔫</span> CONUS Shipment of Firearms</h3>
+    <div class="reg-row">
+      <span class="reg reg-jtr">JTR 051303</span>
+      <span class="reg reg-dtr">DTR Ch. 409, Para C1</span>
+    </div>
+    <ul>
+      <li>Customers are authorized to ship all <strong>conventional, antique, and surplus military firearms</strong> within CONUS</li>
+      <li>Owner must be in possession of all licenses, permits, or documentation required by law</li>
+      <li><strong>Prohibited:</strong> Importation of foreign and domestic semi-automatic assault weapons (DTR Ch. 409, Para B1)</li>
+    </ul>
+
+    <h3><span class="h3-icon">✈</span> Shipping Firearms CONUS → OCONUS</h3>
+    <div class="reg-row">
+      <span class="reg reg-dtr">DTR Ch. 409, Para C2</span>
+    </div>
+    <ul>
+      <li><strong>CBP Form 4455</strong> (Certificate of Registration) must be executed at any CBP office before departure from the U.S.</li>
+      <li>Establishes that firearms were previously owned in the U.S.</li>
+      <li>Alternatives to CBP 4455: bill of sale, receipt, HHG inventory/packing list, or application to ship personal property with adequate description</li>
+    </ul>
+
+    <h3><span class="h3-icon">🛬</span> Shipping Firearms OCONUS → CONUS (Importation)</h3>
+    <div class="reg-row">
+      <span class="reg reg-dtr">DTR Ch. 409, Para C3a</span>
+    </div>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>Requirement</th><th>Reference</th></tr>
+      <tr><td>Member must be on active duty OCONUS within 60 days immediately preceding importation</td><td>DTR Ch. 409, Para C3a1</td></tr>
+      <tr><td>Customs duty paid on amounts exceeding normal customs exemption</td><td>DTR Ch. 409, Para C3a1</td></tr>
+      <tr><td>Prohibited firearms may NOT be imported</td><td>DTR Ch. 409, Para C3a2</td></tr>
+      <tr><td>Surplus military firearms: must prove previous U.S. ownership</td><td>DTR Ch. 409, Para C3a2</td></tr>
+      <tr><td>Importation for personal use only — resale or gifting prohibited</td><td>DTR Ch. 409, Para C3a3</td></tr>
+      <tr><td>Shipment must be to member's place of residence or PDS</td><td>DTR Ch. 409, Para C3a4</td></tr>
+    </table>
+    </div>
+
+    <div class="example">
+      <div class="ex-title">Example — Overseas Firearm Shipment</div>
+      <p>SSgt returning from Ramstein AB with 2 hunting rifles and a handgun. Member is within 60-day window. Rifles are conventional — authorized. Handgun is conventional — authorized. Member must pay customs duty on amounts exceeding personal exemption. Surplus military weapon? Must prove prior U.S. ownership.</p>
+      <div class="result">✓ Authorized — Initials required on DD Form 1797, Part IV</div>
+    </div>
+
+    <div class="callout callout-civ">
+      <h4>👤 Civilians: DTR Chapter 409, Section D</h4>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ PART V — POV ══════════════════════════════════════════ -->
+<section id="pov">
+  <div class="ch-header">
+    <div class="ch-number">V</div>
+    <div class="ch-title">
+      <h2>Privately Owned Vehicles (POV)</h2>
+      <p>Corresponds to DD Form 1797, Part V · Vehicles, motorcycles, and leased vehicles</p>
+    </div>
+    <div class="ch-badge">DD FORM 1797 PART V</div>
+  </div>
+  <div class="ch-body">
+    <div class="reg-row">
+      <span class="reg reg-jtr">JTR 0529–0532</span>
+      <span class="reg reg-dtr">DTR Ch. 408 · Appendix K3 / K4</span>
+      <span class="reg reg-afi">AFI 24-602 V4, Ch. 7</span>
+    </div>
+
+    <div class="callout callout-warn">
+      <h4>⚠ Review PPCIG for Every POV Counseling Session</h4>
+      <p>Varied and sometimes complex restrictions (size, weight, engine size, right-hand drive, etc.) are imposed on POVs in OCONUS locations. Review PPCIG before every POV counseling session.</p>
+    </div>
+
+    <h3><span class="h3-icon">🚗</span> What Qualifies as a POV?</h3>
+    <p>A motor vehicle with <strong>four or more wheels</strong>, owned or leased (long-term, 12+ months) by a service member, civilian employee, or dependent. Must be: self-propelled, licensed to travel on public highways, and designed to carry passengers or HHG. Also includes airplanes, boats, and helicopters for broad POV definition purposes. (JTR Appendix A)</p>
+
+    <h3><span class="h3-icon">📋</span> Authorization to Ship POV</h3>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>Scenario</th><th>Authorization</th><th>Reference</th></tr>
+      <tr><td>Members (any grade) OCONUS</td><td>Authorized if no military/host country restrictions and POV meets shipping requirements</td><td>JTR 053001-A</td></tr>
+      <tr><td>CONUS-to-CONUS shipment</td><td>MPF authorizes when member is physically unable to drive OR insufficient time to drive to PDS</td><td>JTR 0529 · AFI 24-602 V4</td></tr>
+      <tr><td>Join spouse (both with PCS orders)</td><td>May each ship a POV, or combine 20-MT limit and ship one large POV</td><td>JTR 053001-B2b · AFI 24-602 V4, Para 7.3.3</td></tr>
+      <tr><td>Member elects not to ship OCONUS</td><td>May ship POV on return PCS from overseas even if none was shipped going overseas</td><td>JTR 053001-B, Table 5-65 Item 2</td></tr>
+      <tr><td>Dead/ill/injured/missing &gt;30 days</td><td>POV may be shipped to HOR, dependent's residence, or NOK/authorized recipient location</td><td>JTR 0531-B1</td></tr>
+    </table>
+    </div>
+
+    <h4>Size Limitation (Measurement Tons)</h4>
+    <div class="callout callout-warn">
+      <h4>⚠ 20 MT Maximum</h4>
+      <p>Maximum POV size at Government expense = <strong>20 measurement tons</strong>. Formula: (Length × Width × Height in feet) ÷ 40. Member pays excess cost when exceeded. Oversized POV for medical reasons requires MPF approval. (JTR 053001-B2a · AFI 24-602 V4, Para 7.6.3)</p>
+    </div>
+
+    <div class="example">
+      <div class="ex-title">Example — Measurement Tons Calculation</div>
+      <p>Member wants to ship a large SUV: 16 ft long × 6.5 ft wide × 6 ft tall.</p>
+      <p>MT = (16 × 6.5 × 6) ÷ 40 = 624 ÷ 40 = <strong>15.6 MT</strong></p>
+      <div class="result">15.6 MT — Within 20 MT limit ✓ No excess size cost</div>
+    </div>
+
+    <hr class="divider" id="pov-prep">
+    <h3><span class="h3-icon">🔧</span> POV Preparation for Port Turn-In</h3>
+    <div class="reg-row">
+      <span class="reg reg-dtr">DTR Part IV, Ch. 408, Para O</span>
+      <span class="reg reg-dtr">DTR Part IV, Attachment K3</span>
+    </div>
+    <ul>
+      <li>Safe operating condition with valid state inspection sticker (if required)</li>
+      <li>Radiator antifreeze tested to <strong>−20°F</strong> (or colder if needed)</li>
+      <li>Fuel: <strong>less than ¼ tank</strong></li>
+      <li>All exterior surfaces and undercarriage: <strong>clean and free of soil and foreign matter</strong></li>
+      <li>Check for open recalls: <a href="https://vinrcl.safercar.gov/vin/">vinrcl.safercar.gov/vin</a></li>
+      <li>Complete and legible PCS order — all pages, amendments, numbered statements; no cut-off or blurry orders</li>
+      <li>Spouse turning in POV: copy of marriage certificate required</li>
+      <li>Anyone other than member/spouse: Power of Attorney, Letter of Authorization, or other acceptable evidence of agency</li>
+      <li>DD Form 788 (automobiles), DD Form 788-1 (vans), DD Form 788-2 (motorcycles) — documents condition at turn-in</li>
+      <li>Leased vehicle: written authority from leasing company required</li>
+    </ul>
+
+    <h4>Items Permitted/Prohibited in POV During Shipment</h4>
+    <div class="callout callout-info">
+      <h4>ℹ Review DTR Part IV, Ch. 408, Para D7 and D8</h4>
+      <p>Certain items are permitted to remain in a POV during shipment (e.g., jack, spare tire, owner's manual). Review prohibited items with member to prevent fines or shipment delays.</p>
+    </div>
+
+    <h4>Time Limits for Turning In POV to Port/VPC</h4>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>Scenario</th><th>Time Limit</th><th>Reference</th></tr>
+      <tr><td>Overseas tour &gt;1 year</td><td>Within 90 days of departure from previous PDS AND member has ≥1 year remaining on current tour</td><td>AFI 24-602 V4, Para 7.4.1</td></tr>
+      <tr><td>Over 90 days / &lt;1 year remaining</td><td>Written approval of OCONUS LRS/equivalent Sq Commander (may delegate to TO)</td><td>AFI 24-602 V4, Para 7.4.1.1</td></tr>
+      <tr><td>Overseas tour &lt;1 year</td><td>Within 30 days after departure from last PDS</td><td>AFI 24-602 V4, Para 7.4.1.2</td></tr>
+    </table>
+    </div>
+
+    <h4>After Delivery — Port of Debarkation</h4>
+    <ul>
+      <li>Provide contact information (phone, email) to port for arrival notification</li>
+      <li>If POV not picked up within 45 days: commercial storage at member's expense</li>
+      <li>If member fails to contact VPC within ~180 days: <strong>abandoned vehicle process initiated</strong> (DTR Part IV, Ch. 408, Para F)</li>
+    </ul>
+
+    <hr class="divider" id="pov-storage">
+    <h3><span class="h3-icon">🅿</span> POV Storage</h3>
+    <div class="reg-row">
+      <span class="reg reg-jtr">JTR 0532</span>
+      <span class="reg reg-afi">AFI 24-602 V4, Para 7.13–7.15</span>
+    </div>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>Authorization</th><th>Reference</th></tr>
+      <tr><td>Assigned to foreign OCONUS PDS where POV shipment is not permitted</td><td>JTR 0532-A1a</td></tr>
+      <tr><td>TDY on contingency operation for &gt;30 days</td><td>JTR 0532-A1b</td></tr>
+    </table>
+    </div>
+    <div class="callout callout-civ">
+      <h4>👤 Civilians: NOT authorized POV storage (except under evacuation) · JTR 060405. Effective 21 Dec 2011: authorized POV storage in connection with contingency operations · JTR 032905</h4>
+    </div>
+
+    <h4>Storage Facilities</h4>
+    <ul>
+      <li>Option 1: <strong>DoD Global POV Contract (GPC)</strong> — designated facility</li>
+      <li>Option 2: <strong>Personally Procured Storage</strong> — reimbursement limited to Government Constructed Cost (GCC). Provide GCC to member to assist in selecting facility.</li>
+      <li>"Commercial facility" = business offering vehicle storage to the public. On-base storage charging a fee = commercial facility. Residential garage, shed, barn, or lot = NOT commercial (JTR 0532-B3b)</li>
+    </ul>
+
+    <h4>Duration of POV Storage at Government Expense</h4>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>Member Status</th><th>Storage Duration</th><th>Reference</th></tr>
+      <tr><td>Active duty returning from OCONUS/contingency TDY</td><td>90 days after return; additional 90 days approved by Service</td><td>JTR 0532-B11 · AFI 24-602 V4, Para 7.15.2</td></tr>
+      <tr><td>Separation (no severance)</td><td>Until 180th day from active-duty termination</td><td>JTR 0532-B11b · AFI 24-602 V4, Para 7.15.2</td></tr>
+      <tr><td>Retirement / discharge with severance/separation pay</td><td>Up to 1 year from active-duty termination</td><td>JTR 0532-B11c · AFI 24-602 V4, Para 7.15.3</td></tr>
+    </table>
+    </div>
+    <div class="callout callout-danger">
+      <h4>⚠ If &lt;12 Months Remain on OCONUS Tour</h4>
+      <p>A stored POV MAY NOT be removed from storage for shipment if fewer than 12 months remain on the OCONUS tour. <strong>(JTR 0532-B14)</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ PART VI — BOATS ══════════════════════════════════════════ -->
+<section id="boats">
+  <div class="ch-header">
+    <div class="ch-number">VI</div>
+    <div class="ch-title">
+      <h2>Boats &amp; Personal Watercraft</h2>
+      <p>Corresponds to DD Form 1797, Part VI</p>
+    </div>
+    <div class="ch-badge">DD FORM 1797 PART VI</div>
+  </div>
+  <div class="ch-body">
+    <div class="reg-row">
+      <span class="reg reg-dtr">DTR Part IV, Ch. 412</span>
+      <span class="reg reg-jtr">JTR 051301-A</span>
+      <span class="reg reg-afi">AFI 24-602 V4, Para 7.9</span>
+    </div>
+    <div class="callout callout-danger">
+      <h4>🔴 High Excess Cost Risk — Counsel Thoroughly</h4>
+      <p>Boat shipments almost always result in excess costs, which may be very high. Strongly encourage members to consider PPM for boat movements.</p>
+    </div>
+
+    <h3><span class="h3-icon">⛵</span> Size Thresholds and Methods</h3>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>Dimension Limit</th><th>Maximum</th></tr>
+      <tr><td>Length</td><td>14 feet</td></tr>
+      <tr><td>Width</td><td>6 feet 10 inches</td></tr>
+      <tr><td>Height</td><td>6 feet 5 inches</td></tr>
+    </table>
+    </div>
+    <ul>
+      <li>Boats/watercraft ≤ dimensions above: shipped <strong>with HHG</strong> or by PPM (canoes, kayaks, jet skis, skiffs, sculls, dinghies, rowboats included)</li>
+      <li>Boats > dimensions above (CONUS): shipped separately via <strong>Boat One-Time-Only (BOTO)</strong> program or PPM</li>
+      <li>OCONUS (including Alaska): combined boat/trailer > dimensions → BOTO or PPM</li>
+      <li><strong>No size limitations for members</strong> — members may ship any size boat; civilians limited to van-moveable size (DTR Part IV, Ch. 412, Para A3 vs A4)</li>
+    </ul>
+
+    <div class="callout callout-warn">
+      <h4>⚠ Cost Limitation</h4>
+      <p>Boat entitlement is limited to an amount <strong>not to exceed</strong> what it would have cost to move a like weight of HHG (the member's maximum allowance, one lot, between authorized origin and destination). All excess costs are the member's responsibility. <strong>(JTR 051301-A)</strong></p>
+    </div>
+
+    <h3><span class="h3-icon">🚢</span> Methods of Boat Shipment</h3>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>Method</th><th>Description</th><th>Reference</th></tr>
+      <tr><td>Tow-Away (Code B)</td><td>TSP provides hookup, over-road transport, transit permits, delivery</td><td>DTR Part IV, Ch. 412, Para B2b2a</td></tr>
+      <tr><td>Haul-Away (Code H)</td><td>TSP loads onto specialized equipment (flatbed/cradle), transports, delivers</td><td>DTR Part IV, Ch. 412, Para B2b2b</td></tr>
+      <tr><td>PPM</td><td>Member moves own boat. Weight ticket required (gross only — no empty ticket for boats)</td><td>DTR Part IV, Ch. 412, Para A6</td></tr>
+      <tr><td>Direct Procurement (DPM)</td><td>PPSO may use DPM for boat &lt;1,000 lbs when cost-effective</td><td>DTR Part IV, Ch. 412, Para A1</td></tr>
+      <tr><td>Commercial Boat Hauler</td><td>Member arranges commercial transport</td><td>AFI 24-602 V4</td></tr>
+    </table>
+    </div>
+
+    <h4>BOTO Excess Cost — Important Counseling Point</h4>
+    <ul>
+      <li>The authorized Government cost is based on HHG rate for that weight, while BOTO is a fixed rate based on space — BOTO almost always costs more</li>
+      <li>The fact that the member is below the prescribed weight allowance does <strong>not</strong> reduce or eliminate BOTO excess cost</li>
+      <li>International BOTO: carrier also receives BOTO rate for HHG, computed on per-cwt basis (usually higher than standard HHG rate)</li>
+      <li><strong>Determine excess cost as soon as BOTO rate is received; advise member immediately and provide opportunity to make other arrangements</strong></li>
+    </ul>
+
+    <h4>Boat Storage</h4>
+    <ul>
+      <li>NTS authorized; no size limitations for members (DTR Part IV, Ch. 412, Para F1)</li>
+      <li>Contractor entitled to weight additive not to exceed commercial tariff — counts against member's weight allowance</li>
+      <li>Special packing/crating/handling: member's responsibility</li>
+      <li><strong>Water storage of boats is NOT authorized at Government expense</strong></li>
+      <li>Member may self-store and file for reimbursement (limited to Government cost for same weight of HHG; certified weight tickets required)</li>
+    </ul>
+
+    <h4>Boats as Primary Residence</h4>
+    <p>Boats used as primary residence may be shipped as a mobile home IAW DTR Part IV, Ch. 407. Primary residence status must be annotated on travel authorization and transportation documents. (AFI 24-602 V4, Para 7.9.2.4)</p>
+
+    <div class="callout callout-civ">
+      <h4>👤 Civilians: DTR Part IV, Ch. 412, Para A4 and B2b2 · JTR 054406-C</h4>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ PART VII — MOBILE HOMES ══════════════════════════════════════════ -->
+<section id="mobile">
+  <div class="ch-header">
+    <div class="ch-number">VII</div>
+    <div class="ch-title">
+      <h2>Mobile Homes</h2>
+      <p>Mobile Home One-Time-Only (MOTO) Program</p>
+    </div>
+    <div class="ch-badge">DTR PART IV CH. 407</div>
+  </div>
+  <div class="ch-body">
+    <div class="reg-row">
+      <span class="reg reg-jtr">JTR 0522, 0523, 0524</span>
+      <span class="reg reg-dtr">DTR Part IV, Ch. 407 · Attachment K5</span>
+      <span class="reg reg-afi">AFI 24-602 V4</span>
+    </div>
+
+    <div class="callout callout-warn">
+      <h4>⚠ Rare — Prepare Thoroughly</h4>
+      <p>Mobile home moves are rare. Review DTR Part IV, Ch. 407 and Attachment K5 ("Moving Your Mobile Home") in detail before counseling. Discuss excess costs, preparation, road worthiness, and transit storage carefully.</p>
+    </div>
+
+    <h3><span class="h3-icon">🏠</span> Key Mobile Home Counseling Points</h3>
+    <ul>
+      <li>Movement at Government expense subject to same cost limitation as boats/HHG — not to exceed like weight of HHG</li>
+      <li>Small shipment of HHG may be authorized for safety purposes (essential items)</li>
+      <li>Member responsible for road worthiness, permits, oversize/overweight requirements</li>
+      <li>TSP provides all included accessorial services (blocking, unblocking, anchoring, skirting, expando/slideout, double-wide separation/reassembly) as part of MOTO rate</li>
+      <li>Customer responsible: reconnect/disconnect utilities and air conditioner</li>
+      <li>SIT for mobile homes: approved by PPSO; number of storage days must be included in OTO request</li>
+    </ul>
+
+    <h4>Authorization by Member Status</h4>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>Member</th><th>Reference</th></tr>
+      <tr><td>Military service members</td><td>JTR 0522, 0523, 0524</td></tr>
+      <tr><td>Civilian employees</td><td>JTR 0544</td></tr>
+    </table>
+    </div>
+
+    <div class="callout callout-civ">
+      <h4>👤 Civilians: JTR 0544</h4>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ PART VIII — RITA ══════════════════════════════════════════ -->
+<section id="rita">
+  <div class="ch-header">
+    <div class="ch-number">VIII</div>
+    <div class="ch-title">
+      <h2>RITA — Relocation Income Tax Allowance</h2>
+      <p>Reimbursement for federal and state taxes on PCS-related reimbursements</p>
+    </div>
+    <div class="ch-badge">JTR CH. 5 PART E</div>
+  </div>
+  <div class="ch-body">
+    <div class="reg-row">
+      <span class="reg reg-jtr">JTR Chapter 5, Part E</span>
+      <span class="reg reg-afi">AFI 24-602 V4</span>
+      <span class="reg reg-law">26 U.S.C. (Internal Revenue Code)</span>
+    </div>
+
+    <h3><span class="h3-icon">💵</span> What is RITA?</h3>
+    <p>RITA (Relocation Income Tax Allowance) reimburses eligible members and civilian employees for the additional federal and, in some cases, state income taxes they must pay because most PCS-related allowances (MIHA, MALT, DLA, PPM incentive payments, etc.) are included in taxable income.</p>
+
+    <div class="callout callout-info">
+      <h4>ℹ Two-Year Process</h4>
+      <ul>
+        <li><strong>Year 1:</strong> Member receives a <em>Withholding Tax Allowance (WTA)</em> — an advance to offset taxes withheld in the year of the move</li>
+        <li><strong>Year 2:</strong> Member files for RITA after filing federal tax return — reimbursement based on actual taxes paid minus WTA already received</li>
+      </ul>
+    </div>
+
+    <h3><span class="h3-icon">📋</span> Eligibility</h3>
+    <ul>
+      <li>Military members with PCS orders — generally authorized RITA for moves on/after 1 Jan 2018</li>
+      <li>Civilian employees on PCS orders — authorized under JTR Chapter 5, Part F / Chapter 5 Part E</li>
+      <li>Must file federal income tax return (Form 1040) for the tax year of the move</li>
+      <li>Must file RITA claim through Defense Finance and Accounting Service (DFAS) via myPay or official voucher process</li>
+    </ul>
+
+    <h3><span class="h3-icon">📅</span> Filing Timeline</h3>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>Step</th><th>Timing</th></tr>
+      <tr><td>WTA issued automatically with most PCS allowance payments</td><td>During year of move</td></tr>
+      <tr><td>File federal tax return</td><td>By April 15 of year following move</td></tr>
+      <tr><td>Submit RITA claim via myPay/DFAS</td><td>After filing federal return; deadline per JTR/DFAS</td></tr>
+    </table>
+    </div>
+
+    <div class="callout callout-warn">
+      <h4>⚠ Taxable PCS Allowances (Not All-Inclusive)</h4>
+      <ul>
+        <li>DLA (Dislocation Allowance)</li>
+        <li>PPM incentive payment</li>
+        <li>MIHA (Move-In Housing Allowance) in some cases</li>
+        <li>TLE (Temporary Lodging Expense) above excludable amount</li>
+        <li>Reimbursed house-hunting trip expenses above excludable amount</li>
+      </ul>
+      <p>Advise members to consult their base Tax Assistance Center for specific RITA calculations.</p>
+    </div>
+
+    <div class="callout callout-tip">
+      <h4>✅ Counseling Tip</h4>
+      <p>Advise all members and civilian employees on PCS moves about RITA. Remind them to retain all PCS-related financial documents (W-2, LES copies, vouchers) for the two years of the RITA process. Direct to DFAS and base Tax Assistance for filing assistance.</p>
+    </div>
+
+    <h4>State Tax RITA</h4>
+    <p>Some states do not provide a state income tax exclusion for military PCS allowances. Members in these states may be eligible for additional RITA reimbursement for state taxes. Verify with the Tax Assistance Center — state RITA eligibility and amounts vary.</p>
+
+    <div class="callout callout-civ">
+      <h4>👤 Civilian Employees: JTR Chapter 5, Part F and Chapter 5 Part E — RITA is also available for civilian employees on PCS orders. Same two-year WTA/RITA process applies.</h4>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ PART IX — CLAIMS ══════════════════════════════════════════ -->
+<section id="claims">
+  <div class="ch-header">
+    <div class="ch-number">IX</div>
+    <div class="ch-title">
+      <h2>Liability, Claims &amp; Protection</h2>
+      <p>Corresponds to DD Form 1797, Part VII</p>
+    </div>
+    <div class="ch-badge">DD FORM 1797 PART VII</div>
+  </div>
+  <div class="ch-body">
+    <div class="reg-row">
+      <span class="reg reg-dtr">DTR Part IV, Attachment K</span>
+      <span class="reg reg-afi">AFI 24-602 V4, Para 3.5.3</span>
+    </div>
+
+    <h3><span class="h3-icon">🛡</span> Full Replacement Value (FRV) Protection</h3>
+    <p>All DoD customers are eligible for FRV protection on DoD-funded personal property shipments. Claims must be filed through the TSP first to secure FRV eligibility. Use DPS if the shipment was processed through DPS start-to-finish.</p>
+
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>Claim Type</th><th>TSP Maximum Liability</th><th>Reference</th></tr>
+      <tr><td>HHG/UB claim filed with TSP within 9 months of delivery</td><td>Greater of: $10,000 per shipment OR $6.00 × net weight (max $75,000)</td><td>DTR Part IV, Attachment K</td></tr>
+      <tr><td>Quick Claim Settlement (TSP)</td><td>&lt;$12,000; within 5 calendar days of delivery</td><td>DTR Part IV, Attachment K</td></tr>
+      <tr><td>MCO claim (depreciated value)</td><td>No later than 2 years from delivery (after 9 months)</td><td>claims.jag.af.mil</td></tr>
+    </table>
+    </div>
+
+    <h3><span class="h3-icon">📝</span> Claims Process Flow</h3>
+    <ol>
+      <li><strong>At Delivery:</strong> Complete "Notification of Loss or Damage AT Delivery" form in DPS</li>
+      <li><strong>After Delivery:</strong> Complete "Notice of Loss or Damage AFTER Delivery" in DPS</li>
+      <li>TSP is responsible for obtaining repair estimates (DTR Part IV, Attachment K, Para Y3c)</li>
+      <li>TSP must pay, deny, or make offer within <strong>60 days</strong> of claim receipt</li>
+      <li>Member may accept in full or reject TSP's offer on a line-by-line basis</li>
+      <li>If unsatisfied after 30 days: transfer claim to Military Claims Office (MCO)</li>
+      <li>MCO pays depreciated value, pursues FRV with TSP; member receives difference if FRV settlement exceeds MCO payment</li>
+    </ol>
+
+    <h3><span class="h3-icon">⏰</span> Inconvenience Claims</h3>
+    <div class="reg-row">
+      <span class="reg reg-dtr">DTR Part IV, Attachment K-1, Para Z</span>
+    </div>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>Scenario</th><th>TSP Responsibility</th></tr>
+      <tr><td>TSP must deliver out of SIT</td><td>Within 7 GBDs of customer's first contact requesting delivery, OR within 2 GBDs of requested delivery date (if &gt;7 GBDs out)</td></tr>
+      <tr><td>Days 1–7 of delay</td><td>Local per diem (meals and incidentals only — no lodging) for member only; no receipts required</td></tr>
+      <tr><td>Day 8 onward</td><td>Receipts required for out-of-pocket expenses for member and dependents</td></tr>
+    </table>
+    </div>
+    <ul>
+      <li>Eligible expenses: laundry, furniture/appliance rental, TV rental, air mattress, towels, linens, pots, pans, dishes, pillows, blankets</li>
+      <li><strong>Do NOT claim:</strong> alcohol, items not in the shipment, high-end items (TSP may reclaim durable household items)</li>
+      <li>TSP must acknowledge receipt within 5 GBDs; reimbursement within 30 calendar days</li>
+      <li>File directly with TSP (not PPSO or MCO)</li>
+    </ul>
+
+    <h3><span class="h3-icon">🚗</span> POV Claims</h3>
+    <ul>
+      <li>Vehicles shipped to U.S.: fair market value per NADA Official Used Car Guide for the region where claim is filed</li>
+      <li>Vehicles shipped OCONUS: fair market value per NADA at U.S. port of shipment</li>
+      <li>File within 2 years of delivery with: POV contractor or MCO</li>
+    </ul>
+
+    <h3><span class="h3-icon">💎</span> High Value / Extraordinary Value Items</h3>
+    <ul>
+      <li>Advise member to obtain additional insurance through TSP or commercial company for: currency, coins, jewelry, silverware, watches, crystal, figurines, furs, art, manuscripts, collectibles, rare documents with value &gt;$100/lb (AFI 24-602 V4, Para 3.5.3.1 and 3.5.3.2)</li>
+      <li>Strongly encourage PPM or hand-carry for high value items when possible</li>
+      <li>Encourage photography/video of valuables before shipment</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ PART X — PPM ══════════════════════════════════════════ -->
+<section id="ppm">
+  <div class="ch-header">
+    <div class="ch-number">X</div>
+    <div class="ch-title">
+      <h2>Personally Procured Move (PPM)</h2>
+      <p>Corresponds to DD Form 2278</p>
+    </div>
+    <div class="ch-badge">DD FORM 2278</div>
+  </div>
+  <div class="ch-body">
+    <div class="reg-row">
+      <span class="reg reg-afi">AFI 24-602 V4, Chapter 8</span>
+      <span class="reg reg-jtr">JTR 051301-A</span>
+    </div>
+
+    <div class="callout callout-tip">
+      <h4>✅ Always Recommend PPM as an Option</h4>
+      <p>Counselors should not hesitate to recommend PPM — it often provides great advantages, especially when the member may exceed their weight allowance or is moving a boat. PPM is available for one-way moves between points in CONUS, OCONUS, Alaska, Mexico, or Canada, and for local moves.</p>
+    </div>
+
+    <h3><span class="h3-icon">📝</span> PPM DD Form 2278 — Block-by-Block Guidance</h3>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>Block</th><th>Key Points</th><th>Reference</th></tr>
+      <tr><td>6a — Vehicle</td><td>Any vehicle authorized to move HHG. <strong>Privately owned AIRPLANE is NOT authorized.</strong></td><td>AFI 24-602 V4, Para 8.5</td></tr>
+      <tr><td>6b — Origin/Destination</td><td>Authorized origin/destination per orders. JTR 051301-A if alternate requested.</td><td>JTR 051301-A</td></tr>
+      <tr><td>6c — Grade/Rank</td><td>Auto-populated from DPS</td><td>DPS</td></tr>
+      <tr><td>6d — Estimated Weight</td><td>Auto-populated from DPS estimate. Amounts are ESTIMATES only. PBP&amp;E declarable; member paid for PBP&amp;E weight but not charged against allowance.</td><td>AFI 24-602 V4</td></tr>
+      <tr><td>6e — Unauthorized Items</td><td>Provide hazardous material list (DTR Part IV, Appendix I). Unauthorized items = forfeit of monetary allowance; possible investigative referral.</td><td>AFI 24-602 V4, Para 8.9–8.9.2</td></tr>
+      <tr><td>6f — Agent</td><td>If member absent, POA required to initiate PPM and submit for payment</td><td>AFI 24-602 V4</td></tr>
+      <tr><td>6g — Claims</td><td>Member may file claim with Government for loss/damage under Military Personnel and Civilian Employees Claims Act for circumstances beyond control (accident, fire, theft)</td><td>AFI 24-602 V4, Para 8.7</td></tr>
+      <tr><td>6h — Temporary Storage</td><td>SIT may be approved at origin and destination. Requests beyond 90 days require DD Form 1857.</td><td>AFI 24-602 V4</td></tr>
+      <tr><td>7a — Operating Allowance</td><td>Discuss pros/cons of advance. Repayment required if over-estimating weight.</td><td>AFI 24-602 V4</td></tr>
+      <tr><td>7b — Start Date</td><td>Actual start date of move</td><td>—</td></tr>
+      <tr><td>7c — Weight Tickets</td><td><strong>BOTH empty and loaded weight tickets REQUIRED</strong> for EACH vehicle. No tickets = actual cost reimbursement NTE GCC only (no incentive).</td><td>PPA HQ Advisory 22-014</td></tr>
+      <tr><td>7d — Ticket ID</td><td>Member prints full name, last four, and vehicle designation on each ticket. Weigh master signature required before departing.</td><td>AFI 24-602 V4</td></tr>
+      <tr><td>7e — Trailer</td><td>Utility trailer meeting JTR definition: weigh SEPARATELY (trailer = part of HHG weight). Non-qualifying trailer: weigh with prime vehicle (empty and loaded).</td><td>JTR Appendix A</td></tr>
+      <tr><td>7f — Finance</td><td>DD Form 1351-2 required with ALL PPM packages</td><td>—</td></tr>
+      <tr><td>7g — Payment Package</td><td>Signed DD Form 2278 + weight tickets + DD 1351-2 + certificate of expenses → submit to finance</td><td>AFI 24-602 V4</td></tr>
+    </table>
+    </div>
+
+    <h3><span class="h3-icon">ℹ</span> Special PPM Situations</h3>
+    <details>
+      <summary>Commercial Carriers</summary>
+      <div class="det-body">
+        <p>Members may hire a commercial carrier for PPM. The contract is between the member and the 3rd party — the Government cannot intervene on the member's behalf. Advise members to research companies carefully before signing any contract.</p>
+      </div>
+    </details>
+    <details>
+      <summary>Small Package Services (Mail/UPS/FedEx)</summary>
+      <div class="det-body">
+        <p>Actual cost reimbursement only. Receipt/invoice must include: mailing facility address, date, weight, and cost. <strong>Cost of insurance is NOT reimbursable.</strong></p>
+      </div>
+    </details>
+    <details>
+      <summary>RV / 5th Wheel / Camper</summary>
+      <div class="det-body">
+        <p>Member may use RV or 5th wheel to move personal property. <strong>The weight of the RV/5th wheel/camper/mobile home itself is NOT HHG and the Government will NOT pay for that weight.</strong> Member must remove personal property from the RV to obtain a valid empty weight ticket. (JTR Appendix A)</p>
+      </div>
+    </details>
+    <details>
+      <summary>Boat via PPM</summary>
+      <div class="det-body">
+        <p>Members may PPM boats that qualify as HHG. A weight ticket indicating gross weight of the boat is required. Note: an empty weight ticket cannot be obtained for boats — only one gross weight ticket is required for incentive payment. (DTR Part IV, Ch. 412, Para A6)</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ CIVILIANS QUICK REF ══════════════════════════════════════════ -->
+<section id="civilians">
+  <div class="ch-header">
+    <div class="ch-number">★</div>
+    <div class="ch-title">
+      <h2>Civilian Employee Quick Reference</h2>
+      <p>DoD civilian employees — JTR Chapter 5, Part F / Chapter 5 and AFI 24-602 V4, Chapter 13</p>
+    </div>
+    <div class="ch-badge">JTR CH. 5 PART F / CH. 13</div>
+  </div>
+  <div class="ch-body">
+    <div class="callout callout-civ">
+      <h4>👤 Civilian Employee Entitlements — Key Differences</h4>
+      <p>Civilian employees generally share most HHG, NTS, UB, POV, and RITA entitlements with military members, but with important distinctions. Always reference the JTR civilian-specific provisions and AFI 24-602 V4, Chapter 13.</p>
+    </div>
+
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>Topic</th><th>Civilian Reference</th><th>Key Notes</th></tr>
+      <tr><td>HHG Weight Allowance</td><td>JTR 054304-B, Table 5-88</td><td>Net weight determination differs from military</td></tr>
+      <tr><td>Effective Date of PCS Order</td><td>JTR Appendix A</td><td>Date employee must travel</td></tr>
+      <tr><td>PBP&amp;E</td><td>JTR 054309 · AFI 24-602 V4, Para 13.2</td><td>Same general rules; civilian-specific citations apply</td></tr>
+      <tr><td>Excess Costs</td><td>JTR 054304-C1 and C2</td><td>Civilian excess cost computation rules</td></tr>
+      <tr><td>Extra Pickup/Delivery</td><td>JTR 054305, Table 5-89</td><td>Civilian allowances differ from military</td></tr>
+      <tr><td>UB</td><td>JTR 054305-E1 and 054305-E</td><td>UB allowances differ for civilians</td></tr>
+      <tr><td>NTS</td><td>JTR 054306 and JTR 054306-B3</td><td>LOA renewal each fiscal year required</td></tr>
+      <tr><td>SIT (Temporary Storage)</td><td>JTR 054307</td><td>Civilian SIT entitlements</td></tr>
+      <tr><td>POV Shipment</td><td>JTR 0547</td><td>Civilian POV authorizations</td></tr>
+      <tr><td>POV Storage</td><td>JTR 054706 (except contingency · JTR 032905)</td><td>Generally NOT authorized except evacuation/contingency</td></tr>
+      <tr><td>POV Turn-In/Process</td><td>JTR 054701</td><td>CONUS shipment provisions differ</td></tr>
+      <tr><td>Boats (civilian)</td><td>DTR Part IV, Ch. 412, Para A4 and B2b2</td><td>Civilian limited to van-moveable size</td></tr>
+      <tr><td>Boat NTS (civilian)</td><td>JTR 054304-C4</td><td>Size limitations apply for civilians</td></tr>
+      <tr><td>Mobile Homes</td><td>JTR 0544</td><td>Civilian mobile home entitlements</td></tr>
+      <tr><td>Firearms</td><td>DTR Ch. 409, Section D</td><td>Civilian-specific requirements</td></tr>
+      <tr><td>Dead/Injured/Missing</td><td>JTR 054812-D2b (HHG) · JTR 054812-C4 (POV)</td><td>Benefits for survivors/NOK</td></tr>
+      <tr><td>RITA</td><td>JTR Ch. 5, Part E/F</td><td>Available to civilian employees on PCS</td></tr>
+      <tr><td>Overseas Weight Limits</td><td>JTR 054304</td><td>Administrative overseas weight limits for civilians</td></tr>
+    </table>
+    </div>
+
+    <div class="callout callout-info">
+      <h4>ℹ Service Member Married to Civilian Employee</h4>
+      <p>A civilian employee whose spouse/domestic partner is a service member retains HHG transportation and storage allowances if a PCS order is issued. They may use combined weight allowances to offset any excess, but may NOT both be paid/reimbursed for shipping the same HHG. <strong>(JTR 054303 · Comptroller General Decision B-202023, 4 Dec 1981)</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ REGULATION INDEX ══════════════════════════════════════════ -->
+<section id="regindex">
+  <div class="ch-header">
+    <div class="ch-number">★</div>
+    <div class="ch-title">
+      <h2>Regulation Reference Index</h2>
+      <p>Master list of all regulatory references used in this handbook</p>
+    </div>
+    <div class="ch-badge">AUTHORITATIVE SOURCES</div>
+  </div>
+  <div class="ch-body">
+    <div class="callout callout-danger">
+      <h4>⚠ Regulations Change Frequently</h4>
+      <p>All regulation references in this handbook were current as of the 2026 edition. Always verify currency by consulting the official JTR, AFI 24-602 V4, and DTR Part IV directly before counseling or taking action. In all cases, the primary directive governs — not this handbook.</p>
+    </div>
+
+    <h3><span class="h3-icon">📗</span> Joint Travel Regulations (JTR)</h3>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>Reference</th><th>Topic</th></tr>
+      <tr><td>JTR Appendix A</td><td>Definitions — HHG, POV, PBP&amp;E, utility trailer, etc.</td></tr>
+      <tr><td>JTR 0515</td><td>Mode of shipment — Best Value</td></tr>
+      <tr><td>JTR 0516</td><td>Extraordinary value items in storage</td></tr>
+      <tr><td>JTR 0518-A, B</td><td>Storage — SIT (A) and NTS (B) comprehensive provisions</td></tr>
+      <tr><td>JTR 020501–020505</td><td>TDY shipment and UB provisions</td></tr>
+      <tr><td>JTR 020502-C, E</td><td>TDY/deployment storage (90+ days)</td></tr>
+      <tr><td>JTR 050816</td><td>Student dependent UB and education travel</td></tr>
+      <tr><td>JTR 051002</td><td>HOR and PLEAD destinations</td></tr>
+      <tr><td>JTR 051003</td><td>Home of Selection (HOS) — retirement</td></tr>
+      <tr><td>JTR 051301</td><td>HHG shipment — general authority and limitations</td></tr>
+      <tr><td>JTR 051302-A</td><td>Effective date of PCS order</td></tr>
+      <tr><td>JTR 051303</td><td>Firearms — CONUS shipment authority</td></tr>
+      <tr><td>JTR 051304</td><td>Special weight allowances — PBP&amp;E, gun safe</td></tr>
+      <tr><td>JTR 051306</td><td>Excess costs — computation and collection</td></tr>
+      <tr><td>JTR 051401, Table 5-37</td><td>PCS weight allowances by grade</td></tr>
+      <tr><td>JTR 051402</td><td>Administrative overseas weight limitations</td></tr>
+      <tr><td>JTR 051403</td><td>UB — part of HHG weight allowance</td></tr>
+      <tr><td>JTR 051404</td><td>PBP&amp;E constructive weight</td></tr>
+      <tr><td>JTR 052002-F</td><td>Consumable weight allowances</td></tr>
+      <tr><td>JTR 052010-C3b</td><td>Dead/missing/ill/injured — 18,000 lb cap</td></tr>
+      <tr><td>JTR 052012, 052013</td><td>Short distance moves</td></tr>
+      <tr><td>JTR 053001</td><td>POV shipment — comprehensive authority</td></tr>
+      <tr><td>JTR 0531</td><td>POV shipment for dead/ill/injured/missing members</td></tr>
+      <tr><td>JTR 0532</td><td>POV storage — comprehensive provisions</td></tr>
+      <tr><td>JTR 0522, 0523, 0524</td><td>Mobile home movement — military</td></tr>
+      <tr><td>JTR 0544</td><td>Mobile home movement — civilian</td></tr>
+      <tr><td>JTR 0547</td><td>POV shipment — civilian employees</td></tr>
+      <tr><td>JTR Ch. 5, Part E/F</td><td>RITA / Relocation Income Tax Allowance</td></tr>
+      <tr><td>JTR 054304–054309</td><td>Civilian employee HHG, weight, PBP&amp;E, excess costs</td></tr>
+      <tr><td>JTR 054405–054406</td><td>Civilian boat shipment</td></tr>
+      <tr><td>JTR 054701, 054704, 054706</td><td>Civilian POV — shipment, excess cost, claims</td></tr>
+      <tr><td>JTR 054812</td><td>Civilian death/injury benefits</td></tr>
+    </table>
+    </div>
+
+    <h3><span class="h3-icon">📘</span> AFI 24-602 Volume 4 — Personal Property Moving and Storage</h3>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>Reference</th><th>Topic</th></tr>
+      <tr><td>AFI 24-602 V4, Para 2.6.2–2.6.3</td><td>TDY/deployment storage</td></tr>
+      <tr><td>AFI 24-602 V4, Para 3.1.3 &amp; Attachment 6</td><td>PBP&amp;E — declaration, shipment, storage</td></tr>
+      <tr><td>AFI 24-602 V4, Para 3.2</td><td>Overseas administrative weight limitations</td></tr>
+      <tr><td>AFI 24-602 V4, Para 3.4.2</td><td>UB and extra pickup/delivery</td></tr>
+      <tr><td>AFI 24-602 V4, Para 3.5.3</td><td>Extraordinary value items and insurance</td></tr>
+      <tr><td>AFI 24-602 V4, Para 3.7.1, 3.7.4, 3.7.5.3</td><td>Excess cost counseling; unauthorized items; ex-spouse shipment</td></tr>
+      <tr><td>AFI 24-602 V4, Para 4.1.1.2, 4.1.2.3</td><td>TDY en route NTS; NTS to separation station restriction</td></tr>
+      <tr><td>AFI 24-602 V4, Para 4.4.1.2</td><td>Overseas weight limits — separation/retirement exception</td></tr>
+      <tr><td>AFI 24-602 V4, Para 6.1</td><td>Storage-in-Transit (SIT) — approval, time limits, conversion</td></tr>
+      <tr><td>AFI 24-602 V4, Para 6.2</td><td>Non-Temporary Storage (NTS) — authorization and procedures</td></tr>
+      <tr><td>AFI 24-602 V4, Para 7.3.3, 7.4.1, 7.6.3, 7.6.4</td><td>POV — join spouse, time limits, size limits, medical oversize</td></tr>
+      <tr><td>AFI 24-602 V4, Para 7.7.2, 7.8</td><td>POV — alternate port procedures; unused OCONUS shipment</td></tr>
+      <tr><td>AFI 24-602 V4, Para 7.9.2.4</td><td>Boat as primary residence — annotation requirement</td></tr>
+      <tr><td>AFI 24-602 V4, Para 7.13–7.15</td><td>POV storage — facility, duration, excess cost</td></tr>
+      <tr><td>AFI 24-602 V4, Para 8.5–8.9.2</td><td>PPM — vehicles authorized, payment, unauthorized items</td></tr>
+      <tr><td>AFI 24-602 V4, Chapter 13</td><td>Civilian employee entitlements</td></tr>
+      <tr><td>AFI 24-602 V4, Para 12.3.1</td><td>Excess cost collection and PPA HQ/LHEX referral</td></tr>
+    </table>
+    </div>
+
+    <h3><span class="h3-icon">📙</span> Defense Transportation Regulation (DTR) Part IV (DoD 4500.9-R)</h3>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>Reference</th><th>Topic</th></tr>
+      <tr><td>DTR Part IV, Chapter 401, Para F</td><td>HHG processing procedures — pickup dates, RDD, mode of service</td></tr>
+      <tr><td>DTR Part IV, Chapter 401, Appendix B</td><td>Packing standards, disassembly/reassembly, third-party services</td></tr>
+      <tr><td>DTR Part IV, Chapter 401, Appendix I</td><td>Hazardous/prohibited/restricted items list</td></tr>
+      <tr><td>DTR Part IV, Chapter 401, Attachment K1 / K2</td><td>"It's Your Move" — military and civilian member pamphlets</td></tr>
+      <tr><td>DTR Part IV, Chapter 407</td><td>Mobile home shipment procedures</td></tr>
+      <tr><td>DTR Part IV, Chapter 408</td><td>POV shipment — comprehensive procedures and turn-in checklist</td></tr>
+      <tr><td>DTR Part IV, Chapter 409</td><td>Firearms — CONUS, OCONUS, importation, TSP responsibilities</td></tr>
+      <tr><td>DTR Part IV, Chapter 412</td><td>Boats and personal watercraft — all provisions</td></tr>
+      <tr><td>DTR Part IV, Attachment K3</td><td>"Shipping Your POV" — member pamphlet</td></tr>
+      <tr><td>DTR Part IV, Attachment K4</td><td>"Storing Your POV" — member pamphlet</td></tr>
+      <tr><td>DTR Part IV, Attachment K5</td><td>"Moving Your Mobile Home" — member pamphlet</td></tr>
+      <tr><td>DTR Part V</td><td>Customs inspection requirements</td></tr>
+      <tr><td>DTR Part IV, Attachment K (Claims)</td><td>Para Y — FRV claims process; Para Z — Inconvenience claims</td></tr>
+    </table>
+    </div>
+
+    <h3><span class="h3-icon">⚖</span> Other Legal Authorities</h3>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>Reference</th><th>Topic</th></tr>
+      <tr><td>CG Decision B-202054, 31 Dec 1981</td><td>Ex-spouse shipment of HHG on current PCS order</td></tr>
+      <tr><td>CG Decision B-202023, 4 Dec 1981</td><td>Service member married to civilian employee — combined weight</td></tr>
+      <tr><td>CG Decision B-196535</td><td>Dual HHG allowances prohibited (separation + federal agency)</td></tr>
+      <tr><td>USTRANSCOM Personal Property Advisory #22-0038C</td><td>7-day spread date process</td></tr>
+      <tr><td>PPA HQ Advisory 22-014</td><td>PPM weight ticket requirements</td></tr>
+    </table>
+    </div>
+
+    <div style="margin-top:28px; padding:14px 20px; background:#F0F4FF; border-radius:8px; border:1px solid var(--border); font-size:11.5px; color:var(--muted);">
+      <strong>Document Control:</strong> USAF Personal Property Counselor's Handbook 2026 · Published by PPA HQ, JBSA Randolph AFB · This handbook is a training reference only. Authoritative sources: JTR, AFI 24-602 V4, DTR Part IV (DoD 4500.9-R). Regulations change frequently — verify currency before counseling. Excess cost adjudication: <strong>hqppa.ecaf-adj@us.af.mil</strong> · Customer resources: <strong>militaryonesource.mil</strong>
+    </div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+// ── SEARCH ──
+function doSearch(q) {
+  const msg = document.getElementById('search-msg');
+  document.querySelectorAll('mark').forEach(m => { m.outerHTML = m.innerHTML; });
+  if (!q || q.trim().length < 2) { msg.style.display = 'none'; return; }
+  const re = new RegExp('(' + q.trim().replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')', 'gi');
+  let count = 0;
+  const walker = document.createTreeWalker(document.getElementById('main'), NodeFilter.SHOW_TEXT);
+  const nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach(n => {
+    if (['SCRIPT','STYLE','MARK'].includes(n.parentNode.nodeName)) return;
+    if (!re.test(n.textContent)) return;
+    const span = document.createElement('span');
+    span.innerHTML = n.textContent.replace(re, '<mark>$1</mark>');
+    count += (n.textContent.match(re)||[]).length;
+    n.parentNode.replaceChild(span, n);
+  });
+  if (count > 0) {
+    msg.textContent = '🔍 ' + count + ' match' + (count > 1 ? 'es' : '') + ' found for "' + q.trim() + '"';
+    msg.style.display = 'block';
+    const first = document.querySelector('mark');
+    if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  } else {
+    msg.textContent = '⚠ No matches found for "' + q.trim() + '"';
+    msg.style.display = 'block';
+  }
+}
+
+// ── ACTIVE SIDEBAR LINK ──
+const allSections = document.querySelectorAll('section[id]');
+const allLinks = document.querySelectorAll('.sb-link');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      allLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id);
+      });
+    }
+  });
+}, { rootMargin: '-56px 0px -60% 0px' });
+allSections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
