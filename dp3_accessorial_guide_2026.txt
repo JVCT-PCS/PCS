@@ -1,0 +1,1736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DP3 Accessorial Services Guide 2026</title>
+<style>
+  :root {
+    --army-green: #4a6741;
+    --dark-green: #2d4a29;
+    --gold: #c8922a;
+    --light-gold: #f5d98f;
+    --gray-100: #f7f8f9;
+    --gray-200: #e9ecef;
+    --gray-300: #dee2e6;
+    --gray-600: #6c757d;
+    --gray-800: #343a40;
+    --white: #ffffff;
+    --red-warn: #c0392b;
+    --blue-info: #1a5276;
+    --teal: #1a6b72;
+    --print-break: always;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 13px;
+    color: var(--gray-800);
+    background: var(--gray-100);
+  }
+
+  /* ── TOP NAV ── */
+  #topnav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--dark-green);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    height: 52px;
+    gap: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.35);
+  }
+  #topnav .brand {
+    color: var(--light-gold);
+    font-weight: 700;
+    font-size: 15px;
+    white-space: nowrap;
+    flex: 1;
+  }
+  #topnav input[type="search"] {
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: none;
+    font-size: 12px;
+    width: 240px;
+    outline: none;
+  }
+  #topnav button {
+    background: var(--gold);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 7px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  #topnav button:hover { background: #a87420; }
+
+  /* ── LAYOUT ── */
+  #wrapper {
+    display: flex;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px 16px;
+    gap: 20px;
+  }
+
+  /* ── SIDEBAR ── */
+  #sidebar {
+    width: 240px;
+    flex-shrink: 0;
+  }
+  #sidebar-inner {
+    position: sticky;
+    top: 72px;
+    background: var(--white);
+    border-radius: 10px;
+    border: 1px solid var(--gray-300);
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  }
+  .sb-head {
+    background: var(--army-green);
+    color: var(--white);
+    font-weight: 700;
+    padding: 10px 14px;
+    font-size: 12px;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+  }
+  .sb-nav a {
+    display: block;
+    padding: 8px 14px 8px 18px;
+    color: var(--gray-800);
+    text-decoration: none;
+    font-size: 12px;
+    border-bottom: 1px solid var(--gray-200);
+    transition: background .15s;
+  }
+  .sb-nav a:hover { background: var(--gray-100); color: var(--army-green); }
+  .sb-nav a.active { background: var(--light-gold); color: var(--dark-green); font-weight: 700; }
+  .sb-section {
+    padding: 6px 14px 4px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+    color: var(--gray-600);
+    background: var(--gray-100);
+  }
+
+  /* ── MAIN ── */
+  #main { flex: 1; min-width: 0; }
+
+  /* ── COVER ── */
+  .cover {
+    background: linear-gradient(135deg, var(--dark-green) 0%, var(--army-green) 60%, var(--gold) 100%);
+    border-radius: 12px;
+    padding: 40px 44px;
+    color: var(--white);
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    right: -40px; top: -40px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.07);
+  }
+  .cover .badge {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    letter-spacing: .6px;
+    text-transform: uppercase;
+  }
+  .cover h1 { font-size: 28px; line-height: 1.2; margin-bottom: 8px; }
+  .cover .sub { font-size: 14px; opacity: .85; margin-bottom: 20px; }
+  .cover .meta { display: flex; gap: 24px; flex-wrap: wrap; }
+  .cover .meta span { font-size: 12px; opacity: .75; }
+  .cover .meta strong { opacity: 1; font-size: 13px; }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--army-green);
+    color: var(--white);
+    padding: 12px 20px;
+    border-radius: 10px 10px 0 0;
+    margin-top: 28px;
+  }
+  .section-header .ico {
+    width: 32px; height: 32px;
+    background: rgba(255,255,255,.18);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .section-header h2 { font-size: 16px; font-weight: 700; }
+  .section-header .item-code {
+    margin-left: auto;
+    background: var(--gold);
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .section-body {
+    background: var(--white);
+    border: 1px solid var(--gray-300);
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+    padding: 20px 24px;
+    margin-bottom: 4px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.05);
+  }
+
+  /* ── REG REFERENCE BADGE ── */
+  .reg-refs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  .reg-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 9px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .reg-400ng { background: #d4e8d0; color: #1f5c19; }
+  .reg-it26  { background: #d0e4f0; color: #0d3f6b; }
+  .reg-dtr   { background: #f0e4d0; color: #6b3d0d; }
+  .reg-jtr   { background: #ead2f0; color: #5b0d6b; }
+  .reg-it25  { background: #ffe0e0; color: #8b0000; }
+
+  /* ── TABS ── */
+  .tab-row {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid var(--gray-300);
+    margin-bottom: 16px;
+  }
+  .tab {
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-bottom: none;
+    border-radius: 6px 6px 0 0;
+    color: var(--gray-600);
+    background: none;
+    position: relative;
+    bottom: -2px;
+  }
+  .tab.active {
+    background: var(--white);
+    color: var(--army-green);
+    border-color: var(--gray-300);
+    border-bottom-color: var(--white);
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ── TABLES ── */
+  table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 12px 0; }
+  th {
+    background: var(--army-green);
+    color: var(--white);
+    padding: 8px 10px;
+    text-align: left;
+    font-size: 11px;
+    letter-spacing: .3px;
+  }
+  td { padding: 7px 10px; border-bottom: 1px solid var(--gray-200); }
+  tr:nth-child(even) td { background: var(--gray-100); }
+  tr:hover td { background: var(--light-gold); }
+
+  /* ── CALLOUT BOXES ── */
+  .callout {
+    border-left: 4px solid;
+    padding: 10px 14px;
+    border-radius: 0 6px 6px 0;
+    margin: 12px 0;
+    font-size: 12px;
+  }
+  .callout-warn  { border-color: var(--red-warn); background: #fdf3f3; }
+  .callout-info  { border-color: var(--blue-info); background: #f0f5fb; }
+  .callout-tip   { border-color: var(--teal);   background: #f0fafa; }
+  .callout-gold  { border-color: var(--gold);   background: #fffbef; }
+  .callout h4 { font-size: 12px; margin-bottom: 4px; font-weight: 700; }
+
+  /* ── EXAMPLE BLOCK ── */
+  .example-block {
+    background: #f8f9fa;
+    border: 1px dashed var(--gray-300);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 12px 0;
+    font-size: 12px;
+  }
+  .example-block h4 {
+    color: var(--teal);
+    font-size: 12px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .example-block .calc-line { margin: 3px 0; }
+  .example-block .calc-line strong { color: var(--army-green); }
+  .example-block .result {
+    margin-top: 8px;
+    padding: 6px 10px;
+    background: var(--dark-green);
+    color: var(--white);
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 12px;
+  }
+
+  /* ── VALIDATION CHECKLIST ── */
+  .checklist { list-style: none; margin: 10px 0; }
+  .checklist li {
+    padding: 5px 0 5px 24px;
+    position: relative;
+    font-size: 12px;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .checklist li:last-child { border: none; }
+  .checklist li::before {
+    content: '☐';
+    position: absolute;
+    left: 0;
+    color: var(--army-green);
+    font-size: 14px;
+    top: 3px;
+  }
+
+  /* ── FORMULA BOX ── */
+  .formula {
+    background: var(--dark-green);
+    color: var(--light-gold);
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    margin: 10px 0;
+    letter-spacing: .3px;
+  }
+
+  /* ── GRID CARDS ── */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 14px; margin: 14px 0; }
+  .card {
+    background: var(--white);
+    border: 1px solid var(--gray-300);
+    border-radius: 8px;
+    padding: 14px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.06);
+  }
+  .card h4 { font-size: 12px; color: var(--army-green); margin-bottom: 6px; }
+  .card p  { font-size: 11px; color: var(--gray-600); }
+
+  /* ── SEARCH HIGHLIGHT ── */
+  mark { background: var(--light-gold); color: var(--gray-800); border-radius: 2px; padding: 0 2px; }
+
+  /* ── PRINT ── */
+  @media print {
+    #topnav, #sidebar { display: none !important; }
+    #wrapper { padding: 0; }
+    #main { width: 100%; }
+    .section-header { break-before: page; }
+    .section-body { box-shadow: none; border: 1px solid #ccc; }
+  }
+
+  /* ── MISC ── */
+  h3 { font-size: 14px; color: var(--dark-green); margin: 14px 0 6px; }
+  p  { margin: 6px 0; line-height: 1.5; }
+  ul { padding-left: 18px; }
+  ul li { margin: 4px 0; font-size: 12px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+
+  #search-results-msg {
+    background: var(--light-gold);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 12px;
+    margin-bottom: 12px;
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<div id="topnav">
+  <div class="brand">&#9733; DP3 Accessorial Guide — 400NG / IT-26 / 2026</div>
+  <input type="search" id="searchInput" placeholder="Search accessorial (e.g. shuttle, SIT, crate)…" oninput="doSearch(this.value)">
+  <button onclick="window.print()">&#128438; Print / Save PDF</button>
+</div>
+
+<div id="wrapper">
+
+  <!-- SIDEBAR -->
+  <div id="sidebar">
+    <div id="sidebar-inner">
+      <div class="sb-head">Contents</div>
+      <div class="sb-nav">
+        <div class="sb-section">Overview</div>
+        <a href="#cover-intro">Introduction &amp; How to Use</a>
+        <a href="#acronyms">Acronyms &amp; Definitions</a>
+        <div class="sb-section">Domestic (400NG)</div>
+        <a href="#item105">Packing / Unpacking / Crating</a>
+        <a href="#item120">Extra Labor &amp; Waiting Time</a>
+        <a href="#item125">Shuttle Service</a>
+        <a href="#item130">Bulky Articles</a>
+        <a href="#item135">Origin/Destination Svc Charge</a>
+        <a href="#item175">Overtime Loading/Unloading</a>
+        <a href="#item185">SIT Charges</a>
+        <a href="#item210">SIT Pickup &amp; Delivery</a>
+        <a href="#item17-1">Attempted Delivery from SIT</a>
+        <a href="#item16">Fuel Surcharge (FRA/FSC)</a>
+        <a href="#item35">Third Party Service</a>
+        <a href="#item28">Extra Pickup &amp; Delivery</a>
+        <a href="#item225">Self-Storage Pickup/Delivery</a>
+        <div class="sb-section">International (IT-26)</div>
+        <a href="#it26-501">Shuttle (IT-26 Item 501)</a>
+        <a href="#it26-502">Labor (IT-26 Item 502)</a>
+        <a href="#it26-503">Waiting Time (IT-26 Item 503)</a>
+        <a href="#it26-504">OT Loading/Unloading (IT-26)</a>
+        <a href="#it26-505">Reweigh (IT-26 Item 505)</a>
+        <a href="#it26-506">Debris Removal (IT-26 Item 506)</a>
+        <a href="#it26-508">Crating (IT-26 Item 508)</a>
+        <a href="#it26-513">Fuel Surcharge (IT-26 Item 513)</a>
+        <a href="#it26-518">SIT HHG (IT-26 Item 518)</a>
+        <a href="#it26-520">SIT P/D (IT-26 Item 520)</a>
+        <div class="sb-section">Reweigh</div>
+        <a href="#reweigh">Reweigh (400NG Item 4)</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div id="main">
+    <div id="search-results-msg"></div>
+
+    <!-- COVER -->
+    <div class="cover" id="cover-intro">
+      <div class="badge">Defense Personal Property Program (DP3)</div>
+      <h1>Accessorial Services Guide</h1>
+      <div class="sub">400NG Domestic Tariff · IT-26 International Tender · 2026 Edition</div>
+      <div class="meta">
+        <span><strong>Domestic Effective:</strong> 15 May 2026 – 14 May 2027</span>
+        <span><strong>International Effective:</strong> 15 May 2026 – 14 May 2027</span>
+        <span><strong>Published:</strong> 5 Dec 2025</span>
+        <span><strong>Managed by:</strong> DPMO / USTRANSCOM</span>
+      </div>
+    </div>
+
+    <!-- HOW TO USE -->
+    <div class="section-header">
+      <div class="ico">&#128214;</div>
+      <h2>How to Use This Guide</h2>
+    </div>
+    <div class="section-body">
+      <p>This guide is a technician and shipper reference for all accessorial services authorized under the <strong>400NG Domestic Tariff (2026)</strong> and the <strong>IT-26 International Tender (2026)</strong>. Each accessorial entry includes:</p>
+      <div class="card-grid" style="margin-top:14px;">
+        <div class="card"><h4>&#128196; Regulatory Reference</h4><p>Item number and regulation source for each charge (400NG, IT-26, DTR, JTR)</p></div>
+        <div class="card"><h4>&#9989; Pre-Approval Required?</h4><p>Clearly marked when PPSO pre-approval is required before services are performed</p></div>
+        <div class="card"><h4>&#128290; Formula &amp; Calculation</h4><p>Billing formula with variables defined, matching Appendix A of the 400NG</p></div>
+        <div class="card"><h4>&#128221; Worked Example</h4><p>Step-by-step numeric examples using representative shipments</p></div>
+        <div class="card"><h4>&#128270; Technician Validation</h4><p>Checklist of items to verify before approving or disputing a TSP invoice</p></div>
+        <div class="card"><h4>&#9888; Common Errors</h4><p>Frequent billing mistakes and how to detect and correct them</p></div>
+      </div>
+      <div class="callout callout-warn" style="margin-top:14px;">
+        <h4>&#9888; Disclaimer</h4>
+        <p>This guide is a reference tool only. The authoritative sources are the <strong>400NG Tariff</strong>, <strong>IT-26 Tender</strong>, <strong>DTR Part IV</strong>, and <strong>JTR</strong>. Always verify current baseline rates at <a href="https://www.ustranscom.mil/dp3/pdfs.cfm" target="_blank">USTRANSCOM DP3 website</a>. Entitlements are governed by the JTR; this guide covers <em>accessorial charge mechanics</em> only.</p>
+      </div>
+    </div>
+
+    <!-- ACRONYMS -->
+    <div class="section-header" id="acronyms">
+      <div class="ico">&#128218;</div>
+      <h2>Acronyms &amp; Key Definitions</h2>
+    </div>
+    <div class="section-body">
+      <div class="two-col">
+        <div>
+          <table>
+            <tr><th>Acronym</th><th>Meaning</th></tr>
+            <tr><td>400NG</td><td>Domestic 400NG Tariff (2026)</td></tr>
+            <tr><td>IT-26</td><td>International Tender 2026</td></tr>
+            <tr><td>BL</td><td>Bill of Lading</td></tr>
+            <tr><td>BPC</td><td>Base Point City</td></tr>
+            <tr><td>CWT</td><td>Hundredweight (TWT ÷ 100)</td></tr>
+            <tr><td>CWT-M</td><td>Hundredweight-Miles</td></tr>
+            <tr><td>dLHS</td><td>Linehaul Discount (fraction)</td></tr>
+            <tr><td>dSIT</td><td>SIT Discount (fraction)</td></tr>
+            <tr><td>InvdLHS</td><td>1.00 − dLHS</td></tr>
+            <tr><td>InvdSIT</td><td>1.00 − dSIT</td></tr>
+            <tr><td>DPMO</td><td>Defense Personal Property Mgmt Office</td></tr>
+            <tr><td>DPS</td><td>Defense Personal Property System</td></tr>
+            <tr><td>DTR</td><td>Defense Transportation Regulation (DoD 4500.9-R)</td></tr>
+            <tr><td>FSC</td><td>Fuel Surcharge</td></tr>
+            <tr><td>FRA</td><td>Fuel Related Rate Adjustment</td></tr>
+          </table>
+        </div>
+        <div>
+          <table>
+            <tr><th>Acronym</th><th>Meaning</th></tr>
+            <tr><td>GBD</td><td>Government Business Day</td></tr>
+            <tr><td>GPA</td><td>General Price Adjustment</td></tr>
+            <tr><td>HHG</td><td>Household Goods</td></tr>
+            <tr><td>JTR</td><td>Joint Travel Regulations</td></tr>
+            <tr><td>LHS</td><td>Linehaul Charge</td></tr>
+            <tr><td>NTS</td><td>Non-Temporary Storage</td></tr>
+            <tr><td>OT</td><td>Overtime</td></tr>
+            <tr><td>OTO</td><td>One-Time-Only</td></tr>
+            <tr><td>PBP&amp;E</td><td>Professional Books Papers &amp; Equipment</td></tr>
+            <tr><td>PPSO</td><td>Personal Property Shipping Office</td></tr>
+            <tr><td>RDD</td><td>Required Delivery Date</td></tr>
+            <tr><td>SA</td><td>Service Area</td></tr>
+            <tr><td>SIT</td><td>Storage-in-Transit</td></tr>
+            <tr><td>TSP</td><td>Transportation Service Provider</td></tr>
+            <tr><td>UB</td><td>Unaccompanied Baggage</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!--  DOMESTIC 400NG SECTION                             -->
+    <!-- ═══════════════════════════════════════════════════ -->
+
+    <!-- ITEM 105 - PACKING / UNPACKING / CRATING -->
+    <div class="section-header" id="item105">
+      <div class="ico">&#128230;</div>
+      <h2>Packing, Unpacking, and Crating Services</h2>
+      <div class="item-code">400NG Item 105</div>
+    </div>
+    <div class="section-body">
+      <div class="reg-refs">
+        <span class="reg-badge reg-400ng">400NG Item 105A/105B/105D/105J</span>
+        <span class="reg-badge reg-dtr">DTR Part IV Ch. 402 App. B</span>
+        <span class="reg-badge reg-jtr">JTR Par. 051002</span>
+      </div>
+
+      <div class="callout callout-gold">
+        <h4>&#9989; Pre-Approval Required</h4>
+        <p>Pack, Crate, Unpack, and Debris Removal all require <strong>PPSO pre-approval</strong> before service is performed, or must be Government-requested. Verify DPS pre-approval entry before paying any invoice.</p>
+      </div>
+
+      <div class="tab-row">
+        <button class="tab active" onclick="showTab(this,'tabs-105','t105-overview')">Overview</button>
+        <button class="tab" onclick="showTab(this,'tabs-105','t105-formula')">Formulas</button>
+        <button class="tab" onclick="showTab(this,'tabs-105','t105-example')">Examples</button>
+        <button class="tab" onclick="showTab(this,'tabs-105','t105-validate')">Validation</button>
+        <button class="tab" onclick="showTab(this,'tabs-105','t105-crating')">Crating Rules</button>
+      </div>
+      <div id="tabs-105">
+
+      <div id="t105-overview" class="tab-panel active">
+        <table>
+          <tr><th>Item Code</th><th>Service</th><th>Basis</th><th>Discount</th></tr>
+          <tr><td>105A</td><td>Full Pack / Full Unpack</td><td>Net weight (CWT)</td><td>dLHS applies</td></tr>
+          <tr><td>105B</td><td>Pack / Unpack Regular Crate</td><td>Gross cu ft. of crate (min 4 cu ft.)</td><td>dLHS applies</td></tr>
+          <tr><td>105D</td><td>Debris Removal (within 30 days of delivery)</td><td>Net weight (CWT)</td><td>dLHS applies</td></tr>
+          <tr><td>105J</td><td>Storage Inspection Fee (in lieu of 105A Full Pack)</td><td>Actual net CWT</td><td>No dLHS on 105J; dLHS applies to unpack</td></tr>
+        </table>
+        <p><strong>Packing/Crating basis:</strong> Rate applied at <em>origin</em> Service Area (block 19 of BL). <strong>Unpacking/Uncrating basis:</strong> Rate applied at <em>destination</em> Service Area (block 18 of BL).</p>
+        <p><strong>Full Unpack Rate:</strong> Always calculated at the rate line for Full Pack CWT ≤ 16,000 lbs at the <em>destination</em> Service Schedule × 25% × InvdLHS (58% fixed discount per tariff).</p>
+        <div class="callout callout-info">
+          <h4>Vehicle Weight Deduction</h4>
+          <p>Motor passenger vehicle weight (auto, pickup, van, SUV, dune buggy) must be <strong>deducted from shipment weight</strong> before computing 105A Full Pack charges. Use NADA or manufacturer's weight.</p>
+        </div>
+        <div class="callout callout-warn">
+          <h4>105J vs 105A — Mutually Exclusive</h4>
+          <p>Do NOT bill both 105A and 105J on the same shipment. Use 105J only when shipment picks up from a storage warehouse and is already packed. The Full Unpack (billed as Misc item code 226A) is still owed and subject to dLHS.</p>
+        </div>
+      </div>
+
+      <div id="t105-formula" class="tab-panel">
+        <h3>Full Pack Formula</h3>
+        <div class="formula">105A Pack = (Pack Rate × CWT) × InvdLHS</div>
+        <h3>Full Unpack Formula</h3>
+        <div class="formula">105A Unpack = (Unpack Rate × CWT) × InvdLHS
+  Note: Unpack Rate = Pack Rate (16,000 lb line at dest. schedule) × 25% × 0.42 (58% fixed discount)</div>
+        <h3>Crating (105B) Formula</h3>
+        <div class="formula">105B Crate = (Crating Rate × Cu Ft.) × InvdLHS
+  Subject to 4 cu ft. minimum; truncate at 2 decimal places (no rounding up)</div>
+        <h3>Debris Removal (105D)</h3>
+        <div class="formula">105D = (Debris Rate × CWT) × InvdLHS
+  Only applies when performed AFTER delivery date and within 30 days</div>
+      </div>
+
+      <div id="t105-example" class="tab-panel">
+        <div class="example-block">
+          <h4>&#128221; Example: Full Pack/Unpack — 6,000 lb shipment, dLHS = 57%</h4>
+          <p><strong>Given:</strong> Origin SA Schedule 3, Pack Rate = $54.29/cwt | Dest SA Schedule 2, Unpack Rate line = $5.70045/cwt | InvdLHS = 1.00 − 0.57 = <strong>0.43</strong></p>
+          <div class="calc-line">Full Pack = $54.29 × 60 cwt = $3,257.40 × 0.43 = <strong>$1,400.68</strong></div>
+          <div class="calc-line">Full Unpack = $5.70045 × 60 cwt = $342.03 × 0.43 = <strong>$147.07</strong></div>
+          <div class="result">Total Packing Charge = $1,400.68 + $147.07 = $1,547.75</div>
+        </div>
+        <div class="example-block">
+          <h4>&#128221; Example: Regular Crate (105B) — 4.3 cu ft., same shipment</h4>
+          <p><strong>Given:</strong> Crating Rate = $22.75/cu ft. | InvdLHS = 0.43</p>
+          <div class="calc-line">105B Crate = $22.75 × 4.3 cu ft. = $97.83 × 0.43 = <strong>$42.06</strong></div>
+          <div class="result">Crating Charge = $42.06</div>
+        </div>
+        <div class="callout callout-info">
+          <h4>Internal vs External Crate Billing Limits</h4>
+          <p><strong>Internal Crate:</strong> Compensation capped at 3 inches beyond any single dimension of the item. E.g., item 39" × 71" × 0.5" → max crate 42" × 74" × 3.5" = 6.29 cu ft.</p>
+          <p><strong>External Crate:</strong> Compensation capped at 5 inches beyond any single dimension. Subject to 4 cu ft. minimum.</p>
+        </div>
+      </div>
+
+      <div id="t105-validate" class="tab-panel">
+        <h3>&#128270; Technician Validation Checklist — Packing/Crating Invoice</h3>
+        <ul class="checklist">
+          <li>Confirm PPSO pre-approval in DPS for packing, crating, and/or debris removal before paying</li>
+          <li>Verify the correct Service Area (SA) for origin (105A Pack, 105B) and destination (105A Unpack) using "Geographical Schedule" tab in 400NG Baseline Rates</li>
+          <li>Confirm vehicle weight has been deducted from shipment weight before computing 105A</li>
+          <li>Confirm 105A and 105J are NOT billed on the same shipment</li>
+          <li>For 105B: verify actual crate dimensions reported in DPS pre-approval; confirm cu ft. truncated at 2 decimal places (not rounded)</li>
+          <li>For internal crates (Code 2 shipments): confirm dimensions do not exceed 3-inch allowance per side</li>
+          <li>For external crates: confirm dimensions do not exceed 5-inch allowance per side</li>
+          <li>Verify correct dLHS discount was applied (InvdLHS = 1 − dLHS)</li>
+          <li>Debris removal (105D): confirm service was performed AFTER delivery date and within 30 days</li>
+          <li>105J: confirm unpacking was billed separately as Misc Item Code 226A with dLHS applied</li>
+          <li>TV crating: confirm TV exceeds 75-inch diagonal screen before approving 105B for TVs</li>
+        </ul>
+        <div class="callout callout-warn">
+          <h4>Common Billing Errors</h4>
+          <p>TSPs may bill 105A at the wrong Service Area (e.g., using destination SA for packing instead of origin SA). Always cross-reference the origin BL block 19 ZIP3 to the "Base Point City" tab, then the "Geographical Schedule" tab to verify the applicable SA and rate schedule.</p>
+        </div>
+      </div>
+
+      <div id="t105-crating" class="tab-panel">
+        <h3>When Crating MAY Be Approved</h3>
+        <ul>
+          <li>Items with unique features (leaded glass, curved glass panels) that cannot be duplicated without great expense</li>
+          <li>Marble tabletops and pool table slates too heavy/large for standard cartons</li>
+          <li>Flat/curved screen televisions <strong>exceeding 75-inch diagonal screen size</strong></li>
+        </ul>
+        <h3>When Crating May NOT Be Approved</h3>
+        <ul>
+          <li>Standard furniture (sofas, chairs, tables, grandfather clocks) unless unique features exist</li>
+          <li>Items declared of extraordinary value without appraisal</li>
+          <li>Flat/curved screen TVs with 75-inch diagonal or less</li>
+          <li>Memory Foam / Tempur-Pedic mattresses (not authorized under any domestic COS)</li>
+          <li>Entire shipments on Code D (only individual items eligible)</li>
+        </ul>
+        <div class="callout callout-info">
+          <h4>Code 2 Shipments — Crating Rules (400NG)</h4>
+          <p>Additional crating may be approved only for items that cannot fit into an ARTRANS-approved container (approx. 7 ft × 8 ft × 8 ft / 448 cu ft.). All crating must occur at <em>origin residence</em> unless PPSO authorizes warehouse crating. Crates become <strong>customer property</strong> at destination.</p>
+        </div>
+      </div>
+      </div><!-- /tabs-105 -->
+    </div><!-- /section-body -->
+
+    <!-- ITEM 120 - EXTRA LABOR & WAITING TIME -->
+    <div class="section-header" id="item120">
+      <div class="ico">&#128736;</div>
+      <h2>Extra Labor, Special Services &amp; Waiting Time</h2>
+      <div class="item-code">400NG Item 120</div>
+    </div>
+    <div class="section-body">
+      <div class="reg-refs">
+        <span class="reg-badge reg-400ng">400NG Item 120A–F</span>
+        <span class="reg-badge reg-dtr">DTR Part IV Ch. 402</span>
+        <span class="reg-badge reg-jtr">JTR Par. 051002</span>
+      </div>
+      <div class="callout callout-gold"><h4>&#9989; Pre-Approval Required — All items in Section 120</h4><p>No Item 120 charge may be invoiced without PPSO pre-approval or Government request.</p></div>
+
+      <table>
+        <tr><th>Code</th><th>Service</th><th>When Applicable</th></tr>
+        <tr><td>120A</td><td>Extra Labor Regular</td><td>0800–1700 Mon–Fri, non-holiday</td></tr>
+        <tr><td>120B</td><td>Special Services (disassembly, rigging, etc.)</td><td>Special services not covered by transportation charge</td></tr>
+        <tr><td>120C</td><td>Waiting Time — Regular</td><td>0800–1700 after free waiting time expires</td></tr>
+        <tr><td>120D</td><td>Extra Labor Regular — OT</td><td>1700–0800 Mon–Fri, any hour Sat/Sun/holiday</td></tr>
+        <tr><td>120E</td><td>Special Services — OT</td><td>Same OT hours as 120D</td></tr>
+        <tr><td>120F</td><td>Waiting Time — OT</td><td>OT hours (same as 120D)</td></tr>
+      </table>
+
+      <h3>Free Waiting Time Allowances</h3>
+      <table>
+        <tr><th>Situation</th><th>Free Waiting Time</th></tr>
+        <tr><td>Origin pickup</td><td>1 hour</td></tr>
+        <tr><td>Direct delivery to residence</td><td>2 hours</td></tr>
+        <tr><td>Delivery from SIT (scheduled by PPSO)</td><td>1 hour</td></tr>
+        <tr><td>Base access delays (military installation)</td><td>2 hours (then $75.00 fee + $18.75/15 min)</td></tr>
+      </table>
+
+      <div class="example-block">
+        <h4>&#128221; Example: Base Access Waiting Time</h4>
+        <p>TSP waits 3 hours 30 minutes at military installation gate. Free waiting time = 2 hours.</p>
+        <div class="calc-line">Billable delay = 3:30 − 2:00 = 1 hr 30 min</div>
+        <div class="calc-line">Base fee = $75.00 (first chargeable instance)</div>
+        <div class="calc-line">Additional: 1 hr 30 min beyond free = 6 increments × $18.75 = $112.50</div>
+        <div class="result">Total waiting time charge = $75.00 + $112.50 = $187.50 (billed as Item Code 226A)</div>
+      </div>
+
+      <div class="callout callout-warn">
+        <h4>Base Access Waiting Time — Technician Notes</h4>
+        <ul style="margin-top:4px;">
+          <li>Validate actual installation force-protection status on the date of service</li>
+          <li>Only authorized <strong>once per shipment location</strong> (once at origin, once at destination)</li>
+          <li>Not applicable when delay is caused by TSP/agent actions</li>
+          <li>Does not apply to port agents at APOD/APOE or SPOD/SPOE</li>
+        </ul>
+      </div>
+
+      <h3>Gun Safe Extra Labor</h3>
+      <p>PPSO may authorize additional labor (Item 120) for gun safes weighing <strong>over 300 lbs</strong>. Approval must be entered in DPS with EDI billing note explaining use.</p>
+
+      <h3>&#128270; Technician Validation Checklist — Extra Labor</h3>
+      <ul class="checklist">
+        <li>Confirm PPSO pre-approval or Government request is documented in DPS before payment</li>
+        <li>Verify time claimed is within regular (0800–1700 M–F non-holiday) vs. OT hours — use correct item code</li>
+        <li>Cross-check free waiting time: 1 hr origin, 2 hrs destination, 1 hr SIT delivery</li>
+        <li>For base access delays: confirm it is billed as 226A with detailed note; confirm only 1 occurrence per location per shipment</li>
+        <li>Confirm rate applied is based on the <em>location where service is performed</em> per Item 28 stop-off provisions</li>
+        <li>Fractions of an hour billed per Item 22: 0–15 min = 1/4 hr; 16–30 min = 1/2 hr; 31–45 min = 3/4 hr; 46–60 min = 1 hr</li>
+      </ul>
+    </div>
+
+    <!-- ITEM 125 - SHUTTLE SERVICE -->
+    <div class="section-header" id="item125">
+      <div class="ico">&#128663;</div>
+      <h2>Shuttle Service (Auxiliary Service)</h2>
+      <div class="item-code">400NG Item 125</div>
+    </div>
+    <div class="section-body">
+      <div class="reg-refs">
+        <span class="reg-badge reg-400ng">400NG Item 125A / 125C</span>
+        <span class="reg-badge reg-dtr">DTR Part IV Ch. 402</span>
+        <span class="reg-badge reg-jtr">JTR Par. 051002</span>
+      </div>
+      <div class="callout callout-gold"><h4>&#9989; Pre-Approval Required — All Shuttle Services</h4><p>TSP must submit a pre-approval request with comprehensive notes documenting the specific physical obstruction preventing linehaul equipment access.</p></div>
+
+      <div class="two-col">
+        <div>
+          <h3>Valid Shuttle Reasons</h3>
+          <ul>
+            <li>Structure of the building</li>
+            <li>Inaccessibility by highway</li>
+            <li>Inadequate or unsafe road</li>
+            <li>Overhead obstructions</li>
+            <li>Narrow gates or sharp turns</li>
+            <li>Trees or shrubbery</li>
+            <li>Road deterioration (rain/flood/snow)</li>
+            <li>Nature of articles in shipment</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Shuttle Does NOT Apply When:</h3>
+          <ul>
+            <li>Shipment taken from residence to await linehaul (except unusual PPSO-approved circumstances)</li>
+            <li>Delivery from SIT (not normally approved)</li>
+            <li>TSP performs warehouse-to-truck or truck-to-warehouse transfer (must be truck-to-truck)</li>
+            <li>Rental equipment — not reimbursable</li>
+          </ul>
+        </div>
+      </div>
+
+      <table>
+        <tr><th>Code</th><th>Service</th><th>OT Hours</th></tr>
+        <tr><td>125A</td><td>Shuttle Service (Regular)</td><td>N/A</td></tr>
+        <tr><td>125C</td><td>Shuttle Service (OT)</td><td>1700–0800 M–F; any hour Sat/Sun/Holiday</td></tr>
+      </table>
+
+      <p><strong>Weight basis:</strong> Total weight transferred to/from linehaul equipment, subject to 1,000 lb minimum. Separate weight tickets required for shuttle comprising a portion of a shipment over 1,000 lbs. Failure to provide = limited to 1,000 lb billing.</p>
+      <p><strong>Mileage:</strong> When service is within the same BPC, use DTOD mileage entered manually in the rating engine.</p>
+      <p><strong>DD Form 619</strong> signed by the customer is required to support payment. Weight tickets must come from the <em>larger vehicle</em>, not the smaller shuttle vehicle.</p>
+
+      <h3>&#128270; Technician Validation Checklist — Shuttle Service</h3>
+      <ul class="checklist">
+        <li>Confirm PPSO pre-approval with notes documenting specific obstruction type</li>
+        <li>Confirm DD Form 619 signed by customer is attached to invoice</li>
+        <li>Confirm weight tickets are from the <em>linehaul (larger) vehicle</em></li>
+        <li>Confirm service was a truck-to-truck transfer (not truck-to-warehouse)</li>
+        <li>Confirm rental equipment is NOT included in billing</li>
+        <li>Confirm dispatch logs or signed driver/equipment records are attached if requested</li>
+        <li>For OT shuttle (125C): verify service was Government-requested and performed in OT hours; OT charges do not apply for TSP convenience</li>
+        <li>Weight subject to 1,000 lb minimum; if partial shipment, separate weight ticket must exist</li>
+        <li>Review whether actual obstruction qualifies under the tariff's approved list of valid shuttle reasons</li>
+      </ul>
+    </div>
+
+    <!-- ITEM 130 - BULKY ARTICLES -->
+    <div class="section-header" id="item130">
+      <div class="ico">&#128674;</div>
+      <h2>Bulky Articles</h2>
+      <div class="item-code">400NG Item 130</div>
+    </div>
+    <div class="section-body">
+      <div class="reg-refs">
+        <span class="reg-badge reg-400ng">400NG Item 130A–J</span>
+        <span class="reg-badge reg-dtr">DTR Part IV Ch. 402</span>
+        <span class="reg-badge reg-jtr">JTR Par. 051002</span>
+      </div>
+      <div class="callout callout-gold"><h4>&#9989; Pre-Approval Required for all Bulky Article charges</h4></div>
+
+      <table>
+        <tr><th>Code</th><th>Article Type</th></tr>
+        <tr><td>130A</td><td>Automobile, Truck, or Van</td></tr>
+        <tr><td>130B</td><td>Go-Carts, Motorcycles ≥250cc, Riding Golf Cart, Small Rec Vehicle, Snowmobile, Three/Four Wheelers, Riding Lawnmowers (including stand-on)</td></tr>
+        <tr><td>130C</td><td>Canoes, Jet Skis, Kayaks, or Windsurfers with/without associated trailer</td></tr>
+        <tr><td>130D</td><td>Boats ≤14 ft., Dinghies, Row Boats, Sculls, Skiffs with/without associated trailer</td></tr>
+        <tr><td>130E</td><td>Boats &gt;14 ft. shipped WITH HHG (when HHG TSP agrees)</td></tr>
+        <tr><td>130F</td><td>Boat Trailers ≤16 ft.</td></tr>
+        <tr><td>130G</td><td>Big Screen TV ≥48 inches (excluding flat screen)</td></tr>
+        <tr><td>130H</td><td>Baby Grand or Grand Piano (not upright)</td></tr>
+        <tr><td>130I</td><td>Animal House/Kennel, Playhouse, Tool/Utility Shed &gt;100 cu ft. (if moved assembled)</td></tr>
+        <tr><td>130J</td><td>Bathtub, Hot Tub, Jacuzzi, Spa, Whirlpool Bath &gt;100 cu ft. (if moved assembled)</td></tr>
+      </table>
+
+      <h3>Bulky Article Does NOT Apply:</h3>
+      <ul>
+        <li>Shuttle trans-load operations (truck-to-truck)</li>
+        <li>Articles capable of being safely hand-carried by one person or transported in standard cartons (exception: kayaks, canoes, dinghies)</li>
+        <li>Items approved for <strong>crating</strong> or shipped as <strong>Code 2</strong></li>
+        <li>Only items specifically listed in Item 130 qualify — similar items do not substitute</li>
+      </ul>
+
+      <h3>Boat Length Measurement Rule</h3>
+      <p>Length = straight centerline distance between top center of transom and a point perpendicular with the foremost bow. Use manufacturer's "length overall" or "center line length" as the authoritative measurement. Fractions of a foot are disregarded.</p>
+
+      <h3>&#128270; Technician Validation Checklist — Bulky Articles</h3>
+      <ul class="checklist">
+        <li>Confirm PPSO pre-approval documented in DPS</li>
+        <li>Verify article is specifically listed in Item 130 (items merely similar to listed articles are not eligible)</li>
+        <li>Confirm item was NOT approved for crating and is NOT on a Code 2 shipment</li>
+        <li>For boats: verify length using manufacturer's spec; confirm boat qualifies for 130D vs. 130E based on &gt;/≤ 14 ft.</li>
+        <li>For 130I/130J: confirm item was moved in assembled state</li>
+        <li>Confirm charge includes both loading and unloading (one combined charge per combined loading/unloading event)</li>
+      </ul>
+    </div>
+
+    <!-- ITEM 135 - ORIGIN/DESTINATION SERVICE CHARGE -->
+    <div class="section-header" id="item135">
+      <div class="ico">&#127968;</div>
+      <h2>Origin &amp; Destination Service Charge</h2>
+      <div class="item-code">400NG Item 135</div>
+    </div>
+    <div class="section-body">
+      <div class="reg-refs">
+        <span class="reg-badge reg-400ng">400NG Item 135A / 135B</span>
+        <span class="reg-badge reg-dtr">DTR Part IV Ch. 402 App. A</span>
+      </div>
+      <p>The Origin/Destination Service Charge is a mandatory, automatic charge on <em>all</em> domestic HHG shipments. It is an all-inclusive charge covering elevator service, stair carry, excess distance carries, additional transportation, and appliance bracing/stabilization.</p>
+
+      <table>
+        <tr><th>Code</th><th>Service</th><th>Basis</th></tr>
+        <tr><td>135A</td><td>Origin Service Charge</td><td>Net weight (CWT) at origin SA (block 19 BL)</td></tr>
+        <tr><td>135B</td><td>Destination Service Charge</td><td>Net weight (CWT) at destination SA (block 18 BL)</td></tr>
+      </table>
+
+      <div class="formula">135A = (135A Rate × CWT) × InvdLHS
+135B = (135B Rate × CWT) × InvdLHS</div>
+
+      <div class="example-block">
+        <h4>&#128221; Example: 6,000 lb shipment, dLHS = 57%</h4>
+        <p>Origin SA rate (135A) = $3.50/cwt | Destination SA rate (135B) = $6.63/cwt | InvdLHS = 0.43</p>
+        <div class="calc-line">135A = ($3.50 × 60) × 0.43 = $210.00 × 0.43 = <strong>$90.30</strong></div>
+        <div class="calc-line">135B = ($6.63 × 60) × 0.43 = $397.80 × 0.43 = <strong>$171.05</strong></div>
+        <div class="result">Combined Origin/Destination Service Charge = $261.35</div>
+      </div>
+
+      <h3>Special Cases</h3>
+      <ul>
+        <li><strong>Extra stops:</strong> Origin rate = initial origin SA; destination rate = final destination SA; weight = total combined</li>
+        <li><strong>Diversion:</strong> Based on BL block 19/18 (not point of diversion). Diverted back to origin = 135A applies twice</li>
+        <li><strong>SIT:</strong> Based on BL block 19 (origin SIT) or block 18 (destination SIT). If shipment terminates at storage facility, that facility = final destination for 135B</li>
+      </ul>
+
+      <h3>&#128270; Technician Validation Checklist — 135A/135B</h3>
+      <ul class="checklist">
+        <li>Confirm rate used is from the correct SA corresponding to block 19 (135A) and block 18 (135B) of BL</li>
+        <li>Confirm weight used is actual net weight (not gross; not including deducted vehicle weight)</li>
+        <li>Confirm correct dLHS was applied</li>
+        <li>For diversions: confirm rate is based on original BL blocks — not the diversion point</li>
+        <li>For SIT: confirm storage site zip code is NOT used — only BL block 18 or 19 SA applies</li>
+      </ul>
+    </div>
+
+    <!-- ITEM 175 - OVERTIME LOADING/UNLOADING -->
+    <div class="section-header" id="item175">
+      <div class="ico">&#9200;</div>
+      <h2>Overtime Loading and Unloading Service</h2>
+      <div class="item-code">400NG Item 175</div>
+    </div>
+    <div class="section-body">
+      <div class="reg-refs">
+        <span class="reg-badge reg-400ng">400NG Item 175A</span>
+        <span class="reg-badge reg-dtr">DTR Part IV Ch. 402</span>
+        <span class="reg-badge reg-jtr">JTR Par. 051002</span>
+      </div>
+      <p>Applies when loading/unloading is performed <strong>outside normal business hours</strong> at the request of the shipper, customer, agent, due to landlord requirements, or prevailing ordinances — <em>not</em> for TSP convenience.</p>
+
+      <table>
+        <tr><th>OT Hours (175A)</th><th>Regular Hours</th></tr>
+        <tr><td>1700–0800 Mon–Fri (non-holiday)</td><td>0800–1700 Mon–Fri (non-holiday)</td></tr>
+        <tr><td>Any hour on Saturdays, Sundays, holidays</td><td>&nbsp;</td></tr>
+        <tr><td>Good Friday in NYC area (BPCs 100–127)</td><td>&nbsp;</td></tr>
+      </table>
+
+      <div class="callout callout-warn">
+        <h4>175A Does NOT Apply When:</h4>
+        <ul>
+          <li>Done for TSP's convenience or at TSP's option</li>
+          <li>At destination when First Proviso shipments are delivered to a storage facility</li>
+          <li>Item 210 OT provisions (SIT P/D OT) or Item 120 provisions are applicable</li>
+        </ul>
+      </div>
+
+      <p><strong>Weight basis:</strong> Actual net weight, subject to 1,000 lb minimum. If only a portion is loaded/unloaded, a separate weight ticket MUST be provided; otherwise TSP is limited to 1,000 lb billing.</p>
+
+      <h3>&#128270; Technician Validation Checklist — OT Loading/Unloading</h3>
+      <ul class="checklist">
+        <li>Confirm service was requested by shipper/customer/agent or required by landlord/ordinance — not TSP convenience</li>
+        <li>Verify date/time stamps of service confirm OT hours were actually worked</li>
+        <li>Confirm no double-billing with Item 120 (Extra Labor OT) for the same period</li>
+        <li>If partial shipment, confirm separate weight ticket provided for the OT portion</li>
+        <li>Confirm item is NOT a First Proviso shipment delivered to storage (not eligible)</li>
+      </ul>
+    </div>
+
+    <!-- ITEM 185 - SIT CHARGES -->
+    <div class="section-header" id="item185">
+      <div class="ico">&#127963;</div>
+      <h2>Storage-in-Transit (SIT) Charges</h2>
+      <div class="item-code">400NG Item 185</div>
+    </div>
+    <div class="section-body">
+      <div class="reg-refs">
+        <span class="reg-badge reg-400ng">400NG Items 17 / 185A / 185B</span>
+        <span class="reg-badge reg-dtr">DTR Part IV Ch. 402 App. A</span>
+        <span class="reg-badge reg-jtr">JTR Par. 051202 (SIT Entitlement)</span>
+      </div>
+
+      <table>
+        <tr><th>Code</th><th>Charge</th><th>Basis</th><th>Discount</th></tr>
+        <tr><td>185A</td><td>SIT First Day (includes warehouse handling)</td><td>Actual net weight (min 1,000 lbs)</td><td>dSIT applies</td></tr>
+        <tr><td>185B</td><td>SIT Additional Days</td><td>Per CWT per day</td><td>dSIT applies</td></tr>
+      </table>
+
+      <div class="formula">185A = (SIT 1st Day Rate × CWT) × InvdSIT
+185B = (SIT Additional Day Rate × CWT × Additional Days) × InvdSIT
+Note: "Additional Days" = Total SIT Days − 1</div>
+
+      <div class="example-block">
+        <h4>&#128221; Example: 16 days SIT, 6,000 lbs, dSIT = 55%</h4>
+        <p>185A (1st Day) rate = $14.36/cwt | 185B (Additional Day) rate = $0.50/cwt | InvdSIT = 1.00 − 0.55 = <strong>0.45</strong></p>
+        <div class="calc-line">185A = ($14.36 × 60 cwt) × 0.45 = $861.60 × 0.45 = <strong>$387.72</strong></div>
+        <div class="calc-line">185B = ($0.50 × 60 cwt × 15 additional days) × 0.45 = $450.00 × 0.45 = <strong>$202.50</strong></div>
+        <div class="result">Total SIT Charge = $387.72 + $202.50 = $590.22</div>
+      </div>
+
+      <h3>Key SIT Rules</h3>
+      <ul>
+        <li>SIT charges are based on BL block 19 (origin SIT) or block 18 (destination SIT) SA — <strong>NOT the SIT facility ZIP code</strong></li>
+        <li>SIT does not commence until <strong>TSP's first available delivery date</strong></li>
+        <li>First available delivery date cannot be a weekend or federal/state holiday without PPSO pre-approval</li>
+        <li>Maximum aggregate SIT period: <strong>90 days</strong> unless authorized Government extension</li>
+        <li>Storage days = day placed in storage + day removed from storage (both count)</li>
+        <li>TSP must provide 24-hour notice to customer before placing shipment in SIT</li>
+        <li>SIT charges cease on the 5th GBD after requested delivery date if shipment not removed</li>
+      </ul>
+
+      <div class="callout callout-warn">
+        <h4>Critical: Rate Basis for SIT</h4>
+        <p>SIT rates and discounts are based on the <strong>original requested pickup date</strong> at time shipment was offered/accepted — not the date SIT commenced. Always verify the original pickup date from the BL.</p>
+      </div>
+
+      <h3>&#128270; Technician Validation Checklist — SIT Charges</h3>
+      <ul class="checklist">
+        <li>Confirm SA used for 185A/185B is the BL block 19 or 18 ZIP3 — not the SIT facility ZIP3</li>
+        <li>Verify SIT in-date = TSP's first available delivery date (not arrival date)</li>
+        <li>Confirm first available delivery date is not a weekend or holiday without PPSO pre-approval</li>
+        <li>Confirm total SIT days do not exceed 90 days without Government authorization</li>
+        <li>Count days: day in + day out both count; "additional days" = total − 1</li>
+        <li>Confirm InvdSIT (not InvdLHS) was used for SIT calculations</li>
+        <li>Verify TSP provided 24-hour notice to customer before placing in SIT</li>
+        <li>If SIT charges cease due to 5th GBD rule, confirm correct stop date on invoice</li>
+      </ul>
+    </div>
+
+    <!-- ITEM 210 - SIT PICKUP & DELIVERY -->
+    <div class="section-header" id="item210">
+      <div class="ico">&#128666;</div>
+      <h2>SIT Pickup &amp; Delivery Transportation Charges</h2>
+      <div class="item-code">400NG Item 210</div>
+    </div>
+    <div class="section-body">
+      <div class="reg-refs">
+        <span class="reg-badge reg-400ng">400NG Items 210A–F</span>
+        <span class="reg-badge reg-dtr">DTR Part IV Ch. 402</span>
+      </div>
+
+      <table>
+        <tr><th>Code</th><th>Distance</th><th>Basis</th><th>Discount</th></tr>
+        <tr><td>210A</td><td>Block 18/19 BL address to actual residence: ≤30 miles</td><td>SA schedule table rate</td><td>dSIT</td></tr>
+        <tr><td>210B</td><td>31–50 miles (bill 210A + 210B combined as 210B)</td><td>210A + additional charge from Additional Rates tab</td><td>dSIT</td></tr>
+        <tr><td>210C</td><td>&gt;50 miles (CONUS)</td><td>Use linehaul tables (not SIT P/D table)</td><td>dLHS applies on original BL pickup date</td></tr>
+        <tr><td>210D</td><td>OT: ≤30 miles (OT)</td><td>Requires PPSO pre-approval</td><td>dSIT</td></tr>
+        <tr><td>210E</td><td>OT: 31–50 miles (OT)</td><td>Requires PPSO pre-approval</td><td>dSIT</td></tr>
+        <tr><td>210F</td><td>&gt;50 miles (Alaska only)</td><td>Section 7 Intra-AK linehaul tables</td><td>dSIT</td></tr>
+      </table>
+
+      <div class="callout callout-info">
+        <h4>Distance Measurement</h4>
+        <p>Distance is from original BL block 18 (destination SIT) or block 19 (origin SIT) address to the <strong>actual delivery residence</strong>. DTOD mileage applies when origin/destination and final delivery share the same ZIP3 (first 3 digits).</p>
+      </div>
+
+      <div class="formula">210A = 210A Table Charge × InvdSIT
+210B = (210A Table Charge + 210B Add'l Charge) × InvdSIT
+210C = Linehaul Rate (full table computation, discounts from original BL pickup date)</div>
+
+      <div class="example-block">
+        <h4>&#128221; Example: SIT P/D ≤30 miles — 6,000 lb, dSIT = 55%</h4>
+        <p>SIT P/D Schedule (destination) table charge for weight = $2,258 | InvdSIT = 0.45</p>
+        <div class="calc-line">210A = $2,258 × 0.45 = <strong>$1,016.10</strong></div>
+      </div>
+
+      <div class="example-block">
+        <h4>&#128221; Example: SIT P/D 31–50 miles same shipment</h4>
+        <p>210A charge from above = $1,016.10 | 210B additional rate = $136.59 × 0.45 = $61.47</p>
+        <div class="calc-line">Combine: 210B total = $1,016.10 + $61.47 = <strong>$1,077.57</strong></div>
+        <div class="result">Bill entirely as Item Code 210B (not 210A + 210B separately)</div>
+      </div>
+
+      <div class="example-block">
+        <h4>&#128221; Example: Partial Delivery from SIT — 260 lbs (&lt;1,000 lbs)</h4>
+        <p>Compute at 1,000 lb minimum: base 210A charge = $565 × 0.45 = $254.25. Apply actual weight fraction:</p>
+        <div class="calc-line">$254.25 × (260 ÷ 1,000) = $254.25 × 0.260 = <strong>$66.11</strong></div>
+        <div class="result">Bill as Misc Item Code 226A with detailed notes until further notice</div>
+      </div>
+
+      <h3>&#128270; Technician Validation Checklist — SIT P/D</h3>
+      <ul class="checklist">
+        <li>Confirm distance measured from BL block 18/19 address to actual delivery address — not from SIT facility</li>
+        <li>For 210B: confirm 210A is NOT billed separately; 210B includes both components combined</li>
+        <li>For 210C (&gt;50 miles): confirm linehaul tables used with discounts from original BL pickup date (not current date)</li>
+        <li>For &gt;100 miles delivery out of SIT: confirm PPSO pre-approval obtained in DPS</li>
+        <li>For partial deliveries &lt;1,000 lbs: confirm billed as 226A (Misc) with notes, using fractional weight formula</li>
+        <li>Reweigh fee does NOT apply on partial SIT deliveries</li>
+        <li>TSP not authorized 210 charge for shipments released to dock — bill 120 labor instead</li>
+      </ul>
+    </div>
+
+    <!-- ITEM 17-1 - ATTEMPTED DELIVERY FROM SIT -->
+    <div class="section-header" id="item17-1">
+      <div class="ico">&#128230;</div>
+      <h2>Attempted Delivery to Residence from SIT</h2>
+      <div class="item-code">400NG Item 17-1</div>
+    </div>
+    <div class="section-body">
+      <div class="reg-refs">
+        <span class="reg-badge reg-400ng">400NG Item 17-1 (17A–17G)</span>
+        <span class="reg-badge reg-dtr">DTR Part IV Ch. 402</span>
+      </div>
+      <div class="callout callout-gold"><h4>&#9989; Pre-Approval Required — Contact PPSO while at delivery point</h4></div>
+      <div class="callout callout-info">
+        <h4>Key Condition</h4>
+        <p>Attempted delivery only applies when failure to deliver is <strong>not the fault of the TSP</strong>, and the delivery was either scheduled or confirmed by PPSO as customer's fault. TSP must contact PPSO while physically at the delivery point.</p>
+      </div>
+      <table>
+        <tr><th>Code</th><th>Distance</th></tr>
+        <tr><td>17A</td><td>Round trip ≤30 miles (regular)</td></tr>
+        <tr><td>17B</td><td>Round trip 31–50 miles (regular)</td></tr>
+        <tr><td>17C</td><td>Round trip &gt;50 miles</td></tr>
+        <tr><td>17D</td><td>SIT first day (second first-day charge when shipment returned to SIT)</td></tr>
+        <tr><td>17E</td><td>≤30 miles OT</td></tr>
+        <tr><td>17F</td><td>31–50 miles OT</td></tr>
+        <tr><td>17G</td><td>&gt;50 miles (Alaska)</td></tr>
+      </table>
+      <h3>TSP Requirements for Attempted Delivery</h3>
+      <ul>
+        <li>Must update DPS with "Scheduled delivery date" PRIOR to actual delivery date, or within 2 hours after agreeing with customer — whichever is EARLIER</li>
+        <li>PPSO has 1 hour of free waiting time from contact to locate customer or approve/disapprove</li>
+        <li>If PPSO pre-approval was not entered in DPS, PPSO may disapprove the charge even if delivery was scheduled</li>
+      </ul>
+      <h3>&#128270; Technician Validation Checklist — Attempted Delivery</h3>
+      <ul class="checklist">
+        <li>Confirm scheduled delivery date was entered in DPS prior to delivery attempt (or within 2 hours of scheduling)</li>
+        <li>Confirm TSP contacted PPSO while at the delivery point (DPS record or documentation)</li>
+        <li>Confirm failure was not TSP's fault</li>
+        <li>Confirm PPSO pre-approval was obtained before payment</li>
+        <li>If shipment returned to SIT: confirm second 185A (first-day) charge is applied (Item 17D)</li>
+        <li>Waiting time at residence per Item 120 provisions requires separate pre-approval</li>
+      </ul>
+    </div>
+
+    <!-- ITEM 16 - FUEL SURCHARGE -->
+    <div class="section-header" id="item16">
+      <div class="ico">&#9981;</div>
+      <h2>Fuel Surcharge (FSC) / Fuel Related Rate Adjustment (FRA)</h2>
+      <div class="item-code">400NG Item 16</div>
+    </div>
+    <div class="section-body">
+      <div class="reg-refs">
+        <span class="reg-badge reg-400ng">400NG Item 16A / 16B</span>
+        <span class="reg-badge reg-dtr">DTR Part IV Ch. 402</span>
+      </div>
+      <table>
+        <tr><th>Code</th><th>Service</th></tr>
+        <tr><td>16A</td><td>Fuel Surcharge — Linehaul (LHS)</td></tr>
+        <tr><td>16B</td><td>Fuel Surcharge — Delivery to/from SIT</td></tr>
+      </table>
+
+      <h3>FRA Calculation</h3>
+      <p><strong>Baseline fuel price:</strong> $3.50/gallon. For every increment of $0.13 above $3.50, TSP is entitled to <strong>1% of the linehaul rate</strong>.</p>
+      <p>FRA is determined by the national average diesel fuel price published on the <strong>first Monday of each month</strong> (or first business day after Monday if Monday is a holiday) by DOE/EIA at <a href="https://www.eia.gov/petroleum/gasdiesel/" target="_blank">EIA website</a>.</p>
+
+      <div class="example-block">
+        <h4>&#128221; FRA Example: EIA price = $5.15/gallon</h4>
+        <div class="calc-line">Overage = $5.15 − $3.50 = $1.65</div>
+        <div class="calc-line">Increments = $1.65 ÷ $0.13 = 12.69 → 12 complete increments = <strong>12% FRA</strong></div>
+        <div class="result">TSP entitled to 12% of the linehaul rate as fuel surcharge</div>
+      </div>
+
+      <div class="callout callout-warn">
+        <h4>FSC NOT Authorized On:</h4>
+        <ul>
+          <li>Spot bid or One-Time-Only (OTO) personal property movements (any mode)</li>
+          <li>Rail, barge, or pipeline movements</li>
+          <li>Third party service charges</li>
+          <li>Alaska shipments picked up/delivered within 14 miles of nearest BPC water port</li>
+        </ul>
+      </div>
+
+      <p>TSP must apply the linehaul or SIT discount to baseline charges before billing item codes 16A or 16B. The current FSC table is posted at <a href="https://www.ustranscom.mil/dp3/pdfs.cfm" target="_blank">USTRANSCOM DP3 website</a>.</p>
+
+      <h3>&#128270; Technician Validation Checklist — FSC/FRA</h3>
+      <ul class="checklist">
+        <li>Confirm EIA diesel fuel price from the first Monday of the month in which shipment was picked up</li>
+        <li>Confirm FRA percentage from USTRANSCOM FSC table</li>
+        <li>Confirm shipment is not an OTO, rail, barge, pipeline, or third-party movement</li>
+        <li>Confirm linehaul or SIT discount was applied to baseline before FSC computed</li>
+        <li>For Alaska: confirm pickup/delivery is MORE than 14 miles from BPC water port before approving FSC</li>
+      </ul>
+    </div>
+
+    <!-- ITEM 35 - THIRD PARTY SERVICE -->
+    <div class="section-header" id="item35">
+      <div class="ico">&#128101;</div>
+      <h2>Third Party Service Charges</h2>
+      <div class="item-code">400NG Item 35</div>
+    </div>
+    <div class="section-body">
+      <div class="reg-refs">
+        <span class="reg-badge reg-400ng">400NG Item 35A / 35B</span>
+        <span class="reg-badge reg-dtr">DTR Part IV Ch. 402</span>
+      </div>
+      <div class="callout callout-gold"><h4>&#9989; Pre-Approval Required — All third party services</h4><p>Paid receipt from the third party is required for reimbursement. FSC is not authorized on third party charges.</p></div>
+
+      <table>
+        <tr><th>Code</th><th>Service</th></tr>
+        <tr><td>35A</td><td>Third Party Service (general)</td></tr>
+        <tr><td>35B</td><td>Florida Keys Service Charge (ZIP3 330)</td></tr>
+      </table>
+
+      <div class="two-col">
+        <div>
+          <h3>Third Party DOES Apply For:</h3>
+          <ul>
+            <li>Bridge/ferry toll charges (supported by paid receipts — one receipt per one shipment)</li>
+            <li>Parking permits</li>
+            <li>Special services necessary for move completion when TSP cannot perform</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Third Party Does NOT Apply For:</h3>
+          <ul>
+            <li>Washer appliance bracing/stabilization (part of transportation charge)</li>
+            <li>Crating (billed under 105B only)</li>
+            <li>FSC on third party charges</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout callout-info">
+        <h4>Florida Keys (Item 35B)</h4>
+        <p>Shipments to/from Key West (ZIP3 330, US4965500) are subject to a Florida Keys Service Charge in addition to other charges, based on the weight at which linehaul charges are computed. If customer cannot take direct delivery, SIT in Miami area (ZIP3 331) plus Item 210C (SIT P/D &gt;50 miles) will apply.</p>
+      </div>
+
+      <h3>&#128270; Technician Validation Checklist — Third Party</h3>
+      <ul class="checklist">
+        <li>Confirm PPSO pre-approval documented in DPS</li>
+        <li>Confirm paid receipt from third party provider is attached</li>
+        <li>Confirm toll receipt is for one shipment only (not split across multiple BLs)</li>
+        <li>Confirm FSC is NOT billed on third party service amounts</li>
+        <li>If crating was combined with third party (e.g., pool table disassembly): confirm crate is billed as 105B only, not as third party; separate costing documentation required</li>
+      </ul>
+    </div>
+
+    <!-- ITEM 28 - EXTRA PICKUP / DELIVERY -->
+    <div class="section-header" id="item28">
+      <div class="ico">&#128230;</div>
+      <h2>Stop-offs, Extra Pickups, and Extra Deliveries</h2>
+      <div class="item-code">400NG Item 28</div>
+    </div>
+    <div class="section-body">
+      <div class="reg-refs">
+        <span class="reg-badge reg-400ng">400NG Item 28A / 28B / 28C</span>
+        <span class="reg-badge reg-dtr">DTR Part IV Ch. 402</span>
+      </div>
+      <table>
+        <tr><th>Code</th><th>Service</th></tr>
+        <tr><td>28A</td><td>Extra Pickup (stop after first pickup, before final delivery)</td></tr>
+        <tr><td>28B</td><td>Extra Delivery (stop before final delivery)</td></tr>
+        <tr><td>28C</td><td>Diversion Charge (billed as 28B with note until further notice)</td></tr>
+      </table>
+      <ul>
+        <li>Extra stops must be in block 13 of BL or pre-approved</li>
+        <li>Transportation charges based on total weight (origin to final destination via all stop-offs) at BPC mileage</li>
+        <li>Extra pickup service rates = origin SA; extra delivery service rates = destination SA</li>
+        <li>Extra pickup charges do NOT apply when the only pickup/delivery is from a self-storage or mini-warehouse</li>
+      </ul>
+      <h3>&#128270; Technician Validation Checklist — Extra Pickups/Deliveries</h3>
+      <ul class="checklist">
+        <li>Confirm stop is in block 13 of BL or PPSO pre-approval exists in DPS</li>
+        <li>Confirm transportation charge is based on total combined shipment weight for full origin-to-destination mileage (including stop-off routing)</li>
+        <li>Confirm extra pickup rates use origin SA, extra delivery rates use destination SA</li>
+        <li>For diversions billed as 28C: confirm note in DPS identifies it as a diversion; confirm TSP used Item 28B code as instructed</li>
+        <li>Confirm no extra pickup charge when sole pickup is from self-storage/mini-warehouse</li>
+      </ul>
+    </div>
+
+    <!-- ITEM 225 - SELF-STORAGE PICKUP/DELIVERY -->
+    <div class="section-header" id="item225">
+      <div class="ico">&#128274;</div>
+      <h2>Pickup and Delivery at Third Party / Self-Storage Warehouses</h2>
+      <div class="item-code">400NG Item 225</div>
+    </div>
+    <div class="section-body">
+      <div class="reg-refs">
+        <span class="reg-badge reg-400ng">400NG Item 225A / 225B</span>
+        <span class="reg-badge reg-dtr">DTR Part IV Ch. 402</span>
+      </div>
+      <div class="callout callout-gold"><h4>&#9989; PPSO Pre-Approval Required</h4></div>
+      <p>Applies when Government requests TSP to <em>enter</em> a third-party or self-storage warehouse to remove or place items. Does NOT apply when the warehouse is the "primary" pickup or delivery address on the BL (block 18 or 19), in which case TSP enters at no additional charge.</p>
+      <table>
+        <tr><th>Code</th><th>Service</th></tr>
+        <tr><td>225A</td><td>Pickup/Delivery at Self/Mini-Storage (regular)</td></tr>
+        <tr><td>225B</td><td>Pickup/Delivery at Self/Mini-Storage (OT)</td></tr>
+      </table>
+      <p><strong>Weight basis:</strong> Weight of portion placed into or removed from warehouse, min 1,000 lbs. Separate weight ticket required if partial shipment.</p>
+      <p><strong>OT (225B):</strong> 1700–0800 Mon–Fri, or any time Sat/Sun/holiday. Applies only for the inside-warehouse portion; Item 175 OT Loading/Unloading applies to outside-warehouse portion.</p>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!--  REWEIGH                                             -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <div class="section-header" id="reweigh">
+      <div class="ico">&#9878;</div>
+      <h2>Reweigh, Weighing, and Weights</h2>
+      <div class="item-code">400NG Item 4</div>
+    </div>
+    <div class="section-body">
+      <div class="reg-refs">
+        <span class="reg-badge reg-400ng">400NG Item 4A / 4B</span>
+        <span class="reg-badge reg-dtr">DTR Part IV Ch. 402 App. B</span>
+        <span class="reg-badge reg-jtr">49 CFR 375.519</span>
+      </div>
+
+      <div class="callout callout-warn">
+        <h4>Billing: Use Item Code 226A — NOT Item 4A or 4B</h4>
+        <p>Reweigh fees are billed as Misc Charge (226A) with note "reweigh fee." Item codes 4A/4B are used only for pre-approval of requested reweighs in DPS. Pre-approval NOT required for automatic reweighs.</p>
+      </div>
+
+      <h3>Automatic Reweigh Thresholds</h3>
+      <table>
+        <tr><th>Grade</th><th>Weight Threshold for Automatic Reweigh</th></tr>
+        <tr><td>E-6 through O-10 and DoW Civilians</td><td>7,000 lbs or more</td></tr>
+        <tr><td>E-1 through E-5</td><td>4,000 lbs or more</td></tr>
+      </table>
+
+      <h3>Reweigh Charge Is Payable ONLY When:</h3>
+      <ul>
+        <li>Reweigh net weight ≥ initial net weight, OR</li>
+        <li>Reweigh net weight is less than initial net weight but within tolerances:</li>
+      </ul>
+      <table>
+        <tr><th>Shipment Weight</th><th>Tolerance (initial minus reweigh)</th></tr>
+        <tr><td>≤5,000 lbs</td><td>Less than 150 lbs difference</td></tr>
+        <tr><td>&gt;5,000 lbs</td><td>Less than 5% of the lower net scale weight</td></tr>
+      </table>
+
+      <div class="callout callout-info">
+        <h4>Reweigh Refund Triggers</h4>
+        <p>If the reweigh shows the shipment weighs LESS than original weight AND the difference exceeds the tolerance above, the TSP must <strong>refund all charges</strong> based on the lower weight. TSP cannot invoice for destination/direct delivery services until reweigh is performed, updated in DPS, and tickets provided to origin PPSO.</p>
+      </div>
+
+      <h3>Weight Ticket Requirements (49 CFR 375.519)</h3>
+      <p>Each weight ticket must contain: (1) scale name and location, (2) date of weighing, (3) identification of tare/gross/net, (4) vehicle identification, (5) shipper's last name, (6) BL number. Reweighs CANNOT be performed on the same scale as the original weighing.</p>
+
+      <h3>Constructive Weight</h3>
+      <ul>
+        <li>General items (if scales unavailable): <strong>7 lbs per cu ft.</strong></li>
+        <li>PBP&amp;E: may use bathroom/platform scale or 7 lbs/cu ft.</li>
+        <li>Gun safes with data plate: use manufacturer's weight</li>
+        <li>Gun safes without data plate: <strong>25 lbs per cu ft.</strong>; small pistol safes may use bathroom scale</li>
+      </ul>
+
+      <h3>&#128270; Technician Validation Checklist — Reweigh</h3>
+      <ul class="checklist">
+        <li>Confirm fee billed as Item Code 226A (Misc) with note "reweigh fee" — not as 4A or 4B</li>
+        <li>For automatic reweighs: verify shipment meets the grade/weight threshold</li>
+        <li>For requested reweighs: confirm DPS pre-approval (4A or 4B) entered by PPSO/customer</li>
+        <li>Confirm reweigh was performed on a DIFFERENT scale than the original weighing</li>
+        <li>Confirm TSP advised shipper of time and location of weighing (right to observe)</li>
+        <li>If reweigh weight is lower and exceeds tolerance: confirm refund submitted on same invoice as delivery charges</li>
+        <li>Confirm TSP did not invoice for destination/direct delivery charges until reweigh completed and DPS updated</li>
+        <li>Confirm all 6 required fields are present on weight tickets</li>
+        <li>Reweigh NOT required for shipments under 1,000 lbs</li>
+        <li>Reweigh charge does NOT apply on partial SIT deliveries</li>
+      </ul>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!--  INTERNATIONAL (IT-26) SECTION                       -->
+    <!-- ═══════════════════════════════════════════════════ -->
+
+    <div style="margin-top:32px; margin-bottom:8px;">
+      <div style="background:var(--blue-info); color:var(--white); padding:12px 20px; border-radius:10px; font-size:15px; font-weight:700;">
+        &#127758; INTERNATIONAL TENDER (IT-26) ACCESSORIAL SERVICES
+      </div>
+    </div>
+
+    <!-- IT-26 ITEM 501 - SHUTTLE -->
+    <div class="section-header" id="it26-501">
+      <div class="ico">&#128663;</div>
+      <h2>International Shuttle Services (Auxiliary Service)</h2>
+      <div class="item-code">IT-26 Item 501</div>
+    </div>
+    <div class="section-body">
+      <div class="reg-refs">
+        <span class="reg-badge reg-it26">IT-26 Item 501A / 501B</span>
+        <span class="reg-badge reg-dtr">DTR Part IV Ch. 402</span>
+      </div>
+      <div class="callout callout-gold"><h4>&#9989; Pre-Approval Required</h4></div>
+      <p>Parallel to 400NG Item 125. Applies when linehaul equipment cannot access origin/destination. Must be a <strong>truck-to-truck transfer</strong>. Valid obstruction types are the same as domestic shuttle (building structure, road conditions, overhead obstructions, etc.).</p>
+      <p>Apply <strong>labor rates from Item 502</strong> when billing shuttle services under Items 501A (shuttle vehicle) and 501B (labor associated with shuttle). Rental equipment is not reimbursable under IT-26.</p>
+      <h3>Key Differences from 400NG Shuttle</h3>
+      <ul>
+        <li>IT-26 Item 501 applies to international shipments (CONUS origin/destination and OCONUS points)</li>
+        <li>Labor rates are pulled from IT-26 Item 502 (separate rate tables by location)</li>
+        <li>Same general rules: not authorized when delivered from SIT without unusual PPSO-approved circumstances</li>
+      </ul>
+      <h3>&#128270; Technician Validation Checklist — IT-26 Shuttle</h3>
+      <ul class="checklist">
+        <li>Confirm PPSO pre-approval documented in DPS</li>
+        <li>Confirm truck-to-truck transfer (not warehouse transfer)</li>
+        <li>Confirm valid obstruction reason documented in pre-approval notes</li>
+        <li>Confirm labor billed using IT-26 Item 502 rates for the applicable location</li>
+        <li>Confirm rental equipment costs are not included</li>
+      </ul>
+    </div>
+
+    <!-- IT-26 ITEM 502 - LABOR -->
+    <div class="section-header" id="it26-502">
+      <div class="ico">&#128736;</div>
+      <h2>International Labor Charges</h2>
+      <div class="item-code">IT-26 Item 502</div>
+    </div>
+    <div class="section-body">
+      <div class="reg-refs">
+        <span class="reg-badge reg-it26">IT-26 Item 502A–C</span>
+        <span class="reg-badge reg-dtr">DTR Part IV Ch. 402</span>
+      </div>
+      <p>Labor charges for HHG and UB international shipments. The applicable rate depends on whether the service is performed in CONUS, OCONUS, or Alaska, and whether it is regular time or overtime. Reference IT-26 Item 502 rate tables for current rates.</p>
+      <table>
+        <tr><th>Scenario</th><th>Rate Table Reference</th></tr>
+        <tr><td>HHG at CONUS points</td><td>IT-26 Item 502 — HHG CONUS labor rates</td></tr>
+        <tr><td>UB at CONUS points</td><td>IT-26 Item 502 — UB CONUS labor rates</td></tr>
+        <tr><td>HHG/UB at OCONUS points</td><td>IT-26 Item 502 — OCONUS labor rates</td></tr>
+        <tr><td>HHG/UB in Alaska</td><td>IT-26 Item 502 — Alaska labor rates</td></tr>
+      </table>
+      <p>Labor rates are charged per worker per hour. Regular vs. OT hours same as 400NG (regular = 0800–1700 Mon–Fri, non-holiday; OT = otherwise). Fractions of an hour per IT-26 Item 207 (same 15-min increment rule as 400NG Item 22).</p>
+      <div class="callout callout-info">
+        <h4>Gun Safe — Additional Labor</h4>
+        <p>PPSO may authorize additional labor for gun safes over 300 lbs. Bill using IT-26 502 with EDI billing note explaining use — same rule as 400NG.</p>
+      </div>
+    </div>
+
+    <!-- IT-26 ITEM 503 - WAITING TIME -->
+    <div class="section-header" id="it26-503">
+      <div class="ico">&#9200;</div>
+      <h2>International Waiting Time</h2>
+      <div class="item-code">IT-26 Item 503</div>
+    </div>
+    <div class="section-body">
+      <div class="reg-refs">
+        <span class="reg-badge reg-it26">IT-26 Item 503A–D</span>
+        <span class="reg-badge reg-dtr">DTR Part IV Ch. 402</span>
+      </div>
+      <p>Waiting time cannot apply when it is the fault of the TSP. Charges apply beyond free waiting time allowances.</p>
+      <table>
+        <tr><th>Item</th><th>Service</th></tr>
+        <tr><td>503A</td><td>Vehicle waiting time ($32.29/hr per vehicle)</td></tr>
+        <tr><td>503B</td><td>Regular labor waiting time (uses Item 502 rates)</td></tr>
+        <tr><td>503C</td><td>OT labor waiting time (uses Item 502 OT rates)</td></tr>
+        <tr><td>503D</td><td>Sunday/holiday labor (Alaska only)</td></tr>
+      </table>
+      <h3>Free Waiting Time</h3>
+      <ul>
+        <li>1 hour at origin (pickup)</li>
+        <li>1 hour for direct deliveries to residence (PPSO notified waiting time applies after)</li>
+      </ul>
+      <h3>&#128270; Technician Validation Checklist — IT-26 Waiting Time</h3>
+      <ul class="checklist">
+        <li>Confirm waiting time is not the fault of the TSP</li>
+        <li>Confirm free waiting time has expired before charging (1 hr at origin; 1 hr direct delivery)</li>
+        <li>Confirm 503A vehicle charge is supported by driver log or vehicle record</li>
+        <li>Confirm labor charges (503B/C) use IT-26 Item 502 rates for applicable location</li>
+        <li>Alaska Sunday/holiday (503D): confirm service was actually performed on Sunday or recognized holiday in Alaska</li>
+      </ul>
+    </div>
+
+    <!-- IT-26 ITEM 504 - OT LOADING/UNLOADING -->
+    <div class="section-header" id="it26-504">
+      <div class="ico">&#127881;</div>
+      <h2>International Overtime Loading and Unloading</h2>
+      <div class="item-code">IT-26 Item 504</div>
+    </div>
+    <div class="section-body">
+      <div class="reg-refs">
+        <span class="reg-badge reg-it26">IT-26 Item 504</span>
+        <span class="reg-badge reg-dtr">DTR Part IV Ch. 402</span>
+      </div>
+      <p>Parallel to 400NG Item 175. Applies when OT loading/unloading is performed at shipper, customer, or agent request or due to landlord/ordinance requirements (not for TSP convenience). Use IT-26 Item 502 OT labor rates.</p>
+      <h3>&#128270; Technician Validation Checklist — IT-26 OT Loading/Unloading</h3>
+      <ul class="checklist">
+        <li>Confirm service was government/customer requested or required by ordinance</li>
+        <li>Verify OT hours worked (1700–0800 Mon–Fri; any hour Sat/Sun/holiday)</li>
+        <li>Confirm IT-26 Item 502 OT rates applied for the correct geographic location</li>
+        <li>Confirm not billed for TSP convenience</li>
+      </ul>
+    </div>
+
+    <!-- IT-26 ITEM 505 - REWEIGH -->
+    <div class="section-header" id="it26-505">
+      <div class="ico">&#9878;</div>
+      <h2>International Reweighing</h2>
+      <div class="item-code">IT-26 Item 505</div>
+    </div>
+    <div class="section-body">
+      <div class="reg-refs">
+        <span class="reg-badge reg-it26">IT-26 Item 505</span>
+        <span class="reg-badge reg-dtr">DTR Part IV Ch. 402 App. B</span>
+        <span class="reg-badge reg-jtr">49 CFR 375.519</span>
+      </div>
+      <p>International reweigh procedures mirror 400NG Item 4 with the following key distinction:</p>
+      <ul>
+        <li>For HHG: standard reweigh at origin/destination as described in 400NG</li>
+        <li>For UB (Unaccompanied Baggage): reweigh may also be performed at the port agent's facility</li>
+        <li>Same tolerance thresholds as 400NG (150 lbs for ≤5,000 lbs; 5% for &gt;5,000 lbs)</li>
+        <li>Non-performance of a required reweigh may result in immediate suspension</li>
+      </ul>
+      <div class="callout callout-warn">
+        <h4>Non-Performance</h4>
+        <p>IT-26 removed the non-performance fee but non-performance of required reweigh may still result in punitive administrative action.</p>
+      </div>
+    </div>
+
+    <!-- IT-26 ITEM 506 - DEBRIS REMOVAL -->
+    <div class="section-header" id="it26-506">
+      <div class="ico">&#128465;</div>
+      <h2>International Debris Removal (HHG Only)</h2>
+      <div class="item-code">IT-26 Item 506</div>
+    </div>
+    <div class="section-body">
+      <div class="reg-refs">
+        <span class="reg-badge reg-it26">IT-26 Item 506</span>
+        <span class="reg-badge reg-dtr">DTR Part IV Ch. 402</span>
+      </div>
+      <p>Applies to HHG international shipments only (not UB). Parallel to 400NG Item 105D. PPSO pre-approval required. Must be performed in conjunction with unpacking service and within 30 days of delivery. Does NOT apply for cartons unpacked by TSP on the day of delivery.</p>
+      <p>Used by exception only per Services guidance (Bluebark, etc.).</p>
+    </div>
+
+    <!-- IT-26 ITEM 508 - CRATING -->
+    <div class="section-header" id="it26-508">
+      <div class="ico">&#128230;</div>
+      <h2>International Crates / Special Containers</h2>
+      <div class="item-code">IT-26 Item 508</div>
+    </div>
+    <div class="section-body">
+      <div class="reg-refs">
+        <span class="reg-badge reg-it26">IT-26 Item 508A / 508B / 508C</span>
+        <span class="reg-badge reg-dtr">DTR Part IV Ch. 402; SDDC Pamphlet 55-12</span>
+      </div>
+      <div class="callout callout-gold"><h4>&#9989; PPSO Pre-Approval Required</h4></div>
+      <p>International crating follows the same general approval criteria as 400NG (unique articles, marble tops, etc.) with rate tables updated by GPA each rate cycle. TV crating (&gt;75-inch screen) rules apply equally.</p>
+      <table>
+        <tr><th>Code</th><th>Service</th></tr>
+        <tr><td>508A</td><td>Construct and pack crate (per cu ft.)</td></tr>
+        <tr><td>508B</td><td>Unpack and disassemble crate (included in 508A rate when pre-approved at origin)</td></tr>
+        <tr><td>508C</td><td>Special container (per cu ft.)</td></tr>
+      </table>
+      <p>Reference SDDC Pamphlet 55-12 for approved container specifications and ARTRANS-approved containers under IT-26.</p>
+      <h3>&#128270; Technician Validation Checklist — IT-26 Crating</h3>
+      <ul class="checklist">
+        <li>Confirm PPSO pre-approval in DPS</li>
+        <li>Confirm item qualifies for crating (unique features, glass panels, heavy slates, or TV &gt;75 inches)</li>
+        <li>Confirm cu ft. is truncated (not rounded) at 2 decimal places</li>
+        <li>Confirm 4 cu ft. minimum applied</li>
+        <li>Confirm uncrating (508B) billed only at destination upon uncrating performance</li>
+        <li>Crating is not a third-party charge; bill under 508 only</li>
+      </ul>
+    </div>
+
+    <!-- IT-26 ITEM 513 - FUEL SURCHARGE -->
+    <div class="section-header" id="it26-513">
+      <div class="ico">&#9981;</div>
+      <h2>International Fuel Surcharge (CONUS, Alaska, Hawaii)</h2>
+      <div class="item-code">IT-26 Item 513</div>
+    </div>
+    <div class="section-body">
+      <div class="reg-refs">
+        <span class="reg-badge reg-it26">IT-26 Item 513</span>
+        <span class="reg-badge reg-dtr">DTR Part IV Ch. 402</span>
+      </div>
+      <p>Applies to commercial TSP personal property movements within CONUS and Alaska for international shipments with domestic legs. Same baseline ($3.50/gallon), same FRA formula as 400NG Item 16, same EIA price source. Fuel surcharges NOT applicable on shipment movements outside CONUS (air fuel surcharges and bunker surcharges governed separately by IT-26 Item 231).</p>
+      <div class="callout callout-warn">
+        <h4>Air Fuel, Bunker, and Port Congestion Surcharges (Item 231)</h4>
+        <p>These three surcharges are NOT applicable on CONUS-only shipment movements. See IT-26 Item 231 for air fuel (Code 6/8), BSC (Codes 4/7), and CON surcharge details when applicable to international waterhaul/airlift movements.</p>
+      </div>
+    </div>
+
+    <!-- IT-26 ITEM 518 - SIT HHG -->
+    <div class="section-header" id="it26-518">
+      <div class="ico">&#127963;</div>
+      <h2>International SIT and Warehouse Handling Charges — HHG</h2>
+      <div class="item-code">IT-26 Item 518</div>
+    </div>
+    <div class="section-body">
+      <div class="reg-refs">
+        <span class="reg-badge reg-it26">IT-26 Item 518</span>
+        <span class="reg-badge reg-dtr">DTR Part IV Ch. 402</span>
+        <span class="reg-badge reg-jtr">JTR Par. 051202</span>
+      </div>
+      <p>International SIT charges for HHG shipments follow the same general principles as 400NG Items 185A/185B with location-based rate tables. Key distinctions:</p>
+      <ul>
+        <li>Rate tables vary by CONUS location vs. OCONUS location (see IT-26 SIT by Location tables)</li>
+        <li>Maximum aggregate SIT: authorized period specified by PPSO</li>
+        <li>SIT does not commence until TSP's first available delivery date</li>
+        <li>Charges based on BL block 19 (origin SIT) or block 18 (destination SIT) — NOT SIT facility ZIP</li>
+        <li>Non-performance of unpacking: refund $3.87/cwt from Single Factor Rate</li>
+      </ul>
+
+      <h3>&#128270; Technician Validation Checklist — IT-26 SIT HHG</h3>
+      <ul class="checklist">
+        <li>Confirm rate used is from the IT-26 Item 518 table for the applicable location (BL block 18 or 19 address)</li>
+        <li>Confirm SIT in-date = TSP first available delivery date (not arrival date)</li>
+        <li>Confirm TSP provided 24-hour notice to customer before placing in SIT</li>
+        <li>Verify total SIT period does not exceed PPSO-authorized days</li>
+        <li>Confirm $3.87/cwt unpacking refund was issued if unpacking not performed</li>
+      </ul>
+    </div>
+
+    <!-- IT-26 ITEM 520 - SIT P/D -->
+    <div class="section-header" id="it26-520">
+      <div class="ico">&#128666;</div>
+      <h2>International SIT Pickup/Delivery Transportation — HHG</h2>
+      <div class="item-code">IT-26 Item 520</div>
+    </div>
+    <div class="section-body">
+      <div class="reg-refs">
+        <span class="reg-badge reg-it26">IT-26 Item 520</span>
+        <span class="reg-badge reg-dtr">DTR Part IV Ch. 402</span>
+      </div>
+      <p>Parallel to 400NG Item 210. IT-26 Item 520 provides SIT pickup/delivery transportation rate schedules for HHG international shipments, organized by CONUS rate areas. The distance bands (≤30 miles, 31–50 miles, &gt;50 miles) and discount application rules are the same as 400NG Item 210. Reference IT-26 "Pickup or Delivery Transportation Rate Schedules" tables (Pages 93–97 of IT-26 for 2026) for specific dollar amounts.</p>
+
+      <div class="callout callout-info">
+        <h4>IT-26 Item 521 — UB SIT Pickup/Delivery</h4>
+        <p>Separate rate tables exist for Unaccompanied Baggage (UB) SIT pickup/delivery under IT-26 Item 521. Apply the UB-specific tables when billing UB SIT P/D; do not use HHG tables for UB shipments.</p>
+      </div>
+
+      <h3>&#128270; Technician Validation Checklist — IT-26 SIT P/D</h3>
+      <ul class="checklist">
+        <li>Confirm correct table used (HHG Item 520 vs. UB Item 521)</li>
+        <li>Confirm distance measured from BL block 18/19 to actual residence (not from SIT facility)</li>
+        <li>For 31–50 miles: confirm 210-equivalent combined billing (not split items)</li>
+        <li>For &gt;50 miles: confirm linehaul table computation with original BL pickup date discounts</li>
+        <li>For OT SIT P/D: confirm PPSO pre-approval obtained</li>
+      </ul>
+    </div>
+
+    <!-- QUICK REFERENCE TABLE -->
+    <div class="section-header" style="margin-top:28px;">
+      <div class="ico">&#128203;</div>
+      <h2>Quick Reference: Pre-Approval Requirements Summary</h2>
+    </div>
+    <div class="section-body">
+      <table>
+        <tr><th>Accessorial</th><th>Item Code(s)</th><th>Pre-Approval?</th><th>Key Regulation</th></tr>
+        <tr><td>Packing / Crating / Debris Removal</td><td>105A, 105B, 105D</td><td style="color:var(--red-warn);font-weight:700;">REQUIRED</td><td>400NG Item 105; DTR Ch. 402</td></tr>
+        <tr><td>Extra Labor / Special Services</td><td>120A–F</td><td style="color:var(--red-warn);font-weight:700;">REQUIRED</td><td>400NG Item 120; DTR Ch. 402</td></tr>
+        <tr><td>Shuttle Service</td><td>125A, 125C</td><td style="color:var(--red-warn);font-weight:700;">REQUIRED</td><td>400NG Item 125; DTR Ch. 402</td></tr>
+        <tr><td>Bulky Articles</td><td>130A–J</td><td style="color:var(--red-warn);font-weight:700;">REQUIRED</td><td>400NG Item 130</td></tr>
+        <tr><td>Origin/Destination Svc Charge</td><td>135A, 135B</td><td style="background:#d4e8d0; color:#1f5c19;">AUTOMATIC</td><td>400NG Item 135; DTR Ch. 402</td></tr>
+        <tr><td>Overtime Loading/Unloading</td><td>175A</td><td style="color:var(--red-warn);font-weight:700;">REQUIRED</td><td>400NG Item 175</td></tr>
+        <tr><td>SIT Charges (1st Day / Add'l Days)</td><td>185A, 185B</td><td>PPSO SIT Approval</td><td>400NG Items 17, 185; DTR Ch. 402</td></tr>
+        <tr><td>SIT Pickup/Delivery ≤30 mi</td><td>210A</td><td style="background:#d4e8d0; color:#1f5c19;">NOT REQUIRED (unless &gt;100 mi)</td><td>400NG Item 210</td></tr>
+        <tr><td>SIT Pickup/Delivery OT</td><td>210D, 210E</td><td style="color:var(--red-warn);font-weight:700;">REQUIRED</td><td>400NG Item 210</td></tr>
+        <tr><td>Attempted Delivery from SIT</td><td>17A–17G</td><td style="color:var(--red-warn);font-weight:700;">REQUIRED (at delivery point)</td><td>400NG Item 17-1</td></tr>
+        <tr><td>Fuel Surcharge (FSC/FRA)</td><td>16A, 16B</td><td style="background:#d4e8d0; color:#1f5c19;">NOT REQUIRED</td><td>400NG Item 16; DTR Ch. 402</td></tr>
+        <tr><td>Third Party Service</td><td>35A, 35B</td><td style="color:var(--red-warn);font-weight:700;">REQUIRED</td><td>400NG Item 35</td></tr>
+        <tr><td>Extra Pickup / Extra Delivery</td><td>28A, 28B, 28C</td><td>Must be on BL block 13 or pre-approved</td><td>400NG Item 28</td></tr>
+        <tr><td>Self-Storage Pickup/Delivery</td><td>225A, 225B</td><td style="color:var(--red-warn);font-weight:700;">REQUIRED</td><td>400NG Item 225</td></tr>
+        <tr><td>Reweigh (billing as 226A)</td><td>226A (Misc)</td><td>Requested: REQUIRED via 4A/4B | Automatic: NOT REQUIRED</td><td>400NG Item 4; DTR Ch. 402</td></tr>
+        <tr><td>INTL: Shuttle Service</td><td>IT-26 501</td><td style="color:var(--red-warn);font-weight:700;">REQUIRED</td><td>IT-26 Item 501; DTR Ch. 402</td></tr>
+        <tr><td>INTL: Labor Charges</td><td>IT-26 502</td><td>Per service authorization</td><td>IT-26 Item 502; DTR Ch. 402</td></tr>
+        <tr><td>INTL: Waiting Time</td><td>IT-26 503</td><td style="color:var(--red-warn);font-weight:700;">REQUIRED (beyond free time)</td><td>IT-26 Item 503</td></tr>
+        <tr><td>INTL: Crating</td><td>IT-26 508</td><td style="color:var(--red-warn);font-weight:700;">REQUIRED</td><td>IT-26 Item 508; SDDC Pam 55-12</td></tr>
+        <tr><td>INTL: Debris Removal</td><td>IT-26 506</td><td style="color:var(--red-warn);font-weight:700;">REQUIRED</td><td>IT-26 Item 506; DTR Ch. 402</td></tr>
+        <tr><td>INTL: SIT Charges HHG</td><td>IT-26 518</td><td>PPSO SIT Approval</td><td>IT-26 Item 518; DTR Ch. 402</td></tr>
+        <tr><td>INTL: SIT P/D HHG</td><td>IT-26 520</td><td>NOT REQUIRED (unless &gt;100 mi)</td><td>IT-26 Item 520</td></tr>
+      </table>
+    </div>
+
+    <!-- REGULATION INDEX -->
+    <div class="section-header" style="margin-top:28px;">
+      <div class="ico">&#128218;</div>
+      <h2>Regulatory Reference Index</h2>
+    </div>
+    <div class="section-body">
+      <table>
+        <tr><th>Regulation</th><th>Relevant Section</th><th>Topics Covered</th></tr>
+        <tr><td>400NG Tariff 2026</td><td>Item 4</td><td>Reweigh, weighing procedures, weight tickets</td></tr>
+        <tr><td>400NG Tariff 2026</td><td>Item 16</td><td>Fuel Surcharge (FSC) / FRA, EIA baseline, calculation</td></tr>
+        <tr><td>400NG Tariff 2026</td><td>Item 17, 17-1, 17-2</td><td>SIT rules, attempted delivery, SIT termination</td></tr>
+        <tr><td>400NG Tariff 2026</td><td>Item 28</td><td>Stop-offs, extra pickups, extra deliveries, diversions</td></tr>
+        <tr><td>400NG Tariff 2026</td><td>Item 35</td><td>Third party service, Florida Keys Service Charge</td></tr>
+        <tr><td>400NG Tariff 2026</td><td>Item 105</td><td>Packing, unpacking, crating, debris removal</td></tr>
+        <tr><td>400NG Tariff 2026</td><td>Item 120</td><td>Extra labor, special services, waiting time</td></tr>
+        <tr><td>400NG Tariff 2026</td><td>Item 125</td><td>Shuttle service</td></tr>
+        <tr><td>400NG Tariff 2026</td><td>Item 130</td><td>Bulky article classifications</td></tr>
+        <tr><td>400NG Tariff 2026</td><td>Item 135</td><td>Origin and destination service charges</td></tr>
+        <tr><td>400NG Tariff 2026</td><td>Item 175</td><td>Overtime loading and unloading</td></tr>
+        <tr><td>400NG Tariff 2026</td><td>Item 185</td><td>SIT 1st day / additional day charges</td></tr>
+        <tr><td>400NG Tariff 2026</td><td>Item 210</td><td>SIT pickup and delivery transportation</td></tr>
+        <tr><td>400NG Tariff 2026</td><td>Item 225</td><td>Self-storage pickup/delivery</td></tr>
+        <tr><td>400NG Tariff 2026</td><td>Appendix A</td><td>Costing formulas, how-to for all charges</td></tr>
+        <tr><td>IT-26 Tender 2026</td><td>Item 501</td><td>International shuttle service</td></tr>
+        <tr><td>IT-26 Tender 2026</td><td>Item 502</td><td>International labor charges</td></tr>
+        <tr><td>IT-26 Tender 2026</td><td>Item 503</td><td>International waiting time</td></tr>
+        <tr><td>IT-26 Tender 2026</td><td>Item 504</td><td>International OT loading/unloading</td></tr>
+        <tr><td>IT-26 Tender 2026</td><td>Item 505</td><td>International reweigh (HHG and UB)</td></tr>
+        <tr><td>IT-26 Tender 2026</td><td>Item 506</td><td>International debris removal (HHG)</td></tr>
+        <tr><td>IT-26 Tender 2026</td><td>Item 508</td><td>International crating / special containers</td></tr>
+        <tr><td>IT-26 Tender 2026</td><td>Item 513</td><td>International fuel surcharge (CONUS/AK/HI legs)</td></tr>
+        <tr><td>IT-26 Tender 2026</td><td>Item 518</td><td>International SIT — HHG</td></tr>
+        <tr><td>IT-26 Tender 2026</td><td>Item 519</td><td>International SIT — UB</td></tr>
+        <tr><td>IT-26 Tender 2026</td><td>Item 520</td><td>International SIT P/D — HHG</td></tr>
+        <tr><td>IT-26 Tender 2026</td><td>Item 521</td><td>International SIT P/D — UB</td></tr>
+        <tr><td>DTR Part IV (DoD 4500.9-R)</td><td>Chapter 401</td><td>Policy and authorization for HHG shipments</td></tr>
+        <tr><td>DTR Part IV</td><td>Chapter 402, App. A</td><td>Shipment processing, billing instructions</td></tr>
+        <tr><td>DTR Part IV</td><td>Chapter 402, App. B</td><td>Packing, crating, reweigh procedures</td></tr>
+        <tr><td>DTR Part IV</td><td>Chapter 403</td><td>Performance evaluation, BVS, ranking</td></tr>
+        <tr><td>DTR Part IV</td><td>Chapter 405</td><td>Administrative/punitive actions</td></tr>
+        <tr><td>JTR</td><td>Chapter 5, Par. 051002</td><td>HHG accessorial service entitlements</td></tr>
+        <tr><td>JTR</td><td>Chapter 5, Par. 051202</td><td>SIT entitlement rules</td></tr>
+        <tr><td>49 CFR Part 375.103</td><td>Scale certification requirements</td><td>Certified scale definition for reweigh</td></tr>
+        <tr><td>49 CFR Part 375.519</td><td>Weight ticket requirements</td><td>Six mandatory fields on weight tickets</td></tr>
+        <tr><td>SDDC Pamphlet 55-12</td><td>Container specifications</td><td>ARTRANS-approved container standards (international)</td></tr>
+      </table>
+    </div>
+
+    <div style="margin-top:24px; padding:14px 20px; background:var(--gray-200); border-radius:8px; font-size:11px; color:var(--gray-600);">
+      <strong>Document Control:</strong> DP3 Accessorial Guide 2026 | Sources: 400NG Tariff 2026 (effective 15 May 2026, published 5 Dec 2025), IT-26 Tender 2026 (effective 15 May 2026), DTR Part IV (DoD 4500.9-R), JTR. This guide is a reference document only; authoritative sources govern. Current baseline rates and FSC tables available at <strong>https://www.ustranscom.mil/dp3/pdfs.cfm</strong>. For questions contact DPMO PP Quality Support Team.
+    </div>
+
+  </div><!-- /main -->
+</div><!-- /wrapper -->
+
+<script>
+// ── TABS ──
+function showTab(btn, containerID, panelID) {
+  const container = document.getElementById(containerID);
+  container.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  container.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(panelID).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── SEARCH ──
+function doSearch(query) {
+  const msg = document.getElementById('search-results-msg');
+  // Remove previous highlights
+  document.querySelectorAll('mark').forEach(m => {
+    m.outerHTML = m.innerHTML;
+  });
+  if (!query || query.trim().length < 2) {
+    msg.style.display = 'none';
+    return;
+  }
+  const q = query.trim();
+  const regex = new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+  let count = 0;
+  const walker = document.createTreeWalker(document.getElementById('main'), NodeFilter.SHOW_TEXT, null, false);
+  const nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach(node => {
+    if (node.parentNode.nodeName === 'SCRIPT' || node.parentNode.nodeName === 'STYLE') return;
+    if (regex.test(node.textContent)) {
+      const span = document.createElement('span');
+      span.innerHTML = node.textContent.replace(regex, '<mark>$1</mark>');
+      count += (node.textContent.match(regex) || []).length;
+      node.parentNode.replaceChild(span, node);
+    }
+  });
+  if (count > 0) {
+    msg.textContent = '🔍 Found ' + count + ' match' + (count>1?'es':'') + ' for "' + q + '". Scroll to review highlighted results.';
+    msg.style.display = 'block';
+    // Scroll to first match
+    const first = document.querySelector('mark');
+    if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  } else {
+    msg.textContent = '⚠ No matches found for "' + q + '".';
+    msg.style.display = 'block';
+  }
+}
+
+// ── SIDEBAR ACTIVE LINK ──
+const sections = document.querySelectorAll('[id]');
+const navLinks = document.querySelectorAll('.sb-nav a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id);
+      });
+    }
+  });
+}, { rootMargin: '-60px 0px -70% 0px' });
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
