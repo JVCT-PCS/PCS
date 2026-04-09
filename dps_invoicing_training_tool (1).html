@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DPS Shipment Management — Complete Training (Gov Edition)</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0a1628;--navy2:#132040;--blue:#1a73e8;--blue2:#0d47a1;--amber:#f59e0b;--red:#dc2626;--green:#16a34a;--gray:#f4f6fa;--border:#dde3ef;--text:#1a2340;--muted:#5a6a8a;--white:#fff;}
+body{font-family:'IBM Plex Sans',sans-serif;background:var(--gray);color:var(--text);min-height:100vh}
+.app{max-width:980px;margin:0 auto;padding:1.5rem 1rem}
+.header{background:var(--navy);border-radius:12px;padding:1.4rem 2rem;margin-bottom:1rem;display:flex;align-items:center;gap:1.5rem}
+.header-icon{width:54px;height:54px;background:var(--blue);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.header h1{color:#fff;font-size:17px;font-weight:600;margin-bottom:3px}
+.header p{color:#8fa8d0;font-size:11px}
+.badge{background:var(--amber);color:#fff;font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;margin-left:6px}
+.tabs{display:flex;gap:5px;margin-bottom:1rem;flex-wrap:wrap}
+.tab{padding:6px 13px;border-radius:8px;border:1.5px solid var(--border);background:var(--white);font-size:12px;font-weight:500;cursor:pointer;color:var(--muted);transition:all .2s}
+.tab.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.tab:hover:not(.active){border-color:var(--blue);color:var(--blue)}
+.card{background:var(--white);border-radius:12px;border:1px solid var(--border);margin-bottom:1rem;overflow:hidden}
+.card-header{padding:.85rem 1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.card-header h2{font-size:13px;font-weight:600;color:var(--text)}
+.card-body{padding:1.2rem}
+.progress-bar{height:6px;background:#e8edf7;border-radius:3px;overflow:hidden;margin-bottom:4px}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--blue),#00897b);border-radius:3px;transition:width .5s}
+.module-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:9px}
+.module-card{border:1.5px solid var(--border);border-radius:10px;padding:.85rem;cursor:pointer;transition:all .2s;background:var(--white)}
+.module-card:hover:not(.locked){border-color:var(--blue);box-shadow:0 2px 8px rgba(26,115,232,.1)}
+.module-card.locked{opacity:.48;cursor:default}
+.module-card.completed{border-color:var(--green)}
+.mod-icon{width:32px;height:32px;border-radius:7px;display:flex;align-items:center;justify-content:center;margin-bottom:7px;font-size:16px}
+.mod-title{font-size:11px;font-weight:600;margin-bottom:3px;line-height:1.4}
+.mod-desc{font-size:10px;color:var(--muted);line-height:1.5}
+.status-pill{display:inline-flex;align-items:center;font-size:10px;font-weight:500;padding:2px 7px;border-radius:12px;margin-top:5px}
+.pill-done{background:#dcfce7;color:#166534}
+.pill-lock{background:#f1f5f9;color:#64748b}
+.pill-active{background:#dbeafe;color:#1d4ed8}
+.lesson-panel{display:none}
+.lesson-panel.show{display:block}
+.step-indicator{display:flex;align-items:center;margin-bottom:1rem;overflow-x:auto;padding-bottom:3px}
+.step{display:flex;align-items:center}
+.step-dot{width:23px;height:23px;border-radius:50%;border:2px solid var(--border);background:var(--white);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;color:var(--muted);flex-shrink:0;transition:all .2s}
+.step-dot.done{background:var(--green);border-color:var(--green);color:#fff}
+.step-dot.current{background:var(--blue);border-color:var(--blue);color:#fff}
+.step-line{width:18px;height:2px;background:var(--border);flex-shrink:0}
+.step-line.done{background:var(--green)}
+.cb{background:var(--gray);border-radius:9px;padding:.95rem;margin-bottom:.8rem;border-left:4px solid var(--blue)}
+.cb.warn{border-left-color:var(--amber)}
+.cb.ok{border-left-color:var(--green)}
+.cb.danger{border-left-color:var(--red)}
+.cb h3{font-size:12px;font-weight:600;margin-bottom:5px}
+.cb p,.cb li{font-size:11px;color:var(--text);line-height:1.65}
+.cb ul{padding-left:1rem;margin-top:3px}
+.sm{background:var(--navy2);border-radius:9px;overflow:hidden;margin:.7rem 0}
+.sm-bar{background:var(--navy);padding:6px 12px;display:flex;align-items:center;gap:6px}
+.sm-bar span{font-size:10px;color:#8fa8d0;font-family:'IBM Plex Mono',monospace}
+.sm-dots{display:flex;gap:4px}
+.sdot{width:8px;height:8px;border-radius:50%}
+.sm-body{padding:.8rem}
+.dnav{background:#1e3a5f;border-radius:5px;padding:5px;margin-bottom:7px}
+.dnav-i{color:#7fa8d0;font-size:10px;padding:3px 8px;border-radius:3px;font-family:'IBM Plex Mono',monospace}
+.dnav-i.an{background:#0d47a1;color:#fff}
+.drow{display:flex;gap:6px;margin-bottom:6px;flex-wrap:wrap}
+.df{flex:1;min-width:100px}
+.dl{font-size:9px;color:#7fa8d0;margin-bottom:2px;font-family:'IBM Plex Mono',monospace}
+.di{background:#0d2040;border:1px solid #1e4080;border-radius:3px;padding:4px 8px;color:#e0eaff;font-size:10px;font-family:'IBM Plex Mono',monospace;width:100%}
+.db{background:var(--blue);color:#fff;border:none;border-radius:4px;padding:5px 12px;font-size:11px;font-weight:600;cursor:pointer;font-family:'IBM Plex Sans',sans-serif}
+.db.sec{background:#1e3a5f;border:1px solid #2a5080}
+.dt{width:100%;border-collapse:collapse;margin-top:5px}
+.dt th{background:#0d2040;color:#7fa8d0;font-size:9px;padding:4px 8px;text-align:left;font-family:'IBM Plex Mono',monospace;font-weight:500}
+.dt td{color:#c0d8f8;font-size:10px;padding:4px 8px;border-bottom:1px solid #1a3060;font-family:'IBM Plex Mono',monospace}
+.dt tr:hover td{background:#0f2850}
+.hb{background:#fff8e1;border:1.5px dashed var(--amber);border-radius:7px;padding:7px 11px;margin:6px 0;font-size:11px;color:#7c5a00}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:.8rem}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-bottom:.8rem}
+.vc{background:var(--navy2);border-radius:9px;padding:1rem}
+.vt-thumb{width:100%;background:#0d2040;border-radius:7px;display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:8px;border:1px solid #1e4080;cursor:pointer;gap:5px;padding:15px 0;transition:background .2s;min-height:85px}
+.vt-thumb:hover{background:#162d55}
+.pb2{width:40px;height:40px;background:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.vti{color:#fff;font-size:12px;font-weight:600;margin-bottom:3px}
+.vsub{color:#7fa8d0;font-size:10px}
+.vplay{background:#0d2040;border-radius:7px;padding:12px;border:1px solid #1e4080;margin-bottom:8px}
+.vtx{font-size:10px;color:#8fa8d0;line-height:1.7;font-family:'IBM Plex Mono',monospace}
+.vpr{height:4px;background:#1e4080;border-radius:2px;margin:6px 0;overflow:hidden}
+.vf{height:100%;background:var(--blue);border-radius:2px;animation:vfill 12s linear forwards}
+@keyframes vfill{from{width:0}to{width:100%}}
+.sc-card{border:1.5px solid var(--border);border-radius:10px;margin-bottom:9px;overflow:hidden}
+.sc-hdr{padding:.7rem 1rem;background:#f8faff;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:7px}
+.sc-badge{background:var(--navy);color:#fff;font-size:10px;padding:2px 6px;border-radius:3px;font-weight:600}
+.sc-body{padding:.95rem}
+.sc-q{font-size:12px;font-weight:600;margin-bottom:8px}
+.ob{display:block;width:100%;text-align:left;padding:8px 11px;border-radius:7px;border:1.5px solid var(--border);background:var(--white);font-size:11px;cursor:pointer;margin-bottom:5px;transition:all .2s;color:var(--text);font-family:'IBM Plex Sans',sans-serif}
+.ob:hover{border-color:var(--blue);background:#f0f6ff}
+.ob.correct{background:#f0fdf4;border-color:var(--green);color:#166534}
+.ob.wrong{background:#fef2f2;border-color:var(--red);color:#991b1b}
+.fb{margin-top:7px;padding:8px 11px;border-radius:7px;font-size:11px;display:none;line-height:1.6}
+.fb.show{display:block}
+.fb.ok{background:#f0fdf4;color:#166534}
+.fb.no{background:#fef2f2;color:#991b1b}
+.nav-btns{display:flex;gap:8px;margin-top:.95rem}
+.btn{padding:7px 15px;border-radius:7px;font-size:11px;font-weight:600;cursor:pointer;border:none;transition:all .2s;font-family:'IBM Plex Sans',sans-serif}
+.btn-p{background:var(--blue);color:#fff}
+.btn-p:hover{background:var(--blue2)}
+.btn-o{background:var(--white);color:var(--text);border:1.5px solid var(--border)}
+.btn-o:hover{border-color:var(--blue);color:var(--blue)}
+.btn:disabled{opacity:.4;cursor:default}
+.score-d{text-align:center;padding:2rem}
+.score-n{font-size:50px;font-weight:600;color:var(--blue);line-height:1}
+.score-l{font-size:12px;color:var(--muted);margin-top:3px}
+.cl li{font-size:11px;padding:3px 0;display:flex;align-items:flex-start;gap:6px;color:var(--text)}
+.cl li::before{content:"✓";color:var(--green);font-weight:700;flex-shrink:0}
+.gl-item{padding:8px 0;border-bottom:1px solid var(--border)}
+.gl-item:last-child{border-bottom:none}
+.gl-term{font-size:12px;font-weight:600;color:var(--navy)}
+.gl-def{font-size:11px;color:var(--muted);margin-top:2px;line-height:1.5}
+.tag{display:inline-block;background:#e8edf7;color:var(--muted);font-size:9px;padding:1px 6px;border-radius:3px;margin-right:3px;font-family:'IBM Plex Mono',monospace}
+.ai-b{background:var(--navy);border-radius:11px 11px 11px 2px;padding:10px 14px;margin-bottom:.85rem;max-width:92%}
+.ai-b p{color:#c8daff;font-size:11px;line-height:1.65}
+.ai-lbl{font-size:9px;color:#5a78a8;margin-bottom:4px;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+</style>
+</head>
+<body>
+<div class="app">
+
+<div class="header">
+  <div class="header-icon">
+    <svg width="26" height="26" viewBox="0 0 28 28" fill="none"><rect x="3" y="4" width="22" height="20" rx="3" fill="#fff" fill-opacity=".15"/><rect x="3" y="4" width="22" height="20" rx="3" stroke="#fff" stroke-width="1.5"/><path d="M8 10h12M8 14h8M8 18h10" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><circle cx="21" cy="19" r="5" fill="#1a73e8"/><path d="M19 19l1.5 1.5L23 17" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+  <div>
+    <h1>DPS Shipment Management — Complete Invoicing &amp; Processing Training <span class="badge">GOV EDITION v27</span></h1>
+    <p>All guide sections covered · 9 modules · 10 scenarios · 9 video lessons · USTRANSCOM / PEO-T</p>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="showTab('overview')">Overview</div>
+  <div class="tab" onclick="showTab('modules')">Training Modules</div>
+  <div class="tab" onclick="showTab('scenarios')">Scenarios</div>
+  <div class="tab" onclick="showTab('videos')">Video Lessons</div>
+  <div class="tab" onclick="showTab('glossary')">Glossary</div>
+</div>
+
+<div id="tab-overview">
+  <div class="card">
+    <div class="card-header">
+      <h2>Training progress</h2>
+      <span style="font-size:10px;color:var(--muted)" id="prog-text">0 / 9 modules complete</span>
+    </div>
+    <div class="card-body">
+      <div class="progress-bar"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+      <p style="font-size:10px;color:var(--muted);margin-bottom:.9rem" id="prog-pct">0% complete</p>
+      <div class="ai-b">
+        <div class="ai-lbl">AI Instructor</div>
+        <p>Welcome. This training covers every section of the DPS Shipment Management Government Edition v27 — including View/Edit Shipments, Edit Locations, Edit Planned Dates, Outbound Shipments (pickup entry), Reweigh invoicing, Diversions, Splits, and all Admin/Reports sections. Complete all 9 modules in order, then test yourself with the scenarios.</p>
+      </div>
+      <div class="module-grid" id="overview-grid"></div>
+    </div>
+  </div>
+</div>
+
+<div id="tab-modules" style="display:none">
+  <div id="module-list">
+    <div class="card">
+      <div class="card-header"><h2>All training modules</h2></div>
+      <div class="card-body"><div class="module-grid" id="modules-grid"></div></div>
+    </div>
+  </div>
+  <div id="lesson-panels"></div>
+</div>
+
+<div id="tab-scenarios" style="display:none">
+  <div class="card">
+    <div class="card-header">
+      <h2>Practice scenarios</h2>
+      <span style="font-size:10px;color:var(--muted)" id="sc-score-label">Score: 0 / 0</span>
+    </div>
+    <div class="card-body">
+      <div class="ai-b" style="margin-bottom:.9rem">
+        <div class="ai-lbl">AI Instructor</div>
+        <p>Ten realistic scenarios drawn from all sections of the DPS Government Edition guide. Select the best answer — immediate feedback explains the correct process.</p>
+      </div>
+      <div id="scenario-container"></div>
+      <div id="sc-result" style="display:none">
+        <div class="score-d">
+          <div class="score-n" id="sc-num">0/10</div>
+          <div class="score-l">scenarios answered correctly</div>
+          <div style="margin-top:1rem"><button class="btn btn-p" onclick="resetScenarios()">Retry all scenarios</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="tab-videos" style="display:none">
+  <div class="card">
+    <div class="card-header"><h2>AI-narrated video walkthroughs</h2></div>
+    <div class="card-body">
+      <div class="ai-b" style="margin-bottom:.9rem">
+        <div class="ai-lbl">AI Instructor</div>
+        <p>Nine narrated lessons — one per module. Click Play to follow the step-by-step transcript keyed to actual DPS screens and workflows from the Government Edition guide.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:9px" id="video-grid"></div>
+    </div>
+  </div>
+</div>
+
+<div id="tab-glossary" style="display:none">
+  <div class="card">
+    <div class="card-header"><h2>Key terms &amp; acronyms</h2></div>
+    <div class="card-body" id="glossary-body"></div>
+  </div>
+</div>
+
+</div>
+
+<script>
+/* ================================================================
+   MODULE METADATA  (9 modules — complete guide coverage)
+   ================================================================ */
+var MOD_META=[
+  {icon:"🖥️",bg:"#e0e7ff",title:"Module 1 — Shipment Basics (§3)",
+   desc:"DPS navigation, View/Edit Shipment, Edit/Add Locations, Edit Planned Dates (spread override with reason codes)."},
+  {icon:"📋",bg:"#dbeafe",title:"Module 2 — Routing & Awarding (§4.1–4.5)",
+   desc:"Route standard/OTO/Volume Move shipments, select COS, award via BVS or alternate, short-fuse, premove surveys, preapprovals."},
+  {icon:"🚛",bg:"#fef9c3",title:"Module 3 — Outbound Shipments (§4.6–4.7)",
+   desc:"Enter pickup data, container info, manage outbound SIT at origin (place, extend, convert, release)."},
+  {icon:"📦",bg:"#f0fdf4",title:"Module 4 — SIT Management (§6)",
+   desc:"Outbound SIT queue, Inbound SIT queue, Extend/Convert/Release/Move SIT, SIT Expirations — via dedicated SIT Management screens."},
+  {icon:"💰",bg:"#fefce8",title:"Module 5 — PPM Closeouts (§5.2)",
+   desc:"Incentive-Based and ACR PPM closeout, customer balance payments, accessorials, check mailing address."},
+  {icon:"⚖️",bg:"#f0f4ff",title:"Module 6 — Reweighs (§7.3–7.4)",
+   desc:"Shipment Reweighs queue, Request Reweigh, Enter Shipment Reweigh (gross/tare/net/ticket number), Monitor Reweighs queue."},
+  {icon:"🔀",bg:"#fdf4ff",title:"Module 7 — Diversions, Pullbacks & Cancellations (§7.5–7.7)",
+   desc:"8-step diversion process, pullback options (Reaward/Cancel/SDDC), cancellation and termination (Divert/Reconsign/Only)."},
+  {icon:"📥",bg:"#f0fdfa",title:"Module 8 — Inbound Management (§5.1–5.5)",
+   desc:"Enter Arrival, all delivery options, Deliver Split, Place Split Into SIT, PPM Closeouts, Excess Cost, View Uploaded Documents."},
+  {icon:"🔍",bg:"#fdf2f8",title:"Module 9 — QA, Admin & Reports (§7.1–7.2, §8–11)",
+   desc:"Customer/TSP Requests, Inspections, DD 1814, Suspension/Non-Use, Rescind, Auto Route, Data Corrections, Search, Reports, Print Forms, SDDC SMO."}
+];
+
+/* ================================================================
+   LESSON CONTENT
+   ================================================================ */
+var LESSONS=[
+
+/* ---- MODULE 0: SHIPMENT BASICS §3 ---- */
+[
+{t:"DPS Navigation & Shipment Management Queue",h:'<div class="cb"><h3>Accessing Shipment Management</h3><p>Log in at www.move.mil → select the <b>Shipment Management tab</b> at the top of the DPS Home Page. DPS presents a role-specific Shipment Management Queue pop-up.</p></div><div class="sm"><div class="sm-bar"><div class="sm-dots"><div class="sdot" style="background:#ff5f56"></div><div class="sdot" style="background:#ffbd2e"></div><div class="sdot" style="background:#27c93f"></div></div><span>DPS — PPSO Shipment Management Queue</span></div><div class="sm-body"><div class="dnav"><div class="dnav-i an">▼ Outbound Management</div><div class="dnav-i" style="padding-left:16px">Route Shipments</div><div class="dnav-i" style="padding-left:16px">Award Shipments</div><div class="dnav-i an">▼ Inbound Management</div><div class="dnav-i" style="padding-left:16px">Inbound Shipments</div><div class="dnav-i" style="padding-left:16px">PPM Closeouts</div><div class="dnav-i an">▼ Search / Reports</div><div class="dnav-i" style="padding-left:16px">Find Shipments/Customer</div></div></div></div><div class="cb warn"><h3>SDDC users</h3><p>SDDC users must select a PPSO GBLOC from a drop-down menu before accessing any Shipment Management functions. Data is limited to the selected GBLOC.</p></div><div class="cb"><h3>GBLOC access rule (§2.1)</h3><p>JPPSO/PPSO users can only view and manipulate shipments associated with their own GBLOC at origin or destination. Exceptions are noted throughout the guide.</p></div>'},
+{t:"View/Edit Shipment Information (§3.3)",h:'<div class="cb"><h3>Accessing View/Edit</h3><p>Most queue pages offer a <b>View/Edit Shipment</b> column link. Select it to open the View/Edit Shipment Information page for that shipment. When labeled "View" only, the information is read-only.</p></div><div class="sm"><div class="sm-bar"><div class="sm-dots"><div class="sdot" style="background:#ff5f56"></div><div class="sdot" style="background:#ffbd2e"></div><div class="sdot" style="background:#27c93f"></div></div><span>DPS — View/Edit Shipment Information</span></div><div class="sm-body"><div style="color:#7fa8d0;font-size:9px;margin-bottom:7px;font-family:monospace">Primary Information | Shipment Dates | Weights | Orders | Channel/COS | Line of Accounting</div><table class="dt"><thead><tr><th>Section</th><th>Edit Available?</th><th>Notes</th></tr></thead><tbody><tr><td>Primary Information</td><td style="color:#4ade80">Yes (Edit button)</td><td>Customer name, TSP, shipping agent</td></tr><tr><td>Shipment Dates</td><td style="color:#4ade80">Yes (Edit button)</td><td>Pack/pickup/delivery dates; gray/shaded = read-only</td></tr><tr><td>Weights</td><td style="color:#4ade80">Yes (Edit button)</td><td>May not appear for late-stage shipments</td></tr><tr><td>Location Information</td><td style="color:#4ade80">Edit Location / Add Location</td><td>Subject to approval rules — see §3.4</td></tr></tbody></table></div></div><div class="hb">💡 Select an Edit button for a given table section. Fields in gray or shaded are read-only. Fields with a red asterisk (*) are required. Select Save to revise, or Cancel to return without changes.</div>'},
+{t:"Edit/Add Locations (§3.4)",h:'<div class="cb"><h3>Edit Location</h3><p>On the View/Edit Shipment Information page, click <b>Edit Location</b> for a Shipment Pickup Address or Shipment Authorized Delivery Address.</p></div><div class="sm"><div class="sm-bar"><div class="sm-dots"><div class="sdot" style="background:#ff5f56"></div><div class="sdot" style="background:#ffbd2e"></div><div class="sdot" style="background:#27c93f"></div></div><span>DPS — Edit Location</span></div><div class="sm-body"><div class="drow"><div class="df"><div class="dl">Address Line 1 *</div><div class="di">1234 New Street</div></div></div><div class="drow"><div class="df"><div class="dl">CONUS/OCONUS</div><div class="di">● CONUS  ○ OCONUS</div></div><div class="df"><div class="dl">Zip/City Lookup *</div><div class="di">San Antonio → [auto-populates state, zip, county]</div></div></div><div style="display:flex;gap:6px;margin-top:7px"><button class="db">Save</button><button class="db sec">Cancel</button></div></div></div><div class="cb warn"><h3>Approval rules</h3><ul class="cl"><li>If NOT a JPPSO: request sent to the responsible JPPSO to approve</li><li>If IS a JPPSO: address is automatically updated — no approval required</li><li>Once a shipment is set to Intransit status, <b>Pickup locations cannot be edited</b></li><li>Pickup locations limited to selected state/country; delivery limited to selected channel or country</li></ul></div><div class="cb ok"><h3>Add Location</h3><p>On View/Edit Shipment page, click <b>Add Location</b> under Location Information. Select address type from dropdown (Additional Pickup, Additional Delivery, Second Additional Pickup, Second Additional Delivery). Enter address, select city via Zip/City Lookup, Save. Note: Second Additional addresses require the primary Additional address to exist first.</p></div>'},
+{t:"Edit Planned Dates / Override Spread (§3.5)",h:'<div class="cb"><h3>When this is needed</h3><p>DPS allows JPPSO/PPSO to override Planned Pack/Pickup Dates outside the Seven Day Spread. This is available from shipment status <b>Presurvey Done</b> through <b>Delivered Complete</b>.</p></div><div class="cb warn"><h3>How to override planned dates</h3><ul class="cl"><li>Navigate via Search/Reports → Find Shipments/Customer → open the shipment</li><li>On View/Edit Shipment Information page, click <b>Edit</b> under Shipment Dates</li><li>Check the <b>"Override Planned Pack/Pickup Dates outside Spread Dates"</b> checkbox</li><li>This reveals the <b>Override Reason</b> dropdown — required field</li><li>Select an Override Reason from the list (see below)</li><li>The Planned Pack Date, Planned Pickup Date, and Planned/Agreed Delivery Date fields become editable</li><li>Enter the new dates, then click <b>Save</b></li></ul></div><div class="sm"><div class="sm-bar"><div class="sm-dots"><div class="sdot" style="background:#ff5f56"></div><div class="sdot" style="background:#ffbd2e"></div><div class="sdot" style="background:#27c93f"></div></div><span>DPS — Override Reasons Dropdown</span></div><div class="sm-body"><table class="dt"><thead><tr><th>#</th><th>Override Reason Option</th></tr></thead><tbody><tr><td>1</td><td>Customer Requested/Government Convenience</td></tr><tr><td>2</td><td>TSP Convenience</td></tr><tr><td>3</td><td>NTS TSP Release Non-Availability</td></tr></tbody></table></div></div><div class="hb">⚠ The override reason must be selected before the date fields become editable. Click Cancel to close the editable section without saving changes.</div>'},
+{t:"Module 1 Complete",h:'<div class="cb ok"><h3>Module 1 complete — Shipment Basics!</h3></div><div class="cb"><h3>Key rules summary</h3><ul class="cl"><li>Shipment Mgmt tab → role-specific Queue → left nav or Functional Area table links</li><li>SDDC users must select a GBLOC before using any functions</li><li>View/Edit page: gray/shaded fields are read-only; red asterisk = required</li><li>Edit Location: JPPSO auto-updates; non-JPPSO request goes to JPPSO for approval</li><li>Pickup locations cannot be edited once shipment is In Transit</li><li>Planned date override: check checkbox → select Override Reason → dates become editable → Save</li><li>Override reasons: Customer Requested/Gov Convenience, TSP Convenience, NTS TSP Release Non-Availability</li></ul></div>'}
+],
+
+/* ---- MODULE 1: ROUTING §4.1-4.5 ---- */
+[
+{t:"Route Shipments Queue (§4.1)",h:'<div class="cb"><h3>Accessing the queue</h3><p>Outbound Management → Route Shipments. Queue lists all shipments submitted for processing but not yet routed. Three action types are presented.</p></div><div class="sm"><div class="sm-bar"><div class="sm-dots"><div class="sdot" style="background:#ff5f56"></div><div class="sdot" style="background:#ffbd2e"></div><div class="sdot" style="background:#27c93f"></div></div><span>DPS — Route Shipments Queue</span></div><div class="sm-body"><table class="dt"><thead><tr><th>Link</th><th>Use for...</th></tr></thead><tbody><tr><td><span style="color:#60a5fa">Route</span></td><td>Standard, special, or Volume Move shipments</td></tr><tr><td><span style="color:#60a5fa">Route OTO</span></td><td>One-Time-Only: boat (BOTO), mobile home (MOTO), international (iOTO)</td></tr><tr><td><span style="color:#fbbf24">TOPS Confirm</span></td><td>DPM shipment (COS HA/BA) already transferred to TOPS — verify in TOPS first</td></tr></tbody></table></div></div><div class="cb"><h3>Route A Shipment page</h3><p>Select the Route link → page shows available Codes of Service with estimated costs, transit days, and RDD. Select a COS radio button → click Submit. For Volume Move shipments, DPS offers the VM option on this page — select the VM, click Continue, then Submit in the Add Shipment pop-up.</p></div>'},
+{t:"Award Shipments & Short-Fuse (§4.2)",h:'<div class="cb"><h3>Award Shipments queue</h3><p>After routing, click Award Shipment on the Route A Shipment page, or navigate to Award Shipments in the left nav. Click Award for a listed shipment.</p></div><div class="sm"><div class="sm-bar"><div class="sm-dots"><div class="sdot" style="background:#ff5f56"></div><div class="sdot" style="background:#ffbd2e"></div><div class="sdot" style="background:#27c93f"></div></div><span>DPS — Award Shipment page</span></div><div class="sm-body"><div class="drow"><div class="df"><div class="dl">Next TSP Due Award (BVS Score)</div><div class="di">ACME MOVING CO (ACME) — 94.2</div></div></div><div style="display:flex;gap:6px;margin:6px 0"><button class="db">Award Shipment to TSP</button></div><div style="border-top:1px solid #1e4080;padding-top:7px"><div class="dl">Alternate TSP</div><div style="display:flex;gap:5px;margin-top:3px"><select style="background:#0d2040;border:1px solid #1e4080;color:#c0d8f8;font-size:10px;padding:3px;border-radius:3px;flex:1"><option>Select alternate...</option></select><button class="db sec">Award to Alternate</button></div></div></div></div><div class="cb warn"><h3>Short-fuse offers</h3><ul class="cl"><li>TSP no response in 1 business day → status: "Offer Timeout"</li><li>If pickup is within short-fuse window → click <b>Offer Short Fuse</b></li><li>DPS emails all qualified TSPs; first respondent wins the award</li><li>Status → "Offered to all TSPs" until acceptance</li><li>After another timeout: re-enters short-fuse eligibility check</li><li>50 refusals or 72 hours no acceptance → returns to manual Award queue</li></ul></div>'},
+{t:"Re-Offer, Premove Surveys & Preapprovals (§4.3–4.5)",h:'<div class="cb"><h3>Re-Offer Shipments (§4.3)</h3><p>When Auto Re-Offer is ON, refused shipments are automatically offered to the next TSP. The Re-Offer queue lists these shipments — no actions available except View/Edit. Re-offer cycle stops at short-fuse eligibility, 50 refusals, or 72 hours.</p></div><div class="cb ok"><h3>Premove Surveys Pending (§4.4)</h3><p>After TSP accepts the award, the shipment appears in the Premove Surveys queue. TSP (or government user) enters: Packing Date, Pickup Date, Destination Arrival Date, Survey Method (in-person or phone), Estimated Weight. Click Submit. DPS presents the Presurvey Completed page with links to print BL/GBL and enter preapprovals.</p></div><div class="cb warn"><h3>Preapprovals Pending (§4.5)</h3><p>TSPs must request preapproval before rendering accessorial services (crating, labor, overtime, delivery attempts, etc.). The Premove Survey must be submitted before any preapprovals can be entered. A flag icon = request is within 3 business days of First Pack Date. Approve or Deny each request with a required Remark.</p></div><div class="hb">💡 Government users should allow the TSP to print the original BL/GBL. Updates after a GBL is printed auto-generate a GBL Correction Notice (SF1200).</div>'},
+{t:"Module 2 Complete",h:'<div class="cb ok"><h3>Module 2 complete — Routing & Awarding!</h3></div><div class="cb"><h3>Key rules</h3><ul class="cl"><li>Route → select COS radio → Submit → Award queue status: "TSP Selection"</li><li>TSP no response 1 business day → "Offer Timeout" → short-fuse if pickup in window</li><li>DPM (COS HA/BA) → TOPS; verify in TOPS before clicking TOPS Confirm</li><li>Volume Move: select VM → Continue → Submit in pop-up; DPS assigns VM COS</li><li>Premove Survey must be submitted before any preapproval requests</li><li>Original BL/GBL: first print = original; changes after = SF1200 correction notice</li></ul></div>'}
+],
+
+/* ---- MODULE 2: OUTBOUND SHIPMENTS §4.6-4.7 ---- */
+[
+{t:"Outbound Shipments Queue (§4.6)",h:'<div class="cb"><h3>Accessing Outbound Shipments</h3><p>Outbound Management → Outbound Shipments. Lists all outbound shipments and the available actions for each. Key columns: Pickup, Origin SIT, View/Edit.</p></div><div class="sm"><div class="sm-bar"><div class="sm-dots"><div class="sdot" style="background:#ff5f56"></div><div class="sdot" style="background:#ffbd2e"></div><div class="sdot" style="background:#27c93f"></div></div><span>DPS — Outbound Shipments Queue</span></div><div class="sm-body"><table class="dt"><thead><tr><th>Column</th><th>Link</th><th>Purpose</th></tr></thead><tbody><tr><td>Pickup</td><td>Enter Pickup</td><td>Record pickup date, weight, container info</td></tr><tr><td>Origin SIT</td><td>Place Into SIT</td><td>Place shipment into Storage-in-Transit at origin</td></tr><tr><td>Origin SIT</td><td>Manage SIT</td><td>Extend, Convert, or Release SIT at origin</td></tr><tr><td>View/Edit</td><td>View/Edit Shipment</td><td>Full shipment record details and editing</td></tr></tbody></table></div></div>'},
+{t:"Enter Pickup — Shipment Pickup Page",h:'<div class="cb"><h3>Entering pickup information</h3><p>Click <b>Enter Pickup</b> in the Outbound Shipments queue. DPS presents the Shipment Pickup page. Enter or select values for all required fields.</p></div><div class="sm"><div class="sm-bar"><div class="sm-dots"><div class="sdot" style="background:#ff5f56"></div><div class="sdot" style="background:#ffbd2e"></div><div class="sdot" style="background:#27c93f"></div></div><span>DPS — Shipment Pickup</span></div><div class="sm-body"><div class="drow"><div class="df"><div class="dl">Actual Pickup Date *</div><div class="di">📅 11/08/2024</div></div><div class="df"><div class="dl">Actual Gross Weight (lbs) *</div><div class="di">14,200</div></div><div class="df"><div class="dl">Actual Net Weight (lbs) *</div><div class="di">7,400</div></div></div><div class="drow"><div class="df"><div class="dl">Number of Containers *</div><div class="di">3</div></div><div class="df"><div class="dl">Total Containers Cube</div><div class="di">1,250</div></div><div class="df"><div class="dl">Port of Embarkation (if applicable)</div><div class="di">Port of Houston TX</div></div></div><div style="display:flex;gap:6px;margin-top:7px"><button class="db">Next</button><button class="db sec">Cancel</button></div></div></div><div class="hb">💡 Port fields are not presented for all shipments. If Number of Containers value &gt; 0, DPS presents the Shipment Container Information page after clicking Enter Container Info — enter a Container Seal Number for each container, then Save Container Info.</div><div class="cb ok"><h3>Completing pickup</h3><p>After clicking Next → Shipment Pickup Confirmation pop-up → click Submit to update the record and return to Outbound Shipments queue.</p></div>'},
+{t:"SIT @ Origin from Outbound Shipments (§4.6–4.7)",h:'<div class="cb"><h3>Place Into SIT (from Outbound Shipments queue)</h3><p>Click <b>Place Into SIT</b> in the Origin SIT column. The Place Shipment Into SIT page appears even if SIT is not yet authorized — a warning is shown but you may proceed.</p></div><div class="sm"><div class="sm-bar"><div class="sm-dots"><div class="sdot" style="background:#ff5f56"></div><div class="sdot" style="background:#ffbd2e"></div><div class="sdot" style="background:#27c93f"></div></div><span>DPS — Place Shipment Into SIT</span></div><div class="sm-body"><div class="drow"><div class="df"><div class="dl">SIT Entry Date *</div><div class="di">📅 11/09/2024</div></div><div class="df"><div class="dl">SIT Days Authorized *</div><div class="di">90</div></div><div class="df"><div class="dl">Weight in SIT (lbs) *</div><div class="di">7,400</div></div></div><div class="drow"><div class="df"><div class="dl">SIT Warehouse *</div><div class="di">🔍 [Select from popup → ABC Storage, San Antonio TX]</div></div></div><div style="display:flex;gap:6px;margin-top:7px"><button class="db">Submit</button><button class="db sec">Cancel</button></div></div></div><div class="cb warn"><h3>SIT @ Origin queue (§4.7)</h3><p>Navigate to SIT @ Origin in the left nav to access the Outbound SIT Queue. All shipments in SIT@Origin are listed. Actions: <b>Manage SIT</b> (Extend, Convert, Release) and <b>Excess Flag</b> column to detect accrued excess SIT charges. Shipments remain in this queue until explicitly released.</p></div>'},
+{t:"Module 3 Complete",h:'<div class="cb ok"><h3>Module 3 complete — Outbound Shipments!</h3></div><div class="cb"><h3>Key rules</h3><ul class="cl"><li>Outbound Shipments queue: Enter Pickup → weight/date/containers → Next → Submit on confirmation</li><li>Containers &gt; 0: DPS asks for Container Seal Numbers via Shipment Container Information page</li><li>Port fields only appear for applicable shipment types</li><li>Place Into SIT: SIT warning shown if not yet authorized — may still proceed</li><li>SIT@Origin queue: shipments stay until explicitly released via Manage SIT → Release SIT</li><li>Excess Flag icon = excess SIT charges have accrued for that shipment</li></ul></div>'}
+],
+
+/* ---- MODULE 3: SIT MANAGEMENT §6 ---- */
+[
+{t:"Outbound SIT Queue — Manage SIT (§6.1)",h:'<div class="cb"><h3>Accessing SIT Management</h3><p>Navigate to <b>SIT Management → Outbound SIT</b> in the left navigation. This is the dedicated queue for all shipments in SIT@Origin. Click the Manage SIT link for any shipment.</p></div><div class="sm"><div class="sm-bar"><div class="sm-dots"><div class="sdot" style="background:#ff5f56"></div><div class="sdot" style="background:#ffbd2e"></div><div class="sdot" style="background:#27c93f"></div></div><span>DPS — Manage Shipment SIT (@Origin)</span></div><div class="sm-body"><div style="color:#7fa8d0;font-size:9px;margin-bottom:6px;font-family:monospace">SIT Type: Origin | Control #: SIT-2024-0042 | Contractor: ABC Storage</div><table class="dt"><thead><tr><th>Action</th><th>Effect</th></tr></thead><tbody><tr><td>Extend SIT</td><td>Extend authorized SIT days or set a new end date</td></tr><tr><td>Convert SIT to Customer Expense</td><td>Converts remaining SIT to customer cost; DPS emails DoD customer</td></tr><tr><td>Release SIT</td><td>Releases shipment from SIT; ready for delivery</td></tr></tbody></table><div style="color:#c0d8f8;font-size:9px;margin-top:6px;font-family:monospace">SIT Activity History: [displayed below SIT data]</div></div></div><div class="three-col"><div class="cb" style="margin:0"><h3>Extend SIT</h3><p>Enter Extension Days OR select a Date (DPS auto-populates the other). Select Extension Reason. Enter required Remark. Submit.</p></div><div class="cb warn" style="margin:0"><h3>Convert to Customer Expense</h3><p>Conversion Date auto-set by DPS from Counseling authorized days. Enter required Remark. Submit. DPS automatically emails the DoD customer.</p></div><div class="cb ok" style="margin:0"><h3>Release SIT</h3><p>Select a Release Date (calendar icon). Release Weight auto-populated from Counseling. Submit.</p></div></div>'},
+{t:"Inbound SIT Queue — SIT @ Destination (§6.2)",h:'<div class="cb"><h3>SIT Management → SIT @ Destination</h3><p>Lists all shipments in SIT@Destination. Click Manage SIT for any shipment to access the Manage Shipment SIT page for destination SIT.</p></div><div class="sm"><div class="sm-bar"><div class="sm-dots"><div class="sdot" style="background:#ff5f56"></div><div class="sdot" style="background:#ffbd2e"></div><div class="sdot" style="background:#27c93f"></div></div><span>DPS — Inbound SIT Queue — Available Actions</span></div><div class="sm-body"><table class="dt"><thead><tr><th>Action</th><th>Purpose</th></tr></thead><tbody><tr><td>Deliver Out</td><td>Enter delivery out of SIT@Destination</td></tr><tr><td>Manage SIT</td><td>Extend, Convert, Release, or Move to new warehouse</td></tr><tr><td>View/Edit Splits</td><td>View and edit split shipment records in SIT</td></tr><tr><td>General Remarks</td><td>View, add, or export remarks for the shipment</td></tr><tr><td>View Documents</td><td>View/download/print attached documents</td></tr></tbody></table></div></div><div class="cb ok"><h3>Destination-only action: Move to New SIT Warehouse</h3><p>Available only for SIT@Destination (not origin). On the Manage Shipment SIT page, select <b>Move to New SIT Warehouse</b>. Enter new SIT Entry Date, select new warehouse, indicate Contract Rep Contacted (Yes/No), Submit.</p></div>'},
+{t:"SIT Expirations Queue (§6.3)",h:'<div class="cb warn"><h3>SIT Expirations queue</h3><p>Navigate to SIT Management → SIT Expirations. Lists all shipments with a SIT destination record within <b>30 days</b> of expiration date. Use Manage SIT to extend or arrange delivery before the expiration date. Export to spreadsheet available.</p></div><div class="cb ok"><h3>Module 4 complete — SIT Management!</h3></div><div class="cb"><h3>Complete SIT rules summary</h3><ul class="cl"><li>SIT@Origin (§6.1): Extend, Convert to Customer Expense, or Release</li><li>SIT@Destination (§6.2): Extend, Convert, Release, or Move to New SIT Warehouse</li><li>Move to New Warehouse: destination SIT only; not available for origin SIT</li><li>Conversion: Conversion Date auto-set by DPS; email sent to DoD customer automatically</li><li>Release Weight: auto-populated from Counseling module data</li><li>SIT Expirations: within 30 days of expiration at destination</li><li>Shipments in SIT do not auto-release — must be explicitly released</li></ul></div>'}
+],
+
+/* ---- MODULE 4: PPM CLOSEOUTS §5.2 ---- */
+[
+{t:"PPM / DITY Overview & Access",h:'<div class="cb"><h3>What is a PPM?</h3><p>A Personally Procured Move (PPM) — also called DITY — is when the DoD customer arranges their own transport and is reimbursed. The customer creates the record during counseling.</p></div><div class="two-col"><div class="cb" style="margin:0"><h3>Incentive-Based PPM</h3><p>Reimbursed as a percentage of Government Constructive Cost. Requires actual gross/tare weights, pro gear weights, advance allowance. Closes with DD Form 2278.</p></div><div class="cb warn" style="margin:0"><h3>ACR PPM (two types)</h3><p>(1) NTE Government Constructive Cost. (2) No Government Transportation Available. Requires actual weights, costs, accessorial management.</p></div></div><div class="cb"><h3>Access rules</h3><ul class="cl"><li>Navigate: Inbound Management → PPM Closeouts</li><li>Queue shows shipments matching your GBLOC only</li><li>Any PPM can be closed regardless of GBLOC via Search → View/Edit Shipment</li></ul></div>'},
+{t:"Incentive-Based PPM Closeout",h:'<div class="sm"><div class="sm-bar"><div class="sm-dots"><div class="sdot" style="background:#ff5f56"></div><div class="sdot" style="background:#ffbd2e"></div><div class="sdot" style="background:#27c93f"></div></div><span>DPS — PPM Closeout (Incentive-Based)</span></div><div class="sm-body"><div class="drow"><div class="df"><div class="dl">Actual Pickup Date *</div><div class="di">📅 10/28/2024</div></div></div><div class="drow"><div class="df"><div class="dl">Actual Gross Weight (lbs) *</div><div class="di">14,220</div></div><div class="df"><div class="dl">Actual Tare Weight (lbs) *</div><div class="di">6,800</div></div></div><div class="drow"><div class="df"><div class="dl">Actual Pro Gear Weight</div><div class="di">180</div></div><div class="df"><div class="dl">Spouse Pro Gear Weight</div><div class="di">75</div></div></div><div class="drow"><div class="df"><div class="dl">Advance Operating Allowance ($)</div><div class="di">1,200.00</div></div></div><div style="margin-top:7px"><button class="db">Submit</button></div></div></div><div class="hb">After Submit → DPS shows reimbursement summary → click <b>Closeout PPM Shipment</b> → Print DD Form 2278 link appears → Status: "Delivered Complete" → drops from queue.</div>'},
+{t:"ACR PPM — Balance Scenarios & Accessorials",h:'<div class="two-col"><div class="cb ok" style="margin:0"><h3>Balance owed TO customer</h3><p>Closeout PPM Shipment button available immediately. Click → finalize. Status: "Delivered Complete."</p></div><div class="cb danger" style="margin:0"><h3>Balance owed BY customer</h3><p>Closeout button NOT available until Remaining Balance = $0.00. Enter each payment via <b>Enter Payment/Voucher Info</b> (date, voucher#, amount) one at a time.</p></div></div><div class="cb warn"><h3>ACR accessorials</h3><p>Select <b>Enter/Update Accessorials</b> → Accessorial Management page. Filter by category. Click Approve or Deny → required Remark → OK. Pre-approved accessorials from Counseling show "Pre-Approved." Click Save.</p></div><div class="cb"><h3>PPM check mailing address</h3><p>View/Edit Shipment → Location Information → <b>Enter Check Mailing Address</b> → enter street, select CONUS/OCONUS, type city → select from dropdown → Save.</p></div>'},
+{t:"Module 5 Complete",h:'<div class="cb ok"><h3>Module 5 complete — PPM Closeouts!</h3></div><div class="cb"><h3>Critical rules</h3><ul class="cl"><li>Incentive-Based: enter weights → Submit → review → Closeout PPM Shipment → Print DD 2278</li><li>Gross = truck + HHG; Tare = empty truck; Net = Gross minus Tare</li><li>ACR balance owed by customer: Remaining Balance must reach $0.00 before closeout</li><li>ACR balance owed to customer: Closeout button available immediately</li><li>Status after closeout: "Delivered Complete" — drops from PPM Closeouts queue</li></ul></div>'}
+],
+
+/* ---- MODULE 5: REWEIGHS §7.3-7.4 ---- */
+[
+{t:"Shipment Reweighs Queue (§7.3)",h:'<div class="cb"><h3>What is a reweigh?</h3><p>A reweigh verifies or corrects a shipment\'s weight after pickup. The JPPSO/PPSO can initiate one, or a customer request triggers one. Navigate to <b>Shipment Requests and Corrections → Request Reweigh</b> in the left navigation bar.</p></div><div class="sm"><div class="sm-bar"><div class="sm-dots"><div class="sdot" style="background:#ff5f56"></div><div class="sdot" style="background:#ffbd2e"></div><div class="sdot" style="background:#27c93f"></div></div><span>DPS — Shipment Reweighs Queue</span></div><div class="sm-body"><div class="drow"><div class="df"><div class="dl">A — Search: BL Number</div><div class="di">JPPSO-2024-001</div></div><div class="df"><div class="dl">Orders Number</div><div class="di"></div></div><div class="df"><div class="dl">Customer Last Name</div><div class="di">Martinez</div></div><div class="df"><div class="dl">SSN</div><div class="di">***-**-6789</div></div></div><div style="display:flex;gap:6px;margin-top:6px"><button class="db">Search</button></div><table class="dt" style="margin-top:7px"><thead><tr><th>GBL</th><th>Customer</th><th>Status</th><th>C — Request Reweigh</th><th>D — Enter Reweigh</th></tr></thead><tbody><tr><td>JPPSO-2024-001</td><td>SGT Martinez</td><td>In Transit</td><td><span style="color:#60a5fa">Request Reweigh</span></td><td><span style="color:#6b7280">—</span></td></tr><tr><td>JPPSO-2024-005</td><td>SFC Davis</td><td>Reweigh Pending</td><td><span style="color:#6b7280">—</span></td><td><span style="color:#60a5fa">Enter Reweigh</span></td></tr></tbody></table></div></div><div class="cb"><h3>Two actions explained</h3><ul class="cl"><li><b>C — Request Reweigh:</b> submits a request to the TSP to perform the physical reweigh; shipment moves to Monitor Reweighs queue</li><li><b>D — Enter Reweigh:</b> records the actual reweigh results once the physical reweigh has been performed</li></ul></div>'},
+{t:"Processing a Reweigh Request",h:'<div class="cb"><h3>Step 1 — Submit the Reweigh Request</h3><p>Click the <b>Request Reweigh</b> link (Column C) for a shipment in the queue. DPS presents the Reweigh Request page showing shipment details.</p></div><div class="sm"><div class="sm-bar"><div class="sm-dots"><div class="sdot" style="background:#ff5f56"></div><div class="sdot" style="background:#ffbd2e"></div><div class="sdot" style="background:#27c93f"></div></div><span>DPS — Reweigh Request</span></div><div class="sm-body"><div style="color:#c0d8f8;font-size:10px;margin-bottom:8px;font-family:monospace">GBL: JPPSO-2024-001 | SGT Martinez, R. | Status: In Transit<br>TSP: ACME MOVING CO (ACME) | Estimated Weight: 7,450 lbs</div><div style="display:flex;gap:6px"><button class="db">Request Reweigh</button><button class="db sec">Back</button></div></div></div><div class="cb ok"><h3>After submitting the request</h3><ul class="cl"><li>Select <b>Request Reweigh</b> to submit the request to DPS/TSP</li><li>Select <b>Back</b> to return to the Shipment Reweighs page without submitting</li><li>Shipment appears in <b>Monitor Reweighs</b> queue with outstanding request</li><li>Government user may also enter reweigh results on behalf of the TSP</li></ul></div>'},
+{t:"Enter Shipment Reweigh — Required Fields",h:'<div class="cb"><h3>Accessing Enter Reweigh</h3><p>Click the <b>Enter Reweigh</b> link (Column D) in the Shipment Reweighs queue, or from the Monitor Reweighs queue. DPS presents the <b>Enter Shipment Reweigh</b> page.</p></div><div class="sm"><div class="sm-bar"><div class="sm-dots"><div class="sdot" style="background:#ff5f56"></div><div class="sdot" style="background:#ffbd2e"></div><div class="sdot" style="background:#27c93f"></div></div><span>DPS — Enter Shipment Reweigh (Figure 7-16)</span></div><div class="sm-body"><div class="drow"><div class="df"><div class="dl">Reweigh Date * (required)</div><div class="di">📅 11/08/2024</div></div><div class="df"><div class="dl">Reweigh Ticket Number * (required)</div><div class="di">RW-2024-00492</div></div></div><div class="drow"><div class="df"><div class="dl">Reweigh Gross Weight (lbs) * — shipment AND truck</div><div class="di">14,100</div></div></div><div class="drow"><div class="df"><div class="dl">Reweigh Net Weight (lbs) * — gross minus tare</div><div class="di">7,300</div></div><div class="df"><div class="dl">Reweigh Tare Weight (lbs) * — empty truck only</div><div class="di">6,800</div></div></div><div class="drow"><div class="df"><div class="dl">Reweigh Witnessed (optional dropdown)</div><div class="di">Yes — Customer Present</div></div></div><div class="drow"><div class="df"><div class="dl">Reweigh Note (optional)</div><div class="di">Customer verified weight on scale certificate</div></div></div><div style="display:flex;gap:6px;margin-top:7px"><button class="db">Submit Reweigh</button><button class="db sec">Back</button></div></div></div><div class="hb">After <b>Submit Reweigh</b> → DPS refreshes and presents a confirmation option → select <b>Save and Continue</b> to complete the update process. Select Back to return without submitting.</div>'},
+{t:"Monitor Reweighs Queue (§7.4)",h:'<div class="cb"><h3>Accessing Monitor Reweighs</h3><p>Select the <b>Monitor Reweighs</b> link in the left navigation bar. All shipments with an outstanding reweigh request are listed here — the central hub for tracking reweigh status.</p></div><div class="sm"><div class="sm-bar"><div class="sm-dots"><div class="sdot" style="background:#ff5f56"></div><div class="sdot" style="background:#ffbd2e"></div><div class="sdot" style="background:#27c93f"></div></div><span>DPS — Monitor Reweighs Queue (Figure 7-17)</span></div><div class="sm-body"><table class="dt"><thead><tr><th>GBL</th><th>Customer</th><th>TSP</th><th>Request Date</th><th>Status</th><th>B — Enter Reweigh</th></tr></thead><tbody><tr><td>JPPSO-2024-001</td><td>SGT Martinez</td><td>ACME</td><td>11/06/24</td><td style="color:#fbbf24">Reweigh Pending</td><td><span style="color:#60a5fa">Enter Reweigh</span></td></tr><tr><td>JPPSO-2024-007</td><td>CW2 Jackson</td><td>BWLY</td><td>11/05/24</td><td style="color:#fbbf24">Reweigh Pending</td><td><span style="color:#60a5fa">Enter Reweigh</span></td></tr></tbody></table></div></div><div class="cb ok"><h3>Module 6 complete — Reweighs! Full workflow summary</h3><ul class="cl"><li>Queue: search by BL#, Orders#, Customer Last Name, or SSN</li><li>Request Reweigh: submits request to TSP → shipment moves to Monitor Reweighs queue</li><li>Enter Reweigh required fields: Date, Ticket Number, Gross Weight, Net Weight, Tare Weight</li><li>Enter Reweigh optional fields: Reweigh Witnessed, Reweigh Note</li><li>Submit Reweigh → Save and Continue to complete the update</li><li>Monitor Reweighs queue: Enter Reweigh (B) available for each pending shipment</li></ul></div>'}
+],
+
+/* ---- MODULE 6: DIVERSIONS §7.5-7.7 ---- */
+[
+{t:"Diverting a Shipment (§7.5)",h:'<div class="cb"><h3>When diversion is used</h3><p>Changes destination of an in-transit shipment (e.g., new orders mid-move). Navigate to <b>Shipment Requests and Corrections → Diversion</b>.</p></div><div class="sm"><div class="sm-bar"><div class="sm-dots"><div class="sdot" style="background:#ff5f56"></div><div class="sdot" style="background:#ffbd2e"></div><div class="sdot" style="background:#27c93f"></div></div><span>DPS — Diversion — 8-Step Sequence</span></div><div class="sm-body"><table class="dt"><thead><tr><th>Step</th><th>Page</th><th>Action</th></tr></thead><tbody><tr><td>1</td><td>Divert Shipments</td><td>Enter BL#, Orders#, Last Name, or SSN → Search</td></tr><tr><td>2</td><td>Search Results</td><td>Click <b>Divert Shipment</b> for the listed shipment</td></tr><tr><td>3</td><td>Shipment Diversion</td><td>Enter new destination: Address Line 1, CONUS/OCONUS, city → DPS auto-populates state/zip</td></tr><tr><td>4</td><td>—</td><td>Click <b>Submit New Destination Location</b></td></tr><tr><td>5</td><td>Enter Diversion Point Location</td><td>Enter current shipment location: Address Line 1, CONUS/OCONUS, city</td></tr><tr><td>6</td><td>—</td><td>Click <b>Submit Diversion Point Location</b></td></tr><tr><td>7</td><td>Enter Updated Orders</td><td>Enter new orders number if changed → click <b>Proceed</b></td></tr><tr><td>8</td><td>Shipment Diversion (review)</td><td>Review content → click <b>Save and Continue</b> to complete</td></tr></tbody></table></div></div><div class="hb">⚠ International shipments: DPS presents a notice that the shipment will be <b>terminated</b> and a new shipment created with the diversion point as the origin.</div>'},
+{t:"Pulling Back a Shipment (§7.6)",h:'<div class="cb"><h3>What is a pullback?</h3><p>A pullback revokes a shipment awarded to a TSP. Only shipments that have <b>NOT moved beyond Pickup status</b> are eligible. Navigate to Shipment Requests and Corrections → Pullback.</p></div><div class="three-col"><div class="cb" style="margin:0"><h3>Reaward</h3><p>Award to a different TSP. Enter Pullback Reason. Indicate tonnage return (Yes/No). Save and Continue. DPS cancels original, creates new shipment in Award queue.</p></div><div class="cb warn" style="margin:0"><h3>Cancel</h3><p>Close the shipment record. Enter Pullback Reason. Indicate tonnage return. Save and Continue. Status → "Pullback and Cancel." TSP notified.</p></div><div class="cb danger" style="margin:0"><h3>Submit to SDDC</h3><p><b>OTO shipments only.</b> PPSO cannot pull back OTO directly. Enter Pullback Reason → Send Request. SDDC user completes the pullback.</p></div></div><div class="hb">💡 Per the guide (p.109): "A PPSO must submit a request to SDDC to pullback and cancel a One-Time-Only shipment."</div>'},
+{t:"Cancellation & Termination (§7.7)",h:'<div class="cb"><h3>Cancel vs. Terminate</h3><p>Navigate to Shipment Requests and Corrections → Cancellation/Termination. Search by BL#, Orders#, Last Name, or SSN.</p></div><div class="two-col"><div class="cb" style="margin:0"><h3>Cancel Shipment</h3><p>Shipment NOT yet picked up by TSP. Click Cancel Shipment → Continue → optional remarks → Submit. Record is closed.</p></div><div class="cb warn" style="margin:0"><h3>Terminate Shipment</h3><p>Shipment IS in SIT. Three options:<br><b>Terminate &amp; Divert</b> — return to origin.<br><b>Terminate &amp; Reconsign</b> — new TSP award.<br><b>Terminate Only</b> — close out in SIT.</p></div></div><div class="cb danger"><h3>Termination rules (from guide)</h3><ul class="cl"><li>Only shipments in SIT are eligible for Divert, Reconsign, or Terminate actions</li><li>If not in SIT: DPS instructs user to place it in SIT first</li><li>Return TSP allocation checkbox: NOT presented for short-fuse shipments</li><li>Terminate &amp; Reconsign: select checkbox for tonnage return → Submit → OK on confirmation page</li></ul></div>'},
+{t:"Module 7 Complete",h:'<div class="cb ok"><h3>Module 7 complete — Diversions, Pullbacks & Cancellations!</h3></div><div class="cb"><h3>Workflow summary</h3><ul class="cl"><li>Diversion: 8-step sequence — new destination → diversion point location → updated orders → Save and Continue</li><li>International diversion: DPS terminates existing shipment; creates new one at diversion point</li><li>Pullback eligible: shipments not yet beyond Pickup status only</li><li>OTO pullback: PPSO must Submit Request to SDDC — cannot pull back OTO directly</li><li>Cancel: not yet picked up; Terminate: shipment must be in SIT</li><li>Termination options: Divert, Reconsign, or Terminate Only — all require SIT placement</li></ul></div>'}
+],
+
+/* ---- MODULE 7: INBOUND §5.1-5.5 ---- */
+[
+{t:"Inbound Shipments — Arrival & Delivery (§5.1.1–5.1.2)",h:'<div class="cb"><h3>Inbound Shipments queue</h3><p>Inbound Management → Inbound Shipments. All shipments with status In Transit, Arrived, Split, or In SIT@Destination are listed. Filter by GBL, Last Name, SSN/EIN, or DoDID.</p></div><div class="cb ok"><h3>Enter Arrival — Whole Shipment</h3><p>Click Enter Arrival → Arrival Type page → click <b>Whole Shipment Arrival</b>. Select TSP First Available Delivery Date. Enter Gross Weight and Net Weight. Submit → returns to Inbound Shipments queue.</p></div><div class="sm"><div class="sm-bar"><div class="sm-dots"><div class="sdot" style="background:#ff5f56"></div><div class="sdot" style="background:#ffbd2e"></div><div class="sdot" style="background:#27c93f"></div></div><span>DPS — Enter Delivery — All Options (Figure 5-5)</span></div><div class="sm-body"><table class="dt"><thead><tr><th>Link</th><th>Use when...</th><th>Key required fields</th></tr></thead><tbody><tr><td>Enter Scheduled Delivery Date</td><td>Scheduling future delivery</td><td>Scheduled Delivery Date → Schedule Delivery</td></tr><tr><td>Enter Actual Delivery Date</td><td>Recording completed delivery</td><td>Delivery Date, Delivered Weight, Delivery Location checkbox → Submit</td></tr><tr><td>Deliver Partial and SIT Placement</td><td>Part delivered, rest to SIT</td><td>Delivery Date + Delivered Net Weight + SIT Entry Date + Weight in SIT + Warehouse</td></tr><tr><td>Enter Delivery Attempt</td><td>TSP attempted but could not deliver</td><td>Attempted Delivery Date, Time window (0800–1200 or 1200–1700) → Submit</td></tr><tr><td>Enter Actual Delivery Out of SIT</td><td>Delivering from destination SIT</td><td>Delivery Date, Delivered Net Weight, Final Portion (Yes/No), Delivery Location</td></tr></tbody></table></div></div>'},
+{t:"Deliver Split & Place Split Into SIT (§5.1.3–5.1.5)",h:'<div class="cb"><h3>Split Shipment Arrival (§5.1.1)</h3><p>Click Enter Arrival → Arrival Type page → <b>Split Shipment Arrival</b>. Prior splits shown in the Current Shipment Splits table. Enter TSP First Available Delivery Date, Net Weight, and Cube for the arriving split. Submit.</p></div><div class="cb warn"><h3>Place Into SIT from Inbound (§5.1.3)</h3><p>Click Place Into SIT in the Destination SIT column for an inbound shipment. Enter SIT Entry Date, Weight in SIT, and select a warehouse. Submit. Same fields as outbound but this records the SIT at the destination facility.</p></div><div class="cb ok"><h3>Deliver Split (§5.1.4)</h3><p>For a split shipment with multiple arrivals, click the Splits column link → View/Edit Splits. Each split can be delivered individually. Enter delivery date, delivered net weight, and check the delivery location checkbox → Submit for each split portion.</p></div><div class="cb"><h3>Place Split Into SIT (§5.1.5)</h3><p>For a split portion that needs to go into SIT rather than being delivered, click <b>Place Split Into SIT</b>. Enter SIT Entry Date, Weight In SIT for just the split portion, and select a warehouse. Submit. DPS records the partial SIT placement and maintains split-level tracking.</p></div>'},
+{t:"Excess Cost & Preapprovals Pending (§5.3–5.5)",h:'<div class="cb"><h3>Excess Cost (§5.5)</h3><p>Inbound Management → Excess Cost. Lists shipments requiring customer payment for excess costs. Click <b>Enter Payment Voucher Info</b> → enter date, voucher number, amount. DPS deducts from remaining balance. Shipment stays in queue for <b>3 months after full payment</b>. Edit Notes option allows updating Paying Officer Excess Cost Notes.</p></div><div class="cb warn"><h3>Preapprovals Pending (§5.3)</h3><p>Same queue as Outbound. Lists TSP preapproval requests for accessorials at destination. Premove Survey must be submitted before preapprovals can be entered. Flag icon = within 3 business days of First Pack Date. Approve or Deny each with a required Remark.</p></div><div class="cb ok"><h3>View Uploaded Documents (§10.4)</h3><p>Search/Reports → <b>View Uploaded Documents</b> → Document Management pop-up. Enter customer Name and/or last 4 SSN → Search → select Travel Order from dropdown → Submit → list of all forms for the order appears. Use <b>Get File</b> to open/view a document, or <b>View History</b> to see the upload history for any file.</p></div>'},
+{t:"Module 8 Complete",h:'<div class="cb ok"><h3>Module 8 complete — Inbound Management!</h3></div><div class="cb"><h3>Summary</h3><ul class="cl"><li>Arrival: Whole or Split → TSP First Available Delivery Date + weights → Submit</li><li>Deliver Split: each split portion delivered individually via View/Edit Splits</li><li>Place Split Into SIT: individual split SIT placement with own entry date and weight</li><li>Deliver Partial + SIT: enter delivered portion AND SIT portion in one action</li><li>Delivery Attempt: records time window (0800–1200 or 1200–1700); creates preapproval automatically</li><li>Excess Cost: stays in queue 3 months after full customer payment</li><li>View Uploaded Documents: access via Search/Reports → enter customer name/SSN → select Travel Order</li></ul></div>'}
+],
+
+/* ---- MODULE 8: QA + ADMIN + REPORTS §7.1-7.2, §8-11 ---- */
+[
+{t:"Customer & TSP Requests (§7.1–7.2)",h:'<div class="cb"><h3>Customer Requests queue (§7.1)</h3><p>Shipment Requests and Corrections → Customer Requests. All shipments with outstanding customer requests are listed.</p></div><div class="sm"><div class="sm-bar"><div class="sm-dots"><div class="sdot" style="background:#ff5f56"></div><div class="sdot" style="background:#ffbd2e"></div><div class="sdot" style="background:#27c93f"></div></div><span>DPS — Customer Requests — Actions</span></div><div class="sm-body"><table class="dt"><thead><tr><th>Action</th><th>Details</th></tr></thead><tbody><tr><td>View Contact</td><td>Read-only: name, SSN, email, phone</td></tr><tr><td>Request Reweigh</td><td>Submit reweigh request for the shipment</td></tr><tr><td>Approve/Deny SIT Extension</td><td>Approve: Days or Date + Reason + Remark; Deny: Denial Remarks → Submit</td></tr><tr><td>Enter Delivery</td><td>Access Shipment Delivery page</td></tr><tr><td>Update/Add Location</td><td>Submit updated or additional pickup/delivery address</td></tr></tbody></table></div></div><div class="cb warn"><h3>TSP Requests queue (§7.2)</h3><p>Shipment Requests and Corrections → TSP Requests. Actions: Approve/Deny SIT placement (select radio → enter fields → Submit), Reply to GBL/BL Copy requests, Reply to Certified Copy requests, Update/Add Location, view shipment details.</p></div>'},
+{t:"QA Inspections, Pending Suspensions & DD 1814 (§8.1–8.2)",h:'<div class="cb"><h3>Entering inspections (§8.1)</h3><p>QA Management → Origin Inspections (or Destination Inspections). Click Enter Inspection → select Inspection Date → enter Inspector Name (required) → check violation checkboxes → optionally enter Loss/Damage type and value → Next → Submit.</p></div><div class="hb">After Submit → TSP QA History page shows all violations in last 180 days → options: Print DD-1814 Warning, Return to Queue, or Suspend.</div><div class="cb warn"><h3>Pending Suspensions queue (§8.2)</h3><p><b>Upper table:</b> TSPs that refused a shipment award. Actions: Suspend TSP, Remove, View/Edit. Click <b>Suspend TSP</b> → select Program + Suspension End Date + enter Note → Next → Submit. DPS auto-selects Market-GBLOC scope.</p><p style="margin-top:5px"><b>Lower table:</b> TSPs with 3+ of the same violations in 180 days. Click <b>Suspense Warning</b> → TSP Suspense Warning page lists each violation count → click <b>Generate Suspension Warning</b> → DD 1814 LOW created → TSP has 20 days to respond.</p></div>'},
+{t:"Suspension, Non-Use, Rescind, QA Forms (§8.3–8.9)",h:'<div class="two-col"><div class="cb warn" style="margin:0"><h3>Suspension (§8.4)</h3><p>TSP does not receive awards during the period. <b>Auto-reinstated</b> at end date. Set Begin/End dates + Note. Scope: Channel-COS, GBLOC, or Market.</p></div><div class="cb danger" style="margin:0"><h3>Non-Use (§8.5)</h3><p>No awards during period. <b>Must be manually reinstated</b> by SDDC DPS Master. JPPSO/PPSO can view but cannot reinstate Non-Use.</p></div></div><div class="cb"><h3>Rescind Warnings/Suspensions (§8.7)</h3><p>QA Management → Rescind Warnings/Suspensions → enter GBLOC + TSP SCAC + Search Type (Warning or Suspension) → Search → click View and Rescind → enter Rescindment Reason → Submit. DPS removes the warning or suspension record.</p></div><div class="cb ok"><h3>QA Forms Print (§8.8) & QA Search (§8.9)</h3><ul class="cl"><li>QA Forms Print: print DD 1780 (inspection) or DD 1814 (warning/suspension) — search by BL#, Name, SSN, SCAC, or date range</li><li>QA Actions (§8.6): SDDC options include Place TSP in Suspension or Non-Use — select TSP SCAC, choose scope (Channel-COS, GBLOC, Market), Next, set dates and Note, Submit</li><li>QA Search (§8.9): find inspection forms by GBL/Customer Name or date range</li></ul></div>'},
+{t:"Administration, Search, Reports & SDDC SMO (§9–11)",h:'<div class="three-col"><div class="cb" style="margin:0"><h3>Auto Route/Book (§9.1)</h3><p>Administration → Auto Route Book. Click true/false link per GBLOC to Turn On or Turn Off automated routing. When ON, DPS auto-routes new shipments to next BVS-ranked TSP.</p></div><div class="cb warn" style="margin:0"><h3>Re-Offer (§9.2)</h3><p>When ON, DPS auto-awards refused shipments to next TSP. Stops at short-fuse eligibility, 50 refusals, or 72 hours.</p></div><div class="cb danger" style="margin:0"><h3>Data Corrections (§9.3)</h3><p>Search shipment → perform data correction → select action → enter reason → Save and Continue. Audit trail prefixed "ADM_DTFX." <b>No undo available.</b></p></div></div><div class="cb"><h3>Search &amp; Reports (§10)</h3><ul class="cl"><li><b>Find Shipments (§10.1):</b> search by any combination of fields; wildcards automatic; sort by column headers</li><li><b>SIT Report (§10.2):</b> all delivered shipments with SIT records; View SIT Location = read-only details</li><li><b>Volume Move TDL Report (§10.2):</b> search by performance period/rate cycle → click VM-##-#### for TDL</li><li><b>Print Forms (§10.3):</b> SF1203 (BL/GBL), SF1200 (correction), DD1384 (TCMD), DD1671 (reweigh), DD1412 (inventory), DD2278 (PPM); first print = original; subsequent = copy request to JPPSO/PPSO</li><li><b>View Uploaded Documents (§10.4):</b> search by name/SSN → select Travel Order → Get File or View History</li></ul></div><div class="cb ok"><h3>SDDC SMO (§11)</h3><p>SDDC RSMO users access Warehouse Management (create/edit/delete warehouses; filter by Responsible Office, Name, City, State) and Warehouse Inspections (fill DD 1812 form: date, status, score A–E → Submit → Generate Form for printable PDF).</p></div>'},
+{t:"Module 9 Complete — All Modules Done!",h:'<div class="cb ok"><h3>All 9 modules complete! Full guide coverage achieved.</h3></div><div class="cb"><h3>Complete guide coverage by module</h3><ul class="cl"><li>Module 1 (§3): Navigation, View/Edit Shipment, Edit/Add Locations, Edit Planned Dates / Override</li><li>Module 2 (§4.1–4.5): Route Shipments, Award, Short-Fuse, Re-Offer, Premove Surveys, Preapprovals</li><li>Module 3 (§4.6–4.7): Outbound Shipments queue, Enter Pickup, Container Info, SIT@Origin</li><li>Module 4 (§6): SIT Management — Outbound SIT, Inbound SIT, Move Warehouse, SIT Expirations</li><li>Module 5 (§5.2): PPM Closeouts — Incentive-Based, ACR, Accessorials, Check Mailing Address</li><li>Module 6 (§7.3–7.4): Reweighs — Request Reweigh, Enter Shipment Reweigh, Monitor Reweighs</li><li>Module 7 (§7.5–7.7): Diversion, Pullback, Cancellation and Termination</li><li>Module 8 (§5.1–5.5): Inbound Shipments, Deliver Split, Place Split Into SIT, Excess Cost, View Uploaded Documents</li><li>Module 9 (§7.1–7.2, §8–11): Customer/TSP Requests, QA Inspections, DD 1814, Suspension/Non-Use, Admin, Search/Reports, SDDC SMO</li></ul></div>'}
+]
+
+]; // end LESSONS
+
+/* ================================================================
+   VIDEOS  (9 lessons)
+   ================================================================ */
+var VIDEOS=[
+["DPS Navigation & Shipment Basics","This lesson covers the fundamentals of accessing DPS and working with shipment records. Start at www.move.mil and log in. Select the Shipment Management tab at the top of the DPS Home Page. DPS presents a role-specific queue pop-up. SDDC users must first select a PPSO GBLOC from the dropdown before accessing any functions. Use the left navigation bar or the Functional Area table links on the right to navigate. To view or edit a shipment, find it in any queue and click the View/Edit Shipment link. The View/Edit Shipment Information page shows all primary details. Click an Edit button for the section you want to modify. Gray or shaded fields are read-only. To edit a shipment location, click Edit Location. Enter the new address, select a city via the Zip/City Lookup, and click Save. To override Planned Dates outside the seven-day spread, click Edit under Shipment Dates, check the Override checkbox, select an Override Reason from the dropdown, make your date changes, and Save."],
+["Routing and Awarding Shipments","Navigate to Outbound Management then Route Shipments. For a standard shipment, click Route. The Route A Shipment page shows available Codes of Service with estimated costs, transit days, and RDDs. Select a COS radio button and click Submit. DPS routes the shipment into the Award queue with status TSP Selection. Click Award Shipment immediately or go to the Award Shipments queue. Select Award Shipment to TSP for the BVS-ranked carrier, or select an alternate and click Award to Alternate TSP. If the TSP does not respond within one business day, status becomes Offer Timeout. If pickup falls within the short-fuse window, click Offer Short Fuse. DPS emails all qualified TSPs and awards to the first respondent. For Volume Move shipments, select the VM option on the Route A Shipment page, click Continue, then Submit in the Add Shipment pop-up."],
+["Outbound Shipments and Pickup Entry","Navigate to Outbound Management then Outbound Shipments. Find your shipment and click Enter Pickup. On the Shipment Pickup page, enter the Actual Pickup Date, Actual Gross Weight, and Actual Net Weight. Enter the number of containers and total containers cube. If a non-zero container count is entered, DPS will prompt you for the Shipment Container Information page — enter a Container Seal Number for each container and click Save Container Info. Port fields appear only for applicable shipment types. Click Next, then Submit on the confirmation page to update the record. To place an outbound shipment into SIT, click Place Into SIT in the Origin SIT column. Enter the SIT Entry Date, Days Authorized, and Weight in SIT. Select a warehouse using the SIT Warehouse Selection popup. Review and Submit."],
+["SIT Management — Outbound and Destination","Navigate to SIT Management in the left navigation. The Outbound SIT queue lists all shipments in SIT at origin. Click Manage SIT for any shipment to access the Manage Shipment SIT page. Select Extend SIT, enter extension days or a new end date, choose an Extension Reason, enter a required Remark, and Submit. For Convert to Customer Expense, the Conversion Date is automatically populated from Counseling authorized days. Enter a Remark and Submit — DPS will send an email to the DoD customer. For Release SIT, select a Release Date — the Release Weight is auto-populated — and Submit. For destination SIT, navigate to SIT at Destination. An additional option is available here: Move to New SIT Warehouse. Enter a new SIT Entry Date, select the new warehouse, indicate whether the Contract Representative was contacted, and Submit. Check the SIT Expirations queue regularly for shipments within 30 days of their destination expiration date."],
+["PPM Closeout — Incentive-Based and ACR","Navigate to Inbound Management then PPM Closeouts. For Incentive-Based, click PPM Closeout for the shipment. Enter the Actual Pickup Date, then Actual Gross Weight — that is truck plus household goods — and Actual Tare Weight — empty truck only. Enter Pro Gear and Spouse Pro Gear weights if applicable. Enter the Advance Operating Allowance already paid. Click Submit. DPS shows the reimbursement summary. Click Closeout PPM Shipment. The Print DD Form 2278 link appears — open and print the PDF. For ACR PPMs where the customer owes a balance, the Closeout button is unavailable until the Remaining Balance is zero. Record each customer payment using Enter Payment/Voucher Info with date, voucher number, and amount. For ACR accessorials, go to Enter/Update Accessorials, filter by category, click Approve or Deny, enter the required Remark, and Save."],
+["Reweigh Request and Entry — Complete Workflow","Navigate to Shipment Requests and Corrections then select Request Reweigh from the left navigation bar to access the Shipment Reweighs queue. Search by BL Number, Orders Number, Customer Last Name, or Social Security Number. For a shipment that needs a reweigh requested, click the Request Reweigh link in Column C. DPS presents the Reweigh Request page. Click Request Reweigh to submit the request to DPS and the TSP. The shipment will move to the Monitor Reweighs queue. Once the physical reweigh has been performed, return to the Shipment Reweighs queue and click Enter Reweigh in Column D, or access it via the Monitor Reweighs queue. On the Enter Shipment Reweigh page, enter the Reweigh Date — required. Enter the Reweigh Ticket Number from the scale certificate — required. Enter the Reweigh Gross Weight, which is the shipment and the truck together — required. Enter the Reweigh Net Weight, which is gross minus tare — required. Enter the Reweigh Tare Weight, which is the weight of the empty truck — required. Optionally select from the Reweigh Witnessed dropdown and enter a Reweigh Note. Click Submit Reweigh. DPS refreshes and presents a confirmation. Click Save and Continue to complete the update process."],
+["Diversions, Pullbacks, and Cancellations","To divert a shipment, go to Shipment Requests and Corrections then Diversion. Search and click Divert Shipment for the target shipment. On the Shipment Diversion page, enter the new destination address line, select CONUS or OCONUS, and enter the city — DPS auto-populates state and zip. Click Submit New Destination Location. Enter the current location of the shipment on the Diversion Point page. Click Submit Diversion Point Location. Enter updated orders if they changed and click Proceed. Review the summary and click Save and Continue. For international shipments, DPS terminates the existing shipment and creates a new one at the diversion point. For pullbacks, go to Pullback, search for the shipment, and click Pullback Shipment. Select Reaward, Cancel, or for OTO shipments Submit Request to SDDC. Enter a pullback reason, indicate tonnage return, and Save and Continue. For cancellations, search under Cancellation/Termination. Shipments not yet picked up use Cancel Shipment. Shipments already in SIT use Terminate Shipment with options to Divert, Reconsign, or Terminate Only."],
+["Inbound Management — Arrival, Splits, and Delivery","Navigate to Inbound Management then Inbound Shipments. For a whole shipment arrival, click Enter Arrival then Whole Shipment Arrival. Select the TSP First Available Delivery Date, enter Gross and Net Weights, and Submit. For a split shipment, click Split Shipment Arrival instead. Enter the First Available Delivery Date, Net Weight, and Cube for the arriving split. To deliver, click Enter Delivery. For a completed delivery, select Enter Actual Delivery Date, enter the delivery date and delivered weight, check the delivery location, and Submit. For a partial delivery with SIT placement, select Deliver Partial and SIT Placement — enter the delivered portion details and the SIT portion including entry date, weight, and warehouse in the same action. For split deliveries, click the Splits column link to access View/Edit Splits and deliver each split individually. To view uploaded shipment documents, go to Search/Reports then View Uploaded Documents. Enter the customer name or last four digits of SSN, search, select a Travel Order, and use Get File to open documents."],
+["QA, Administration, and Reports","For inspections, go to QA Management then Origin or Destination Inspections. Click Enter Inspection, select a date, enter the Inspector Name, check applicable violation boxes, and optionally enter loss or damage details. Click Next then Submit. If violations meet the threshold, generate a DD 1814 Letter of Warning from the Pending Suspensions queue lower table. Click Generate Suspension Warning — the TSP has 20 days to respond. To suspend a TSP for refusing a shipment, click Suspend TSP in the upper Pending Suspensions table, select the program, set the end date, enter a note, and Submit. Suspension auto-reinstates at the end date. Non-Use requires manual reinstatement by an SDDC DPS Master. For data corrections, go to Administration, search for the shipment, click perform data correction, select the corrective action, enter a reason, and Save and Continue. Remember there is no undo. For search and reports, use Find Shipments to search with automatic wildcards. The SIT Report and Volume Move TDL Report are available under Reports. Use Print Forms to retrieve BL/GBL forms, correction notices, reweigh forms, inventory forms, and PPM applications."]
+];
+
+/* ================================================================
+   SCENARIOS  (10)
+   ================================================================ */
+var SCENARIOS=[
+  {badge:"SCENARIO 1",title:"Override Planned Dates — Spread",
+   body:'<div class="cb" style="margin-bottom:8px"><p>A PPSO technician needs to change a shipment\'s Planned Pack Date to a date outside the Seven Day Spread. The shipment is currently in "Presurvey Done" status.</p></div>',
+   q:"What must the technician do to make the Planned Pack Date field editable?",
+   opts:["A. Click Edit under Shipment Dates — date fields are always editable","B. Check the 'Override Planned Pack/Pickup Dates outside Spread Dates' checkbox, then select an Override Reason from the dropdown","C. Submit a change request to SDDC for approval before editing dates","D. Cancel and re-book the shipment with correct dates"],
+   correct:1,fb:"Correct! To override planned dates outside the Seven Day Spread, click Edit under Shipment Dates, check the Override Planned Pack/Pickup Dates checkbox, then select an Override Reason (Customer Requested/Government Convenience, TSP Convenience, or NTS TSP Release Non-Availability). Only after selecting the reason do the date fields become editable. Click Save to finalize."},
+  {badge:"SCENARIO 2",title:"Routing a Standard Shipment",
+   body:'<div class="cb" style="margin-bottom:8px"><p>A technician opens the Route Shipments queue and clicks Route for a domestic HHG shipment. The Route A Shipment page shows two Codes of Service with estimated costs and RDDs.</p></div>',
+   q:"What must the technician do to complete routing?",
+   opts:["A. Select a TSP from the dropdown, then click Award","B. Select a Code of Service radio button, then click Submit","C. Print the BL/GBL first, then choose a COS","D. Enter pickup dates before selecting a COS"],
+   correct:1,fb:"Correct! On the Route A Shipment page, select a COS radio button then click Submit. DPS routes the shipment into the Award queue as 'TSP Selection.' Awarding is a separate subsequent step. The Award link appears immediately after routing, or is accessible from the Award Shipments queue."},
+  {badge:"SCENARIO 3",title:"Enter Reweigh — Required Fields",
+   body:'<div class="cb warn" style="margin-bottom:8px"><p>A reweigh was requested for SGT Martinez\'s shipment. The TSP performed the physical reweigh. Scale showed Gross 14,100 lbs, Tare 6,800 lbs. Ticket number: RW-2024-00492.</p></div>',
+   q:"Which fields are REQUIRED when entering the reweigh in DPS?",
+   opts:["A. Reweigh Date and Net Weight only","B. Reweigh Date, Ticket Number, Gross Weight, Net Weight, and Tare Weight","C. Reweigh Date, Ticket Number, and Witnessed status only","D. Net Weight and Witnessed status only"],
+   correct:1,fb:"Correct! Per §7.3, the Enter Shipment Reweigh page requires: Reweigh Date, Reweigh Ticket Number, Reweigh Gross Weight (shipment and truck), Reweigh Net Weight (gross minus tare), and Reweigh Tare Weight (empty truck). Reweigh Witnessed and Reweigh Note are optional. After Submit Reweigh, click Save and Continue to complete."},
+  {badge:"SCENARIO 4",title:"Monitor Reweighs",
+   body:'<div class="cb" style="margin-bottom:8px"><p>A reweigh request was submitted yesterday. The technician wants to track its status and enter results when available.</p></div>',
+   q:"Where does the technician navigate to monitor all outstanding reweigh requests?",
+   opts:["A. QA Management → QA Search","B. Shipment Requests and Corrections → Monitor Reweighs (left navigation bar)","C. Outbound Management → Outbound Shipments","D. Search/Reports → Find Shipments"],
+   correct:1,fb:"Correct! Per §7.4, the Monitor Reweighs queue is accessed via the Monitor Reweighs link in the left navigation bar. All shipments with an outstanding reweigh request are listed. The Enter Reweigh link (Item B) is available directly from this queue to record results once the physical reweigh is done."},
+  {badge:"SCENARIO 5",title:"PPM Closeout — Customer Owes Balance",
+   body:'<div class="cb danger" style="margin-bottom:8px"><p>An ACR PPM is at closeout. DPS shows the advance payment exceeded the authorized reimbursement by $800. The Remaining Balance is $800 owed by the customer.</p></div>',
+   q:"What must happen before Closeout PPM Shipment becomes available?",
+   opts:["A. The technician can override and close immediately with a note","B. A SDDC DPS Master must approve the closeout","C. The customer must pay; the technician enters each payment via Enter Payment/Voucher Info until Remaining Balance = $0.00","D. The shipment auto-closes 30 days after the advance date"],
+   correct:2,fb:"Correct! Per §5.2, DPS prevents PPM closeout when the customer owes a balance. The technician records each customer payment using Enter Payment/Voucher Info (date, voucher number, amount). Only when Remaining Balance = $0.00 does the Closeout PPM Shipment button become available."},
+  {badge:"SCENARIO 6",title:"OTO Shipment Pullback",
+   body:'<div class="cb danger" style="margin-bottom:8px"><p>A PPSO needs to pull back and cancel a One-Time-Only boat shipment (BOTO) awarded to a TSP that has not yet been picked up.</p></div>',
+   q:"What pullback option must the PPSO select?",
+   opts:["A. Cancel — PPSO can cancel OTO shipments directly","B. Reaward — reassign to a different TSP","C. Submit Request to SDDC — OTO pullbacks require SDDC to complete the action","D. Terminate and Reconsign — for all specialty shipments"],
+   correct:2,fb:"Correct! Per §7.6 (p.109): 'A PPSO must submit a request to SDDC to pullback and cancel a One-Time-Only shipment.' The Submit Request to SDDC option appears specifically for OTO shipments. The PPSO enters a Pullback Reason and clicks Send Request; a SDDC user then completes the pullback."},
+  {badge:"SCENARIO 7",title:"Edit Location — Approval Rules",
+   body:'<div class="cb" style="margin-bottom:8px"><p>A non-JPPSO PPSO technician submits an Edit Location request for a shipment\'s Authorized Delivery Address. The shipment has not yet been picked up.</p></div>',
+   q:"What happens after the technician clicks Save on the Edit Location page?",
+   opts:["A. The address is immediately updated in DPS","B. A request is sent to the responsible JPPSO to approve the edited address","C. The change is automatically sent to the TSP for confirmation","D. An SDDC DPS Master must approve all location edits"],
+   correct:1,fb:"Correct! Per §3.4: if the user is not a JPPSO, a request is sent to the responsible JPPSO to approve the edited pickup/delivery location. If the user IS a JPPSO, the address is automatically updated with no approval required. The submitted address shows as 'Requested' status in the Location Information panel until approved."},
+  {badge:"SCENARIO 8",title:"Split Shipment — Placing Into SIT",
+   body:'<div class="cb" style="margin-bottom:8px"><p>A split inbound shipment has arrived but the customer cannot take delivery of one of the splits at this time. The PPSO needs to record that split\'s entry into SIT at the destination.</p></div>',
+   q:"Which function should the technician use for just the split portion going into SIT?",
+   opts:["A. Enter Delivery → Deliver Partial and SIT Placement (whole shipment)","B. Inbound Shipments → Place Split Into SIT (§5.1.5) — tracks SIT at the split level","C. SIT Management → Place Into SIT from the Outbound SIT queue","D. Customer Requests → TSP Requests → Place Into SIT – Approve"],
+   correct:1,fb:"Correct! Per §5.1.5, Place Split Into SIT is used when an individual split portion needs to enter SIT at destination. It tracks SIT placement at the split level — separate from whole-shipment SIT actions. Enter the SIT Entry Date, Weight In SIT for just that split portion, and select a warehouse facility."},
+  {badge:"SCENARIO 9",title:"Data Corrections — No Undo",
+   body:'<div class="cb warn" style="margin-bottom:8px"><p>A technician accidentally performed a Data Correction that reversed the shipment to the wrong prior status.</p></div>',
+   q:"What should the technician do to correct the mistake?",
+   opts:["A. Immediately click Undo in the Data Corrections page","B. Contact SDDC DPS Master to reverse the correction","C. Advance the shipment normally through the standard workflow to reach the intended status","D. Cancel and re-book the shipment to reset it"],
+   correct:2,fb:"Correct! Per §9.3: 'There is no undo option for data corrections. If a data correction was performed in error, simply advance the shipment through the normal shipment process.' The audit trail records the correction prefixed with 'ADM_DTFX' but the only remedy is advancing through normal workflow."},
+  {badge:"SCENARIO 10",title:"TSP Suspension vs. Non-Use",
+   body:'<div class="cb" style="margin-bottom:8px"><p>An SDDC DPS Master needs to prevent TSP MVCO from receiving awards for 60 days, after which awards should resume automatically with no manual action.</p></div>',
+   q:"Which action should the SDDC DPS Master apply?",
+   opts:["A. Non-Use — automatically reinstated at end date","B. Suspension — automatically reinstated at end date","C. Non-Use — requires manual reinstatement by SDDC DPS Master","D. Suspension — requires manual reinstatement by SDDC DPS Master"],
+   correct:1,fb:"Correct! Per §8.4–8.5: Suspension is automatically reinstated when the Suspension End Date passes — no manual action required. Non-Use must be manually reinstated by a SDDC DPS Master. Since automatic reinstatement after 60 days is required here, Suspension is the correct choice."}
+];
+
+/* ================================================================
+   GLOSSARY  (22 terms)
+   ================================================================ */
+var GLOSSARY=[
+  {term:"BL / GBL",tag:"Bill of Lading",def:"Government bill of lading authorizing and documenting the shipment. Must be printed before pickup. Changes after printing auto-generate a GBL Correction Notice (SF1200)."},
+  {term:"COS",tag:"Code of Service",def:"Defines mode and scope of HHG movement (Code D = domestic van, Code 2 = container, Code 3 = international door-to-door, COS HA/BA = DPM/TOPS). Selected during routing."},
+  {term:"GBLOC",tag:"Gov't Bill of Lading Office Code",def:"Identifies the PPSO office managing a shipment. JPPSO/PPSO users can only act on shipments associated with their own GBLOC (exceptions noted in the guide)."},
+  {term:"SIT",tag:"Storage-in-Transit",def:"Government-authorized temporary storage of HHG at or near origin (SIT@Origin) or destination (SIT@Destination)."},
+  {term:"TSP",tag:"Transportation Service Provider",def:"The carrier awarded the shipment. Must accept or refuse within 1 business day. Refusals trigger pending suspensions."},
+  {term:"PPM / DITY",tag:"Personally Procured Move",def:"Move where the DoD customer self-transports and is reimbursed. Two types: Incentive-Based and Actual Cost Reimbursement (ACR)."},
+  {term:"ACR PPM",tag:"Actual Cost Reimbursement",def:"PPM reimbursed on actual costs. Subtypes: (1) NTE Government Constructive Cost, (2) No Government Transportation Available."},
+  {term:"OTO",tag:"One-Time-Only",def:"Specialty shipments: BOTO (boat), MOTO (mobile home), iOTO (international). PPSO cannot pull back OTO directly — must Submit Request to SDDC."},
+  {term:"SCAC",tag:"Standard Carrier Alpha Code",def:"Unique 2–4 letter code identifying a TSP carrier. Used in QA searches, suspension entries, and warning lookups."},
+  {term:"BVS",tag:"Best Value Scoring",def:"DPS algorithm for ranking TSPs for shipment awards. Award goes to next BVS-ranked carrier unless alternate is selected."},
+  {term:"DD 1814",tag:"Suspension Warning Form",def:"Letter of Warning (LOW) issued when a TSP has 3+ of the same violations within 180 days. TSP has 20 days to respond."},
+  {term:"DD 1780",tag:"Inspection Form",def:"Origin or destination inspection report documenting QA findings. Printable via QA Forms Print."},
+  {term:"DD 2278",tag:"PPM Closeout Form",def:"Generated and printed at completion of an Incentive-Based PPM closeout. Documents reimbursement authorization."},
+  {term:"DD 1812",tag:"Warehouse Inspection Form",def:"Used by SDDC RSMO for warehouse quality inspections. Scored A–E. Printable from Warehouse Inspections via Generate Form."},
+  {term:"RDD",tag:"Required Delivery Date",def:"Latest date by which a shipment must be delivered. Displayed per COS on the Route A Shipment page."},
+  {term:"DPM / TOPS",tag:"Direct Procurement Method",def:"Shipments with COS HA or BA are transferred to TOPS (Transportation Operational Personal Property Standard System). Must verify receipt in TOPS before clicking TOPS Confirm in DPS."},
+  {term:"Seven Day Spread",tag:"Scheduling window",def:"The standard window within which planned pack/pickup dates must fall. Dates outside this window require the Override Planned Dates checkbox and an Override Reason."},
+  {term:"Override Reason",tag:"Planned dates field",def:"Required when overriding planned dates outside the Seven Day Spread. Options: Customer Requested/Government Convenience, TSP Convenience, NTS TSP Release Non-Availability."},
+  {term:"Reweigh Ticket Number",tag:"Reweigh field",def:"Scale/facility certificate number identifying the specific reweigh event. Required when entering reweigh results in DPS."},
+  {term:"Reweigh Gross / Tare / Net",tag:"Weight fields",def:"Gross = truck plus shipment. Tare = empty truck. Net = Gross minus Tare. All three are required when entering reweigh data."},
+  {term:"ADM_DTFX",tag:"Audit trail prefix",def:"Prefix applied to Data Correction entries in the shipment status audit trail. Indicates an administrative reversal. No undo is available."},
+  {term:"Split Shipment",tag:"Delivery type",def:"A shipment delivered in multiple portions. Each split can be arrived, delivered, or placed into SIT individually via View/Edit Splits and the §5.1.4–5.1.5 functions."}
+];
+
+/* ================================================================
+   STATE
+   ================================================================ */
+var moduleProgress=new Array(9).fill(0);
+var moduleStep=new Array(9).fill(0);
+
+/* ================================================================
+   BUILD ALL
+   ================================================================ */
+function buildAll(){
+  var og=document.getElementById('overview-grid');
+  var mg=document.getElementById('modules-grid');
+  MOD_META.forEach(function(m,i){
+    og.innerHTML+=modCardHTML(m,i,'ov');
+    mg.innerHTML+=modCardHTML(m,i,'ml');
+  });
+  var lp=document.getElementById('lesson-panels');
+  for(var i=0;i<9;i++){
+    var d=document.createElement('div');
+    d.id='lesson-'+i;d.className='lesson-panel';
+    d.innerHTML='<div class="card"><div class="card-header"><h2>'+MOD_META[i].title+'</h2><button class="btn btn-o" onclick="closeLesson()" style="font-size:10px;padding:4px 9px">← Back</button></div><div class="card-body"><div class="step-indicator" id="steps-'+i+'"></div><div id="lc'+i+'"></div><div class="nav-btns"><button class="btn btn-o" id="lp'+i+'" onclick="prevStep('+i+')" disabled>← Previous</button><button class="btn btn-p" id="ln'+i+'" onclick="nextStep('+i+')">Next →</button></div></div></div>';
+    lp.appendChild(d);
+  }
+  buildScenarios();buildVideos();buildGlossary();
+}
+
+function modCardHTML(m,i,pfx){
+  var locked=i>0&&!moduleProgress[i-1];
+  var pc=moduleProgress[i]?'pill-done':locked?'pill-lock':'pill-active';
+  var pt=moduleProgress[i]?'✓ Complete':locked?'🔒 Locked':'● '+(i===0?'Start':'Available');
+  return '<div class="module-card'+(locked?' locked':'')+(moduleProgress[i]?' completed':'')+'" id="'+pfx+i+'" onclick="handleModClick('+i+')"><div class="mod-icon" style="background:'+m.bg+'">'+m.icon+'</div><div class="mod-title">'+m.title+'</div><div class="mod-desc">'+m.desc+'</div><div class="status-pill '+pc+'" id="'+pfx+i+'-pill">'+pt+'</div></div>';
+}
+
+function updateAllCards(){
+  for(var i=0;i<9;i++){
+    ['ov','ml'].forEach(function(pfx){
+      var el=document.getElementById(pfx+i);if(!el)return;
+      var locked=i>0&&!moduleProgress[i-1];
+      el.className='module-card'+(locked?' locked':'')+(moduleProgress[i]?' completed':'');
+      var pill=document.getElementById(pfx+i+'-pill');
+      if(pill){
+        var pc=moduleProgress[i]?'pill-done':locked?'pill-lock':'pill-active';
+        var pt=moduleProgress[i]?'✓ Complete':locked?'🔒 Locked':'● Available';
+        pill.className='status-pill '+pc;pill.textContent=pt;
+      }
+    });
+  }
+}
+
+/* ================================================================
+   LESSONS
+   ================================================================ */
+function handleModClick(i){if(i>0&&!moduleProgress[i-1])return;showTab('modules');openLesson(i);}
+function openLesson(i){
+  document.getElementById('module-list').style.display='none';
+  for(var j=0;j<9;j++)document.getElementById('lesson-'+j).classList.remove('show');
+  document.getElementById('lesson-'+i).classList.add('show');
+  moduleStep[i]=0;renderLesson(i);
+}
+function closeLesson(){
+  for(var j=0;j<9;j++)document.getElementById('lesson-'+j).classList.remove('show');
+  document.getElementById('module-list').style.display='block';
+}
+function renderLesson(i){
+  var steps=LESSONS[i];var cur=moduleStep[i];
+  var se=document.getElementById('steps-'+i);se.innerHTML='';
+  steps.forEach(function(s,k){
+    var w=document.createElement('div');w.className='step';
+    var d=document.createElement('div');
+    d.className='step-dot'+(k<cur?' done':k===cur?' current':'');
+    d.textContent=k+1;w.appendChild(d);
+    if(k<steps.length-1){var l=document.createElement('div');l.className='step-line'+(k<cur?' done':'');w.appendChild(l);}
+    se.appendChild(w);
+  });
+  document.getElementById('lc'+i).innerHTML=steps[cur].h;
+  document.getElementById('lp'+i).disabled=cur===0;
+  document.getElementById('ln'+i).textContent=cur===steps.length-1?'Complete ✓':'Next →';
+}
+function nextStep(i){if(moduleStep[i]<LESSONS[i].length-1){moduleStep[i]++;renderLesson(i);}else completeModule(i);}
+function prevStep(i){if(moduleStep[i]>0){moduleStep[i]--;renderLesson(i);}}
+function completeModule(i){
+  moduleProgress[i]=1;
+  var done=moduleProgress.filter(function(x){return x}).length;
+  var pct=Math.round(done/9*100);
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('prog-pct').textContent=pct+'% complete';
+  document.getElementById('prog-text').textContent=done+' / 9 modules complete';
+  updateAllCards();closeLesson();
+  alert('Module '+(i+1)+' complete! Overall progress: '+pct+'%');
+}
+
+/* ================================================================
+   TABS
+   ================================================================ */
+function showTab(t){
+  ['overview','modules','scenarios','videos','glossary'].forEach(function(id){var el=document.getElementById('tab-'+id);if(el)el.style.display='none';});
+  document.querySelectorAll('.tab').forEach(function(tab){tab.classList.remove('active')});
+  var order=['overview','modules','scenarios','videos','glossary'];
+  var idx=order.indexOf(t);if(idx>=0)document.querySelectorAll('.tab')[idx].classList.add('active');
+  var p=document.getElementById('tab-'+t);if(p)p.style.display='block';
+}
+
+/* ================================================================
+   SCENARIOS
+   ================================================================ */
+var scCorrect=0,scTotal=0,answeredSc={};
+function buildScenarios(){
+  var c=document.getElementById('scenario-container');
+  SCENARIOS.forEach(function(s,i){
+    var opts=s.opts.map(function(o,j){return '<button class="ob" id="s'+i+'o'+j+'" onclick="answer('+i+','+j+')">'+o+'</button>';}).join('');
+    c.innerHTML+='<div class="sc-card"><div class="sc-hdr"><span class="sc-badge">'+s.badge+'</span><span style="font-size:11px;font-weight:600">'+s.title+'</span></div><div class="sc-body">'+s.body+'<div class="sc-q">'+s.q+'</div>'+opts+'<div class="fb" id="fb'+i+'">'+s.fb+'</div></div></div>';
+  });
+}
+function answer(si,oi){
+  if(answeredSc[si])return;answeredSc[si]=true;scTotal++;
+  var ok=(oi===SCENARIOS[si].correct);if(ok)scCorrect++;
+  document.getElementById('sc-score-label').textContent='Score: '+scCorrect+' / '+scTotal;
+  SCENARIOS[si].opts.forEach(function(o,j){var b=document.getElementById('s'+si+'o'+j);if(b){b.disabled=true;if(j===oi)b.className='ob '+(ok?'correct':'wrong');}});
+  var fb=document.getElementById('fb'+si);if(fb)fb.className='fb show '+(ok?'ok':'no');
+  if(scTotal===SCENARIOS.length){setTimeout(function(){var r=document.getElementById('sc-result');if(r){r.style.display='block';document.getElementById('sc-num').textContent=scCorrect+'/'+SCENARIOS.length;}},500);}
+}
+function resetScenarios(){
+  scCorrect=0;scTotal=0;answeredSc={};
+  document.getElementById('sc-score-label').textContent='Score: 0 / 0';
+  document.getElementById('sc-result').style.display='none';
+  SCENARIOS.forEach(function(s,i){
+    s.opts.forEach(function(o,j){var b=document.getElementById('s'+i+'o'+j);if(b){b.className='ob';b.disabled=false;}});
+    var fb=document.getElementById('fb'+i);if(fb)fb.className='fb';
+  });
+}
+
+/* ================================================================
+   VIDEOS
+   ================================================================ */
+function buildVideos(){
+  var g=document.getElementById('video-grid');
+  VIDEOS.forEach(function(v,i){
+    g.innerHTML+='<div class="vc"><div class="vt-thumb" id="vt'+i+'" onclick="playVideo('+i+')"><div class="pb2"><svg width="14" height="14" viewBox="0 0 16 16"><polygon points="4,2 14,8 4,14" fill="#fff"/></svg></div><div style="color:#8fa8d0;font-size:9px;margin-top:3px">Module '+(i+1)+'</div></div><div class="vti" style="margin-bottom:3px">'+v[0]+'</div><div class="vsub">'+MOD_META[i].title.split('(')[0].trim().replace(/^Module \d+ — /,'')+'</div><div id="vp'+i+'" style="display:none"></div></div>';
+  });
+}
+function playVideo(i){
+  document.getElementById('vt'+i).style.display='none';
+  var p=document.getElementById('vp'+i);p.style.display='block';
+  p.innerHTML='<div class="vplay" style="margin-top:8px"><div class="ai-lbl" style="color:#5a78a8;font-size:9px;margin-bottom:3px">▶ NOW PLAYING — AI INSTRUCTOR</div><div class="vpr"><div class="vf"></div></div><div class="vtx">'+VIDEOS[i][1]+'</div></div><button class="db sec" style="width:100%;margin-top:6px;font-size:10px" onclick="stopVideo('+i+')">↩ Back</button>';
+}
+function stopVideo(i){document.getElementById('vt'+i).style.display='flex';var p=document.getElementById('vp'+i);p.style.display='none';p.innerHTML='';}
+
+/* ================================================================
+   GLOSSARY
+   ================================================================ */
+function buildGlossary(){
+  var b=document.getElementById('glossary-body');
+  GLOSSARY.forEach(function(g){b.innerHTML+='<div class="gl-item"><div class="gl-term">'+g.term+' <span class="tag">'+g.tag+'</span></div><div class="gl-def">'+g.def+'</div></div>';});
+}
+
+buildAll();
+</script>
+</body>
+</html>

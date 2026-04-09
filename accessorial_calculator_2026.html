@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accessorial Calculator 2026 — 400-NG &amp; IT-26</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:#f5f4f1;color:#1a1a19;padding:1.25rem}
+.wrap{max-width:900px;margin:0 auto}
+h1{font-size:20px;font-weight:500;color:#1a1a19;display:inline}
+.badge{display:inline-block;font-size:11px;color:#185FA5;background:#E6F1FB;padding:2px 8px;border-radius:5px;border:0.5px solid #B5D4F4;margin-left:8px;vertical-align:middle}
+.hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.1rem;flex-wrap:wrap;gap:8px}
+.hdr-right{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.btn{padding:6px 14px;font-size:12px;background:#fff;border:0.5px solid #b4b2a9;border-radius:6px;cursor:pointer;color:#1a1a19;font-family:inherit}
+.btn:hover{background:#eee}
+.btn-blue{background:#185FA5;color:#fff;border-color:#185FA5}
+.btn-blue:hover{background:#0C447C}
+.tabs{display:flex;gap:3px;flex-wrap:wrap;border-bottom:0.5px solid #d3d1c7;margin-bottom:0}
+.tab{padding:6px 10px;font-size:12px;cursor:pointer;border-radius:6px 6px 0 0;border:0.5px solid transparent;color:#5f5e5a;background:none;margin-bottom:-1px;font-family:inherit;white-space:nowrap}
+.tab.active{color:#1a1a19;font-weight:500;border:0.5px solid #d3d1c7;border-bottom:0.5px solid #f5f4f1;background:#f5f4f1}
+.tab:hover:not(.active){color:#1a1a19;background:#e8e6e0}
+.tab.sum{color:#185FA5;font-weight:500}
+.tab.sum.active{color:#0C447C}
+.panel{display:none;padding-top:.9rem}.panel.active{display:block}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin-bottom:.8rem}
+.grid3{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1fr);gap:10px;margin-bottom:.8rem}
+.card{background:#fff;border:0.5px solid #d3d1c7;border-radius:10px;padding:.9rem 1.1rem;margin-bottom:.9rem}
+.field{margin-bottom:10px}
+.field label{display:block;font-size:11px;color:#5f5e5a;margin-bottom:3px}
+.field input,.field select{width:100%;height:32px;padding:0 9px;font-size:12px;background:#fff;border:0.5px solid #b4b2a9;border-radius:5px;color:#1a1a19;font-family:inherit}
+.field input:focus,.field select:focus{outline:none;border-color:#378ADD}
+.field input[readonly]{background:#f5f4f1;color:#5f5e5a}
+.sec-title{font-size:12px;font-weight:500;color:#1a1a19;margin-bottom:8px;padding-bottom:5px;border-bottom:0.5px solid #e8e6e0}
+.info-box{background:#EEF5FC;border:0.5px solid #B5D4F4;border-radius:5px;padding:8px 12px;margin-bottom:10px;font-size:11px;color:#185FA5;line-height:1.5}
+.rrow{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:0.5px solid #f0eeea;font-size:12px}
+.rrow:last-child{border-bottom:none}
+.rrow .lbl{color:#5f5e5a}
+.rrow .val{font-weight:500;color:#1a1a19}
+.trow{display:flex;justify-content:space-between;align-items:center;padding:8px 0 4px;font-size:14px;font-weight:500;border-top:1px solid #b4b2a9;margin-top:3px}
+.trow .val{color:#185FA5}
+.note{font-size:10px;color:#888780;margin-top:5px;line-height:1.5}
+.divider{height:0.5px;background:#e8e6e0;margin:10px 0}
+.fra-table{width:100%;border-collapse:collapse;font-size:11px;margin-top:6px}
+.fra-table th{text-align:left;padding:5px 7px;background:#f5f4f1;color:#5f5e5a;font-weight:500;border-bottom:0.5px solid #d3d1c7}
+.fra-table td{padding:5px 7px;border-bottom:0.5px solid #eee;color:#1a1a19}
+.fra-table tr.hl td{background:#E6F1FB;color:#185FA5;font-weight:500}
+.srow{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:0.5px solid #f0eeea;font-size:13px}
+.srow.zero .s1{color:#c8c6be}.srow.zero .s2{color:#c8c6be}
+.grand{display:flex;justify-content:space-between;align-items:center;padding:10px 0 4px;font-size:16px;font-weight:500;border-top:2px solid #1a1a19;margin-top:4px}
+.grand .gv{color:#185FA5}
+.mg{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:1rem}
+.mc{background:#f5f4f1;border-radius:7px;padding:10px;text-align:center}
+.mc .mn{font-size:18px;font-weight:500;color:#185FA5;margin-top:3px}
+.mc .ml{font-size:10px;color:#888780}
+.qbox{background:#fff;border:0.5px solid #d3d1c7;border-radius:8px;padding:1rem;font-size:11px;line-height:1.7;white-space:pre-wrap;font-family:monospace;color:#1a1a19;max-height:340px;overflow-y:auto}
+.ea{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+@media print{
+  body{background:#fff;padding:0}
+  .tabs,.hdr-right,.ea,.btn{display:none!important}
+  .panel{display:block!important;page-break-inside:avoid}
+  .card{border:1px solid #ccc;break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="hdr">
+  <div><h1>Accessorial Calculator 2026</h1><span class="badge">400-NG &amp; IT-26</span></div>
+  <div class="hdr-right">
+    <input type="text" id="customer-name" placeholder="Customer / Order #" style="height:30px;font-size:12px;border:0.5px solid #b4b2a9;border-radius:5px;padding:0 9px;width:220px;font-family:inherit">
+    <button class="btn btn-blue" onclick="switchTab('SUMMARY',document.querySelector('.sum'));buildSummary()">View Summary</button>
+    <button class="btn btn-blue" onclick="window.print()">Print / PDF</button>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('SIT',this)">SIT</button>
+  <button class="tab" onclick="switchTab('PBO',this)">PBO / Unpack</button>
+  <button class="tab" onclick="switchTab('SHUTTLE',this)">Shuttle</button>
+  <button class="tab" onclick="switchTab('ELEVATOR',this)">Elevator / Stairs</button>
+  <button class="tab" onclick="switchTab('LONGCARRY',this)">Long Carry</button>
+  <button class="tab" onclick="switchTab('APPLIANCE',this)">Appliance</button>
+  <button class="tab" onclick="switchTab('CRATING',this)">Crating</button>
+  <button class="tab" onclick="switchTab('DEBRIS',this)">Debris Removal</button>
+  <button class="tab" onclick="switchTab('WAITING',this)">Waiting Time</button>
+  <button class="tab" onclick="switchTab('BULKY',this)">Bulky Items</button>
+  <button class="tab" onclick="switchTab('FULLUNPACK',this)">Full Unpack</button>
+  <button class="tab" onclick="switchTab('PIANO',this)">Piano / Organ</button>
+  <button class="tab" onclick="switchTab('THIRD',this)">Third-Party</button>
+  <button class="tab" onclick="switchTab('FUEL',this)">Fuel Surcharge</button>
+  <button class="tab sum" onclick="switchTab('SUMMARY',this);buildSummary()">Summary &amp; Export</button>
+</div>
+
+<!-- SIT -->
+<div id="panel-SIT" class="panel active">
+  <div class="info-box">SIT (Storage In Transit) — 400-NG Item 210. Minimum 1 month (30 days). Charged per cwt. Delivery from SIT billed at applicable linehaul rate per 100 miles.</div>
+  <div class="card">
+    <div class="sec-title">SIT parameters</div>
+    <div class="grid2">
+      <div class="field"><label>Net weight (lbs)</label><input type="number" id="sit-weight" value="5000" oninput="calcSIT()"></div>
+      <div class="field"><label>Type</label><select id="sit-loc" onchange="calcSIT()"><option>Origin SIT</option><option>Destination SIT</option></select></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>Days in SIT</label><input type="number" id="sit-days" value="30" oninput="calcSIT()"></div>
+      <div class="field"><label>SIT rate ($/cwt) — 2026</label><input type="number" id="sit-rate" value="8.42" step="0.01" oninput="calcSIT()"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>Delivery distance from SIT (mi)</label><input type="number" id="sit-miles" value="15" oninput="calcSIT()"></div>
+      <div class="field"><label>Linehaul rate ($/cwt)</label><input type="number" id="sit-lh-rate" value="45.50" step="0.01" oninput="calcSIT()"></div>
+    </div>
+  </div>
+  <div class="card"><div class="sec-title">Result</div><div id="sit-results"></div></div>
+</div>
+
+<!-- PBO -->
+<div id="panel-PBO" class="panel">
+  <div class="info-box">PBO / Unpacking — 400-NG Item 176 / IT-26. Per-carton charge by size. Wardrobe cartons billed separately. Minimum charge enforced.</div>
+  <div class="card">
+    <div class="sec-title">PBO parameters</div>
+    <div class="grid2">
+      <div class="field"><label>Service type</label><select id="pbo-type" onchange="calcPBO()"><option value="unpack">Unpacking only</option><option value="pack">Packing (PBO)</option><option value="both">Pack &amp; unpack</option></select></div>
+      <div class="field"><label>Small cartons (1.5 cu ft)</label><input type="number" id="pbo-small" value="10" oninput="calcPBO()"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>Large cartons (4.5 cu ft)</label><input type="number" id="pbo-large" value="10" oninput="calcPBO()"></div>
+      <div class="field"><label>Wardrobe cartons</label><input type="number" id="pbo-ward" value="0" oninput="calcPBO()"></div>
+    </div>
+    <div class="grid3">
+      <div class="field"><label>Small carton rate ($)</label><input type="number" id="pbo-rate-sm" value="7.10" step="0.01" oninput="calcPBO()"></div>
+      <div class="field"><label>Large carton rate ($)</label><input type="number" id="pbo-rate-lg" value="10.50" step="0.01" oninput="calcPBO()"></div>
+      <div class="field"><label>Wardrobe rate ($)</label><input type="number" id="pbo-rate-ward" value="14.25" step="0.01" oninput="calcPBO()"></div>
+    </div>
+    <div class="field"><label>Minimum charge ($)</label><input type="number" id="pbo-min" value="56.00" step="0.01" oninput="calcPBO()"></div>
+  </div>
+  <div class="card"><div class="sec-title">Result</div><div id="pbo-results"></div></div>
+</div>
+
+<!-- SHUTTLE -->
+<div id="panel-SHUTTLE" class="panel">
+  <div class="info-box">Shuttle — 400-NG Item 230. Required when the linehaul vehicle cannot access the pickup or delivery point. Minimum 1,000 lbs per shuttle.</div>
+  <div class="card">
+    <div class="sec-title">Shuttle parameters</div>
+    <div class="grid2">
+      <div class="field"><label>Net weight (lbs)</label><input type="number" id="sht-weight" value="5000" oninput="calcShuttle()"></div>
+      <div class="field"><label>Service points</label><select id="sht-service" onchange="calcShuttle()"><option value="origin">Origin only</option><option value="dest">Destination only</option><option value="both">Both origin &amp; destination</option></select></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>Rate ($/cwt) — 2026</label><input type="number" id="sht-rate" value="12.40" step="0.01" oninput="calcShuttle()"></div>
+      <div class="field"><label>Minimum per shuttle ($)</label><input type="number" id="sht-min" value="124.00" step="0.01" oninput="calcShuttle()"></div>
+    </div>
+  </div>
+  <div class="card"><div class="sec-title">Result</div><div id="sht-results"></div></div>
+</div>
+
+<!-- ELEVATOR -->
+<div id="panel-ELEVATOR" class="panel">
+  <div class="info-box">Elevator / Stair carry — 400-NG Item 190. Charge per floor above/below ground (elevator) or per flight (stairs). May apply at both origin and destination.</div>
+  <div class="card">
+    <div class="sec-title">Parameters</div>
+    <div class="grid2">
+      <div class="field"><label>Net weight (lbs)</label><input type="number" id="elev-weight" value="5000" oninput="calcElev()"></div>
+      <div class="field"><label>Service type</label><select id="elev-type" onchange="calcElev()"><option value="elev">Elevator</option><option value="stair">Stair carry</option></select></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>Floors / flights — origin</label><input type="number" id="elev-floors-o" value="2" oninput="calcElev()"></div>
+      <div class="field"><label>Floors / flights — destination</label><input type="number" id="elev-floors-d" value="0" oninput="calcElev()"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>Rate ($/cwt per floor) — 2026</label><input type="number" id="elev-rate" value="3.75" step="0.01" oninput="calcElev()"></div>
+      <div class="field"><label>Minimum charge ($)</label><input type="number" id="elev-min" value="37.50" step="0.01" oninput="calcElev()"></div>
+    </div>
+  </div>
+  <div class="card"><div class="sec-title">Result</div><div id="elev-results"></div></div>
+</div>
+
+<!-- LONG CARRY -->
+<div id="panel-LONGCARRY" class="panel">
+  <div class="info-box">Long carry — 400-NG Item 185. First 75 ft free. Charge per each 50-ft increment (or fraction) beyond the free distance. May apply at origin and destination.</div>
+  <div class="card">
+    <div class="sec-title">Long carry parameters</div>
+    <div class="grid2">
+      <div class="field"><label>Net weight (lbs)</label><input type="number" id="lc-weight" value="5000" oninput="calcLC()"></div>
+      <div class="field"><label>Free distance (ft)</label><input type="number" id="lc-free" value="75" oninput="calcLC()"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>Origin carry distance (ft)</label><input type="number" id="lc-dist-o" value="200" oninput="calcLC()"></div>
+      <div class="field"><label>Destination carry distance (ft)</label><input type="number" id="lc-dist-d" value="0" oninput="calcLC()"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>Rate ($/cwt per 50-ft) — 2026</label><input type="number" id="lc-rate" value="2.05" step="0.01" oninput="calcLC()"></div>
+      <div class="field"><label>Minimum charge ($)</label><input type="number" id="lc-min" value="20.50" step="0.01" oninput="calcLC()"></div>
+    </div>
+  </div>
+  <div class="card"><div class="sec-title">Result</div><div id="lc-results"></div></div>
+</div>
+
+<!-- APPLIANCE -->
+<div id="panel-APPLIANCE" class="panel">
+  <div class="info-box">Appliance service — 400-NG Item 165. Disconnect and/or reconnect of major appliances. Flat charge per appliance.</div>
+  <div class="card">
+    <div class="sec-title">Appliance quantities</div>
+    <div class="grid2">
+      <div class="field"><label>Washer (qty)</label><input type="number" id="app-washer" value="1" min="0" oninput="calcApp()"></div>
+      <div class="field"><label>Dryer — gas (qty)</label><input type="number" id="app-dryer-gas" value="0" min="0" oninput="calcApp()"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>Dryer — electric (qty)</label><input type="number" id="app-dryer-elec" value="1" min="0" oninput="calcApp()"></div>
+      <div class="field"><label>Refrigerator ice maker (qty)</label><input type="number" id="app-ice" value="1" min="0" oninput="calcApp()"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>Range — gas (qty)</label><input type="number" id="app-range-gas" value="0" min="0" oninput="calcApp()"></div>
+      <div class="field"><label>Garage door opener (qty)</label><input type="number" id="app-garage" value="0" min="0" oninput="calcApp()"></div>
+    </div>
+    <div class="divider"></div>
+    <div class="sec-title">2026 rates per appliance</div>
+    <div class="grid3">
+      <div class="field"><label>Washer ($)</label><input type="number" id="r-washer" value="57.00" step="0.01" oninput="calcApp()"></div>
+      <div class="field"><label>Dryer — gas ($)</label><input type="number" id="r-dryer-gas" value="74.00" step="0.01" oninput="calcApp()"></div>
+      <div class="field"><label>Dryer — electric ($)</label><input type="number" id="r-dryer-elec" value="57.00" step="0.01" oninput="calcApp()"></div>
+    </div>
+    <div class="grid3">
+      <div class="field"><label>Ice maker ($)</label><input type="number" id="r-ice" value="43.00" step="0.01" oninput="calcApp()"></div>
+      <div class="field"><label>Range — gas ($)</label><input type="number" id="r-range-gas" value="74.00" step="0.01" oninput="calcApp()"></div>
+      <div class="field"><label>Garage door ($)</label><input type="number" id="r-garage" value="49.00" step="0.01" oninput="calcApp()"></div>
+    </div>
+  </div>
+  <div class="card"><div class="sec-title">Result</div><div id="app-results"></div></div>
+</div>
+
+<!-- CRATING -->
+<div id="panel-CRATING" class="panel">
+  <div class="info-box">Crating — 400-NG Item 175. Board-foot formula: (L × W × H in inches) ÷ 144. Rate per board foot. Minimum charge applies.</div>
+  <div class="card">
+    <div class="sec-title">Crate dimensions</div>
+    <div id="crates">
+      <div class="crate-row grid3">
+        <div class="field"><label>Length (in)</label><input type="number" class="cl" value="36" oninput="calcCrate()"></div>
+        <div class="field"><label>Width (in)</label><input type="number" class="cw" value="24" oninput="calcCrate()"></div>
+        <div class="field"><label>Height (in)</label><input type="number" class="ch" value="24" oninput="calcCrate()"></div>
+      </div>
+    </div>
+    <button class="btn" onclick="addCrate()" style="margin:4px 0 10px;font-size:11px">+ Add crate</button>
+    <div class="grid2">
+      <div class="field"><label>Rate per board foot ($) — 2026</label><input type="number" id="crate-rate" value="2.10" step="0.01" oninput="calcCrate()"></div>
+      <div class="field"><label>Minimum charge ($)</label><input type="number" id="crate-min" value="110.00" step="0.01" oninput="calcCrate()"></div>
+    </div>
+  </div>
+  <div class="card"><div class="sec-title">Result</div><div id="crate-results"></div></div>
+</div>
+
+<!-- DEBRIS REMOVAL -->
+<div id="panel-DEBRIS" class="panel">
+  <div class="info-box">Debris removal — 400-NG Item 176-A. Removal of packing materials after delivery. Charged per cwt with minimum charge. Additional haul-off fees billed at cost.</div>
+  <div class="card">
+    <div class="sec-title">Debris removal parameters</div>
+    <div class="grid2">
+      <div class="field"><label>Net weight (lbs)</label><input type="number" id="deb-weight" value="5000" oninput="calcDebris()"></div>
+      <div class="field"><label>Service type</label><select id="deb-type" onchange="calcDebris()"><option value="partial">Partial — packing materials only</option><option value="full">Full debris removal</option></select></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>Rate ($/cwt) — 2026</label><input type="number" id="deb-rate" value="3.20" step="0.01" oninput="calcDebris()"></div>
+      <div class="field"><label>Minimum charge ($)</label><input type="number" id="deb-min" value="85.00" step="0.01" oninput="calcDebris()"></div>
+    </div>
+    <div class="field"><label>Additional dumpster / haul-off fee ($)</label><input type="number" id="deb-extra" value="0" step="0.01" oninput="calcDebris()"></div>
+  </div>
+  <div class="card"><div class="sec-title">Result</div><div id="deb-results"></div></div>
+</div>
+
+<!-- WAITING TIME -->
+<div id="panel-WAITING" class="panel">
+  <div class="info-box">Waiting time / detention — 400-NG Item 205. Free time: 1 hour at each service point. Chargeable time rounded up to next 30-min increment. Rate is per crew member.</div>
+  <div class="card">
+    <div class="sec-title">Waiting time parameters</div>
+    <div class="grid2">
+      <div class="field"><label>Free time allowance (hrs)</label><input type="number" id="wt-free" value="1.0" step="0.5" oninput="calcWaiting()"></div>
+      <div class="field"><label>Total waiting time (hrs)</label><input type="number" id="wt-total" value="2.5" step="0.5" oninput="calcWaiting()"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>Rate per 30-min per crew member ($) — 2026</label><input type="number" id="wt-rate" value="52.00" step="0.01" oninput="calcWaiting()"></div>
+      <div class="field"><label>Number of crew members</label><input type="number" id="wt-crew" value="2" min="1" oninput="calcWaiting()"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>Apply at origin?</label><select id="wt-origin" onchange="calcWaiting()"><option value="yes">Yes</option><option value="no">No</option></select></div>
+      <div class="field"><label>Apply at destination?</label><select id="wt-dest" onchange="calcWaiting()"><option value="no">No</option><option value="yes">Yes</option></select></div>
+    </div>
+    <p class="note">Chargeable = total time minus free time, rounded up to nearest 30-min increment.</p>
+  </div>
+  <div class="card"><div class="sec-title">Result</div><div id="wt-results"></div></div>
+</div>
+
+<!-- BULKY ITEMS -->
+<div id="panel-BULKY" class="panel">
+  <div class="info-box">Bulky / extra-large article — 400-NG Item 170. Flat charge per article by category. Applies in addition to linehaul charges.</div>
+  <div class="card">
+    <div class="sec-title">Bulky article quantities</div>
+    <div class="grid2">
+      <div class="field"><label>Motorcycle / ATV (qty)</label><input type="number" id="blk-moto" value="0" min="0" oninput="calcBulky()"></div>
+      <div class="field"><label>Riding mower (qty)</label><input type="number" id="blk-mower" value="0" min="0" oninput="calcBulky()"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>Hot tub / spa (qty)</label><input type="number" id="blk-hottub" value="0" min="0" oninput="calcBulky()"></div>
+      <div class="field"><label>Pool table (qty)</label><input type="number" id="blk-pool" value="0" min="0" oninput="calcBulky()"></div>
+    </div>
+    <div class="field"><label>Other oversized article (qty)</label><input type="number" id="blk-other" value="1" min="0" oninput="calcBulky()"></div>
+    <div class="divider"></div>
+    <div class="sec-title">2026 rates per article</div>
+    <div class="grid3">
+      <div class="field"><label>Motorcycle / ATV ($)</label><input type="number" id="r-moto" value="175.00" step="0.01" oninput="calcBulky()"></div>
+      <div class="field"><label>Riding mower ($)</label><input type="number" id="r-mower" value="135.00" step="0.01" oninput="calcBulky()"></div>
+      <div class="field"><label>Hot tub / spa ($)</label><input type="number" id="r-hottub" value="320.00" step="0.01" oninput="calcBulky()"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>Pool table ($)</label><input type="number" id="r-pool" value="285.00" step="0.01" oninput="calcBulky()"></div>
+      <div class="field"><label>Other oversized ($)</label><input type="number" id="r-other" value="95.00" step="0.01" oninput="calcBulky()"></div>
+    </div>
+  </div>
+  <div class="card"><div class="sec-title">Result</div><div id="blk-results"></div></div>
+</div>
+
+<!-- FULL UNPACK -->
+<div id="panel-FULLUNPACK" class="panel">
+  <div class="info-box">Full unpack — 400-NG Item 176-B / IT-26. Complete unpacking of all carrier-packed cartons and placing contents. Debris removal billed separately under Item 176-A.</div>
+  <div class="card">
+    <div class="sec-title">Full unpack parameters</div>
+    <div class="grid2">
+      <div class="field"><label>Net weight (lbs)</label><input type="number" id="fu-weight" value="5000" oninput="calcFU()"></div>
+      <div class="field"><label>Total carrier-packed cartons</label><input type="number" id="fu-cartons" value="40" oninput="calcFU()"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>Rate ($/cwt) — 2026</label><input type="number" id="fu-rate" value="5.85" step="0.01" oninput="calcFU()"></div>
+      <div class="field"><label>Minimum charge ($)</label><input type="number" id="fu-min" value="115.00" step="0.01" oninput="calcFU()"></div>
+    </div>
+    <div class="field"><label>Place-in-room charge per carton ($)</label><input type="number" id="fu-place" value="1.75" step="0.01" oninput="calcFU()"></div>
+  </div>
+  <div class="card"><div class="sec-title">Result</div><div id="fu-results"></div></div>
+</div>
+
+<!-- PIANO / ORGAN -->
+<div id="panel-PIANO" class="panel">
+  <div class="info-box">Piano / organ — 400-NG Item 180. Flat charge per instrument by type. Stair / elevator charges per Item 190 apply additionally if applicable.</div>
+  <div class="card">
+    <div class="sec-title">Instrument quantities</div>
+    <div class="grid2">
+      <div class="field"><label>Upright piano (qty)</label><input type="number" id="pia-upright" value="1" min="0" oninput="calcPiano()"></div>
+      <div class="field"><label>Baby grand piano (qty)</label><input type="number" id="pia-baby" value="0" min="0" oninput="calcPiano()"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>Grand piano (qty)</label><input type="number" id="pia-grand" value="0" min="0" oninput="calcPiano()"></div>
+      <div class="field"><label>Organ / electronic keyboard (qty)</label><input type="number" id="pia-organ" value="0" min="0" oninput="calcPiano()"></div>
+    </div>
+    <div class="divider"></div>
+    <div class="sec-title">2026 rates per instrument</div>
+    <div class="grid2">
+      <div class="field"><label>Upright piano ($)</label><input type="number" id="r-upright" value="195.00" step="0.01" oninput="calcPiano()"></div>
+      <div class="field"><label>Baby grand ($)</label><input type="number" id="r-baby" value="295.00" step="0.01" oninput="calcPiano()"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>Grand piano ($)</label><input type="number" id="r-grand" value="450.00" step="0.01" oninput="calcPiano()"></div>
+      <div class="field"><label>Organ / keyboard ($)</label><input type="number" id="r-organ" value="145.00" step="0.01" oninput="calcPiano()"></div>
+    </div>
+  </div>
+  <div class="card"><div class="sec-title">Result</div><div id="pia-results"></div></div>
+</div>
+
+<!-- THIRD-PARTY -->
+<div id="panel-THIRD" class="panel">
+  <div class="info-box">Third-party services — IT-26 / 400-NG Item 150. Services arranged by the carrier on the shipper's behalf. Billed at actual cost plus the carrier's administrative fee.</div>
+  <div class="card">
+    <div class="sec-title">Third-party charges</div>
+    <div id="tp-rows">
+      <div class="tp-row grid2" style="margin-bottom:8px">
+        <div class="field"><label>Service description</label><input type="text" class="tp-desc" value="IT / electronics disconnect" placeholder="Description"></div>
+        <div class="field"><label>Cost ($)</label><input type="number" class="tp-cost" value="125.00" step="0.01" oninput="calcThird()"></div>
+      </div>
+    </div>
+    <button class="btn" onclick="addThird()" style="margin:0 0 10px;font-size:11px">+ Add service</button>
+    <div class="grid2">
+      <div class="field"><label>Admin / carrier markup (%)</label><input type="number" id="tp-admin-pct" value="10" step="0.1" oninput="calcThird()"></div>
+      <div class="field"><label>Minimum admin fee ($)</label><input type="number" id="tp-admin-min" value="25.00" step="0.01" oninput="calcThird()"></div>
+    </div>
+  </div>
+  <div class="card"><div class="sec-title">Result</div><div id="tp-results"></div></div>
+</div>
+
+<!-- FUEL SURCHARGE -->
+<div id="panel-FUEL" class="panel">
+  <div class="info-box">Fuel surcharge — FRA (Federal Register Audit) basis. Applied to linehaul charges per the DOE weekly on-highway diesel retail price. Baseline: $2.00/gal.</div>
+  <div class="card">
+    <div class="sec-title">Fuel surcharge inputs</div>
+    <div class="grid2">
+      <div class="field"><label>Linehaul charge ($)</label><input type="number" id="fuel-lh" value="2500.00" step="0.01" oninput="calcFuel()"></div>
+      <div class="field"><label>DOE diesel price ($/gallon)</label><input type="number" id="fuel-doe" value="3.85" step="0.01" oninput="calcFuel()"></div>
+    </div>
+    <div class="grid2">
+      <div class="field"><label>FS % (auto-calculated from FRA table)</label><input type="number" id="fuel-pct" value="0" readonly></div>
+      <div class="field"><label>Additional accessorial charges ($)</label><input type="number" id="fuel-access" value="0" step="0.01" oninput="calcFuel()"></div>
+    </div>
+    <div class="field"><label>Apply FS to accessorials?</label><select id="fuel-apply-access" onchange="calcFuel()"><option value="no">No — linehaul only</option><option value="yes">Yes — linehaul + accessorials</option></select></div>
+  </div>
+  <div class="card">
+    <div class="sec-title">FRA fuel surcharge table (DOE diesel)</div>
+    <table class="fra-table"><thead><tr><th>DOE price range ($/gal)</th><th>FS %</th><th></th></tr></thead><tbody id="fra-tbody"></tbody></table>
+    <p class="note" style="margin-top:6px">Updated weekly per DOE EIA. Baseline: $2.00/gal. Source: Federal Register / FRA.</p>
+  </div>
+  <div class="card"><div class="sec-title">Result</div><div id="fuel-results"></div></div>
+</div>
+
+<!-- SUMMARY & EXPORT -->
+<div id="panel-SUMMARY" class="panel">
+  <div class="mg" id="summary-metrics"></div>
+  <div class="card">
+    <div class="sec-title">All accessorial charges</div>
+    <div id="summary-rows"></div>
+  </div>
+  <div class="card">
+    <div class="sec-title">Email-ready quote</div>
+    <div class="qbox" id="quote-text"></div>
+    <div class="ea">
+      <button class="btn btn-blue" onclick="copyQuote()">Copy to clipboard</button>
+      <button class="btn" onclick="window.print()">Print / Save as PDF</button>
+    </div>
+  </div>
+</div>
+
+</div>
+<script>
+function switchTab(id,btn){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  if(btn)btn.classList.add('active');
+  if(id==='FUEL')renderFRA();
+}
+function rr(l,v){return'<div class="rrow"><span class="lbl">'+l+'</span><span class="val">'+v+'</span></div>';}
+function tr(l,v){return'<div class="trow"><span>'+l+'</span><span class="val">$'+f(v)+'</span></div>';}
+function f(n){return Number(n).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,',');}
+function cw(w){return w/100;}
+var T={sit:0,pbo:0,shuttle:0,elev:0,lc:0,app:0,crate:0,debris:0,waiting:0,bulky:0,fullunpack:0,piano:0,third:0,fuel:0};
+
+function calcSIT(){
+  var w=+v('sit-weight'),days=+v('sit-days'),rate=+v('sit-rate'),mi=+v('sit-miles'),lhr=+v('sit-lh-rate');
+  var mo=Math.max(1,Math.ceil(days/30)),cw_=cw(w),sC=cw_*rate*mo,dC=cw_*lhr*(mi/100),tot=sC+dC;
+  T.sit=tot;
+  set('sit-results',rr('Net weight',w.toLocaleString()+' lbs')+rr('CWT',f(cw_)+' cwt')+rr('Days in SIT',days+' → '+mo+' month(s)')+rr('SIT charge ('+mo+' mo × $'+rate+'/cwt)','$'+f(sC))+(mi>0?rr('Delivery from SIT','$'+f(dC)):'')+tr('Total SIT charges',tot));
+}
+function calcPBO(){
+  var type=vs('pbo-type'),sm=+v('pbo-small'),lg=+v('pbo-large'),wd=+v('pbo-ward');
+  var rsm=+v('pbo-rate-sm'),rlg=+v('pbo-rate-lg'),rwd=+v('pbo-rate-ward'),mn=+v('pbo-min');
+  var m=type==='both'?2:1,c=sm*rsm*m+lg*rlg*m+wd*rwd*m,tot=Math.max(c,mn);
+  T.pbo=tot;
+  set('pbo-results',rr('Small cartons',sm+' × $'+f(rsm)+(type==='both'?' × 2':'')+' = $'+f(sm*rsm*m))+rr('Large cartons',lg+' × $'+f(rlg)+(type==='both'?' × 2':'')+' = $'+f(lg*rlg*m))+rr('Wardrobe cartons',wd+' × $'+f(rwd)+' = $'+f(wd*rwd*m))+rr('Computed','$'+f(c))+(tot>c?rr('Minimum applied','$'+f(mn)):'')+tr('Total PBO charges',tot));
+}
+function calcShuttle(){
+  var w=+v('sht-weight'),svc=vs('sht-service'),rate=+v('sht-rate'),mn=+v('sht-min');
+  var ew=Math.max(w,1000),cnt=svc==='both'?2:1,ps=Math.max(cw(ew)*rate,mn),tot=ps*cnt;
+  T.shuttle=tot;
+  set('sht-results',rr('Effective weight (min 1,000 lbs)',ew.toLocaleString()+' lbs')+rr('CWT',f(cw(ew))+' cwt')+rr('Charge per shuttle (min $'+f(mn)+')','$'+f(ps))+rr('Shuttles',cnt)+tr('Total shuttle charge',tot));
+}
+function calcElev(){
+  var w=+v('elev-weight'),fo=+v('elev-floors-o'),fd=+v('elev-floors-d'),rate=+v('elev-rate'),mn=+v('elev-min'),type=vs('elev-type');
+  var tf=fo+fd,c=cw(w)*rate*tf,tot=tf>0?Math.max(c,mn):0;
+  T.elev=tot;
+  set('elev-results',rr('CWT',f(cw(w))+' cwt')+rr('Origin '+type,fo)+rr('Destination '+type,fd)+rr('Total',tf)+rr('Computed','$'+f(c))+(tot>c&&tf>0?rr('Minimum applied','$'+f(mn)):'')+tr('Total elevator/stair charge',tot));
+}
+function calcLC(){
+  var w=+v('lc-weight'),fr=+v('lc-free'),do_=+v('lc-dist-o'),dd=+v('lc-dist-d'),rate=+v('lc-rate'),mn=+v('lc-min');
+  var co=Math.max(0,do_-fr),cd=Math.max(0,dd-fr),io=Math.ceil(co/50),id=Math.ceil(cd/50),ti=io+id;
+  var c=cw(w)*rate*ti,tot=ti>0?Math.max(c,mn):0;
+  T.lc=tot;
+  set('lc-results',rr('CWT',f(cw(w))+' cwt')+rr('Origin chargeable',co+' ft → '+io+' increments')+rr('Destination chargeable',cd+' ft → '+id+' increments')+rr('Total 50-ft increments',ti)+rr('Computed','$'+f(c))+(tot>c&&ti>0?rr('Minimum applied','$'+f(mn)):'')+tr('Total long carry charge',tot));
+}
+function calcApp(){
+  var items=[{id:'app-washer',r:'r-washer',l:'Washer'},{id:'app-dryer-gas',r:'r-dryer-gas',l:'Dryer — gas'},{id:'app-dryer-elec',r:'r-dryer-elec',l:'Dryer — electric'},{id:'app-ice',r:'r-ice',l:'Ice maker'},{id:'app-range-gas',r:'r-range-gas',l:'Range — gas'},{id:'app-garage',r:'r-garage',l:'Garage door'}];
+  var h='',tot=0;
+  items.forEach(function(i){var q=+v(i.id),rt=+v(i.r);if(q>0){var c=q*rt;tot+=c;h+=rr(i.l+' ('+q+' × $'+f(rt)+')','$'+f(c));}});
+  if(!h)h=rr('No appliances entered','—');
+  T.app=tot;set('app-results',h+tr('Total appliance service',tot));
+}
+function addCrate(){
+  var d=document.createElement('div');d.className='crate-row grid3';
+  d.innerHTML='<div class="field"><label>Length (in)</label><input type="number" class="cl" value="24" oninput="calcCrate()"></div><div class="field"><label>Width (in)</label><input type="number" class="cw" value="18" oninput="calcCrate()"></div><div class="field"><label>Height (in)</label><input type="number" class="ch" value="18" oninput="calcCrate()"></div>';
+  document.getElementById('crates').appendChild(d);calcCrate();
+}
+function calcCrate(){
+  var rows=document.querySelectorAll('.crate-row'),rate=+v('crate-rate'),mn=+v('crate-min');
+  var h='',tbf=0;
+  rows.forEach(function(row,i){var l=+row.querySelector('.cl').value||0,w=+row.querySelector('.cw').value||0,ht=+row.querySelector('.ch').value||0;var bf=(l*w*ht)/144;tbf+=bf;h+=rr('Crate '+(i+1)+' ('+l+'"×'+w+'"×'+ht+'")',bf.toFixed(1)+' bf');});
+  var c=tbf*rate,tot=Math.max(c,mn);
+  T.crate=tot;
+  set('crate-results',h+rr('Total board feet',tbf.toFixed(1)+' bf')+rr('Rate','$'+f(rate)+'/bf')+rr('Computed','$'+f(c))+(tot>c?rr('Minimum applied','$'+f(mn)):'')+tr('Total crating charge',tot));
+}
+function calcDebris(){
+  var w=+v('deb-weight'),rate=+v('deb-rate'),mn=+v('deb-min'),ex=+v('deb-extra');
+  var c=cw(w)*rate,base=Math.max(c,mn),tot=base+ex;
+  T.debris=tot;
+  set('deb-results',rr('CWT',f(cw(w))+' cwt')+rr('Computed','$'+f(c))+(base>c?rr('Minimum applied','$'+f(mn)):''+(ex>0?rr('Haul-off fee','$'+f(ex)):''))+tr('Total debris removal',tot));
+}
+function calcWaiting(){
+  var fr=+v('wt-free'),tot_h=+v('wt-total'),rate=+v('wt-rate'),crew=+v('wt-crew');
+  var pts=(vs('wt-origin')==='yes'?1:0)+(vs('wt-dest')==='yes'?1:0);
+  var chg=Math.max(0,tot_h-fr),inc=Math.ceil(chg/0.5),tot=inc*rate*crew*pts;
+  T.waiting=tot;
+  set('wt-results',rr('Free time',fr+' hr(s)')+rr('Total waiting time',tot_h+' hrs')+rr('Chargeable',chg+' hrs → '+inc+' × 30-min increments')+rr('Crew members',crew)+rr('Service points',pts)+tr('Total waiting time charge',tot));
+}
+function calcBulky(){
+  var cats=[{id:'blk-moto',r:'r-moto',l:'Motorcycle / ATV'},{id:'blk-mower',r:'r-mower',l:'Riding mower'},{id:'blk-hottub',r:'r-hottub',l:'Hot tub / spa'},{id:'blk-pool',r:'r-pool',l:'Pool table'},{id:'blk-other',r:'r-other',l:'Other oversized'}];
+  var h='',tot=0;
+  cats.forEach(function(c){var q=+v(c.id),rt=+v(c.r);if(q>0){var cost=q*rt;tot+=cost;h+=rr(c.l+' ('+q+' × $'+f(rt)+')','$'+f(cost));}});
+  if(!h)h=rr('No bulky articles entered','—');
+  T.bulky=tot;set('blk-results',h+tr('Total bulky article charge',tot));
+}
+function calcFU(){
+  var w=+v('fu-weight'),car=+v('fu-cartons'),rate=+v('fu-rate'),mn=+v('fu-min'),pl=+v('fu-place');
+  var c=cw(w)*rate,base=Math.max(c,mn),pc=car*pl,tot=base+pc;
+  T.fullunpack=tot;
+  set('fu-results',rr('CWT',f(cw(w))+' cwt')+rr('Computed','$'+f(c))+(base>c?rr('Minimum applied','$'+f(mn)):'')+rr('Place-in-room ('+car+' × $'+f(pl)+')','$'+f(pc))+tr('Total full unpack charge',tot));
+}
+function calcPiano(){
+  var cats=[{id:'pia-upright',r:'r-upright',l:'Upright piano'},{id:'pia-baby',r:'r-baby',l:'Baby grand'},{id:'pia-grand',r:'r-grand',l:'Grand piano'},{id:'pia-organ',r:'r-organ',l:'Organ / keyboard'}];
+  var h='',tot=0;
+  cats.forEach(function(c){var q=+v(c.id),rt=+v(c.r);if(q>0){var cost=q*rt;tot+=cost;h+=rr(c.l+' ('+q+' × $'+f(rt)+')','$'+f(cost));}});
+  if(!h)h=rr('No instruments entered','—');
+  T.piano=tot;set('pia-results',h+tr('Total piano / organ charge',tot));
+}
+function addThird(){
+  var d=document.createElement('div');d.className='tp-row grid2';d.style.marginBottom='8px';
+  d.innerHTML='<div class="field"><label>Service description</label><input type="text" class="tp-desc" value="" placeholder="Description"></div><div class="field"><label>Cost ($)</label><input type="number" class="tp-cost" value="0" step="0.01" oninput="calcThird()"></div>';
+  document.getElementById('tp-rows').appendChild(d);calcThird();
+}
+function calcThird(){
+  var rows=document.querySelectorAll('.tp-row'),ap=+v('tp-admin-pct'),am=+v('tp-admin-min');
+  var h='',sub=0;
+  rows.forEach(function(row){var desc=row.querySelector('.tp-desc').value||'Service',cost=+row.querySelector('.tp-cost').value||0;if(cost>0){sub+=cost;h+=rr(desc,'$'+f(cost));}});
+  var admin=Math.max(sub*(ap/100),am),tot=sub+admin;
+  T.third=tot;
+  if(!h)h=rr('No services entered','—');
+  set('tp-results',h+rr('Services subtotal','$'+f(sub))+rr('Admin fee ('+ap+'%, min $'+f(am)+')','$'+f(admin))+tr('Total third-party services',tot));
+}
+var FRA=[{min:2.00,max:2.249,pct:4.5},{min:2.25,max:2.499,pct:5.0},{min:2.50,max:2.749,pct:5.5},{min:2.75,max:2.999,pct:6.0},{min:3.00,max:3.249,pct:7.0},{min:3.25,max:3.499,pct:7.5},{min:3.50,max:3.749,pct:8.5},{min:3.75,max:3.999,pct:9.0},{min:4.00,max:4.249,pct:10.0},{min:4.25,max:4.499,pct:11.0},{min:4.50,max:4.749,pct:12.0},{min:4.75,max:4.999,pct:13.0},{min:5.00,max:5.249,pct:14.0},{min:5.25,max:5.499,pct:15.0},{min:5.50,max:99,pct:16.0}];
+function getFSPct(doe){if(doe<2.00)return 0;for(var i=0;i<FRA.length;i++){var row=FRA[i];if(doe>=row.min&&doe<=row.max)return row.pct;}return 16.0;}
+function renderFRA(){
+  var doe=+v('fuel-doe'),h='';
+  FRA.forEach(function(row){var a=doe>=row.min&&(row.max===99?true:doe<=row.max);var rng=row.max===99?'$'+row.min.toFixed(2)+'+':'$'+row.min.toFixed(2)+' – $'+row.max.toFixed(3);h+='<tr'+(a?' class="hl"':'')+'><td>'+rng+'</td><td>'+row.pct.toFixed(1)+'%</td><td>'+(a?'Current':'')+'</td></tr>';});
+  document.getElementById('fra-tbody').innerHTML=h;
+}
+function calcFuel(){
+  var lh=+v('fuel-lh'),doe=+v('fuel-doe'),acc=+v('fuel-access'),applyA=vs('fuel-apply-access')==='yes';
+  var pct=getFSPct(doe);
+  document.getElementById('fuel-pct').value=pct.toFixed(1);
+  var base=applyA?(lh+acc):lh,fsC=base*(pct/100),tot=lh+acc+fsC;
+  T.fuel=fsC;renderFRA();
+  set('fuel-results',rr('DOE diesel','$'+f(doe)+'/gal')+rr('FS %',pct.toFixed(1)+'%')+rr('Linehaul','$'+f(lh))+(acc>0?rr('Accessorials','$'+f(acc)):'')+rr('FS basis','$'+f(base))+rr('Fuel surcharge','$'+f(fsC))+tr('Total with fuel surcharge',tot));
+}
+
+function buildSummary(){
+  runAll();
+  var svcs=[{k:'sit',l:'SIT — storage in transit'},{k:'pbo',l:'PBO / unpacking'},{k:'shuttle',l:'Shuttle service'},{k:'elev',l:'Elevator / stair carry'},{k:'lc',l:'Long carry'},{k:'app',l:'Appliance service'},{k:'crate',l:'Crating'},{k:'debris',l:'Debris removal'},{k:'waiting',l:'Waiting time / detention'},{k:'bulky',l:'Bulky / extra-large articles'},{k:'fullunpack',l:'Full unpack service'},{k:'piano',l:'Piano / organ'},{k:'third',l:'Third-party services'},{k:'fuel',l:'Fuel surcharge (FRA)'}];
+  var grand=svcs.reduce(function(s,sv){return s+T[sv.k];},0);
+  var active=svcs.filter(function(sv){return T[sv.k]>0;}).length;
+  var lh=+v('fuel-lh');
+  document.getElementById('summary-metrics').innerHTML='<div class="mc"><div class="ml">Active services</div><div class="mn">'+active+'</div></div><div class="mc"><div class="ml">Total accessorial</div><div class="mn">$'+f(grand)+'</div></div><div class="mc"><div class="ml">Linehaul (ref)</div><div class="mn">$'+f(lh)+'</div></div><div class="mc"><div class="ml">Grand total</div><div class="mn">$'+f(grand+lh)+'</div></div>';
+  var rows='';
+  svcs.forEach(function(sv){var z=T[sv.k]===0;rows+='<div class="srow'+(z?' zero':'')+'"><span class="s1">'+sv.l+'</span><span class="s2">'+(z?'—':'$'+f(T[sv.k]))+'</span></div>';});
+  rows+='<div class="grand"><span>Grand total — all accessorials</span><span class="gv">$'+f(grand)+'</span></div>';
+  set('summary-rows',rows);
+  buildQuote(svcs,grand,lh);
+}
+
+function buildQuote(svcs,grand,lh){
+  var cust=document.getElementById('customer-name').value||'(Customer / Order #)';
+  var dt=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  var L='ACCESSORIAL SERVICES QUOTE\n400-NG & IT-26  |  2026 Tariff\n'+rep(44)+'\nCustomer / Order: '+cust+'\nQuote date: '+dt+'\n'+rep(44)+'\n\nSERVICE                                  CHARGE\n'+rep(44)+'\n';
+  svcs.forEach(function(sv){if(T[sv.k]>0)L+=pad(sv.l,41)+'$'+f(T[sv.k])+'\n';});
+  L+=rep(44)+'\n'+pad('Total accessorial charges',41)+'$'+f(grand)+'\n'+(lh>0?pad('Linehaul (reference only)',41)+'$'+f(lh)+'\n':'')+rep(44)+'\n'+pad('GRAND TOTAL',41)+'$'+f(grand+lh)+'\n\nNotes:\n- All rates per 400-NG & IT-26 2026 tariff\n- Fuel surcharge applied per FRA / DOE basis\n- Quote valid 30 days from date above\n- Final charges subject to actual weight and\n  conditions confirmed at time of service\n';
+  document.getElementById('quote-text').textContent=L;
+}
+function pad(s,n){s=String(s);while(s.length<n)s+=' ';return s;}
+function rep(n){var s='';for(var i=0;i<n;i++)s+='─';return s;}
+
+function copyQuote(){
+  var text=document.getElementById('quote-text').textContent;
+  navigator.clipboard.writeText(text).then(function(){var btn=event.target;btn.textContent='Copied!';setTimeout(function(){btn.textContent='Copy to clipboard';},2000);});
+}
+
+function v(id){return(document.getElementById(id)||{}).value||0;}
+function vs(id){return(document.getElementById(id)||{}).value||'';}
+function set(id,h){var el=document.getElementById(id);if(el)el.innerHTML=h;}
+function runAll(){calcSIT();calcPBO();calcShuttle();calcElev();calcLC();calcApp();calcCrate();calcDebris();calcWaiting();calcBulky();calcFU();calcPiano();calcThird();calcFuel();}
+
+runAll();renderFRA();
+</script>
+</body>
+</html>
