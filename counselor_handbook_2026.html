@@ -1,0 +1,2145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DoD Personal Property Counselor Handbook</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0a1628;
+  --navy-mid: #122040;
+  --navy-light: #1c3461;
+  --gold: #c8972a;
+  --gold-light: #f0b840;
+  --gold-pale: #fdf3dc;
+  --steel: #4a6fa5;
+  --steel-light: #7b9fcb;
+  --white: #ffffff;
+  --off-white: #f4f6fa;
+  --gray-100: #e8ecf4;
+  --gray-300: #b0bcd4;
+  --gray-500: #6b7fa3;
+  --text: #1a2540;
+  --text-light: #4a5a7a;
+  --green: #1a7a3c;
+  --green-bg: #e8f5ee;
+  --red: #8b1a1a;
+  --red-bg: #fdeaea;
+  --amber: #7a5c10;
+  --amber-bg: #fef7e0;
+  --radius: 6px;
+  --shadow: 0 2px 12px rgba(10,22,40,0.12);
+  --shadow-lg: 0 8px 32px rgba(10,22,40,0.18);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--off-white);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.65;
+}
+/* HEADER */
+.site-header {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, var(--navy-light) 100%);
+  color: var(--white);
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+}
+.header-top {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 14px 28px 10px;
+  border-bottom: 2px solid rgba(200,151,42,0.4);
+}
+.header-seal {
+  width: 54px; height: 54px;
+  background: radial-gradient(circle, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px; font-weight: 800;
+  color: var(--navy);
+  border: 3px solid var(--gold-light);
+  flex-shrink: 0;
+  letter-spacing: -1px;
+}
+.header-titles h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.55rem; font-weight: 800;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  line-height: 1.1;
+  color: var(--white);
+}
+.header-titles p {
+  font-size: 0.78rem; color: var(--gold-light);
+  letter-spacing: 0.12em; text-transform: uppercase;
+  margin-top: 2px;
+}
+.header-badge {
+  margin-left: auto;
+  background: rgba(200,151,42,0.15);
+  border: 1px solid var(--gold);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  color: var(--gold-light);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+}
+/* NAV TABS */
+.nav-tabs {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 0 12px;
+  gap: 2px;
+}
+.nav-tabs::-webkit-scrollbar { display: none; }
+.nav-tab {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem; font-weight: 700;
+  letter-spacing: 0.07em; text-transform: uppercase;
+  color: var(--gray-300);
+  padding: 9px 14px 8px;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+  transition: all 0.2s;
+  flex-shrink: 0;
+  background: none; border-top: none; border-left: none; border-right: none;
+}
+.nav-tab:hover { color: var(--gold-light); }
+.nav-tab.active { color: var(--gold-light); border-bottom-color: var(--gold); }
+
+/* MAIN */
+main { max-width: 1100px; margin: 0 auto; padding: 28px 20px 60px; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* SECTION CARD */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px 28px;
+  margin-bottom: 20px;
+  border-left: 4px solid var(--navy-light);
+}
+.card.gold-border { border-left-color: var(--gold); }
+.card.steel-border { border-left-color: var(--steel); }
+.card.green-border { border-left-color: var(--green); }
+.card h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.35rem; font-weight: 800;
+  color: var(--navy); text-transform: uppercase;
+  letter-spacing: 0.06em; margin-bottom: 12px;
+  display: flex; align-items: center; gap: 10px;
+}
+.card h2 .icon { font-size: 1.2rem; }
+.card h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.05rem; font-weight: 700;
+  color: var(--navy-light); text-transform: uppercase;
+  letter-spacing: 0.05em; margin: 16px 0 8px;
+}
+.card p { margin-bottom: 10px; }
+.card ul { padding-left: 20px; margin-bottom: 10px; }
+.card ul li { margin-bottom: 4px; }
+
+/* ALERTS */
+.alert {
+  padding: 12px 16px; border-radius: var(--radius);
+  margin-bottom: 14px; font-size: 0.9rem;
+  display: flex; gap: 10px; align-items: flex-start;
+}
+.alert-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+.alert.info { background: #e8f0fb; border-left: 4px solid var(--steel); color: #1a3060; }
+.alert.warn { background: var(--amber-bg); border-left: 4px solid var(--gold); color: var(--amber); }
+.alert.danger { background: var(--red-bg); border-left: 4px solid var(--red); color: var(--red); }
+.alert.success { background: var(--green-bg); border-left: 4px solid var(--green); color: var(--green); }
+
+/* TABLES */
+.tbl-wrap { overflow-x: auto; margin-bottom: 14px; }
+table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+thead th {
+  background: var(--navy);
+  color: var(--gold-light);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 10px 12px; text-align: left;
+}
+tbody tr:nth-child(even) { background: var(--off-white); }
+tbody tr:hover { background: var(--gray-100); }
+tbody td { padding: 8px 12px; border-bottom: 1px solid var(--gray-100); vertical-align: top; }
+.tag {
+  display: inline-block;
+  font-size: 0.72rem; font-weight: 700;
+  font-family: 'Barlow Condensed', sans-serif;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 3px;
+}
+.tag-new { background: var(--green-bg); color: var(--green); }
+.tag-mod { background: var(--amber-bg); color: var(--amber); }
+.tag-gone { background: var(--red-bg); color: var(--red); }
+
+/* SERVICE TABS */
+.svc-tabs { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
+.svc-tab {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.82rem; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 7px 16px; border-radius: 20px;
+  cursor: pointer;
+  border: 2px solid;
+  transition: all 0.2s;
+  background: none;
+}
+.svc-tab.army { border-color: #3d6b1a; color: #3d6b1a; }
+.svc-tab.army.active { background: #3d6b1a; color: white; }
+.svc-tab.navy { border-color: var(--navy-light); color: var(--navy-light); }
+.svc-tab.navy.active { background: var(--navy-light); color: white; }
+.svc-tab.usmc { border-color: #8b2020; color: #8b2020; }
+.svc-tab.usmc.active { background: #8b2020; color: white; }
+.svc-tab.uscg { border-color: #c8520a; color: #c8520a; }
+.svc-tab.uscg.active { background: #c8520a; color: white; }
+.svc-panel { display: none; }
+.svc-panel.active { display: block; }
+
+/* WEIGHT TABLE */
+.wt-table th:first-child { min-width: 90px; }
+.wt-dep { color: var(--green); font-weight: 600; }
+.wt-nodep { color: var(--steel); }
+
+/* SCENARIOS */
+.scenario-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.scenario-header {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+  padding: 18px 24px;
+  color: white;
+}
+.scenario-header h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.15rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.07em;
+  color: var(--gold-light);
+}
+.scenario-header p { font-size: 0.9rem; color: var(--gray-300); margin-top: 4px; }
+.scenario-body { padding: 22px 24px; }
+.question-block { margin-bottom: 20px; }
+.question-block .q-text {
+  font-weight: 600; color: var(--navy);
+  margin-bottom: 10px; font-size: 0.95rem;
+}
+.q-num {
+  display: inline-block;
+  background: var(--navy);
+  color: var(--gold-light);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 0.8rem;
+  padding: 2px 8px; border-radius: 3px;
+  margin-right: 6px;
+}
+.options { display: flex; flex-direction: column; gap: 8px; }
+.opt-btn {
+  background: var(--off-white);
+  border: 2px solid var(--gray-100);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-family: 'Barlow', sans-serif;
+  transition: all 0.2s;
+  color: var(--text);
+}
+.opt-btn:hover { border-color: var(--steel); background: #edf2fb; }
+.opt-btn.correct { background: var(--green-bg) !important; border-color: var(--green) !important; color: var(--green); font-weight: 600; }
+.opt-btn.wrong { background: var(--red-bg) !important; border-color: var(--red) !important; color: var(--red); }
+.opt-btn.disabled { cursor: default; pointer-events: none; opacity: 0.6; }
+.feedback {
+  margin-top: 10px; padding: 10px 14px;
+  border-radius: var(--radius); font-size: 0.875rem;
+  display: none;
+}
+.feedback.show { display: block; }
+.feedback.ok { background: var(--green-bg); color: var(--green); border-left: 3px solid var(--green); }
+.feedback.bad { background: var(--red-bg); color: var(--red); border-left: 3px solid var(--red); }
+.scenario-score {
+  background: var(--gold-pale);
+  border-top: 2px solid var(--gold);
+  padding: 16px 24px;
+  display: none;
+  text-align: center;
+}
+.score-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 2.4rem; font-weight: 800;
+  color: var(--navy);
+}
+.score-label { font-size: 0.85rem; color: var(--text-light); }
+.restart-btn {
+  margin-top: 10px;
+  background: var(--navy);
+  color: var(--gold-light);
+  border: none;
+  padding: 9px 22px;
+  border-radius: 20px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 0.9rem;
+  letter-spacing: 0.07em; text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.restart-btn:hover { background: var(--navy-light); }
+
+/* CHECKLIST */
+.cl-item {
+  display: flex; align-items: flex-start;
+  gap: 12px; padding: 10px 14px;
+  border-radius: var(--radius);
+  margin-bottom: 6px;
+  background: var(--off-white);
+  border: 2px solid var(--gray-100);
+  cursor: pointer;
+  transition: all 0.2s;
+  user-select: none;
+}
+.cl-item:hover { border-color: var(--steel); }
+.cl-item.done { background: var(--green-bg); border-color: var(--green); }
+.cl-box {
+  width: 22px; height: 22px;
+  border: 2px solid var(--gray-300);
+  border-radius: 4px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+  margin-top: 1px;
+}
+.cl-item.done .cl-box { background: var(--green); border-color: var(--green); color: white; }
+.cl-label { font-size: 0.9rem; }
+.cl-label strong { font-size: 0.82rem; color: var(--steel); font-family: 'Barlow Condensed', sans-serif; text-transform: uppercase; letter-spacing: 0.05em; }
+.cl-progress {
+  background: var(--off-white); border-radius: 20px;
+  height: 8px; overflow: hidden; margin-bottom: 16px;
+}
+.cl-bar {
+  height: 100%; background: var(--green);
+  border-radius: 20px; transition: width 0.4s;
+  width: 0%;
+}
+.cl-status {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.9rem; font-weight: 700; color: var(--text-light);
+  margin-bottom: 8px; letter-spacing: 0.04em;
+}
+.reset-btn {
+  background: none; border: 2px solid var(--gray-300);
+  color: var(--text-light); padding: 7px 18px;
+  border-radius: 20px; cursor: pointer;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 0.85rem;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  transition: all 0.2s; margin-bottom: 16px;
+}
+.reset-btn:hover { border-color: var(--red); color: var(--red); }
+
+/* GLOSSARY */
+.gloss-item { margin-bottom: 14px; }
+.gloss-term {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; font-size: 1rem;
+  color: var(--navy); text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.gloss-abbr {
+  font-size: 0.78rem; color: var(--steel);
+  font-weight: 700; margin-left: 6px;
+}
+.gloss-def { font-size: 0.9rem; color: var(--text-light); }
+
+/* SECTION PAGE TITLE */
+.page-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.9rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.07em;
+  color: var(--navy);
+  margin-bottom: 6px;
+  border-bottom: 3px solid var(--gold);
+  padding-bottom: 10px;
+  display: flex; align-items: center; gap: 12px;
+}
+.page-subtitle {
+  font-size: 0.88rem; color: var(--text-light);
+  margin-bottom: 22px;
+  letter-spacing: 0.03em;
+}
+
+/* QUICK REF GRID */
+.qr-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px; margin-bottom: 20px;
+}
+.qr-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  border-top: 4px solid var(--navy-light);
+  box-shadow: var(--shadow);
+}
+.qr-card.gold-top { border-top-color: var(--gold); }
+.qr-card.green-top { border-top-color: var(--green); }
+.qr-card.red-top { border-top-color: var(--red); }
+.qr-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.82rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.07em;
+  color: var(--text-light); margin-bottom: 6px;
+}
+.qr-val {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.5rem; font-weight: 800;
+  color: var(--navy);
+}
+.qr-note { font-size: 0.78rem; color: var(--text-light); margin-top: 3px; }
+
+/* PIB / PROHIBITED */
+.proh-cat {
+  background: var(--red-bg);
+  border: 1px solid #e8a0a0;
+  border-radius: var(--radius);
+  padding: 14px 18px; margin-bottom: 12px;
+}
+.proh-cat h4 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; font-size: 0.95rem;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--red); margin-bottom: 6px;
+}
+.proh-cat ul { padding-left: 18px; font-size: 0.88rem; }
+
+/* RESPONSIVE */
+@media (max-width: 700px) {
+  .header-top { padding: 10px 14px 8px; }
+  .header-titles h1 { font-size: 1.1rem; }
+  main { padding: 16px 10px 50px; }
+  .card { padding: 16px 14px; }
+  .qr-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-top">
+    <div class="header-seal">PP</div>
+    <div class="header-titles">
+      <h1>Personal Property Counselor Handbook</h1>
+      <p>DoD / JTR / AFI 24-602 V4 / DTR Part IV &mdash; Jan 2026 Update</p>
+    </div>
+    <div class="header-badge">DD Forms 3151–3178</div>
+  </div>
+  <nav class="nav-tabs" id="mainNav">
+    <button class="nav-tab active" onclick="showTab('overview',this)">Overview</button>
+    <button class="nav-tab" onclick="showTab('forms',this)">DD Forms</button>
+    <button class="nav-tab" onclick="showTab('weights',this)">Weight Allowances</button>
+    <button class="nav-tab" onclick="showTab('entitlements',this)">Entitlements</button>
+    <button class="nav-tab" onclick="showTab('uab',this)">UAB / OCONUS</button>
+    <button class="nav-tab" onclick="showTab('student',this)">Student Travel</button>
+    <button class="nav-tab" onclick="showTab('services',this)">Service Differences</button>
+    <button class="nav-tab" onclick="showTab('civilians',this)">Civilians</button>
+    <button class="nav-tab" onclick="showTab('prohibited',this)">Prohibited Items</button>
+    <button class="nav-tab" onclick="showTab('ppm',this)">PPM/DITY</button>
+    <button class="nav-tab" onclick="showTab('pov',this)">POV</button>
+    <button class="nav-tab" onclick="showTab('claims',this)">Claims/FRV</button>
+    <button class="nav-tab" onclick="showTab('rita',this)">RITA</button>
+    <button class="nav-tab" onclick="showTab('scenarios',this)">Scenarios</button>
+    <button class="nav-tab" onclick="showTab('checklist',this)">Checklist</button>
+    <button class="nav-tab" onclick="showTab('glossary',this)">Glossary</button>
+  </nav>
+</header>
+
+<main>
+
+<!-- ======================== OVERVIEW ======================== -->
+<div id="tab-overview" class="tab-panel active">
+  <div class="page-title"><span>📋</span> Overview & Authority</div>
+  <p class="page-subtitle">Governing authority, counselor responsibilities, and quick-reference entitlement summary.</p>
+
+  <div class="qr-grid">
+    <div class="qr-card gold-top"><div class="qr-title">Weight Limit — Officers O-6+</div><div class="qr-val">18,000 lbs</div><div class="qr-note">With or without dependents</div></div>
+    <div class="qr-card"><div class="qr-title">Civilian DoD Flat Allowance</div><div class="qr-val">18,000 lbs</div><div class="qr-note">All GS/WG grades — JTR ¶054303</div></div>
+    <div class="qr-card green-top"><div class="qr-title">PBP&E — Member</div><div class="qr-val">2,000 lbs</div><div class="qr-note">Non-chargeable; DD Form 3168</div></div>
+    <div class="qr-card green-top"><div class="qr-title">PBP&E — Spouse</div><div class="qr-val">500 lbs</div><div class="qr-note">Non-chargeable; DD Form 3168</div></div>
+    <div class="qr-card"><div class="qr-title">NTS Time Limit — CONUS</div><div class="qr-val">1 Year</div><div class="qr-note">Extendable via DD Form 3151</div></div>
+    <div class="qr-card red-top"><div class="qr-title">Claim Filing — FRV</div><div class="qr-val">180 Days</div><div class="qr-note">From delivery (DD Form 3153)</div></div>
+  </div>
+
+  <div class="card gold-border">
+    <h2><span class="icon">⚖️</span> Governing Authority</h2>
+    <p><strong>Joint Travel Regulations (JTR)</strong> — Chapter 5 governs all HHG, NTS, and PPM entitlements for Uniformed Service members. Chapter 5 Part C addresses DoD civilian PCS transportation.</p>
+    <p><strong>DTR Part IV</strong> (Defense Transportation Regulation Part IV) — Operational procedures for personal property shipment; Appendices A–M list all current DD Forms 3151–3178 (January 2026 edition).</p>
+    <p><strong>AFI 24-602 Volume 4</strong> — Air Force instruction implementing DTR Part IV for Air Force and Space Force personal property programs.</p>
+    <p><strong>MILPERSMAN 4650-010</strong> — Navy Personnel Manual procedures for household goods.</p>
+    <p><strong>MCO 4600.40</strong> — Marine Corps Order for personal property and transportation.</p>
+    <p><strong>COMDTINST M4050.6</strong> — Coast Guard personal property management instruction.</p>
+    <p><strong>AR 55-71</strong> — Army Regulation for transportation of personal property.</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">👤</span> Counselor Responsibilities</h2>
+    <p>The Personal Property Counselor is the first line of guidance for service members and DoD civilians during PCS, TDY, separation, or retirement moves. Key responsibilities include:</p>
+    <ul>
+      <li>Verify orders and determine correct shipment entitlements based on rank, dependency status, and move type</li>
+      <li>Brief members on <strong>all applicable DD Forms</strong> (3151–3178 series) and ensure completion prior to shipment</li>
+      <li>Counsel on weight allowances, weight tickets, and consequences of excess weight</li>
+      <li>Advise on prohibited/restricted items, firearms (DD Form 3152), and special-handling requirements</li>
+      <li>Provide FRV (Full Replacement Value) coverage counseling using <strong>DD Form 3153</strong></li>
+      <li>Brief PPM/DITY procedures and complete <strong>DD Form 3166</strong> checklist</li>
+      <li>Ensure all POV shipments are counseled using <strong>DD Forms 3163, 3164, 3165</strong> as applicable</li>
+      <li>Document all counseling in DPS (Defense Personal Property System)</li>
+    </ul>
+  </div>
+
+  <div class="card steel-border">
+    <h2><span class="icon">🏛️</span> Policy Update: New DD Form Series</h2>
+    <div class="alert warn"><span class="alert-icon">⚠️</span><span>All legacy DD Forms 1797, 1299, 2278, 1840/1840R, and 1252/1252-1 are <strong>superseded</strong> as of January 2026. Counselors must use only the DD 3151–3178 series.</span></div>
+    <p>The new form series consolidates and standardizes counseling documentation across all Service branches. Each form aligns with a specific entitlement or shipment category under DTR Part IV (January 2026). See the <strong>DD Forms</strong> tab for a complete reference guide.</p>
+  </div>
+</div>
+
+<!-- ======================== DD FORMS ======================== -->
+<div id="tab-forms" class="tab-panel">
+  <div class="page-title"><span>📄</span> New DD Forms 3151–3178</div>
+  <p class="page-subtitle">Complete reference for all current DD Forms per DTR Part IV, Appendices A–M (January 2026). Legacy forms are no longer valid.</p>
+
+  <div class="alert danger"><span class="alert-icon">🚫</span><span><strong>Superseded Forms — DO NOT USE:</strong> DD 1797 (replaced by DD 3157 &amp; 3170), DD 1299 (replaced by DD 3170), DD 2278 (replaced by DD 3166), DD 1840/1840R (replaced by DD 3153), DD 1252/1252-1 (replaced by DD 3158).</span></div>
+
+  <div class="card">
+    <h2><span class="icon">📋</span> Current Form Reference — DD 3151 to DD 3178</h2>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Form</th><th>Title</th><th>Purpose / When Used</th><th>Replaces</th></tr></thead>
+        <tbody>
+          <tr><td><strong>DD 3151</strong></td><td>Entitlement Extension Request</td><td>Used when member needs to extend NTS, shipment, or storage time limits beyond authorized period. Requires commander/installation approval.</td><td>Legacy extension memos</td></tr>
+          <tr><td><strong>DD 3152</strong></td><td>Privately Owned Firearms (POF) Information Worksheet</td><td>Required for all firearm shipments. Member must list all firearms, serial numbers, calibers, and certify compliance with destination state/country laws. Reviewed by counselor before shipment pickup.</td><td>ATF Form 5330.3B supplements</td></tr>
+          <tr><td><strong>DD 3153</strong></td><td>Full Replacement Value (FRV) Coverage Counseling Checklist</td><td>FRV briefing documentation. Counselor AND member sign. Member elects coverage level, acknowledges 180-day filing window, and receives copy. Mandatory for every shipment.</td><td>DD Forms 1840 / 1840R</td></tr>
+          <tr><td><strong>DD 3154</strong></td><td>Quarantined Pest Self-Inspection Checklist</td><td>Member self-certifies household goods have been inspected for invasive pests (spotted lanternfly, emerald ash borer, etc.) before loading. Required for shipments from designated quarantine zones.</td><td>New form (no prior equivalent)</td></tr>
+          <tr><td><strong>DD 3155</strong></td><td>Home of Record (HOR) Transportation Entitlement Counseling Authority</td><td>Authorizes HHG shipment to/from member's HOR upon separation, retirement, or death. Documents HOR address and entitlement authority. Required when destination differs from last duty station.</td><td>Legacy HOR memo/letter</td></tr>
+          <tr><td><strong>DD 3156</strong></td><td>Home of Selection (HOS) Travel and Transportation Entitlement Authority</td><td>Authorizes HHG shipment to member's selected home upon retirement or 20+ year separation. HOS may differ from HOR. Must be completed prior to retirement order issuance.</td><td>Legacy HOS memo/letter</td></tr>
+          <tr><td><strong>DD 3157</strong></td><td>HHG Moving Checklist</td><td>Pre-move counseling checklist reviewed with member. Covers items not to ship, packing expectations, weight ticket process, DPS account setup, and shipment timeline. Replaces the old DD 1797 counseling record.</td><td><strong>DD Form 1797</strong></td></tr>
+          <tr><td><strong>DD 3158</strong></td><td>List of Food Items for Import into the United States</td><td>Required for all OCONUS-to-CONUS shipments. Member lists all food items in shipment for CBP/USDA inspection coordination. Certain items are prohibited from import.</td><td>DD 1252 / 1252-1 (food sections)</td></tr>
+          <tr><td><strong>DD 3159</strong></td><td>Motorcycle/Dirt Bike Information Worksheet</td><td>Required for shipping motorcycles, dirt bikes, or ATVs. Documents vehicle info, confirms fuel/fluid drain certification, and notes special handling requirements.</td><td>Legacy motorcycle supplements</td></tr>
+          <tr><td><strong>DD 3160</strong></td><td>Non-Temporary Storage (NTS) Release Form</td><td>Authorizes release of items currently in NTS. Member signs to authorize TSP to release property and coordinate delivery to new address. Required before any NTS release action in DPS.</td><td>Legacy NTS release memo</td></tr>
+          <tr><td><strong>DD 3161</strong></td><td>NTS/Outbound Shipment Change Request</td><td>Used to amend an existing NTS or outbound shipment (address change, date change, partial release). Submitted through DPS and must be completed before the TSP is notified of changes.</td><td>Legacy amendment memos</td></tr>
+          <tr><td><strong>DD 3162</strong></td><td>Personal Property Pre-Counseling Worksheet</td><td>Pre-counseling intake form. Member completes prior to counseling appointment, capturing orders info, dependency status, destination, and special items. Allows counselor to prepare entitlement calculations in advance.</td><td>New form (no prior equivalent)</td></tr>
+          <tr><td><strong>DD 3163</strong></td><td>POV Shipping Counseling Form</td><td>Required for all POV (Privately Owned Vehicle) shipments. Documents vehicle description, VIN, shipment authority, member certification, and receiving port information.</td><td>Legacy POV counseling forms</td></tr>
+          <tr><td><strong>DD 3164</strong></td><td>POV Storage Counseling Form</td><td>Authorizes POV placement into non-temporary storage when member is deployed or assigned to a no-POV area. Documents storage location, time limits, and retrieval procedures.</td><td>Legacy POV storage memos</td></tr>
+          <tr><td><strong>DD 3165</strong></td><td>POV Storage Authorization Letter</td><td>Commander/installation authorization confirming the member's assignment qualifies for POV storage. Accompanies DD 3164; issued by losing installation transportation office.</td><td>Legacy commander authorization letters</td></tr>
+          <tr><td><strong>DD 3166</strong></td><td>PPM Checklist and Expense Certification</td><td>Primary form for Personally Procured Move (PPM/DITY). Documents incentive payment calculation, weight tickets (empty and loaded), expenses, and member certification. Required for ALL PPM payments.</td><td><strong>DD Form 2278</strong></td></tr>
+          <tr><td><strong>DD 3167</strong></td><td>Releasing Agent Authorization Statement</td><td>Authorizes a designated agent (spouse, parent, attorney) to act on behalf of the member for shipment pickup, delivery, or changes. Must be notarized or signed before a witness.</td><td>Power of Attorney (personal property use)</td></tr>
+          <tr><td><strong>DD 3168</strong></td><td>Customer/Spouse PBP&E Worksheet</td><td>Documents Professional Books, Papers, and Equipment (PBP&E) for both member (up to 2,000 lbs) and spouse (up to 500 lbs). Weight is non-chargeable against HHG allowance. Requires itemized list.</td><td>Legacy PBP&E supplements</td></tr>
+          <tr><td><strong>DD 3169</strong></td><td>Shipping Alcoholic Beverages</td><td>Required when member is shipping alcoholic beverages (permitted in government-arranged shipments for personal use, subject to destination laws). Member certifies quantity, type, and destination legality.</td><td>Legacy alcohol supplements</td></tr>
+          <tr><td><strong>DD 3170</strong></td><td>Shipper's Certification for Shipment</td><td>General shipper certification documenting the member's acknowledgment of inventory accuracy, packing conditions, and liability limitations. Must be signed at time of pickup.</td><td>DD 1797 certification language, DD 1299</td></tr>
+          <tr><td><strong>DD 3178</strong></td><td>Boat/Personal Watercraft Counseling &amp; Information Sheet</td><td>Required for shipping boats, personal watercraft (jet skis), or canoes. Documents vessel dimensions, fuel drain certification, trailer information, and special handling requirements.</td><td>New form (no prior equivalent)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card steel-border">
+    <h2><span class="icon">📌</span> Forms Still in Use (Not Superseded)</h2>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Form</th><th>Title</th><th>Status / Use</th></tr></thead>
+        <tbody>
+          <tr><td><strong>DD 1701</strong></td><td>Inventory of Household Goods</td><td><span class="tag tag-mod">Active</span> Generated by TSP at pickup. Not a counselor form — TSP completes. Member reviews and signs at delivery.</td></tr>
+          <tr><td><strong>DD 1351-2</strong></td><td>Travel Voucher or Subvoucher</td><td><span class="tag tag-mod">Active</span> Required for PPM incentive payment filing. Member submits through finance with DD 3166.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== WEIGHTS ======================== -->
+<div id="tab-weights" class="tab-panel">
+  <div class="page-title"><span>⚖️</span> Weight Allowances</div>
+  <p class="page-subtitle">JTR Table 5-8 weight allowances by rank/grade and dependency status. Excess weight is the member's financial responsibility.</p>
+
+  <div class="alert warn"><span class="alert-icon">⚠️</span><span>PBP&E (Professional Books, Papers, and Equipment) does <strong>NOT</strong> count against the HHG weight allowance. Document with <strong>DD Form 3168</strong>. Member: up to 2,000 lbs; Spouse: up to 500 lbs.</span></div>
+
+  <div class="card">
+    <h2><span class="icon">🎖️</span> Officer / Warrant Officer Allowances (JTR Table 5-8)</h2>
+    <div class="tbl-wrap">
+      <table class="wt-table">
+        <thead><tr><th>Grade</th><th class="wt-dep">With Dependents (lbs)</th><th class="wt-nodep">Without Dependents (lbs)</th></tr></thead>
+        <tbody>
+          <tr><td><strong>O-10 / O-9 / O-8 / O-7 / O-6</strong></td><td class="wt-dep">18,000</td><td class="wt-nodep">18,000</td></tr>
+          <tr><td><strong>O-5 / W-5</strong></td><td class="wt-dep">17,500</td><td class="wt-nodep">16,000</td></tr>
+          <tr><td><strong>O-4 / W-4</strong></td><td class="wt-dep">17,000</td><td class="wt-nodep">14,000</td></tr>
+          <tr><td><strong>O-3 / W-3</strong></td><td class="wt-dep">14,500</td><td class="wt-nodep">13,000</td></tr>
+          <tr><td><strong>O-2 / W-2</strong></td><td class="wt-dep">13,500</td><td class="wt-nodep">12,500</td></tr>
+          <tr><td><strong>O-1 / W-1</strong></td><td class="wt-dep">12,000</td><td class="wt-nodep">10,000</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">🪖</span> Enlisted Allowances (JTR Table 5-8)</h2>
+    <div class="tbl-wrap">
+      <table class="wt-table">
+        <thead><tr><th>Grade</th><th class="wt-dep">With Dependents (lbs)</th><th class="wt-nodep">Without Dependents (lbs)</th></tr></thead>
+        <tbody>
+          <tr><td><strong>E-9</strong></td><td class="wt-dep">15,000</td><td class="wt-nodep">13,000</td></tr>
+          <tr><td><strong>E-8</strong></td><td class="wt-dep">14,000</td><td class="wt-nodep">12,000</td></tr>
+          <tr><td><strong>E-7</strong></td><td class="wt-dep">13,000</td><td class="wt-nodep">11,000</td></tr>
+          <tr><td><strong>E-6</strong></td><td class="wt-dep">11,000</td><td class="wt-nodep">8,000</td></tr>
+          <tr><td><strong>E-5</strong></td><td class="wt-dep">9,000</td><td class="wt-nodep">7,000</td></tr>
+          <tr><td><strong>E-4</strong></td><td class="wt-dep">8,000</td><td class="wt-nodep">7,000</td></tr>
+          <tr><td><strong>E-3 / E-2 / E-1</strong></td><td class="wt-dep">8,000</td><td class="wt-nodep">5,000</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card green-border">
+    <h2><span class="icon">💼</span> PBP&E — DD Form 3168</h2>
+    <p><strong>Professional Books, Papers, and Equipment (PBP&E)</strong> shipments are authorized in addition to the HHG weight allowance and do not count against it.</p>
+    <ul>
+      <li><strong>Member's PBP&E:</strong> Up to 2,000 lbs — items directly related to military duties</li>
+      <li><strong>Spouse's PBP&E:</strong> Up to 500 lbs — items required for spouse's professional occupation</li>
+      <li>Both member and spouse must complete <strong>DD Form 3168</strong> with a detailed itemized list</li>
+      <li>PBP&E must be packed separately from HHG and listed on a separate inventory</li>
+      <li>Counselor must review DD 3168 and ensure itemization is complete before authorizing shipment</li>
+    </ul>
+    <div class="alert info"><span class="alert-icon">ℹ️</span><span>Examples of qualifying member PBP&E: military references, uniforms in excess of required amounts, specialized tools. Examples of spouse PBP&E: nursing equipment, legal books, medical reference texts.</span></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">📏</span> Weight Ticket Requirements</h2>
+    <ul>
+      <li>For PPM/DITY moves, member must obtain <strong>certified weight tickets</strong> from a certified scale facility</li>
+      <li>Required: one empty-truck weight ticket and one loaded-truck weight ticket</li>
+      <li>Weight tickets must be from a CAT (Certified Automated Terminal) scale or certified public scale</li>
+      <li>Weights must reflect the actual transported goods — personal vehicle weight (if towing) is deducted</li>
+      <li>Document weight tickets on <strong>DD Form 3166</strong> (PPM Checklist and Expense Certification)</li>
+      <li>Weight tickets older than 60 days from the actual move date will not be accepted</li>
+    </ul>
+    <div class="alert warn"><span class="alert-icon">⚠️</span><span>If actual shipped weight exceeds authorized allowance, the member pays the excess at the GCC (Government Constructed Cost) rate. Counsel members to weigh before loading to avoid excess charges.</span></div>
+  </div>
+</div>
+
+<!-- ======================== ENTITLEMENTS ======================== -->
+<div id="tab-entitlements" class="tab-panel">
+  <div class="page-title"><span>📜</span> Entitlements by Move Type</div>
+  <p class="page-subtitle">Authorized shipments and storage entitlements based on move category per JTR Chapter 5.</p>
+
+  <div class="card gold-border">
+    <h2><span class="icon">🔄</span> PCS (Permanent Change of Station)</h2>
+    <p>Most common move type. Entitlements are based on rank, dependency status, and origin/destination.</p>
+    <ul>
+      <li><strong>HHG Shipment:</strong> Up to weight allowance from JTR Table 5-8</li>
+      <li><strong>NTS (Non-Temporary Storage):</strong> Up to 1 year CONUS; up to member's tour length OCONUS. Extension via <strong>DD Form 3151</strong>.</li>
+      <li><strong>TLE (Temporary Lodging Expense):</strong> Up to 10 days CONUS; up to 60 days OCONUS (JTR ¶0504)</li>
+      <li><strong>PPM/DITY:</strong> Eligible; complete <strong>DD Form 3166</strong>. Incentive = 95% of GCC</li>
+      <li><strong>POV Shipment:</strong> One POV OCONUS only (unless no vehicle allowed at gaining duty station)</li>
+      <li><strong>DPS Required:</strong> All shipments must be booked through Defense Personal Property System</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">🏠</span> Separation / ETS — HOR &amp; PLEAD</h2>
+    <ul>
+      <li>Authorized shipment from last duty station to HOR (<strong>DD Form 3155</strong>) or HOS for 20+ year members (<strong>DD Form 3156</strong>)</li>
+      <li>Move must be completed within <strong>1 year</strong> of separation date (extendable via DD 3151 with good cause)</li>
+      <li>Members with less than 8 years of service may have reduced entitlements — verify with JTR ¶0540</li>
+    </ul>
+    <h3>Place Entered Active Duty (PLEAD) — JTR ¶0539</h3>
+    <p>When a member separates or retires and their HOR differs from their current duty station, the government transportation entitlement is to the <strong>Home of Record (HOR)</strong> — typically the same as the member's PLEAD (Place of Entry on Active Duty).</p>
+    <ul>
+      <li><strong>What PLEAD Means:</strong> PLEAD is the geographic location where the member entered active military service. For most enlisted members, this is their recruiting station city/state; for officers, it is typically where they were commissioned.</li>
+      <li><strong>HOR vs. PLEAD:</strong> In most cases, the HOR and PLEAD are the same location. When they differ (e.g., member moved to a different state before enlisting and changed their official HOR), the HOR on record governs the transportation entitlement — not the PLEAD.</li>
+      <li><strong>Correcting HOR:</strong> A member's HOR is established at accession and can only be corrected if there was an error at the time of entry. It cannot be changed simply because the member has lived elsewhere during service. Corrections require documentary evidence and are processed through the Service personnel records office.</li>
+      <li><strong>Government pays to HOR:</strong> Upon separation, the government pays transportation costs to the HOR (or HOS if qualifying). If the member elects to move to a location other than HOR/HOS, the government pays only up to the constructive cost to the HOR — the member pays the difference.</li>
+      <li><strong>PLEAD for Civilians:</strong> DoD civilians do not have an equivalent PLEAD entitlement. Civilian PCOS transportation is to the new official duty station or to the employee's home at the time of appointment, as specified in their appointment documents.</li>
+    </ul>
+    <div class="alert info"><span class="alert-icon">ℹ️</span><span>If a member's HOR is in dispute or appears incorrect on their orders, the counselor should direct the member to their S1/G1/MPF/IPAC to resolve the HOR discrepancy <em>before</em> booking the shipment. Shipping to a wrong HOR cannot be corrected after delivery.</span></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">🎖️</span> Retirement — Transportation Extensions (JTR ¶050601)</h2>
+    <p>Retiring members have significant flexibility in when they use their final transportation entitlement. Extensions are governed by JTR ¶050601 and must be formally requested.</p>
+    <h3>Standard Entitlement</h3>
+    <ul>
+      <li>Entitled to one final shipment to HOR or HOS (<strong>DD Form 3155 / DD Form 3156</strong>)</li>
+      <li>Move must begin within <strong>1 year</strong> of retirement date (standard, no request needed)</li>
+      <li>HOS must be established before retirement date; cannot be changed after shipment is booked</li>
+    </ul>
+    <h3>Extension to 3 Years — JTR ¶050601-B</h3>
+    <ul>
+      <li>A retiring member may request an extension of the transportation entitlement to <strong>3 years from the date of retirement</strong></li>
+      <li>Request must be submitted to the losing installation transportation office <strong>before the 1-year standard deadline expires</strong></li>
+      <li>Approval authority: Installation commander or designated transportation official</li>
+      <li>Justification required — common approved reasons: financial hardship, ongoing medical treatment, dependent school year, housing market conditions, or family circumstances</li>
+      <li>Extension is documented in DPS and on <strong>DD Form 3151</strong> (Entitlement Extension Request)</li>
+      <li>HHG may remain in NTS during the extension period at government expense (subject to NTS limits)</li>
+    </ul>
+    <h3>Extension to 6 Years — JTR ¶050601-C</h3>
+    <ul>
+      <li>In cases of unusual or compelling circumstances, an extension to <strong>6 years from the date of retirement</strong> may be authorized</li>
+      <li>Request must be submitted and approved <strong>before the 3-year extension expires</strong></li>
+      <li>Approval authority: Generally requires approval at a higher level than the installation — Service HQ transportation directorate level (e.g., HQ IMCOM G4 for Army, NAVPERSCOM for Navy)</li>
+      <li>Compelling circumstances required — examples: documented medical condition preventing move, dependent in critical education program, housing unavailability at HOS, or ongoing legal proceedings affecting property</li>
+      <li>Member must re-justify the extension; general inconvenience does not qualify for the 6-year extension</li>
+      <li>The 6-year extension is a maximum — no further extensions are authorized beyond 6 years from retirement date</li>
+      <li>NTS continues at government expense during the authorized extension period; member is responsible for any NTS costs beyond the extension expiration</li>
+    </ul>
+    <h3>Key Counselor Actions</h3>
+    <ul>
+      <li>Brief every retiree on the 1-year standard, 3-year extension, and 6-year exception at the retirement counseling appointment</li>
+      <li>Emphasize that extension requests must be submitted <em>before</em> the current deadline expires — retroactive extensions are not authorized</li>
+      <li>Document the extension briefing in DPS counseling notes</li>
+      <li>Provide retiree with POC for extension requests at the losing ITO/PPO</li>
+    </ul>
+    <div class="alert warn"><span class="alert-icon">⚠️</span><span><strong>NTS Cost Warning:</strong> While HHG may remain in NTS during an approved extension, NTS fees and conditions must be reviewed annually. If goods are damaged or lost during NTS due to member's delay, FRV claim eligibility may be affected. Counsel retirees to move as soon as practical even if an extension is approved.</span></div>
+    <div class="alert info"><span class="alert-icon">ℹ️</span><span><strong>Surviving Spouses:</strong> The surviving spouse of a member who dies on active duty or after retirement retains the transportation entitlement with the same 1-year (extendable to 3 years) timeline measured from the date of the member's death — per JTR ¶050602.</span></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">🕊️</span> Death / Survivor Benefits</h2>
+    <ul>
+      <li>Surviving family authorized one HHG shipment to HOR or chosen destination</li>
+      <li>HOR transportation authority documented on <strong>DD Form 3155</strong></li>
+      <li>Surviving spouse has 3 years from date of death to use entitlement (JTR ¶0544); extendable to 6 years under compelling circumstances per JTR ¶050601-C</li>
+      <li>Coordinate with Casualty Affairs office — do not begin shipment without Casualty travel orders</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">📦</span> TDY/TAD (Temporary Duty)</h2>
+    <ul>
+      <li>No HHG shipment authorized for standard TDY/TAD under 180 days</li>
+      <li>TDY over 180 days: may qualify for HHG shipment (HHG to TDY location)</li>
+      <li>Unaccompanied baggage shipment may be authorized — coordinate with gaining installation</li>
+      <li>NTS authorized to store HHG while member is on extended TDY</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">💀</span> Death / Survivor Benefits</h2>
+    <ul>
+      <li>Surviving family authorized one HHG shipment to HOR or chosen destination</li>
+      <li>HOR transportation authority documented on <strong>DD Form 3155</strong></li>
+      <li>Surviving spouse has 3 years from date of death to use entitlement (JTR ¶0544)</li>
+      <li>Coordinate with Casualty Affairs office — do not begin shipment without Casualty travel orders</li>
+    </ul>
+  </div>
+
+  <div class="card steel-border">
+    <h2><span class="icon">🌏</span> OCONUS-Specific Rules</h2>
+    <p>OCONUS shipments have additional requirements beyond standard PCS counseling:</p>
+    <ul>
+      <li>Weight allowances may be reduced based on host nation SOFA agreements (see Service Differences tab)</li>
+      <li><strong>DD Form 3158</strong> required for all food items when returning OCONUS to CONUS</li>
+      <li>Alcohol shipment must be declared on <strong>DD Form 3169</strong>; destination laws govern legality</li>
+      <li>Quarantine inspection may be required — complete <strong>DD Form 3154</strong> for items from designated pest zones</li>
+      <li>POV shipment: one vehicle authorized to/from most OCONUS locations (verify with gaining installation)</li>
+      <li>Firearms: review SOFA agreement; Japan, Germany, and Korea have significant restrictions. Document on <strong>DD Form 3152</strong>.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ======================== UAB / PLEAD / STUDENT ======================== -->
+<div id="tab-uab" class="tab-panel">
+  <div class="page-title"><span>✈️</span> UAB / PLEAD / Student Travel</div>
+  <p class="page-subtitle">Unaccompanied Baggage, pre-move dependent travel to HOR, and annual student travel entitlements for OCONUS-assigned members.</p>
+
+  <div class="qr-grid">
+    <div class="qr-card gold-top"><div class="qr-title">Army / AF UAB</div><div class="qr-val">1,000 lbs</div><div class="qr-note">OCONUS moves — chargeable against HHG</div></div>
+    <div class="qr-card"><div class="qr-title">Navy UAB</div><div class="qr-val">600 lbs</div><div class="qr-note">+200 lbs with dependents (MILPERSMAN)</div></div>
+    <div class="qr-card"><div class="qr-title">USMC UAB</div><div class="qr-val">300 lbs</div><div class="qr-note">OCONUS; verify current MCO</div></div>
+    <div class="qr-card green-top"><div class="qr-title">Student Travel</div><div class="qr-val">Annual</div><div class="qr-note">Round trip; OCONUS member; college-age dependent</div></div>
+  </div>
+
+  <div class="card gold-border">
+    <h2><span class="icon">✈️</span> Unaccompanied Baggage (UAB) — Full Reference</h2>
+    <p>UAB is an expedited <strong>air freight</strong> shipment that travels ahead of or concurrent with the member to provide essential daily items at the OCONUS destination before the main HHG surface shipment arrives (typically 30–90 days later). UAB weight is <strong>chargeable</strong> against the member's total HHG weight allowance.</p>
+
+    <h3>UAB Weight Allowances by Branch</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Branch</th><th>Unaccompanied (lbs)</th><th>With Dependents (lbs)</th><th>Authority</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Army</strong></td><td>1,000</td><td>1,000 (no additional for dependents at standard)</td><td>AR 55-71 / JTR ¶0514</td></tr>
+          <tr><td><strong>Navy</strong></td><td>600</td><td>600 + 200 per dependent household</td><td>MILPERSMAN 4650-010</td></tr>
+          <tr><td><strong>Marine Corps</strong></td><td>300</td><td>300 (verify MCO 4600.40 for updates)</td><td>MCO 4600.40</td></tr>
+          <tr><td><strong>Air Force / Space Force</strong></td><td>1,000</td><td>1,000 + 350 with dependents</td><td>AFI 24-602 V4 / JTR ¶0514</td></tr>
+          <tr><td><strong>Coast Guard</strong></td><td>350</td><td>350 (verify COMDTINST M4050.6)</td><td>COMDTINST M4050.6</td></tr>
+          <tr><td><strong>DoD Civilians (PCOS)</strong></td><td>Gaining installation standard</td><td>Confirm with agency relocation coordinator</td><td>JTR ¶054303 / agency supplement</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="alert warn"><span class="alert-icon">⚠️</span><span>UAB weight limits are subject to change by Service directive. Always verify current Service-specific regulations before counseling. Civilian UAB limits should be confirmed with the gaining installation PPO and the employee's agency.</span></div>
+
+    <h3>What to Ship as UAB</h3>
+    <ul>
+      <li>Clothing and uniforms sufficient for the first 30–60 days at the new location</li>
+      <li>Children's immediate school supplies, textbooks, and uniforms</li>
+      <li>Small essential kitchen items (coffee maker, basic cookware, utensils)</li>
+      <li>Bedding and linens for immediate use</li>
+      <li>Portable electronics for daily use (laptop, tablet — batteries must comply with airline/air freight rules)</li>
+      <li>Important documents (keep originals; ship certified copies if needed)</li>
+      <li>Small appliances critical to daily routine</li>
+    </ul>
+
+    <h3>UAB Restrictions</h3>
+    <ul>
+      <li><strong>Firearms</strong> — NOT permitted in UAB. Document on DD Form 3152 and include in main HHG only</li>
+      <li><strong>Alcohol</strong> — NOT permitted in UAB; must be in main HHG shipment with DD Form 3169</li>
+      <li><strong>Food items</strong> — Strongly discouraged in UAB returning OCONUS-to-CONUS due to CBP/USDA inspection; complete DD Form 3158 for main HHG</li>
+      <li><strong>Hazardous materials</strong> — Same prohibitions as HHG; aerosols, flammables, propane prohibited</li>
+      <li><strong>Large single items</strong> — Items exceeding 300 lbs individually must go in main HHG shipment</li>
+      <li><strong>Lithium batteries over 100Wh</strong> — Air freight restrictions are stricter than truck; verify with TSP/carrier before including battery devices in UAB</li>
+    </ul>
+
+    <h3>Booking UAB in DPS</h3>
+    <ul>
+      <li>UAB is booked as a separate shipment from the main HHG in DPS</li>
+      <li>Member selects "Unaccompanied Baggage" as the shipment type when setting up the move</li>
+      <li>UAB typically moves via approved air freight carriers under the HHG TSP contract</li>
+      <li>Estimated transit time: 10–21 days to most OCONUS locations (varies by destination)</li>
+    </ul>
+  </div>
+
+  <div class="card" style="border-left-color:#1a7a3c">
+    <h2><span class="icon">🎓</span> PLEAD — Pre-move Dependent Travel to HOR</h2>
+    <p><strong>PLEAD</strong> authorizes a member's dependents — and a partial HHG shipment for their use — to travel to the member's <strong>Home of Record (HOR)</strong> in advance of the member's PCS move, separation, or retirement. It is commonly used to place school-age children in a stable school environment or to reunite the family with support networks before the member's tour is complete.</p>
+
+    <h3>PLEAD Eligibility (JTR ¶0549)</h3>
+    <ul>
+      <li>Member must hold approved PCS, retirement, or separation orders, or be within 12 months of anticipated retirement/separation</li>
+      <li>Dependents must be command-sponsored and authorized to travel under the member's orders</li>
+      <li>Receiving location must be the member's established HOR as recorded in the official personnel system</li>
+      <li>Member must not have previously used the full HHG shipment entitlement for this PCS/retirement move</li>
+      <li>PLEAD must be approved by the ITO/PPO and documented in DPS <em>before</em> dependents depart</li>
+    </ul>
+
+    <h3>What PLEAD Authorizes</h3>
+    <ul>
+      <li>Transportation (travel) of dependents to the HOR at dependent travel rates per JTR</li>
+      <li>A partial HHG shipment to the HOR for the dependents' use — counted against the member's total weight allowance</li>
+      <li>Member retains the ability to ship remaining HHG (within weight limit) when they complete their tour</li>
+      <li>NTS for HHG not shipped under PLEAD, pending the member's final move</li>
+    </ul>
+
+    <h3>PLEAD and HOR — Critical Relationship</h3>
+    <ul>
+      <li>The <strong>PLEAD destination must be the member's HOR</strong> as recorded in official personnel records — not a preferred location</li>
+      <li>If the member's HOR is incorrect, it must be corrected in the personnel system (DEERS/iPERMS/MCTFS) <em>before</em> the PLEAD shipment is authorized</li>
+      <li>Members retiring with an HOS (<strong>DD Form 3156</strong>) different from their HOR: the PLEAD shipment to HOR and the final retirement shipment to HOS are separate legs — coordinate carefully with ITO/PPO to avoid exceeding weight allowance across both legs</li>
+      <li>PLEAD uses the <strong>HOR authority (DD Form 3155)</strong> as the foundational document</li>
+    </ul>
+
+    <div class="alert warn"><span class="alert-icon">⚠️</span><span><strong>HOR Verification Is Mandatory:</strong> Confirm the member's HOR is correctly recorded before authorizing any PLEAD action. An incorrect HOR cannot be corrected retroactively after the shipment departs. This is a counselor verification responsibility.</span></div>
+
+    <h3>Counselor Checklist for PLEAD</h3>
+    <ul>
+      <li>Verify HOR in official personnel system matches the intended destination</li>
+      <li>Confirm orders are valid and dependents are authorized to travel</li>
+      <li>Calculate partial HHG weight and verify it does not exceed total allowance</li>
+      <li>Book PLEAD shipment in DPS as a separate shipment linked to member's orders</li>
+      <li>Authorize NTS for remaining HHG if member will not ship final HHG until tour completion</li>
+      <li>Brief member on HOR-vs-HOS distinction if retirement is anticipated</li>
+    </ul>
+  </div>
+
+  <div class="card steel-border">
+    <h2><span class="icon">🎒</span> Student Travel</h2>
+    <p>Student travel is an annual transportation entitlement that allows a member's college-age dependent child to travel between the member's OCONUS duty station (or the HOR where the student resides) and the student's school in CONUS, Alaska, or Hawaii.</p>
+
+    <h3>Eligibility Requirements (JTR ¶0551)</h3>
+    <ul>
+      <li>Member must be assigned to an <strong>OCONUS permanent duty station</strong></li>
+      <li>Dependent must be the member's child (stepchild or legally adopted child also qualifies)</li>
+      <li>Dependent must be under age 23 and enrolled full-time at an accredited college, university, or secondary boarding school in CONUS, Alaska, or Hawaii</li>
+      <li>The school must not be accessible from the OCONUS PDS (i.e., the student cannot attend school at the OCONUS location)</li>
+      <li>Authorized once per academic year — round trip</li>
+    </ul>
+
+    <h3>What Student Travel Covers</h3>
+    <ul>
+      <li>Round-trip commercial air travel at the government rate (lowest available fare consistent with mission requirements)</li>
+      <li>Reasonable checked baggage fees for academic-year supplies</li>
+      <li>Travel is typically routed through the member's OCONUS PDS city or the HOR (wherever the student's authorized residence is)</li>
+      <li>Per diem is <strong>not</strong> authorized — transportation only</li>
+    </ul>
+
+    <h3>Student Travel Does NOT Include</h3>
+    <ul>
+      <li>A separate HHG or UAB shipment for the student's personal belongings — these count against the member's HHG allowance if shipped</li>
+      <li>Travel for academic breaks shorter than the full academic year (mid-semester breaks, holidays) — those require personal funds or leave travel</li>
+      <li>Travel for students enrolled at OCONUS institutions or online-only programs where in-person attendance is not required</li>
+      <li>Travel for dependents over age 23, or for spouses</li>
+    </ul>
+
+    <h3>Comparison: Student Travel / PLEAD / Dependent PCS Travel</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Entitlement</th><th>Trigger</th><th>Frequency</th><th>HHG Authorized?</th><th>Per Diem?</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Dependent PCS Travel</strong></td><td>PCS orders — dependents travel to/from new PDS</td><td>Once per PCS</td><td>Yes — full HHG allowance</td><td>Yes</td></tr>
+          <tr><td><strong>PLEAD</strong></td><td>Approved orders/retirement — dependents move to HOR early</td><td>Once (tied to the PCS/retirement)</td><td>Yes — partial, counts against allowance</td><td>Yes — dependent travel rate</td></tr>
+          <tr><td><strong>Student Travel</strong></td><td>OCONUS assignment — child enrolled at CONUS school</td><td>Annual (once per academic year)</td><td>No — transportation only</td><td>No</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Counselor Action for Student Travel</h3>
+    <ul>
+      <li>Obtain proof of enrollment from an accredited institution before authorizing travel</li>
+      <li>Process student travel authorization through DPS or Service-specific travel system linked to member's OCONUS orders</li>
+      <li>Brief member that student travel authorization must be requested each academic year — it is not automatically renewed</li>
+      <li>Confirm student's age and enrollment status annually; entitlement ends when the student reaches age 23 or completes their program</li>
+    </ul>
+    <div class="alert info"><span class="alert-icon">ℹ️</span><span>Student travel applies to OCONUS-assigned members only. Members on CONUS assignments with college-age children have no equivalent transportation entitlement for the student's school travel.</span></div>
+  </div>
+</div>
+
+<!-- ======================== UAB / OCONUS ======================== -->
+<div id="tab-uab" class="tab-panel">
+  <div class="page-title"><span>✈️</span> Unaccompanied Baggage &amp; OCONUS Shipments</div>
+  <p class="page-subtitle">UAB entitlements for service members, dependents, and DoD civilians moving OCONUS. Per JTR ¶051401 and DTR Part IV.</p>
+
+  <div class="alert info"><span class="alert-icon">ℹ️</span><span><strong>UAB Weight is Chargeable:</strong> Unaccompanied Baggage weight counts against the member's authorized HHG weight allowance. Total UAB + HHG + NTS storage cannot exceed the authorized weight. Plan accordingly.</span></div>
+
+  <div class="card gold-border">
+    <h2><span class="icon">📦</span> What Is Unaccompanied Baggage (UAB)?</h2>
+    <p>Unaccompanied Baggage (UAB) is a small, expedited shipment transported by air that arrives at the OCONUS duty station ahead of the main HHG surface shipment. It is intended to provide essential household items during the period between arrival and delivery of the main HHG shipment.</p>
+    <ul>
+      <li>UAB is authorized for <strong>OCONUS PCS moves only</strong> — not for CONUS-to-CONUS moves</li>
+      <li>UAB travels by <strong>air freight</strong> and typically arrives within 2–4 weeks of departure</li>
+      <li>Main HHG surface shipment may take 30–90 days depending on the OCONUS location</li>
+      <li>UAB weight counts against the member's total HHG weight allowance (not in addition to it)</li>
+      <li>UAB is booked separately in DPS from the main HHG shipment</li>
+      <li>Items typically included in UAB: bedding/linens, kitchen essentials, children's school supplies, portable electronics, clothing for the first weeks, and children's comfort items</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">🎖️</span> Military Member UAB Allowances (JTR ¶051401)</h2>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Move Category</th><th>Member UAB</th><th>Each Dependent UAB</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Accompanied OCONUS PCS</strong> (with dependents)</td><td>350 lbs</td><td>350 lbs per dependent</td><td>All weights chargeable against HHG allowance. Dependents joining later still qualify.</td></tr>
+          <tr><td><strong>Unaccompanied OCONUS PCS</strong> (no dependents at OCONUS location)</td><td>350 lbs</td><td>N/A</td><td>Dependents remaining CONUS: HHG may be split (partial ship OCONUS, NTS for remainder)</td></tr>
+          <tr><td><strong>Unaccompanied Tour</strong> (no dependents authorized)</td><td>350 lbs UAB only</td><td>N/A</td><td>Remaining HHG placed in NTS for tour duration</td></tr>
+          <tr><td><strong>Return from OCONUS (CONUS PCS)</strong></td><td>Up to 350 lbs</td><td>Up to 350 lbs per dependent</td><td>UAB authorized for return moves when HHG is in surface transit</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="alert warn"><span class="alert-icon">⚠️</span><span>UAB allowances vary slightly by Service branch. The 350 lb figure is the JTR standard baseline. Army authorizes up to 1,000 lbs in some circumstances; verify with the specific Service regulation. See the Service Differences tab for branch-specific UAB limits.</span></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">👨‍👩‍👧</span> Dependent UAB — Key Rules</h2>
+    <ul>
+      <li><strong>Each authorized dependent</strong> (spouse, children, parents authorized as dependents) is entitled to 350 lbs of UAB when accompanying the member OCONUS</li>
+      <li><strong>Infant/minor children:</strong> Each child listed on the member's military ID/orders as a dependent counts separately — a family with 2 children has 4 × 350 = 1,400 lbs of UAB authorized (all chargeable against HHG allowance)</li>
+      <li><strong>Dependents not traveling with member:</strong> If dependents are deferred and will join the member later, they retain their UAB entitlement at the time they travel OCONUS. A separate UAB shipment must be booked in DPS.</li>
+      <li><strong>Dependents remaining in CONUS:</strong> If dependents will remain in CONUS for the entire tour (split family), dependents do not have a UAB entitlement for the member's OCONUS shipment.</li>
+      <li><strong>New dependents added during OCONUS tour:</strong> A member who marries or has a child while OCONUS may request a small UAB shipment for the new dependent — verify with installation PPO/ITO.</li>
+    </ul>
+  </div>
+
+  <div class="card steel-border">
+    <h2><span class="icon">🌍</span> OCONUS-Specific Shipment Guidance</h2>
+    <h3>Japan (Atsugi, Yokosuka, Sasebo, Misawa, Okinawa, Iwakuni)</h3>
+    <ul>
+      <li>Japanese housing is generally smaller than US housing — counsel members to ship essential items only and place excess in NTS CONUS</li>
+      <li>Tatami rooms and sliding door (shoji) openings may not accommodate large furniture</li>
+      <li>UAB typically arrives in 2–3 weeks; surface HHG takes 60–90 days</li>
+      <li>Firearms: Japan SOFA prohibits private ownership off-base. Store CONUS in NTS (see Prohibited Items tab)</li>
+      <li>Food items returning CONUS: DD Form 3158 required</li>
+    </ul>
+    <h3>Korea (Camp Humphreys, Yongsan, Osan, Kunsan)</h3>
+    <ul>
+      <li>Most Korea tours are 12-month unaccompanied (Area I) or 24-month accompanied (Area II/III)</li>
+      <li>Unaccompanied tours: member ships 350 lbs UAB; remaining HHG to NTS</li>
+      <li>Accompanied tours: full HHG plus UAB authorized; housing inventory varies by installation</li>
+      <li>Vehicles: most US vehicles are impractical on Korean roads; POV storage CONUS recommended</li>
+    </ul>
+    <h3>Germany / Italy / Spain / UK</h3>
+    <ul>
+      <li>European OCONUS locations generally accommodate larger HHG shipments than Pacific locations</li>
+      <li>SOFA customs declarations required; DD Form 3169 for alcohol, DD Form 3158 for CONUS return food items</li>
+      <li>POV shipment authorized; verify vehicle meets EU emissions and registration standards</li>
+      <li>UAB 2–3 weeks; surface HHG 4–8 weeks via Bremerhaven or Southampton VPCs</li>
+    </ul>
+    <h3>Guam / Hawaii</h3>
+    <ul>
+      <li>Guam and Hawaii are OCONUS for HHG purposes — UAB and surface shipment rules apply</li>
+      <li>Surface transit: Hawaii 4–6 weeks; Guam 6–10 weeks</li>
+      <li>Agricultural inspection: USDA/CBP rules apply strictly. Certain plants, soil, and food items restricted — complete DD Form 3154 as applicable</li>
+    </ul>
+    <h3>Middle East / CENTCOM AOR</h3>
+    <ul>
+      <li>Most CENTCOM tours are unaccompanied — member ships UAB (350 lbs max); HHG to NTS</li>
+      <li>Alcohol: prohibited in most Middle East nations. Do not ship alcoholic beverages to these locations even with DD Form 3169</li>
+      <li>Firearms: SOFA/host nation rules vary significantly — verify with gaining installation legal office</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">💼</span> DoD Civilian OCONUS UAB Entitlements (JTR ¶054303)</h2>
+    <p>DoD civilians directed to perform an OCONUS PCOS are entitled to UAB shipment similar to military members, though at a flat rate regardless of grade.</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Traveler</th><th>UAB Allowance</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Employee</strong></td><td>350 lbs</td><td>Chargeable against 18,000 lb HHG allowance</td></tr>
+          <tr><td><strong>Spouse</strong></td><td>350 lbs</td><td>If accompanying employee OCONUS</td></tr>
+          <tr><td><strong>Each dependent child</strong></td><td>350 lbs</td><td>Per authorized dependent accompanying employee</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <ul>
+      <li>Civilian UAB must be authorized in the agency's PCOS travel orders</li>
+      <li>Agency may use a Relocation Management Company (RMC) to coordinate civilian UAB — follow the RMC's booking procedures</li>
+      <li>SES members may have enhanced UAB provisions in their individual service agreements — verify with agency HR</li>
+    </ul>
+  </div>
+
+  <div class="card green-border">
+    <h2><span class="icon">📋</span> UAB Counseling Checklist Items</h2>
+    <ul>
+      <li>Calculate authorized UAB weight (member + each dependent × 350 lbs)</li>
+      <li>Confirm UAB weight will be deducted from HHG allowance in DPS</li>
+      <li>Brief prohibited items for air shipment (no lithium batteries over 100Wh, no liquids, no hazmat)</li>
+      <li>Advise member to pack UAB separately from HHG — TSP will pick up and ship separately</li>
+      <li>Provide estimated UAB transit time to OCONUS location</li>
+      <li>Brief FRV coverage for UAB via DD Form 3153 (same coverage as HHG)</li>
+      <li>Confirm DPS has separate UAB shipment booking alongside main HHG booking</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ======================== STUDENT TRAVEL ======================== -->
+<div id="tab-student" class="tab-panel">
+  <div class="page-title"><span>🎓</span> Student Travel</div>
+  <p class="page-subtitle">Transportation entitlements for dependent students of service members and DoD civilians assigned OCONUS. Per JTR ¶058001–058006.</p>
+
+  <div class="card gold-border">
+    <h2><span class="icon">📚</span> What Is Student Travel?</h2>
+    <p>Student travel is a transportation entitlement that allows dependent children of service members stationed OCONUS to travel to and from an educational institution in the United States (or another authorized location) at government expense. It is separate from PCS move entitlements.</p>
+    <ul>
+      <li>Authorized under JTR ¶058001 for members assigned OCONUS with dependent students</li>
+      <li>Provides round-trip transportation between the OCONUS duty station and the school location</li>
+      <li>Intended to allow dependent children to attend US schools, colleges, or vocational institutions when local schooling is unavailable or inadequate</li>
+      <li>Student travel is a <strong>travel entitlement, not a personal property entitlement</strong> — it covers transportation costs, not HHG or UAB shipment</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">✅</span> Eligibility Requirements (JTR ¶058001)</h2>
+    <ul>
+      <li><strong>Member must be assigned OCONUS</strong> on a PCS tour with authorized dependents</li>
+      <li><strong>Student must be a dependent</strong> listed on the member's military ID/orders</li>
+      <li><strong>Age requirements:</strong> Student must be at least <strong>18 years old</strong> (or high school graduate) to qualify for independent student travel. Younger dependent students may travel with or to a parent/guardian.</li>
+      <li><strong>Enrollment requirement:</strong> Student must be enrolled or accepted at a qualifying educational institution (university, college, junior college, vocational/technical school, or secondary school)</li>
+      <li><strong>Student is a dependent:</strong> The student must still meet the definition of a dependent under the member's service regulations (generally under age 23 if enrolled in school full-time)</li>
+      <li><strong>Accompanied tour:</strong> Member must be on an accompanied OCONUS tour (dependents authorized at the duty station)</li>
+    </ul>
+    <div class="alert warn"><span class="alert-icon">⚠️</span><span>Student travel is <strong>not authorized</strong> for members on unaccompanied tours. If dependents are not authorized at the OCONUS duty station, student travel does not apply — the dependent is not present OCONUS to travel from.</span></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">🗺️</span> Authorized Destinations &amp; Frequency (JTR ¶058002–058003)</h2>
+    <h3>Where Student Travel Goes</h3>
+    <ul>
+      <li><strong>Primary destination:</strong> The location of the student's educational institution within the United States (or its territories)</li>
+      <li><strong>Alternate destination:</strong> May be authorized to the member's HOR if that is closer to the school, at no additional cost to the government</li>
+      <li>The government pays the cost of transportation <strong>not to exceed</strong> the cost of travel between the OCONUS duty station and the student's school (or HOR, whichever is less)</li>
+    </ul>
+    <h3>Frequency of Travel</h3>
+    <ul>
+      <li>Student travel is authorized <strong>once each academic year</strong> (round trip) per qualifying dependent student</li>
+      <li>Travel should coincide with school year breaks — typically summer between academic years or semester breaks</li>
+      <li>Member may authorize the student to travel to the HOR instead of returning to the OCONUS duty station if that better supports the family situation</li>
+    </ul>
+    <h3>One-Time Limitation</h3>
+    <ul>
+      <li>Student travel for a given dependent is limited to the duration of the member's current OCONUS tour</li>
+      <li>Once the member PCS's back to CONUS, student travel entitlement ends</li>
+      <li>On a new OCONUS PCS tour, student travel may begin again if the dependent still qualifies</li>
+    </ul>
+  </div>
+
+  <div class="card steel-border">
+    <h2><span class="icon">💰</span> What Student Travel Covers (JTR ¶058004)</h2>
+    <ul>
+      <li><strong>Transportation cost:</strong> Government-procured ticket (typically commercial air) from the OCONUS duty station to the school/HOR and return</li>
+      <li><strong>Per diem:</strong> Student is entitled to per diem at the dependent rate for days of travel (travel days only — not for the academic year while at school)</li>
+      <li><strong>Baggage:</strong> Normal airline baggage allowance; no separate HHG or UAB shipment is authorized for student travel</li>
+      <li>Student travel does <strong>not</strong> cover: room and board at school, tuition, school supplies, local transportation at school, or personal baggage beyond normal airline limits</li>
+    </ul>
+    <div class="alert info"><span class="alert-icon">ℹ️</span><span>Student travel is coordinated through the installation finance/travel office, not the transportation/personal property office. However, counselors should be aware of the entitlement to properly advise members and refer them to the correct office.</span></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">🏫</span> Qualifying Educational Institutions</h2>
+    <ul>
+      <li>Accredited US colleges and universities (4-year, community college, graduate programs)</li>
+      <li>Accredited vocational, technical, or trade schools</li>
+      <li>Accredited secondary schools (high schools) — when local schooling is unavailable or the student has special educational needs</li>
+      <li>DoDEA (Department of Defense Education Activity) schools in CONUS or other OCONUS locations may qualify in some circumstances — verify with installation education office</li>
+      <li>Online-only programs: Generally do not qualify unless the student has a physical campus enrollment requirement</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">📋</span> Student Travel vs. Dependent Travel — Key Distinction</h2>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Entitlement</th><th>Purpose</th><th>Who Processes</th><th>Personal Property Involved?</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Student Travel</strong></td><td>Annual round-trip for dependent student to/from school CONUS</td><td>Finance/Travel Office (DTS)</td><td>No — travel only; normal baggage only</td></tr>
+          <tr><td><strong>Dependent Travel (PCS)</strong></td><td>Move of dependents to/from OCONUS PCS duty station</td><td>ITO/PPO (personal property) + Finance</td><td>Yes — UAB and HHG entitlements apply</td></tr>
+          <tr><td><strong>Dependent UAB</strong></td><td>Expedited shipment of essentials for dependent joining member OCONUS</td><td>ITO/PPO (personal property)</td><td>Yes — 350 lbs UAB per dependent</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card green-border">
+    <h2><span class="icon">💡</span> Counselor Action — Student Travel Referrals</h2>
+    <p>While student travel is not a personal property function, counselors should:</p>
+    <ul>
+      <li>Be aware of the student travel entitlement when counseling OCONUS-bound members with school-age dependents</li>
+      <li>Refer members to the installation finance/travel office (DTS) for student travel arrangements</li>
+      <li>Distinguish clearly between dependent PCS travel (which involves personal property) and annual student travel (which does not)</li>
+      <li>Note that a dependent who travels OCONUS on student travel does NOT get a separate UAB entitlement for that student travel trip — UAB is a PCS entitlement only</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ======================== SERVICES ======================== -->
+<div id="tab-services" class="tab-panel">
+  <div class="page-title"><span>🪖</span> Service Branch Differences</div>
+  <p class="page-subtitle">Branch-specific regulations and requirements beyond JTR baseline. Select a branch below.</p>
+
+  <div class="svc-tabs">
+    <button class="svc-tab army active" onclick="showSvc('army',this)">⬛ Army</button>
+    <button class="svc-tab navy" onclick="showSvc('navy',this)">⚓ Navy</button>
+    <button class="svc-tab usmc" onclick="showSvc('usmc',this)">🦅 Marines</button>
+    <button class="svc-tab uscg" onclick="showSvc('uscg',this)">⚓ Coast Guard</button>
+  </div>
+
+  <div id="svc-army" class="svc-panel active">
+    <div class="card" style="border-left-color:#3d6b1a">
+      <h2 style="color:#3d6b1a"><span class="icon">⬛</span> Army — AR 55-71</h2>
+      <p>The Army transportation regulation implements JTR within Army-specific procedures and command structures.</p>
+      <h3>Key Army-Specific Rules</h3>
+      <ul>
+        <li><strong>Installation Transportation Office (ITO):</strong> All Army PCS moves must be coordinated through the local ITO before departure. Members cannot bypass ITO and book directly in DPS without ITO authorization code.</li>
+        <li><strong>Pre-Move Survey:</strong> Army strongly recommends an in-home pre-move survey for moves over 10,000 lbs. ITO will schedule with TSP if requested.</li>
+        <li><strong>Excess Weight:</strong> Army commanders can authorize one-time weight allowance waivers for field-grade officers on certain OCONUS assignments — requires G4 coordination.</li>
+        <li><strong>OCONUS Korea (USAG Korea):</strong> Restricted dependent area — limited HHG authorized. Check Area I vs. Area II assignments. Unaccompanied members: NTS authorized for remainder of tour.</li>
+        <li><strong>OCONUS Germany/Italy:</strong> Full accompanied tour = full HHG allowance. SOFA permits firearms shipment with host nation customs declaration. DD Form 3152 required.</li>
+        <li><strong>DITY/PPM:</strong> Army members may be authorized advance pay for PPM expenses — coordinate with finance before move. Document on DD Form 3166.</li>
+        <li><strong>POV Storage:</strong> Available at Army Vehicle Processing Centers (VPCs). DD Forms 3163/3164 required. Major VPCs: Baltimore, Houston, Jacksonville, Los Angeles.</li>
+        <li><strong>Unaccompanied Baggage:</strong> Army authorizes up to 1,000 lbs unaccompanied baggage for OCONUS PCS when full HHG shipment is delayed.</li>
+      </ul>
+      <div class="alert info"><span class="alert-icon">📞</span><span><strong>Army HQ Contact:</strong> HQ IMCOM G4 Transportation Division — coordinates Army-wide personal property policy. Local ITO is primary POC for all individual move issues.</span></div>
+    </div>
+  </div>
+
+  <div id="svc-navy" class="svc-panel">
+    <div class="card" style="border-left-color:#1c3461">
+      <h2 style="color:#1c3461"><span class="icon">⚓</span> Navy — MILPERSMAN 4650-010</h2>
+      <p>Navy personal property procedures are governed by MILPERSMAN 4650-010 and NAVSUP Publication 490. Navy-unique shipment rules apply to unaccompanied tours, ship deployments, and shore rotations.</p>
+      <h3>Key Navy-Specific Rules</h3>
+      <ul>
+        <li><strong>PPO (Personal Property Office):</strong> Navy members counsel at the local PPO (Navy Installations Command). Some large installations have dedicated HHG counseling centers (e.g., Norfolk, San Diego, Pearl Harbor).</li>
+        <li><strong>Deployment NTS:</strong> Sailors deploying 6+ months may store HHG in NTS rather than paying rent on an apartment. NTS is authorized for the duration of deployment plus 30 days (extendable via DD 3151).</li>
+        <li><strong>Ship-to-Shore PCS:</strong> When moving from a ship to shore duty, members have 60 days to complete counseling after check-in at new command.</li>
+        <li><strong>Japan (OCONUS):</strong> Yokosuka, Sasebo, and Misawa have restricted weight limits due to housing dimensions. Counselors must brief members on Japanese housing square footage limitations. Excess stored in NTS at member's expense beyond JTR NTS limit.</li>
+        <li><strong>Guam:</strong> Full HHG authorized. Shipping time is 60–90 days by sea. Counsel members to ship early and plan for temporary housing/furniture rental.</li>
+        <li><strong>Firearms in Japan:</strong> SOFA Article 9 prohibits private firearm possession in Japan for US personnel. DD Form 3152 must note "destination prohibits — storing CONUS." NTS or surrender required.</li>
+        <li><strong>Unaccompanied Baggage (UAB):</strong> Navy authorizes up to 600 lbs UAB for OCONUS moves. Arrives before main shipment by air.</li>
+        <li><strong>POV:</strong> Navy VPCs operated at major ports. Coordinate through NAVSUP for overseas POV shipment timelines.</li>
+      </ul>
+      <div class="alert warn"><span class="alert-icon">⚠️</span><span>Navy Instruction OPNAVINST 4600.15 governs special move categories including embassy duty, recruiting duty, and overseas recruiting tours — verify with BUPERS for these assignment types.</span></div>
+    </div>
+  </div>
+
+  <div id="svc-usmc" class="svc-panel">
+    <div class="card" style="border-left-color:#8b2020">
+      <h2 style="color:#8b2020"><span class="icon">🦅</span> Marine Corps — MCO 4600.40</h2>
+      <p>Marine Corps personal property is governed by MCO 4600.40 and coordinated through installation PPOs at each Marine Corps installation.</p>
+      <h3>Key USMC-Specific Rules</h3>
+      <ul>
+        <li><strong>PPO Locations:</strong> USMC PPOs at Camp Lejeune, Camp Pendleton, Quantico, Okinawa, Iwakuni, and Miramar. Members at smaller installations may use nearest major PPO or coordinate through MCCS online portal.</li>
+        <li><strong>Okinawa:</strong> Most Okinawa tours are accompanied (36 months) or unaccompanied (12 months). Accompanied: full HHG authorized with housing size caveat. Unaccompanied: HHG placed in NTS; member ships only UAB (300 lbs max).</li>
+        <li><strong>Unaccompanied Baggage:</strong> USMC authorizes 300 lbs UAB for OCONUS moves (less than Navy's 600 lbs). Verify current MCO for any recent changes.</li>
+        <li><strong>Mandatory Pre-Move Survey:</strong> MCO 4600.40 requires a pre-move survey for all shipments over 12,000 lbs or when member has art, antiques, or high-value items.</li>
+        <li><strong>PPM/DITY:</strong> Marines processing a DITY move must have orders certified and DD Form 3166 completed by PPO before move begins. Advance pay authorized up to 60% of estimated incentive.</li>
+        <li><strong>Retirement HOS:</strong> Marine retirees completing DD Form 3156 must have commanding officer endorsement if HOS is more than 500 miles outside CONUS area of military service.</li>
+        <li><strong>Weapons:</strong> USMC permits shipment of authorized firearms per DD Form 3152. Bayonets, suppressors, and NFA items require USMC legal review prior to shipment authorization.</li>
+        <li><strong>MARADMIN Guidance:</strong> Check current MARADMIN for temporary policy changes affecting PCS moves — issued frequently during high ops-tempo periods.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="svc-uscg" class="svc-panel">
+    <div class="card" style="border-left-color:#c8520a">
+      <h2 style="color:#c8520a"><span class="icon">⚓</span> Coast Guard — COMDTINST M4050.6</h2>
+      <p>The Coast Guard follows JTR entitlements but has unique administrative processes through CGPSC (Coast Guard Personnel Service Center) and SWA (Surface Warfare Afloat) commands.</p>
+      <h3>Key USCG-Specific Rules</h3>
+      <ul>
+        <li><strong>CGPSC Coordination:</strong> All personal property moves are coordinated through CGPSC (formerly CGPC). Members contact their servicing Personnel and Pay Center for move authorization codes.</li>
+        <li><strong>Remote Duty Stations:</strong> USCG has numerous remote/isolated duty stations (light stations, LORAN sites, Alaska). For remote assignments with no road access, special air or water freight shipment may be authorized — coordinate with CG-731.</li>
+        <li><strong>Alaska:</strong> Extended shipping times (60–90 days surface freight). Air freight for urgent items authorized up to 350 lbs. Counsel members to ship well in advance.</li>
+        <li><strong>Hawaii/Guam:</strong> Similar to other OCONUS locations. USCG has limited housing inventory — members should apply for housing immediately upon receipt of orders.</li>
+        <li><strong>POV:</strong> USCG uses commercial VPCs under GSA contract. No dedicated USCG VPC; members coordinate through CGPSC for commercial POV shipper authorization.</li>
+        <li><strong>Small Units:</strong> Many USCG members are at small units (Aids to Navigation Teams, Sectors) without on-site counselors. CGPSC provides phone/virtual counseling support. Refer members to 1-855-CG-MOVES.</li>
+        <li><strong>USCG Reserve:</strong> Reserve members called to active duty for 30+ days in support of contingency operations may be entitled to HHG shipment — verify with CGPSC and orders type.</li>
+        <li><strong>DITY/PPM:</strong> USCG members completing PPM must submit DD Form 3166 and weight tickets to CGPSC within 45 days of move completion for incentive payment.</li>
+      </ul>
+      <div class="alert info"><span class="alert-icon">ℹ️</span><span>USCG members may use any DoD PPO for in-person counseling. CGPSC provides authorization codes. Navy and USCG have a memorandum of understanding for mutual PPO use at shared installations.</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== CIVILIANS ======================== -->
+<div id="tab-civilians" class="tab-panel">
+  <div class="page-title"><span>💼</span> DoD Civilian Entitlements</div>
+  <p class="page-subtitle">Transportation entitlements for DoD civilian employees (GS, WG, SES) under JTR Chapter 5 Part C.</p>
+
+  <div class="qr-grid">
+    <div class="qr-card gold-top"><div class="qr-title">Civilian HHG Allowance — All Grades</div><div class="qr-val">18,000 lbs</div><div class="qr-note">JTR ¶054303 — flat rate, no grade-based variation</div></div>
+    <div class="qr-card"><div class="qr-title">NTS Time Limit</div><div class="qr-val">1 Year</div><div class="qr-note">Extendable with agency approval (DD Form 3151)</div></div>
+    <div class="qr-card green-top"><div class="qr-title">PBP&E</div><div class="qr-val">Up to 500 lbs</div><div class="qr-note">Job-related books, papers, equipment — DD Form 3168</div></div>
+  </div>
+
+  <div class="card gold-border">
+    <h2><span class="icon">📋</span> Civilian PCOS Entitlements — JTR ¶054303</h2>
+    <p>DoD civilian employees directed to perform a Permanent Change of Official Station (PCOS) are entitled to the following:</p>
+    <ul>
+      <li><strong>HHG Shipment:</strong> Up to 18,000 lbs — all GS, WG, SES, and equivalent grades receive the same flat allowance</li>
+      <li><strong>NTS:</strong> Up to 1 year from date of departure. Extension via <strong>DD Form 3151</strong> with agency Human Resources concurrence</li>
+      <li><strong>PPM/DITY:</strong> Authorized. Complete <strong>DD Form 3166</strong>. Incentive = 95% of GCC rate</li>
+      <li><strong>PBP&E:</strong> Up to 500 lbs documented on <strong>DD Form 3168</strong> — non-chargeable against HHG weight</li>
+      <li><strong>Releasing Agent:</strong> Civilian may designate agent via <strong>DD Form 3167</strong> (same as military)</li>
+      <li><strong>POV:</strong> One POV shipment authorized for OCONUS PCOS (limited locations — verify with agency)</li>
+    </ul>
+    <div class="alert warn"><span class="alert-icon">⚠️</span><span>Civilian PCOS must be at the <strong>agency's direction</strong> — voluntary transfers or new appointments generally do not qualify for HHG shipment unless specifically authorized in appointment letter. Verify authorization before counseling.</span></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">⚖️</span> Key Differences: Civilian vs. Military</h2>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Element</th><th>Military Member</th><th>DoD Civilian</th></tr></thead>
+        <tbody>
+          <tr><td>Weight Allowance</td><td>Varies by grade/dependency (JTR Table 5-8)</td><td>18,000 lbs flat — all grades (JTR ¶054303)</td></tr>
+          <tr><td>PBP&E</td><td>2,000 lbs member + 500 lbs spouse</td><td>500 lbs total (no spouse PBP&E provision)</td></tr>
+          <tr><td>NTS Authority</td><td>JTR ¶0515 — up to 1 yr CONUS</td><td>JTR ¶054303 — 1 yr, requires agency HR approval for extension</td></tr>
+          <tr><td>PPM/DITY</td><td>Standard DPS process via ITO/PPO</td><td>Authorized but some agencies require additional approvals</td></tr>
+          <tr><td>POV Shipment</td><td>OCONUS only, one POV</td><td>OCONUS only, one POV — fewer qualifying locations</td></tr>
+          <tr><td>FRV Counseling</td><td>DD Form 3153 required</td><td>DD Form 3153 required — same as military</td></tr>
+          <tr><td>Move Authority</td><td>PCS orders from military command</td><td>Written authorization from agency (SF-1190 or equivalent)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card steel-border">
+    <h2><span class="icon">📝</span> SES and Equivalent</h2>
+    <p>Senior Executive Service (SES), DISES, and DISL employees may have enhanced entitlements in their service agreements. Review the individual's appointment letter and agency-specific travel supplement before counseling. Some SES members have a second-move entitlement or extended NTS provisions not in standard JTR.</p>
+  </div>
+</div>
+
+<!-- ======================== PROHIBITED ======================== -->
+<div id="tab-prohibited" class="tab-panel">
+  <div class="page-title"><span>🚫</span> Prohibited & Restricted Items</div>
+  <p class="page-subtitle">Items that cannot be shipped in government-arranged HHG. Brief members thoroughly — improper shipment can result in criminal liability.</p>
+
+  <div class="alert danger"><span class="alert-icon">🚨</span><span><strong>Criminal Liability:</strong> Shipping prohibited items (especially hazardous materials or illegal weapons) can result in UCMJ action, federal prosecution, and/or termination of civilian employment. Counselor must document the prohibited items briefing.</span></div>
+
+  <div class="card" style="border-left-color:var(--red)">
+    <h2><span class="icon">🚫</span> Absolutely Prohibited — Cannot Ship Under Any Circumstances</h2>
+    <div class="proh-cat">
+      <h4>Hazardous / Flammable / Explosive Materials</h4>
+      <ul>
+        <li>Ammunition of any type (including empty brass casings with primers)</li>
+        <li>Black powder, gun powder, or explosive compounds</li>
+        <li>Fireworks, flares, or pyrotechnics</li>
+        <li>Propane tanks, butane, or any pressurized fuel containers (even empty)</li>
+        <li>Gasoline, diesel, kerosene — including items with residual fuel (mowers, generators)</li>
+        <li>Paint thinner, acetone, lacquer, turpentine</li>
+        <li>Aerosol cans (hairspray, bug spray, etc.)</li>
+      </ul>
+    </div>
+    <div class="proh-cat">
+      <h4>Illegal / Controlled Substances</h4>
+      <ul>
+        <li>Marijuana and cannabis products (illegal under federal law regardless of state law)</li>
+        <li>Schedule I–V controlled substances without valid prescription</li>
+        <li>Drug paraphernalia</li>
+      </ul>
+    </div>
+    <div class="proh-cat">
+      <h4>Biological / Perishable Hazards</h4>
+      <ul>
+        <li>Live plants, seeds, and soil (without USDA import permit)</li>
+        <li>Fresh food, meat, produce, or refrigerated items</li>
+        <li>Live animals or insects</li>
+        <li>Human or animal remains</li>
+      </ul>
+    </div>
+    <div class="proh-cat">
+      <h4>Weapons of Mass Destruction / Illegal Weapons</h4>
+      <ul>
+        <li>Unregistered NFA weapons (suppressed items, short-barreled rifles without ATF approval)</li>
+        <li>Destructive devices, grenades, or military ordinance</li>
+        <li>Switchblades or other weapons prohibited in destination state/country</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card gold-border">
+    <h2><span class="icon">⚠️</span> Restricted Items — Special Forms / Handling Required</h2>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Item Category</th><th>Requirement</th><th>Form</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Privately Owned Firearms</strong></td><td>Must list all firearms with serial numbers. Destination state/country laws must be verified. Japan, Korea, Germany may restrict certain firearms.</td><td><strong>DD 3152</strong></td></tr>
+          <tr><td><strong>Gun Safe</strong></td><td>Shippable but heavy. Must be completely emptied of firearms, ammunition, and valuables before pickup. TSP may charge extra labor. List on DD Form 3153 with value. See Gun Safe section below.</td><td><strong>DD 3153 (FRV listing)</strong></td></tr>
+          <tr><td><strong>Medical / Durable Medical Equipment (DME)</strong></td><td>Power wheelchairs, CPAP, hospital beds authorized. Pressurized oxygen tanks prohibited. DME with lithium batteries requires declaration. See Medical Equipment section below.</td><td><strong>DD 3153 (FRV listing)</strong></td></tr>
+          <tr><td><strong>Lithium Battery Devices</strong></td><td>Devices with batteries over 300Wh (e-bikes, mobility scooters, large power stations) require special handling or battery removal. See Lithium Battery section below.</td><td><strong>DD 3157 (briefing doc)</strong></td></tr>
+          <tr><td><strong>Motorcycle / Dirt Bike / ATV</strong></td><td>All fuel must be drained. Battery must be disconnected. Declared on worksheet.</td><td><strong>DD 3159</strong></td></tr>
+          <tr><td><strong>Boat / Personal Watercraft</strong></td><td>Fuel drained, battery disconnected, hull dimensions verified against truck size. Trailer documented separately.</td><td><strong>DD 3178</strong></td></tr>
+          <tr><td><strong>Alcoholic Beverages</strong></td><td>Permitted for personal use. Destination laws (dry counties, OCONUS) must be confirmed. Quantity limits apply.</td><td><strong>DD 3169</strong></td></tr>
+          <tr><td><strong>Food Items (OCONUS→CONUS)</strong></td><td>All food items must be listed. CBP/USDA may seize prohibited agricultural items. No fresh produce/meat.</td><td><strong>DD 3158</strong></td></tr>
+          <tr><td><strong>Quarantine Zone Items</strong></td><td>Items from designated pest quarantine zones require member self-inspection and certification.</td><td><strong>DD 3154</strong></td></tr>
+          <tr><td><strong>High-Value / Specialty Items</strong></td><td>Antiques, fine art, jewelry over $5,000: photograph, inventory, and consider supplemental insurance.</td><td><strong>DD 3153 (FRV counseling)</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" style="border-left-color:#4a6fa5">
+    <h2><span class="icon">🔒</span> Gun Safes — Special Handling Guidance</h2>
+    <p>Gun safes are authorized for shipment in government-arranged HHG but require specific counseling due to their weight, value, and contents.</p>
+    <h3>Weight Considerations</h3>
+    <ul>
+      <li>Residential gun safes typically weigh 200–1,000+ lbs and count toward the member's HHG weight allowance</li>
+      <li>Large safes (500+ lbs) may require a TSP with heavy-item capability — advise member to disclose safe weight when booking in DPS</li>
+      <li>TSPs may charge additional labor fees for safes requiring special equipment (dollies, ramps, extra crew) — this is within TSP contract terms</li>
+    </ul>
+    <h3>Contents Requirements — CRITICAL</h3>
+    <ul>
+      <li><strong>Firearms must be removed</strong> from the safe before pickup and shipped per DD Form 3152 procedures</li>
+      <li><strong>Ammunition is prohibited</strong> — must not be left inside the safe under any circumstances</li>
+      <li><strong>Valuables (jewelry, cash, documents)</strong> should be removed and hand-carried</li>
+      <li>Safe must be empty and unlocked (or key/combination provided to TSP) for inspection at delivery</li>
+    </ul>
+    <h3>FRV Coverage</h3>
+    <ul>
+      <li>List the gun safe on DD Form 3153 with brand, model, and estimated replacement value</li>
+      <li>Photograph all sides before pickup to document pre-existing condition</li>
+      <li>Note any exterior damage at delivery before signing the inventory</li>
+    </ul>
+    <div class="alert warn"><span class="alert-icon">⚠️</span><span>If a gun safe arrives with ammunition still inside, the TSP is required to report to local law enforcement. Counsel members explicitly: <strong>remove all firearms AND all ammunition before pickup day.</strong></span></div>
+  </div>
+
+  <div class="card green-border">
+    <h2><span class="icon">♿</span> Medical Equipment &amp; Durable Medical Equipment (DME)</h2>
+    <p>Members and civilians with medical conditions, or dependents requiring medical equipment, have specific entitlements and handling requirements for personal property moves.</p>
+    <h3>Authorized DME for Shipment</h3>
+    <ul>
+      <li><strong>Power wheelchairs and motorized scooters</strong> — authorized; batteries must comply with lithium battery rules (see below)</li>
+      <li><strong>Manual wheelchairs, walkers, crutches</strong> — authorized; no special handling required</li>
+      <li><strong>CPAP / BiPAP machines</strong> — authorized; strongly recommend hand-carrying to avoid claims issues</li>
+      <li><strong>Hospital beds, patient lifts, traction equipment</strong> — authorized; provide advance notice in DPS for TSP capacity planning</li>
+      <li><strong>Nebulizers, infusion pumps, dialysis equipment</strong> — authorized; document on inventory for FRV purposes via DD Form 3153</li>
+      <li><strong>Hearing aids and cochlear implant processors</strong> — authorized; high value; recommend hand-carry and list on DD Form 3153</li>
+    </ul>
+    <h3>Prohibited Medical Items</h3>
+    <ul>
+      <li><strong>Pressurized oxygen tanks (full or empty)</strong> — PROHIBITED. Classified as compressed gas. Member must arrange direct delivery from oxygen supplier at destination. Coordinate with TRICARE and medical provider well in advance of move date.</li>
+      <li><strong>Liquid nitrogen or dry ice containers</strong> — PROHIBITED. Cryogenic/sublimating materials are hazardous in enclosed transport vehicles.</li>
+      <li><strong>Controlled substance medications</strong> — PROHIBITED in HHG. Must be hand-carried in original labeled containers.</li>
+    </ul>
+    <h3>Prescription Medications</h3>
+    <ul>
+      <li>All medications should be hand-carried — never packed in HHG boxes</li>
+      <li>Controlled substances (Schedule II–V) must travel with the member; packing in HHG may violate DEA regulations</li>
+      <li>OCONUS moves: research destination country import requirements. Some US medications (certain stimulants, strong opioids) are illegal in Japan, UAE, and other SOFA nations — counsel member to carry prescriptions and a provider letter</li>
+    </ul>
+    <div class="alert info"><span class="alert-icon">ℹ️</span><span><strong>EFMP Coordination:</strong> Members enrolled in the Exceptional Family Member Program (EFMP) with dependents requiring ongoing DME should coordinate with the installation EFMP office before booking. Gaining installation EFMP enrollment and DME provider continuity must be confirmed before departure.</span></div>
+  </div>
+
+  <div class="card" style="border-left-color:#8b1a1a">
+    <h2><span class="icon">🔋</span> Lithium Batteries — Shipping Rules</h2>
+    <p>Lithium-ion and lithium-metal batteries pose fire/explosion risks in enclosed transport vehicles. DoD HHG rules align with IATA and 49 CFR hazmat regulations.</p>
+    <h3>Battery Watt-Hour (Wh) Classification</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Category</th><th>Wh Rating</th><th>Common Examples</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Small consumer</strong></td><td>Up to 100Wh</td><td>Laptops, phones, tablets, cameras, small power banks</td><td><span class="tag tag-new">PERMITTED</span> — no action needed</td></tr>
+          <tr><td><strong>Medium devices</strong></td><td>100–300Wh</td><td>Large power tool packs, some e-bike batteries, mid-size power stations</td><td><span class="tag tag-mod">CONDITIONAL</span> — permitted if disclosed and properly stored</td></tr>
+          <tr><td><strong>Large / high-capacity</strong></td><td>Over 300Wh</td><td>Most e-bikes, mobility scooters, large residential power stations</td><td><span class="tag tag-gone">RESTRICTED</span> — battery must be removed; ship separately via approved carrier</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>Common Items — Counselor Action</h3>
+    <ul>
+      <li><strong>E-bikes and electric scooters:</strong> Most have batteries over 300Wh. Remove battery; member hand-carries or ships via approved hazmat carrier. Ship frame in HHG.</li>
+      <li><strong>Power wheelchairs / motorized scooters (DME):</strong> Contact TSP in advance — specialized equipment handling required. Disconnect or remove battery per manufacturer guidance.</li>
+      <li><strong>Large portable power stations</strong> (Goal Zero, Jackery, EcoFlow over 300Wh): Disclose to TSP at DPS booking; TSP will advise handling.</li>
+      <li><strong>Laptops, tablets, phones, cameras:</strong> Permitted normally — no special action required.</li>
+      <li><strong>Power tool battery packs:</strong> Under 300Wh permitted; remove from tools before packing.</li>
+    </ul>
+    <div class="alert danger"><span class="alert-icon">🔥</span><span><strong>Fire Hazard:</strong> Lithium battery fires in moving trucks are a leading cause of total HHG loss. Undisclosed large batteries may void FRV coverage. Document the lithium battery briefing on DD Form 3157.</span></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">📋</span> Counselor Briefing Requirements</h2>
+    <p>For every shipment, the counselor must verbally brief and document the following:</p>
+    <ul>
+      <li>Prohibited items list (use DD Form 3157 — Moving Checklist as documentation)</li>
+      <li>Firearm requirements if member acknowledges possessing firearms (DD Form 3152)</li>
+      <li>Motorcycle/watercraft procedures if applicable (DD Forms 3159 / 3178)</li>
+      <li>OCONUS food/agriculture rules if OCONUS-to-CONUS move (DD Form 3158)</li>
+      <li>FRV coverage election (DD Form 3153)</li>
+    </ul>
+    <div class="alert success"><span class="alert-icon">✅</span><span>Best practice: Have member sign DD Form 3157 (HHG Moving Checklist) which contains a prohibited items acknowledgment section, providing documentation that briefing occurred.</span></div>
+  </div>
+</div>
+
+<!-- ======================== PPM ======================== -->
+<div id="tab-ppm" class="tab-panel">
+  <div class="page-title"><span>🚛</span> PPM / DITY Moves</div>
+  <p class="page-subtitle">Personally Procured Move (PPM) formerly called Do-It-Yourself (DITY). Governed by JTR ¶0523 and DTR Part IV. Primary form: DD Form 3166.</p>
+
+  <div class="card gold-border">
+    <h2><span class="icon">💰</span> PPM Overview & Incentive Payment</h2>
+    <p>The PPM program allows members to personally arrange their own move in exchange for <strong>95% of the Government Constructive Cost (GCC)</strong> — the estimated cost the government would have paid a TSP to perform the same move.</p>
+    <ul>
+      <li>Incentive = 95% × GCC (based on weight shipped and distance)</li>
+      <li>Weight shipped must be verified by <strong>certified weight tickets</strong> (empty and loaded)</li>
+      <li>Partial PPM is permitted (member moves some goods; government TSP moves remainder)</li>
+      <li>PPM and government shipment combined cannot exceed authorized weight allowance</li>
+      <li>Incentive payment is taxable income (reported on W-2)</li>
+    </ul>
+    <div class="alert info"><span class="alert-icon">ℹ️</span><span>Members who exceed their authorized weight limit on a PPM are paid at 95% of GCC only for the <em>authorized</em> weight — not the full shipped weight. Counsel members to weigh before loading.</span></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">📋</span> DD Form 3166 — PPM Checklist and Expense Certification</h2>
+    <p>DD Form 3166 is the <strong>central document</strong> for all PPM moves. It replaced DD Form 2278 effective January 2026. Sections include:</p>
+    <ul>
+      <li><strong>Section I:</strong> Member identification and order information</li>
+      <li><strong>Section II:</strong> PPM authorization and GCC calculation</li>
+      <li><strong>Section III:</strong> Weight ticket documentation (empty/loaded, date, scale facility)</li>
+      <li><strong>Section IV:</strong> Expense documentation (rental truck, packing materials, fuel, tolls)</li>
+      <li><strong>Section V:</strong> Member certification and signature</li>
+      <li><strong>Section VI:</strong> Finance/ITO approval and incentive payment calculation</li>
+    </ul>
+    <div class="alert warn"><span class="alert-icon">⚠️</span><span>DD Form 3166 must be completed and <strong>approved BEFORE</strong> the member begins the PPM move. Retroactive PPM approval is not authorized. Unauthorized PPM moves will not receive incentive payment.</span></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">📝</span> PPM Process — Step by Step</h2>
+    <ul>
+      <li><strong>Step 1:</strong> Member receives PCS orders and reports to ITO/PPO within 7 days</li>
+      <li><strong>Step 2:</strong> Member completes DD Form 3162 (Pre-Counseling Worksheet) prior to appointment</li>
+      <li><strong>Step 3:</strong> Counselor calculates GCC estimate and completes DD Form 3166 Sections I–II with member</li>
+      <li><strong>Step 4:</strong> Counselor briefs prohibited items, weight requirements, and weight ticket procedures</li>
+      <li><strong>Step 5:</strong> ITO approves DD Form 3166. Advance pay may be requested (up to 60% of estimated incentive)</li>
+      <li><strong>Step 6:</strong> Member obtains empty weight ticket before loading</li>
+      <li><strong>Step 7:</strong> Member loads and obtains loaded weight ticket</li>
+      <li><strong>Step 8:</strong> Member completes move to destination</li>
+      <li><strong>Step 9:</strong> Member submits DD Form 3166 (completed), weight tickets, receipts, and DD Form 1351-2 to finance</li>
+      <li><strong>Step 10:</strong> Finance calculates final incentive payment and disburses</li>
+    </ul>
+  </div>
+
+  <div class="card steel-border">
+    <h2><span class="icon">⚠️</span> Common PPM Errors — Counselor Action Required</h2>
+    <ul>
+      <li><strong>Missing empty weight ticket:</strong> PPM cannot be certified without both empty and loaded weights. Brief member repeatedly.</li>
+      <li><strong>Scale not certified:</strong> Only CAT scales or certified commercial scales are acceptable. Bathroom scales, post office scales, and ag scales are not valid.</li>
+      <li><strong>Moved before approval:</strong> Without approved DD 3166, no payment is authorized. Flag these cases immediately to supervisor.</li>
+      <li><strong>Weight over allowance:</strong> Calculate before approving. Member is responsible for any weight over their authorized allowance — they will not receive incentive for excess pounds.</li>
+      <li><strong>Combining PPM and government shipment improperly:</strong> Both shipments combined must not exceed authorized weight. DPS tracking is essential.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ======================== POV ======================== -->
+<div id="tab-pov" class="tab-panel">
+  <div class="page-title"><span>🚗</span> POV Shipment & Storage</div>
+  <p class="page-subtitle">Privately Owned Vehicle (POV) shipping and storage entitlements under JTR ¶0537. Forms: DD 3163, DD 3164, DD 3165.</p>
+
+  <div class="card gold-border">
+    <h2><span class="icon">🌏</span> OCONUS POV Shipment — DD Form 3163</h2>
+    <p>Members authorized to ship one POV to/from OCONUS duty stations during PCS. <strong>DD Form 3163</strong> (POV Shipping Counseling Form) must be completed prior to vehicle drop-off at VPC.</p>
+    <ul>
+      <li>One POV authorized per member (regardless of number of vehicles owned)</li>
+      <li>Vehicle must be a personal vehicle titled in member's name (or spouse/dependent)</li>
+      <li>Vehicle must be operable and meet customs requirements of destination country</li>
+      <li>Member responsible for ensuring vehicle meets SOFA and host nation standards (emissions, size, modifications)</li>
+      <li>Shipping time: 30–60 days average; up to 90 days for Pacific locations</li>
+      <li>Vehicle Processing Centers (VPC): Member drops off and picks up POV. Inspect vehicle thoroughly at both drop-off and pick-up; note any pre-existing damage on DD Form 3163.</li>
+    </ul>
+    <div class="alert warn"><span class="alert-icon">⚠️</span><span>Germany and some EU countries may require vehicle emissions modifications (catalytic converter upgrades, etc.) before allowing vehicle registration. Counsel members to research destination country requirements <em>before</em> shipping.</span></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">🏭</span> POV Storage — DD Forms 3164 & 3165</h2>
+    <p>When a member is assigned to a location where POV use is not practical (deployments, unaccompanied OCONUS tours, etc.), POV storage is authorized.</p>
+    <ul>
+      <li><strong>DD Form 3164:</strong> POV Storage Counseling Form — documents vehicle info, storage authorization, duration, and member's chosen storage facility</li>
+      <li><strong>DD Form 3165:</strong> POV Storage Authorization Letter — issued by installation transportation officer confirming assignment qualifies for POV storage</li>
+      <li>Government-funded storage is limited to one POV per member</li>
+      <li>Storage duration = length of the assignment/deployment that qualifies + 30 days for retrieval</li>
+      <li>Member may store at government VPC or approved commercial facility</li>
+      <li>Member must retrieve or make arrangements within 30 days of return or storage fees become member's responsibility</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">📍</span> Major VPC Locations</h2>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>VPC Location</th><th>Serves</th><th>Overseas Ports Supported</th></tr></thead>
+        <tbody>
+          <tr><td>Baltimore, MD</td><td>East Coast, Europe</td><td>Bremerhaven (Germany), Southampton (UK)</td></tr>
+          <tr><td>Jacksonville, FL</td><td>Southeast, CENTCOM</td><td>Bremerhaven, Middle East ports</td></tr>
+          <tr><td>Houston, TX</td><td>Gulf Coast, Southwest</td><td>Bremerhaven, CENTCOM ports</td></tr>
+          <tr><td>Los Angeles/Long Beach, CA</td><td>West Coast, Pacific</td><td>Japan, Korea, Guam, Okinawa</td></tr>
+          <tr><td>Seattle/Tacoma, WA</td><td>Pacific Northwest, Alaska</td><td>Japan, Korea, Guam</td></tr>
+          <tr><td>Honolulu, HI</td><td>Hawaii, Pacific</td><td>Japan, Guam, Korea</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== CLAIMS ======================== -->
+<div id="tab-claims" class="tab-panel">
+  <div class="page-title"><span>📋</span> Claims & Full Replacement Value</div>
+  <p class="page-subtitle">FRV coverage briefing requirements and claims process. Primary form: DD Form 3153.</p>
+
+  <div class="card gold-border">
+    <h2><span class="icon">🛡️</span> Full Replacement Value (FRV) — DD Form 3153</h2>
+    <p>FRV is the primary cargo loss/damage coverage for government-arranged HHG shipments. The Transportation Service Provider (TSP) is responsible for FRV coverage under their contract.</p>
+    <ul>
+      <li>FRV = replacement cost of item at today's price (not depreciated value)</li>
+      <li>No additional cost to the member for standard FRV coverage</li>
+      <li>Coverage applies to loss or damage that occurs while goods are in TSP's custody</li>
+      <li>Members may elect <strong>Released Value</strong> at $0.60/lb (lower coverage, not recommended)</li>
+      <li>High-value items (over $5,000 individual item) should be listed on DD Form 3153 with description and estimated value</li>
+    </ul>
+    <div class="alert warn"><span class="alert-icon">⚠️</span><span>DD Form 3153 must be completed at the <strong>counseling appointment</strong> — not at delivery. Once the shipment departs, coverage elections cannot be changed. Counsel members on all options before signing.</span></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">📅</span> Claims Filing Timeline</h2>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Action</th><th>Deadline</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Note exceptions on delivery documentation</td><td>At delivery</td><td>Member must note all visible damage/missing items before driver leaves</td></tr>
+          <tr><td>File FRV claim with TSP</td><td><strong>180 days from delivery</strong></td><td>Submit via DPS online claims module or directly to TSP</td></tr>
+          <tr><td>TSP responds to claim</td><td>60 days from filing</td><td>TSP must accept, settle, or deny within 60 days</td></tr>
+          <tr><td>Appeal TSP decision</td><td>30 days from TSP response</td><td>File appeal with installation claims officer or MCJA</td></tr>
+          <tr><td>File with military claims office (if TSP fails)</td><td>2 years from delivery</td><td>Military Personnel Claims Act backstop coverage</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">📋</span> Claims Counseling Requirements</h2>
+    <p>Every member must receive FRV counseling and complete DD Form 3153 before shipment:</p>
+    <ul>
+      <li>Explain difference between FRV and Released Value ($0.60/lb)</li>
+      <li>Advise member to document high-value items with photos and serial numbers before packing</li>
+      <li>Remind member that prohibited items are not covered if they cause damage</li>
+      <li>Brief the 180-day filing window and how to access DPS claims module</li>
+      <li>Provide TSP contact information at time of shipment booking</li>
+      <li>Advise member to be present at delivery and inspect all items before signing the delivery receipt</li>
+    </ul>
+  </div>
+
+  <div class="card steel-border">
+    <h2><span class="icon">💡</span> Counselor Tips for Claims Prevention</h2>
+    <ul>
+      <li>Encourage members to photograph all high-value items before packing begins</li>
+      <li>Advise against packing irreplaceable items (jewelry, important documents, heirlooms) in HHG — suggest hand-carry</li>
+      <li>Remind members that electronics serial numbers should be recorded on DD Form 3153 for FRV purposes</li>
+      <li>Items packed by owner (PBO) have limited TSP liability for internal damage — advise professional packing for fragile items</li>
+      <li>Firearms must be secured in TSA-approved hard-sided cases; document on DD Form 3152 and FRV listing</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ======================== RITA ======================== -->
+<div id="tab-rita" class="tab-panel">
+  <div class="page-title"><span>💰</span> RITA — Relocation Income Tax Allowance</div>
+  <p class="page-subtitle">Federal income tax reimbursement for service members and DoD civilians on PCS/PCOS moves. Governed by JTR Chapter 5 and IRS rules.</p>
+
+  <div class="qr-grid">
+    <div class="qr-card gold-top"><div class="qr-title">RITA Purpose</div><div class="qr-val">Tax Relief</div><div class="qr-note">Reimburses federal income tax on WTA payment</div></div>
+    <div class="qr-card"><div class="qr-title">Filing Deadline</div><div class="qr-val">2 Tax Years</div><div class="qr-note">File in tax year following WTA receipt</div></div>
+    <div class="qr-card green-top"><div class="qr-title">Who Qualifies</div><div class="qr-val">PCS / PCOS</div><div class="qr-note">Military members &amp; DoD civilians on directed moves</div></div>
+    <div class="qr-card"><div class="qr-title">Covers</div><div class="qr-val">WTA Tax</div><div class="qr-note">Federal tax on Withholding Tax Allowance only</div></div>
+  </div>
+
+  <div class="card gold-border">
+    <h2><span class="icon">📋</span> What Is RITA?</h2>
+    <p>The <strong>Relocation Income Tax Allowance (RITA)</strong> is a payment designed to reimburse service members and DoD civilians for the additional federal income tax burden incurred as a result of receiving taxable PCS/PCOS moving allowances. It specifically addresses the "tax on a tax" problem created by the Withholding Tax Allowance (WTA).</p>
+    <h3>The Tax Problem RITA Solves</h3>
+    <ul>
+      <li>Certain PCS entitlements (such as moving expense reimbursements and allowances) are taxable income under the Tax Cuts and Jobs Act of 2017</li>
+      <li>When these reimbursements are paid, the government also pays a <strong>Withholding Tax Allowance (WTA)</strong> to cover the estimated federal income tax owed</li>
+      <li>However, the WTA itself is taxable income — creating a "tax on a tax" cycle</li>
+      <li><strong>RITA reimburses the member for the additional federal income tax they owe on the WTA</strong>, effectively making the member whole and neutralizing the tax burden of the PCS/PCOS move</li>
+    </ul>
+    <div class="alert info"><span class="alert-icon">ℹ️</span><span>RITA does not cover state income taxes. Members in high-tax states (CA, NY, etc.) may still owe state tax on WTA income. Counsel members to consult a tax professional or MilTax (free military tax service) for their full tax picture.</span></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">🔄</span> WTA and RITA — How They Work Together</h2>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Step</th><th>Payment</th><th>Purpose</th><th>Timing</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1</strong></td><td>Moving Allowance Reimbursement</td><td>Reimburses member for taxable PCS expenses (PPM incentive, certain travel allowances)</td><td>During/after move</td></tr>
+          <tr><td><strong>2</strong></td><td>Withholding Tax Allowance (WTA)</td><td>Estimated federal tax on the moving allowance — paid by government to reduce member's tax withholding burden</td><td>Same pay period as moving allowance</td></tr>
+          <tr><td><strong>3</strong></td><td>RITA Filing</td><td>Member files RITA claim in the tax year <em>after</em> receiving WTA. Finance calculates actual additional tax owed on WTA income.</td><td>Following tax year (Jan–Apr)</td></tr>
+          <tr><td><strong>4</strong></td><td>RITA Payment</td><td>Government pays the actual federal tax owed on WTA, completing the reimbursement cycle</td><td>After RITA claim is processed</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card steel-border">
+    <h2><span class="icon">📝</span> Taxable PCS Entitlements (Require WTA/RITA)</h2>
+    <p>Since the Tax Cuts and Jobs Act of 2017, most PCS moving expense reimbursements are taxable for most service members. Common taxable items include:</p>
+    <ul>
+      <li><strong>PPM/DITY Incentive Payment</strong> — the 95% of GCC incentive is taxable income; WTA is applied at the time of payment</li>
+      <li><strong>Miscellaneous Expense Allowance (MEA)</strong> — lump sum paid to offset incidental PCS costs; taxable</li>
+      <li><strong>Temporary Lodging Expense (TLE) reimbursements</strong> — taxable under current IRS rules</li>
+      <li><strong>Real Estate Transaction Expenses (CONUS)</strong> — home sale/purchase reimbursements for certain categories are taxable</li>
+    </ul>
+    <div class="alert warn"><span class="alert-icon">⚠️</span><span><strong>Exception — Combat Zone Members:</strong> Service members whose PCS move is in connection with a permanent change of station while serving in a combat zone may have certain tax exemptions. Refer to IRS Publication 3 (Armed Forces Tax Guide) and MilTax for current guidance.</span></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">📅</span> RITA Filing Process</h2>
+    <ul>
+      <li><strong>Step 1 — Complete Tax Return:</strong> In the tax year following the WTA payment, member files their federal tax return (or completes a draft) to determine actual tax liability</li>
+      <li><strong>Step 2 — Obtain W-2 and Move Documents:</strong> Member gathers W-2 showing WTA income, travel vouchers, and PCS-related finance documents</li>
+      <li><strong>Step 3 — File RITA Claim:</strong> Member submits RITA claim through the Defense Finance and Accounting Service (DFAS) MyPay portal or through the installation finance office</li>
+      <li><strong>Step 4 — Finance Calculates RITA Amount:</strong> DFAS calculates the additional federal income tax attributable to the WTA income using IRS tax tables</li>
+      <li><strong>Step 5 — RITA Payment:</strong> DFAS pays the RITA amount to the member, completing the tax reimbursement cycle</li>
+    </ul>
+    <div class="alert success"><span class="alert-icon">✅</span><span><strong>MilTax:</strong> DoD offers free tax preparation assistance through MilTax (available via Military OneSource). Counsel members to use MilTax for RITA-related tax preparation — the preparers are trained on military-specific tax issues including WTA and RITA.</span></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">💼</span> RITA for DoD Civilians (PCOS)</h2>
+    <p>DoD civilian employees directed to perform a PCOS are also eligible for WTA and RITA on taxable relocation reimbursements. Key differences from military:</p>
+    <ul>
+      <li>Civilian RITA is processed through the employing agency's finance/HR office, not DFAS</li>
+      <li>Civilian taxable relocation expenses include: PPM incentive, certain travel reimbursements, and house-hunting trip expenses</li>
+      <li>Civilian employees should coordinate with their agency's relocation coordinator for RITA filing procedures</li>
+      <li>Some civilian agencies use third-party relocation management companies (RMCs) — RITA filing may go through the RMC portal</li>
+      <li>Civilian RITA timeline: file in the tax year following WTA receipt, same as military</li>
+    </ul>
+  </div>
+
+  <div class="card steel-border">
+    <h2><span class="icon">💡</span> Counselor Responsibilities — RITA Briefing</h2>
+    <p>While RITA is primarily a finance function, personal property counselors play an important role in ensuring members understand the tax implications of their move:</p>
+    <ul>
+      <li>Brief every member receiving a PPM incentive that the payment is <strong>taxable income</strong> and WTA will be applied</li>
+      <li>Inform members that they will need to file a RITA claim in the following tax year to complete the reimbursement cycle</li>
+      <li>Direct members to their installation finance office for WTA/RITA details and to Military OneSource for MilTax assistance</li>
+      <li>Document RITA briefing on DD Form 3166 (PPM) or in DPS counseling notes</li>
+      <li>Do not attempt to calculate RITA amounts — this is a finance function requiring current IRS tax tables</li>
+    </ul>
+    <div class="alert info"><span class="alert-icon">📞</span><span><strong>Key References:</strong> JTR ¶0515C (WTA/RITA for military); JTR ¶054305 (WTA/RITA for civilians); IRS Publication 3 (Armed Forces Tax Guide); DFAS MyPay portal for RITA filing; Military OneSource 1-800-342-9647 for MilTax referral.</span></div>
+  </div>
+</div>
+
+<!-- ======================== SCENARIOS ======================== -->
+<div id="tab-scenarios" class="tab-panel">
+  <div class="page-title"><span>🎓</span> Interactive Counseling Scenarios</div>
+  <p class="page-subtitle">Work through realistic counseling situations. Select an answer for each question to receive feedback and explanation.</p>
+
+  <!-- SCENARIO 1 -->
+  <div class="scenario-card" id="sc1">
+    <div class="scenario-header">
+      <h3>Scenario 1 — E-6 CONUS PCS with Dependents</h3>
+      <p>SSG Martinez (E-6, Army, with spouse and 2 children) receives PCS orders from Fort Campbell, KY to Fort Bliss, TX. He owns 3 firearms, has professional reference materials, and wants to do a partial DITY move. He arrives at the ITO with his orders.</p>
+    </div>
+    <div class="scenario-body">
+
+      <div class="question-block" id="sc1q1">
+        <div class="q-text"><span class="q-num">Q1</span> SSG Martinez has 3 firearms he wants to ship with his HHG. What is the correct action?</div>
+        <div class="options">
+          <button class="opt-btn" onclick="ans('sc1','q1',this,false,'Firearms cannot be shipped in government-arranged HHG under any circumstances — even registered ones. DD Form 3152 is required for government-arranged shipments to document and authorize firearm shipments.')">Deny the firearm shipment — firearms cannot be shipped in government HHG</button>
+          <button class="opt-btn" onclick="ans('sc1','q1',this,true,'Correct! DD Form 3152 (Privately Owned Firearms Information Worksheet) is required for all firearm shipments. The counselor must list all firearms with serial numbers, verify destination state legality, and complete the form before the shipment is authorized.')">Complete DD Form 3152, list all firearms with serial numbers, and verify Texas law permits the firearms</button>
+          <button class="opt-btn" onclick="ans('sc1','q1',this,false,'DD Form 3153 is the FRV counseling form — it does not authorize firearm shipment. The correct form for firearms is DD Form 3152.')">List the firearms on DD Form 3153 as high-value items and approve the shipment</button>
+          <button class="opt-btn" onclick="ans('sc1','q1',this,false,'Ammunition cannot be shipped in government HHG under any circumstances — this is a prohibited item. Only unloaded firearms documented on DD Form 3152 may be shipped.')">Allow the shipment if SSG Martinez certifies the firearms are unloaded and includes ammunition</button>
+        </div>
+        <div id="sc1q1-fb" class="feedback"></div>
+      </div>
+
+      <div class="question-block" id="sc1q2">
+        <div class="q-text"><span class="q-num">Q2</span> SSG Martinez has military reference manuals and Army publications he uses for his duties — approximately 800 lbs. His spouse is a licensed nurse and has nursing textbooks and medical references totaling 400 lbs. How should this be handled?</div>
+        <div class="options">
+          <button class="opt-btn" onclick="ans('sc1','q2',this,false,'PBP&E is not included in the HHG weight allowance — it is non-chargeable. The counselor should complete DD Form 3168 to document and separately authorize PBP&E for both the member and spouse.')">Include all 1,200 lbs in SSG Martinez&apos;s HHG weight count against his 11,000 lb allowance</button>
+          <button class="opt-btn" onclick="ans('sc1','q2',this,false,'The spouse\'s professional books do qualify for PBP&E. JTR authorizes up to 500 lbs of PBP&E for the member\'s spouse when those items are required for the spouse\'s professional occupation.')">Complete DD Form 3168 for SSG Martinez&apos;s 800 lbs only — spouse professional items are not authorized</button>
+          <button class="opt-btn" onclick="ans('sc1','q2',this,true,'Correct! Complete DD Form 3168 for both. Member PBP&E (up to 2,000 lbs) and spouse PBP&E (up to 500 lbs) are both non-chargeable against the HHG weight allowance. SSG Martinez&apos;s 800 lbs qualifies under member PBP&E; his spouse&apos;s 400 lbs qualifies under spouse PBP&E (under the 500 lb limit).')">Complete DD Form 3168 for both — 800 lbs member PBP&E and 400 lbs spouse PBP&E, both non-chargeable against HHG allowance</button>
+          <button class="opt-btn" onclick="ans('sc1','q2',this,false,'While DD Form 3153 covers FRV for high-value items, PBP&E is a separate entitlement documented on DD Form 3168, which is specifically designed to authorize and document the non-chargeable PBP&E shipment.')">List all items on DD Form 3153 as high-value professional items</button>
+        </div>
+        <div id="sc1q2-fb" class="feedback"></div>
+      </div>
+
+      <div class="question-block" id="sc1q3">
+        <div class="q-text"><span class="q-num">Q3</span> SSG Martinez wants to personally move his garage and workshop tools (approximately 2,500 lbs) and have the government move the rest. He has a truck and trailer. What form is required and what is the key counselor action?</div>
+        <div class="options">
+          <button class="opt-btn" onclick="ans('sc1','q3',this,false,'DD Form 3162 is the pre-counseling worksheet completed before the appointment — it does not authorize or document the PPM. The correct form for PPM authorization is DD Form 3166.')">Complete DD Form 3162 as the primary PPM authorization document</button>
+          <button class="opt-btn" onclick="ans('sc1','q3',this,false,'Partial PPMs are authorized and common. The counselor should complete DD Form 3166 for the PPM portion and ensure both the PPM weight and government-moved weight together do not exceed SSG Martinez&apos;s 11,000 lb allowance.')">Deny the partial PPM — members must choose either full PPM or full government move, not a combination</button>
+          <button class="opt-btn" onclick="ans('sc1','q3',this,true,'Correct! DD Form 3166 is required for all PPM moves. Key actions: (1) Calculate that PPM weight + government HHG weight does not exceed 11,000 lbs allowance; (2) Brief weight ticket requirements (empty and loaded certified scales); (3) Advise that incentive = 95% of GCC for the PPM portion; (4) Ensure DD 3166 is approved BEFORE SSG Martinez begins the move.')">Complete DD Form 3166, verify combined weight will not exceed 11,000 lbs, brief weight ticket requirements, and approve before the move begins</button>
+          <button class="opt-btn" onclick="ans('sc1','q3',this,false,'DD Form 3157 is the HHG Moving Checklist — it documents general counseling but is not the authorization form for a PPM. DD Form 3166 is required to authorize and document the PPM incentive payment.')">DD Form 3157 covers all move types including DITY — complete it and the move is approved</button>
+        </div>
+        <div id="sc1q3-fb" class="feedback"></div>
+      </div>
+
+      <div class="question-block" id="sc1q4">
+        <div class="q-text"><span class="q-num">Q4</span> During counseling, SSG Martinez mentions he has some aerosol cans, a propane grill with a half-full propane tank, and lawn equipment with gas in the tank. He wants to include these in his HHG. What is the correct counselor action?</div>
+        <div class="options">
+          <button class="opt-btn" onclick="ans('sc1','q4',this,false,'Partially emptied or &quot;almost empty&quot; propane tanks and aerosol cans are prohibited from government-arranged HHG shipment regardless of fill level. These are hazardous materials under TSP contract terms.')">Allow the propane tank if it is less than 25% full and the aerosol cans are travel-size</button>
+          <button class="opt-btn" onclick="ans('sc1','q4',this,true,'Correct! All three items are prohibited from government-arranged HHG: aerosol cans, pressurized gas containers (propane), and any equipment with residual fuel are all hazardous materials. The counselor must direct SSG Martinez to properly dispose of or personally transport these items. Document the briefing on DD Form 3157.')">Deny all three items — aerosol cans, propane tanks, and equipment with fuel are all prohibited hazardous materials; document briefing on DD Form 3157</button>
+          <button class="opt-btn" onclick="ans('sc1','q4',this,false,'The TSP is required to follow federal hazmat regulations — they cannot accept these items. The counselor must deny these items at the counseling stage, not leave the determination to the TSP.')">Allow TSP to make the determination at the time of packing</button>
+          <button class="opt-btn" onclick="ans('sc1','q4',this,false,'Only lawn equipment is prohibited — this is incorrect. ALL three item types are prohibited hazardous materials in government-arranged HHG shipments.')">Only the propane tank is prohibited — aerosol cans and lawn equipment are permitted in HHG</button>
+        </div>
+        <div id="sc1q4-fb" class="feedback"></div>
+      </div>
+
+    </div>
+    <div class="scenario-score" id="sc1-score">
+      <div class="score-num" id="sc1-num">0/4</div>
+      <div class="score-label">Questions Correct</div>
+      <div id="sc1-msg" style="margin-top:8px;font-size:0.9rem;color:var(--text-light)"></div>
+      <button class="restart-btn" onclick="restartSc('sc1',4)">↺ Restart Scenario</button>
+    </div>
+  </div>
+
+  <!-- SCENARIO 2 -->
+  <div class="scenario-card" id="sc2">
+    <div class="scenario-header">
+      <h3>Scenario 2 — GS-12 Civilian PCOS</h3>
+      <p>Ms. Chen is a GS-12 DoD civilian employee directed by her agency to relocate from San Antonio, TX to Fort Meade, MD for a PCOS. Her husband is a software engineer who works from home. She inquires about her personal property entitlements.</p>
+    </div>
+    <div class="scenario-body">
+
+      <div class="question-block" id="sc2q1">
+        <div class="q-text"><span class="q-num">Q1</span> What is Ms. Chen's HHG weight allowance for this PCOS?</div>
+        <div class="options">
+          <button class="opt-btn" onclick="ans('sc2','q1',this,false,'GS grade does not affect the civilian HHG weight allowance. Under JTR ¶054303, all DoD civilian employees authorized a PCOS receive a flat 18,000 lb allowance regardless of GS/GG/WG grade.')">11,000 lbs — GS-12 is equivalent to O-5 for weight purposes</button>
+          <button class="opt-btn" onclick="ans('sc2','q1',this,true,'Correct! Under JTR ¶054303, all DoD civilian employees directed to perform a PCOS receive a flat 18,000 lb HHG weight allowance, regardless of GS grade, WG grade, or SES status. There is no grade-based variation for civilians.')">18,000 lbs — all DoD civilians receive a flat 18,000 lb allowance regardless of grade</button>
+          <button class="opt-btn" onclick="ans('sc2','q1',this,false,'There is no 15,000 lb civilian rate. The civilian allowance is a flat 18,000 lbs for all authorized PCOS moves under JTR ¶054303.')">15,000 lbs — standard civilian allowance under GSA regulations</button>
+          <button class="opt-btn" onclick="ans('sc2','q1',this,false,'Civilian allowances are set at 18,000 lbs by JTR ¶054303, not by GS grade equivalent to military rank. The system for civilians is a flat rate, not a grade-scaled table.')">14,500 lbs — based on her GS-12 grade mapped to O-3 equivalent</button>
+        </div>
+        <div id="sc2q1-fb" class="feedback"></div>
+      </div>
+
+      <div class="question-block" id="sc2q2">
+        <div class="q-text"><span class="q-num">Q2</span> Ms. Chen's husband is a software engineer who works remotely. He has about 600 lbs of professional equipment (computer workstations, monitors, programming reference books). Can this be shipped as PBP&E?</div>
+        <div class="options">
+          <button class="opt-btn" onclick="ans('sc2','q2',this,false,'The civilian PBP&E provision in JTR for PCOS authorizes up to 500 lbs for the employee — but the spouse PBP&E provision (which allows military spouses up to 500 lbs) does not extend to DoD civilian spouse professional equipment. The husband&apos;s items would count against the 18,000 lb allowance.')">Yes — complete DD Form 3168 for 600 lbs of spouse PBP&E, non-chargeable against the HHG allowance</button>
+          <button class="opt-btn" onclick="ans('sc2','q2',this,false,'Civilian employees do have a PBP&E provision (up to 500 lbs) for their own job-related equipment. However, the spouse PBP&E provision applicable to military members does not extend to civilian spouses under current JTR language.')">No — civilian PCOS has no PBP&E provision whatsoever; count all 600 lbs against the 18,000 lb allowance</button>
+          <button class="opt-btn" onclick="ans('sc2','q2',this,true,'Correct! JTR provides up to 500 lbs of PBP&E for civilian employees (documented on DD Form 3168) — but this applies to the employee&apos;s own professional items, not a spouse. The military spouse PBP&E provision does not apply to civilian PCOS. The husband&apos;s 600 lbs counts against the HHG allowance (well within the 18,000 lb limit). Ms. Chen may ship up to 500 lbs of her own job-related professional items as non-chargeable PBP&E.')">The husband&apos;s items count against the 18,000 lb HHG allowance; Ms. Chen may ship up to 500 lbs of her own professional items as non-chargeable PBP&E via DD Form 3168</button>
+          <button class="opt-btn" onclick="ans('sc2','q2',this,false,'600 lbs exceeds the 500 lb civilian PBP&E limit, and more importantly, spouse PBP&E is a military-member benefit not applicable to civilian PCOS. The husband&apos;s items would count against the HHG allowance.')">Yes — civilian PCOS authorizes 600 lbs of spouse PBP&E since the husband is employed professionally</button>
+        </div>
+        <div id="sc2q2-fb" class="feedback"></div>
+      </div>
+
+      <div class="question-block" id="sc2q3">
+        <div class="q-text"><span class="q-num">Q3</span> Ms. Chen asks about authorizing her mother-in-law (who lives with them) to be present for the HHG pickup since Ms. Chen will be traveling ahead. What form is required?</div>
+        <div class="options">
+          <button class="opt-btn" onclick="ans('sc2','q3',this,false,'While a general POA may legally authorize the mother-in-law to act, the personal property program specifically requires DD Form 3167 (Releasing Agent Authorization Statement) to authorize a releasing agent for HHG shipment. A general POA alone is not sufficient for TSP/ITO purposes.')">No form required — a general power of attorney is sufficient</button>
+          <button class="opt-btn" onclick="ans('sc2','q3',this,false,'DD Form 3162 is the pre-counseling worksheet, not the releasing agent form. The correct form for authorizing a designated agent for HHG pickup is DD Form 3167.')">DD Form 3162 — Pre-Counseling Worksheet authorizes third parties</button>
+          <button class="opt-btn" onclick="ans('sc2','q3',this,true,'Correct! DD Form 3167 (Releasing Agent Authorization Statement) is required to authorize a designated agent to act on behalf of the member/employee for HHG pickup, delivery, or changes. It must be completed at the counseling appointment and provided to the TSP. A general power of attorney does not substitute for DD Form 3167 in the personal property program.')">DD Form 3167 — Releasing Agent Authorization Statement, completed at counseling and provided to the TSP</button>
+          <button class="opt-btn" onclick="ans('sc2','q3',this,false,'DD Form 3157 is the HHG Moving Checklist — it documents counseling topics but does not authorize a releasing agent. The releasing agent authorization requires DD Form 3167.')">DD Form 3157 — the Moving Checklist includes a releasing agent section</button>
+        </div>
+        <div id="sc2q3-fb" class="feedback"></div>
+      </div>
+
+    </div>
+    <div class="scenario-score" id="sc2-score">
+      <div class="score-num" id="sc2-num">0/3</div>
+      <div class="score-label">Questions Correct</div>
+      <div id="sc2-msg" style="margin-top:8px;font-size:0.9rem;color:var(--text-light)"></div>
+      <button class="restart-btn" onclick="restartSc('sc2',3)">↺ Restart Scenario</button>
+    </div>
+  </div>
+
+  <!-- SCENARIO 3 -->
+  <div class="scenario-card" id="sc3">
+    <div class="scenario-header">
+      <h3>Scenario 3 — O-3 Navy OCONUS (Japan)</h3>
+      <p>LT Nguyen (O-3, Navy, unaccompanied — no dependents) receives PCS orders to Naval Air Facility Atsugi, Japan for a 3-year unaccompanied tour. He owns 2 firearms and a motorcycle. He wants to ship his POV and store the remainder of his HHG.</p>
+    </div>
+    <div class="scenario-body">
+
+      <div class="question-block" id="sc3q1">
+        <div class="q-text"><span class="q-num">Q1</span> LT Nguyen is O-3 without dependents. He is going to an unaccompanied OCONUS tour in Japan. What is his authorized HHG weight and what storage options exist?</div>
+        <div class="options">
+          <button class="opt-btn" onclick="ans('sc3','q1',this,false,'14,500 lbs is the O-3 weight with dependents. LT Nguyen has no dependents, so his weight allowance is 13,000 lbs. Additionally, for an unaccompanied OCONUS tour, he may place HHG in NTS for the duration of the tour rather than shipping all goods to a restricted Japanese installation.')">14,500 lbs shipment to Japan — unaccompanied status doesn&apos;t change the authorized shipment weight</button>
+          <button class="opt-btn" onclick="ans('sc3','q1',this,true,'Correct! LT Nguyen&apos;s weight allowance without dependents as O-3 is 13,000 lbs per JTR Table 5-8. For an unaccompanied OCONUS tour, NTS is authorized for the duration of the tour. Japanese housing size limitations and Atsugi installation restrictions may further limit what he actually ships — counsel him to contact the gaining installation housing office before deciding how much to ship vs. store.')">13,000 lbs without dependents (O-3); NTS authorized for duration of unaccompanied tour; Japanese housing limits may further restrict what he ships to Atsugi</button>
+          <button class="opt-btn" onclick="ans('sc3','q1',this,false,'For an unaccompanied OCONUS tour, the member is not required to ship any HHG — NTS is authorized for the full tour duration. Counsel LT Nguyen on both options: partial shipment plus NTS, or full NTS with UAB only.')">13,000 lbs — all must be shipped to Japan; NTS is not authorized for active duty PCS moves</button>
+          <button class="opt-btn" onclick="ans('sc3','q1',this,false,'While NTS is an option, 14,000 lbs is the O-4/W-4 no-dependent weight — not O-3. LT Nguyen&apos;s correct allowance as O-3 without dependents is 13,000 lbs.')">14,000 lbs; NTS for up to 180 days only during OCONUS tours</button>
+        </div>
+        <div id="sc3q1-fb" class="feedback"></div>
+      </div>
+
+      <div class="question-block" id="sc3q2">
+        <div class="q-text"><span class="q-num">Q2</span> LT Nguyen wants to ship his POV to Japan and store his motorcycle. What forms are required and what special considerations apply?</div>
+        <div class="options">
+          <button class="opt-btn" onclick="ans('sc3','q2',this,false,'DD Form 3163 is required for POV shipment, but DD Form 3157 is the general HHG moving checklist — not the motorcycle storage or shipping form. The motorcycle requires DD Form 3159 for documentation. Also, Japan has specific size restrictions for vehicles — not all US vehicles are practical or registerable in Japan.')">DD Form 3163 for POV shipment and DD Form 3157 for the motorcycle — no special Japan considerations needed</button>
+          <button class="opt-btn" onclick="ans('sc3','q2',this,true,'Correct! DD Form 3163 (POV Shipping Counseling Form) for the vehicle. Japan has practical limitations — many US vehicles are oversized for Japanese roads and housing parking. Advise LT Nguyen to research before shipping. For the motorcycle: if stored, DD Form 3159 documents it; if placed in NTS/POV storage at a VPC, DD Forms 3164 and 3165 are required. All fluids must be drained from motorcycle before storage or shipment.')">DD Form 3163 for POV shipment; counsel on Japan vehicle practicality; DD Form 3159 for motorcycle documentation; DD Forms 3164/3165 for motorcycle storage authorization if using government storage</button>
+          <button class="opt-btn" onclick="ans('sc3','q2',this,false,'POV shipment to Japan is authorized for PCS — it is not prohibited. DD Form 3163 is the correct form. However, practical factors like vehicle size, Japanese road laws, and JCI (Japanese Compulsory Insurance) registration requirements should be discussed.')">POV shipment to Japan is prohibited for Navy officers — no form available; motorcycle stored via DD Form 3164</button>
+          <button class="opt-btn" onclick="ans('sc3','q2',this,false,'DD Form 3178 is for boats and personal watercraft — not motorcycles. The correct motorcycle documentation form is DD Form 3159.')">DD Form 3163 for POV and DD Form 3178 for motorcycle storage</button>
+        </div>
+        <div id="sc3q2-fb" class="feedback"></div>
+      </div>
+
+      <div class="question-block" id="sc3q3">
+        <div class="q-text"><span class="q-num">Q3</span> LT Nguyen owns 2 pistols and wants to ship them with his HHG to Atsugi, Japan. How should the counselor handle this?</div>
+        <div class="options">
+          <button class="opt-btn" onclick="ans('sc3','q3',this,true,'Correct! Under SOFA Article 9, US military personnel in Japan are prohibited from privately possessing firearms off-base, and NAF Atsugi has strict on-base weapons storage policies. LT Nguyen cannot bring his personal firearms to Japan. DD Form 3152 must still be completed, but it should document the destination prohibition. The counselor should advise NTS storage for the firearms in CONUS, document on DD Form 3152 as &quot;destination prohibits — storing CONUS,&quot; and note the restriction in DPS.')">Complete DD Form 3152, but note Japan SOFA prohibits private firearms — counsel LT Nguyen to store firearms in CONUS NTS; document restriction in DPS</button>
+          <button class="opt-btn" onclick="ans('sc3','q3',this,false,'While DD Form 3152 is the correct form, Japan SOFA Article 9 prohibits private firearm possession by US personnel. The counselor cannot simply complete the form and ship — the destination prohibition must be briefed and the member counseled on NTS or surrender options.')">Complete DD Form 3152 and authorize shipment — SOFA agreements do not restrict personal property rights</button>
+          <button class="opt-btn" onclick="ans('sc3','q3',this,false,'Firearms can be shipped in government HHG when properly documented on DD Form 3152. The issue in this case is the Japan SOFA destination prohibition — not a blanket ban on all firearm shipments.')">Deny the shipment entirely — firearms cannot be shipped in any government HHG under any circumstances</button>
+          <button class="opt-btn" onclick="ans('sc3','q3',this,false,'DD Form 3153 is for FRV coverage counseling — it does not authorize or document firearm shipments. The correct form for firearms is DD Form 3152, and in this case the Japan SOFA prohibition must be briefed.')">Add firearms to DD Form 3153 as high-value items and approve the shipment to Japan</button>
+        </div>
+        <div id="sc3q3-fb" class="feedback"></div>
+      </div>
+
+    </div>
+    <div class="scenario-score" id="sc3-score">
+      <div class="score-num" id="sc3-num">0/3</div>
+      <div class="score-label">Questions Correct</div>
+      <div id="sc3-msg" style="margin-top:8px;font-size:0.9rem;color:var(--text-light)"></div>
+      <button class="restart-btn" onclick="restartSc('sc3',3)">↺ Restart Scenario</button>
+    </div>
+  </div>
+
+  <!-- SCENARIO 4 -->
+  <div class="scenario-card" id="sc4">
+    <div class="scenario-header">
+      <h3>Scenario 4 — E-7 USMC Retirement</h3>
+      <p>GySgt Rivera (E-7, USMC, 22 years of service, with spouse) is retiring from Camp Lejeune, NC. Her last duty station was Camp Lejeune; she was raised in San Antonio, TX (her HOR), but she and her spouse want to retire to Asheville, NC — about 320 miles from Camp Lejeune. She asks about her move options.</p>
+    </div>
+    <div class="scenario-body">
+
+      <div class="question-block" id="sc4q1">
+        <div class="q-text"><span class="q-num">Q1</span> GySgt Rivera wants to move to Asheville, NC (not her HOR). She has over 20 years of service. What form(s) authorize this, and what are the key requirements?</div>
+        <div class="options">
+          <button class="opt-btn" onclick="ans('sc4','q1',this,false,'DD Form 3155 authorizes movement to the Home of Record (HOR) — which would be San Antonio, TX. For a member choosing a location other than their HOR, the applicable form is DD Form 3156 (Home of Selection), which requires 20+ years of service.')">DD Form 3155 — Home of Record Transportation Entitlement. GySgt Rivera may choose any location using the HOR form.</button>
+          <button class="opt-btn" onclick="ans('sc4','q1',this,true,'Correct! With 22 years of service, GySgt Rivera qualifies for a Home of Selection (HOS) move under JTR. DD Form 3156 (HOS Travel and Transportation Entitlement Authority) authorizes the move to Asheville, NC. Key requirements: (1) 20+ years of service — met; (2) HOS must be established before retirement date; (3) HOS cannot be changed after shipment is booked; (4) Move must begin within 1 year of retirement date.')">DD Form 3156 — Home of Selection (20+ years required). Asheville, NC is authorized as HOS. Establish HOS before retirement date; move must begin within 1 year.</button>
+          <button class="opt-btn" onclick="ans('sc4','q1',this,false,'There is no such form. The correct forms are DD Form 3155 for HOR moves and DD Form 3156 for HOS moves. The member&apos;s desire to go to a non-HOR location after retirement is addressed by the HOS entitlement under DD Form 3156.')">DD Form 3162 — Pre-Counseling Worksheet for retirement moves to non-HOR locations</button>
+          <button class="opt-btn" onclick="ans('sc4','q1',this,false,'While Asheville and Camp Lejeune are both in North Carolina, the government pays for a one-time retirement move to HOR or HOS — distance within the state is not a factor that disqualifies the entitlement. A move within state is still authorized and requires DD Form 3156.')">No move entitlement — Asheville is in NC which is also where Camp Lejeune is; same-state moves are not authorized at retirement</button>
+        </div>
+        <div id="sc4q1-fb" class="feedback"></div>
+      </div>
+
+      <div class="question-block" id="sc4q2">
+        <div class="q-text"><span class="q-num">Q2</span> GySgt Rivera asks about FRV coverage for her shipment. Her household includes antiques passed down from her grandmother valued at approximately $12,000. What is the required counselor action?</div>
+        <div class="options">
+          <button class="opt-btn" onclick="ans('sc4','q2',this,false,'DD Form 3153 is required for ALL shipments, not just those with items over $5,000. Routine FRV counseling must be completed for every member. For the antiques, they should be specifically listed on DD Form 3153 with descriptions and estimated values so FRV coverage is documented for those high-value items.')">FRV counseling is only required for shipments with items valued over $5,000 — complete DD Form 3153 because of the antiques</button>
+          <button class="opt-btn" onclick="ans('sc4','q2',this,false,'FRV counseling via DD Form 3153 is required for ALL shipments regardless of value. Additionally, the counselor should document the antiques specifically on DD Form 3153 and advise GySgt Rivera to photograph the items and consider supplemental insurance for irreplaceable antiques.')">No form required — FRV is automatic and covers all items without documentation</button>
+          <button class="opt-btn" onclick="ans('sc4','q2',this,true,'Correct! DD Form 3153 is mandatory for every shipment. Key counselor actions for the antiques: (1) List items on DD Form 3153 with descriptions and estimated values; (2) Advise GySgt Rivera to photograph all antiques before packing; (3) Counsel that FRV reimburses replacement value, but for unique/irreplaceable antiques, supplemental insurance may be advisable; (4) Advise professional packing for fragile antique items to support any future claims.')">Complete DD Form 3153 for all FRV counseling (mandatory for every shipment); specifically list antiques with descriptions and values; advise photography and consider supplemental insurance for irreplaceable items</button>
+          <button class="opt-btn" onclick="ans('sc4','q2',this,false,'DD Form 3153 replaced DD Forms 1840/1840R effective January 2026. The old forms are no longer valid — all FRV counseling must use DD Form 3153.')">Complete DD Form 1840 — the legacy FRV counseling form is still used for retirements</button>
+        </div>
+        <div id="sc4q2-fb" class="feedback"></div>
+      </div>
+
+    </div>
+    <div class="scenario-score" id="sc4-score">
+      <div class="score-num" id="sc4-num">0/2</div>
+      <div class="score-label">Questions Correct</div>
+      <div id="sc4-msg" style="margin-top:8px;font-size:0.9rem;color:var(--text-light)"></div>
+      <button class="restart-btn" onclick="restartSc('sc4',2)">↺ Restart Scenario</button>
+    </div>
+  </div>
+
+</div><!-- end scenarios -->
+
+<!-- ======================== CHECKLIST ======================== -->
+<div id="tab-checklist" class="tab-panel">
+  <div class="page-title"><span>✅</span> Counseling Checklist</div>
+  <p class="page-subtitle">Complete all applicable items for each counseling session. Track your progress below.</p>
+
+  <div class="cl-status" id="cl-status">0 of 20 items completed</div>
+  <div class="cl-progress"><div class="cl-bar" id="cl-bar"></div></div>
+  <button class="reset-btn" onclick="resetCL()">↺ Reset Checklist</button>
+
+  <div class="card">
+    <h3>Pre-Counseling / Admin</h3>
+    <div class="cl-item" onclick="tck(this)"><div class="cl-box">☐</div><div class="cl-label"><strong>Pre-Counseling Worksheet</strong> — Verify member has completed DD Form 3162 prior to appointment</div></div>
+    <div class="cl-item" onclick="tck(this)"><div class="cl-box">☐</div><div class="cl-label"><strong>Orders Verification</strong> — Confirm PCS/separation/retirement orders are valid, current, and include all dependent information</div></div>
+    <div class="cl-item" onclick="tck(this)"><div class="cl-box">☐</div><div class="cl-label"><strong>DPS Account</strong> — Confirm member has active DPS (Defense Personal Property System) account or assist with creation</div></div>
+    <div class="cl-item" onclick="tck(this)"><div class="cl-box">☐</div><div class="cl-label"><strong>Entitlement Calculation</strong> — Determine weight allowance (JTR Table 5-8 for military; 18,000 lbs flat for civilians)</div></div>
+  </div>
+
+  <div class="card">
+    <h3>Shipment Counseling</h3>
+    <div class="cl-item" onclick="tck(this)"><div class="cl-box">☐</div><div class="cl-label"><strong>DD Form 3157 — HHG Moving Checklist</strong> — Review all line items with member; obtain signature</div></div>
+    <div class="cl-item" onclick="tck(this)"><div class="cl-box">☐</div><div class="cl-label"><strong>DD Form 3153 — FRV Coverage</strong> — Complete FRV counseling; member elects coverage level; both sign</div></div>
+    <div class="cl-item" onclick="tck(this)"><div class="cl-box">☐</div><div class="cl-label"><strong>Weight Briefing</strong> — Brief weight allowance, weight ticket requirements, and consequences of excess weight</div></div>
+    <div class="cl-item" onclick="tck(this)"><div class="cl-box">☐</div><div class="cl-label"><strong>Prohibited Items Briefing</strong> — Brief all prohibited items per DTR Part IV; document on DD Form 3157</div></div>
+    <div class="cl-item" onclick="tck(this)"><div class="cl-box">☐</div><div class="cl-label"><strong>Shipment Type</strong> — Determine HHG, UAB, NTS, or combination; document authorization in DPS</div></div>
+    <div class="cl-item" onclick="tck(this)"><div class="cl-box">☐</div><div class="cl-label"><strong>UAB Calculation (OCONUS)</strong> — If OCONUS PCS: calculate authorized UAB weight (member + each dependent × 350 lbs); book UAB separately in DPS; brief air transit times vs. surface HHG</div></div>
+    <div class="cl-item" onclick="tck(this)"><div class="cl-box">☐</div><div class="cl-label"><strong>UAB Authorization (OCONUS)</strong> — If OCONUS move: determine UAB entitlement by branch, book UAB as separate DPS shipment, brief what can/cannot go in UAB (no firearms, no alcohol)</div></div>
+    <div class="cl-item" onclick="tck(this)"><div class="cl-box">☐</div><div class="cl-label"><strong>PLEAD (if applicable)</strong> — If dependents will move to HOR before member: verify HOR in personnel system, calculate partial HHG weight, authorize in DPS before departure</div></div>
+    <div class="cl-item" onclick="tck(this)"><div class="cl-box">☐</div><div class="cl-label"><strong>Student Travel (OCONUS assignment)</strong> — If member has college-age dependent at CONUS school: verify eligibility, confirm enrollment, authorize annual round-trip travel through DPS/travel system</div></div>
+  </div>
+
+  <div class="card">
+    <h3>Special Items / As Applicable</h3>
+    <div class="cl-item" onclick="tck(this)"><div class="cl-box">☐</div><div class="cl-label"><strong>DD Form 3152 — Firearms</strong> — If member has firearms: complete worksheet, verify destination legality, note SOFA restrictions if OCONUS</div></div>
+    <div class="cl-item" onclick="tck(this)"><div class="cl-box">☐</div><div class="cl-label"><strong>Gun Safe</strong> — If member has a gun safe: confirm empty (firearms AND ammo removed), list on DD Form 3153 with value, advise photography</div></div>
+    <div class="cl-item" onclick="tck(this)"><div class="cl-box">☐</div><div class="cl-label"><strong>Medical / DME Equipment</strong> — If member/dependent has DME: confirm no pressurized oxygen tanks, verify lithium battery compliance, coordinate EFMP if applicable</div></div>
+    <div class="cl-item" onclick="tck(this)"><div class="cl-box">☐</div><div class="cl-label"><strong>Lithium Battery Devices</strong> — Brief member on large battery restrictions (&gt;300Wh); confirm e-bikes/scooters/power stations handled correctly; document on DD Form 3157</div></div>
+    <div class="cl-item" onclick="tck(this)"><div class="cl-box">☐</div><div class="cl-label"><strong>DD Form 3168 — PBP&E</strong> — If member/spouse has professional books, papers, equipment: complete itemized worksheet for non-chargeable PBP&E</div></div>
+    <div class="cl-item" onclick="tck(this)"><div class="cl-box">☐</div><div class="cl-label"><strong>DD Form 3159 — Motorcycle/Dirt Bike</strong> — If applicable: complete worksheet, confirm fuel drain, battery disconnect</div></div>
+    <div class="cl-item" onclick="tck(this)"><div class="cl-box">☐</div><div class="cl-label"><strong>DD Form 3178 — Boat/Watercraft</strong> — If applicable: complete counseling sheet, confirm fuel drain, document dimensions</div></div>
+    <div class="cl-item" onclick="tck(this)"><div class="cl-box">☐</div><div class="cl-label"><strong>DD Form 3169 — Alcohol</strong> — If member is shipping alcoholic beverages: complete declaration, verify destination law</div></div>
+    <div class="cl-item" onclick="tck(this)"><div class="cl-box">☐</div><div class="cl-label"><strong>DD Form 3158 — Food Items</strong> — OCONUS-to-CONUS moves: complete food item list for CBP/USDA; brief prohibited food items</div></div>
+    <div class="cl-item" onclick="tck(this)"><div class="cl-box">☐</div><div class="cl-label"><strong>DD Form 3167 — Releasing Agent</strong> — If member designates a third-party agent: complete authorization statement</div></div>
+  </div>
+
+  <div class="card">
+    <h3>Storage / PPM / POV</h3>
+    <div class="cl-item" onclick="tck(this)"><div class="cl-box">☐</div><div class="cl-label"><strong>NTS Authorization</strong> — If applicable: authorize NTS in DPS, brief 1-year limit, provide DD Form 3151 info for extensions</div></div>
+    <div class="cl-item" onclick="tck(this)"><div class="cl-box">☐</div><div class="cl-label"><strong>DD Form 3166 — PPM/DITY</strong> — If member elects PPM: complete checklist, brief weight ticket requirements, approve before move begins</div></div>
+    <div class="cl-item" onclick="tck(this)"><div class="cl-box">☐</div><div class="cl-label"><strong>RITA / WTA Briefing</strong> — If PPM or other taxable entitlement involved: brief member that incentive payment is taxable, WTA will be applied, and RITA claim must be filed in following tax year via DFAS/finance</div></div>
+    <div class="cl-item" onclick="tck(this)"><div class="cl-box">☐</div><div class="cl-label"><strong>DD Form 3163 — POV Shipment</strong> — OCONUS POV shipment: complete counseling form, brief VPC procedures and shipping timeline</div></div>
+    <div class="cl-item" onclick="tck(this)"><div class="cl-box">☐</div><div class="cl-label"><strong>HOR/HOS Authority</strong> — Separation/retirement: complete DD Form 3155 (HOR) or DD Form 3156 (HOS for 20+ year members)</div></div>
+    <div class="cl-item" onclick="tck(this)"><div class="cl-box">☐</div><div class="cl-label"><strong>PLEAD / HOR Verification</strong> — Separation/retirement: confirm HOR on orders matches records; advise member to correct any discrepancy with S1/MPF before shipment is booked</div></div>
+    <div class="cl-item" onclick="tck(this)"><div class="cl-box">☐</div><div class="cl-label"><strong>Retirement Extension Brief</strong> — Retiring members: brief 1-year standard, 3-year extension option, and 6-year exception; emphasize request must be filed before current deadline; document in DPS</div></div>
+    <div class="cl-item" onclick="tck(this)"><div class="cl-box">☐</div><div class="cl-label"><strong>Student Travel Referral (OCONUS)</strong> — If member has school-age dependents going OCONUS: refer to finance/travel office for annual student travel entitlement (DTS); note this is separate from UAB/HHG</div></div>
+  </div>
+
+</div>
+
+<!-- ======================== GLOSSARY ======================== -->
+<div id="tab-glossary" class="tab-panel">
+  <div class="page-title"><span>📖</span> Glossary</div>
+  <p class="page-subtitle">Key terms and abbreviations used in the DoD personal property program.</p>
+
+  <div class="card">
+    <div class="gloss-item"><div class="gloss-term">Durable Medical Equipment <span class="gloss-abbr">(DME)</span></div><div class="gloss-def">Medically necessary equipment prescribed for home use: power wheelchairs, hospital beds, CPAP machines, patient lifts, etc. Authorized for shipment in HHG with special handling considerations for lithium-battery-powered units. Pressurized oxygen tanks are prohibited.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Exceptional Family Member Program <span class="gloss-abbr">(EFMP)</span></div><div class="gloss-def">DoD program for service members with family members who have special medical or educational needs. EFMP enrollment is mandatory and must be verified at both losing and gaining installations before PCS moves involving dependents with special needs or DME requirements.</div></div><div class="gloss-def">The online portal used by service members, DoD civilians, and transportation offices to book, manage, and track all government-arranged personal property shipments. All PCS shipments must be booked through DPS.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Defense Transportation Regulation <span class="gloss-abbr">(DTR)</span></div><div class="gloss-def">Multi-part DoD regulation governing transportation operations. Part IV covers personal property. The January 2026 edition introduced the DD Form 3151–3178 series.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Full Replacement Value <span class="gloss-abbr">(FRV)</span></div><div class="gloss-def">Cargo loss/damage coverage under government HHG shipment contracts. TSP pays the current retail replacement cost of lost or damaged items — not depreciated value. Counseled via DD Form 3153. Member has 180 days from delivery to file.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Government Constructive Cost <span class="gloss-abbr">(GCC)</span></div><div class="gloss-def">The estimated cost the government would have paid a TSP to perform a given move. Used to calculate PPM incentive payments (95% of GCC).</div></div>
+    <div class="gloss-item"><div class="gloss-term">Household Goods <span class="gloss-abbr">(HHG)</span></div><div class="gloss-def">Personal property belonging to a member and their dependents that is authorized for shipment at government expense during a PCS move.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Home of Record <span class="gloss-abbr">(HOR)</span></div><div class="gloss-def">The place listed on the member's enlistment/appointment documents as their home at the time of entry into military service. Members separating or retiring may ship HHG to HOR via DD Form 3155.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Home of Selection <span class="gloss-abbr">(HOS)</span></div><div class="gloss-def">A location chosen by a member retiring with 20+ years of service that may differ from their HOR. Authorized via DD Form 3156. Transportation time limit is 1 year from retirement date, extendable to 3 years (standard) or 6 years (exceptional) per JTR ¶054202.</div></div>
+    <div class="gloss-item"><div class="gloss-term">PLEAD</div><div class="gloss-def">Pre-move authorization allowing a member's dependents and a partial HHG shipment to travel to the member's Home of Record (HOR) in advance of the member's PCS, retirement, or separation. Requires valid orders, established HOR, and ITO/PPO approval in DPS before departure. Governed by JTR ¶0549. Partial HHG weight counts against total allowance.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Student Travel</div><div class="gloss-def">An annual transportation entitlement (JTR ¶0551) authorizing round-trip travel for a member's full-time enrolled college-age dependent (under 23) between their CONUS/AK/HI school and the member's OCONUS permanent duty station or HOR. Transportation only — no per diem, no HHG shipment.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Unaccompanied Baggage <span class="gloss-abbr">(UAB)</span></div><div class="gloss-def">An expedited air freight shipment authorized for OCONUS PCS moves. Arrives before main HHG surface shipment (estimated 10–21 days). Weight limits: Army/AF 1,000 lbs; Navy 600 lbs (+200 with dependents); USMC 300 lbs; USCG 350 lbs. Weight is chargeable against total HHG allowance. Firearms and alcohol are not permitted in UAB.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Installation Transportation Office <span class="gloss-abbr">(ITO)</span></div><div class="gloss-def">The installation-level office responsible for personal property counseling, DPS authorization codes, and transportation coordination. Army-specific term; Navy/USMC/USCG use PPO.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Joint Travel Regulations <span class="gloss-abbr">(JTR)</span></div><div class="gloss-def">The primary DoD regulation governing all travel and transportation entitlements for Uniformed Service members and DoD civilians. Chapter 5 covers household goods and personal property.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Non-Temporary Storage <span class="gloss-abbr">(NTS)</span></div><div class="gloss-def">Long-term storage of HHG at government expense, authorized when a member is assigned to a location where HHG cannot be used (OCONUS unaccompanied tours, deployments, etc.). Limited to 1 year CONUS; tour length OCONUS. Extension via DD Form 3151.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Permanent Change of Official Station <span class="gloss-abbr">(PCOS)</span></div><div class="gloss-def">The civilian equivalent of a military PCS — a directed, permanent relocation of a DoD civilian employee to a new duty location. Triggers personal property entitlements under JTR Chapter 5 Part C.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Permanent Change of Station <span class="gloss-abbr">(PCS)</span></div><div class="gloss-def">A military order directing a service member to permanently relocate from one duty station to another. Triggers full HHG, NTS, and related personal property entitlements.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Personally Procured Move / Do-It-Yourself <span class="gloss-abbr">(PPM/DITY)</span></div><div class="gloss-def">An authorized move type in which the member personally arranges their own transportation in exchange for 95% of the GCC. Documented and authorized on DD Form 3166.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Personal Property Office <span class="gloss-abbr">(PPO)</span></div><div class="gloss-def">Navy, USMC, and USCG term for the installation-level personal property counseling office. Performs the same function as the Army ITO.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Professional Books, Papers, and Equipment <span class="gloss-abbr">(PBP&E)</span></div><div class="gloss-def">Job-related professional items authorized for shipment in addition to (non-chargeable against) the standard HHG weight allowance. Member: up to 2,000 lbs; spouse: up to 500 lbs. Documented on DD Form 3168.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Privately Owned Vehicle <span class="gloss-abbr">(POV)</span></div><div class="gloss-def">A vehicle owned by a member or dependent. One POV may be shipped at government expense for OCONUS PCS moves. Documented on DD Form 3163 (shipment) or DD Forms 3164/3165 (storage).</div></div>
+    <div class="gloss-item"><div class="gloss-term">Status of Forces Agreement <span class="gloss-abbr">(SOFA)</span></div><div class="gloss-def">A bilateral agreement between the US and a host nation governing the legal status and rights of US military personnel stationed in that country. SOFA provisions affect firearms permissions, vehicle registration, and personal property restrictions for OCONUS moves.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Transportation Service Provider <span class="gloss-abbr">(TSP)</span></div><div class="gloss-def">A commercial moving company contracted by the government to perform HHG moves. TSPs are selected through DPS and are responsible for FRV coverage, inventory, and on-time delivery performance.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Place Entered Active Duty <span class="gloss-abbr">(PLEAD)</span></div><div class="gloss-def">The geographic location where a service member entered active military service (e.g., recruiting station city for enlisted, commissioning source location for officers). Closely related to HOR. When separating or retiring, government transportation is authorized to the HOR — which in most cases aligns with the PLEAD. Discrepancies must be corrected through the personnel records office before booking a separation/retirement shipment.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Student Travel <span class="gloss-abbr">(JTR ¶058001)</span></div><div class="gloss-def">An annual round-trip transportation entitlement allowing dependent students of OCONUS-assigned service members to travel to/from their US educational institution at government expense. Authorized once per academic year per qualifying dependent. Processed through the finance/travel office (DTS), not the personal property office. Does not include HHG or UAB — normal baggage only.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Retirement Transportation Extension <span class="gloss-abbr">(JTR ¶050601)</span></div><div class="gloss-def">Provision allowing retiring members to extend the 1-year transportation entitlement deadline: to 3 years with approved justification (financial hardship, medical, family circumstances), and to 6 years under compelling circumstances with higher-level approval. Requests must be submitted before the current deadline expires. Maximum extension is 6 years from retirement date — no further extensions authorized.</div></div><div class="gloss-def">A reimbursement payment that covers the additional federal income tax a member owes on the Withholding Tax Allowance (WTA). Solves the "tax on a tax" problem created when taxable moving allowances are paid. Filed in the tax year following WTA receipt through DFAS or the employing agency. Does not cover state income taxes.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Withholding Tax Allowance <span class="gloss-abbr">(WTA)</span></div><div class="gloss-def">An advance payment made by the government to cover the estimated federal income tax owed on taxable PCS/PCOS moving allowances (such as PPM incentive payments). Paid in the same pay period as the taxable allowance. The WTA itself is taxable income, which is why RITA exists to complete the reimbursement cycle.</div></div>
+    <div class="gloss-item"><div class="gloss-term">Vehicle Processing Center <span class="gloss-abbr">(VPC)</span></div><div class="gloss-def">DoD-operated facilities at major ports of embarkation/debarkation where members drop off and pick up their POV for overseas shipment. Major locations: Baltimore, Jacksonville, Houston, Los Angeles, Seattle, Honolulu.</div></div>
+  </div>
+</div>
+
+</main>
+
+<script>
+// ---- TAB NAVIGATION ----
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ---- SERVICE TABS ----
+function showSvc(id, btn) {
+  document.querySelectorAll('.svc-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.svc-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('svc-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ---- SCENARIO TRACKING ----
+var scState = {};
+
+function initSc(scId, total) {
+  if (!scState[scId]) {
+    scState[scId] = { answered: 0, correct: 0, total: total };
+  }
+}
+
+function ans(scId, qId, btn, correct, explanation) {
+  var sc = scState[scId];
+  if (!sc) { initSc(scId, 4); sc = scState[scId]; }
+  var qBlock = document.getElementById(scId + qId);
+  if (!qBlock) return;
+  // Already answered?
+  if (qBlock.dataset.answered) return;
+  qBlock.dataset.answered = '1';
+
+  // Disable all options in this question
+  qBlock.querySelectorAll('.opt-btn').forEach(function(b) {
+    b.classList.add('disabled');
+  });
+  btn.classList.add(correct ? 'correct' : 'wrong');
+  if (correct) {
+    btn.innerHTML = '✓ ' + btn.innerHTML;
+  } else {
+    btn.innerHTML = '✗ ' + btn.innerHTML;
+    // Show correct answer
+    qBlock.querySelectorAll('.opt-btn').forEach(function(b) {
+      if (b !== btn) b.style.opacity = '0.45';
+    });
+  }
+
+  // Show feedback
+  var fb = document.getElementById(scId + qId + '-fb');
+  if (fb) {
+    fb.innerHTML = (correct ? '✅ <strong>Correct!</strong> ' : '❌ <strong>Incorrect.</strong> ') + explanation;
+    fb.className = 'feedback show ' + (correct ? 'ok' : 'bad');
+  }
+
+  // Update score
+  sc.answered++;
+  if (correct) sc.correct++;
+
+  // Show score card when all answered
+  if (sc.answered >= sc.total) {
+    var scoreDiv = document.getElementById(scId + '-score');
+    var numDiv = document.getElementById(scId + '-num');
+    var msgDiv = document.getElementById(scId + '-msg');
+    if (scoreDiv) {
+      scoreDiv.style.display = 'block';
+      numDiv.textContent = sc.correct + '/' + sc.total;
+      var pct = sc.correct / sc.total;
+      var msg = pct >= 0.9 ? '🌟 Outstanding! You are ready to counsel.' :
+                pct >= 0.7 ? '👍 Good work. Review the items you missed.' :
+                pct >= 0.5 ? '📚 Needs improvement. Review this scenario and retake.' :
+                             '🔁 Please review all materials and retake this scenario.';
+      msgDiv.textContent = msg;
+    }
+  }
+}
+
+function restartSc(scId, total) {
+  scState[scId] = { answered: 0, correct: 0, total: total };
+  // Reset all questions
+  for (var i = 1; i <= total; i++) {
+    var qBlock = document.getElementById(scId + 'q' + i);
+    if (!qBlock) continue;
+    delete qBlock.dataset.answered;
+    qBlock.querySelectorAll('.opt-btn').forEach(function(b) {
+      b.classList.remove('correct', 'wrong', 'disabled');
+      b.style.opacity = '';
+      // Remove leading ✓/✗
+      b.innerHTML = b.innerHTML.replace(/^[✓✗]\s/, '');
+    });
+    var fb = document.getElementById(scId + 'q' + i + '-fb');
+    if (fb) { fb.className = 'feedback'; fb.innerHTML = ''; }
+  }
+  var scoreDiv = document.getElementById(scId + '-score');
+  if (scoreDiv) scoreDiv.style.display = 'none';
+}
+
+// Initialize all scenarios
+initSc('sc1', 4);
+initSc('sc2', 3);
+initSc('sc3', 3);
+initSc('sc4', 2);
+
+// ---- CHECKLIST ----
+var clDone = 0;
+var clTotal = 0;
+
+function countCL() {
+  clTotal = document.querySelectorAll('.cl-item').length;
+}
+
+function tck(el) {
+  el.classList.toggle('done');
+  var box = el.querySelector('.cl-box');
+  box.textContent = el.classList.contains('done') ? '✓' : '☐';
+  updateCLProgress();
+}
+
+function updateCLProgress() {
+  clDone = document.querySelectorAll('.cl-item.done').length;
+  clTotal = document.querySelectorAll('.cl-item').length;
+  var pct = clTotal > 0 ? (clDone / clTotal * 100) : 0;
+  document.getElementById('cl-bar').style.width = pct + '%';
+  document.getElementById('cl-status').textContent = clDone + ' of ' + clTotal + ' items completed';
+}
+
+function resetCL() {
+  document.querySelectorAll('.cl-item').forEach(function(el) {
+    el.classList.remove('done');
+    el.querySelector('.cl-box').textContent = '☐';
+  });
+  updateCLProgress();
+}
+
+// Init checklist count on page load
+window.addEventListener('DOMContentLoaded', function() {
+  countCL();
+  updateCLProgress();
+});
+</script>
+</body>
+</html>
