@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Navigate the Civilian Training Task List</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Segoe UI",system-ui,sans-serif;font-size:15px;line-height:1.7;color:var(--fg);background:var(--bg)}
+:root{--bg:#f8f7f4;--bg2:#fff;--bg3:#f1efe8;--fg:#1a1a18;--fg2:#4a4a47;--fg3:#737370;--border:#e0ded6;--blue-bg:#e6f1fb;--blue-border:#185fa5;--blue-text:#0c447c;--teal-bg:#e1f5ee;--teal-border:#0f6e56;--teal-text:#085041;--amber-bg:#faeeda;--amber-border:#854f0b;--amber-text:#633806;--purple-bg:#eeedfe;--purple-border:#534ab7;--purple-text:#3c3489;--green-bg:#eaf3de;--green-border:#3b6d11;--green-text:#27500a;--accent:#185fa5}
+.page{max-width:860px;margin:0 auto;padding:36px 24px}
+/* COVER */
+.cover{text-align:center;padding:48px 24px 40px;background:linear-gradient(135deg,#0f3460 0%,#185fa5 60%,#2980b9 100%);border-radius:16px;margin-bottom:36px;color:#fff}
+.cover .seal{width:64px;height:64px;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.4);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.cover h1{font-size:26px;font-weight:700;margin-bottom:8px;letter-spacing:-.3px}
+.cover p{font-size:14px;color:rgba(255,255,255,.85);max-width:500px;margin:0 auto 20px}
+.cover .meta{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;font-size:12px;color:rgba(255,255,255,.7)}
+.cover .meta span{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:4px 12px}
+/* TOC */
+.toc{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin-bottom:32px}
+.toc h2{font-size:14px;font-weight:700;color:var(--fg2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px}
+.toc-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:6px 24px}
+.toc-list li a{font-size:13px;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px}
+.toc-list li a:hover{text-decoration:underline}
+.toc-list li a span{font-size:11px;color:var(--fg3);min-width:20px}
+/* SECTIONS */
+.guide-section{margin-bottom:36px}
+.section-anchor{scroll-margin-top:20px}
+.section-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--border)}
+.section-num{width:32px;height:32px;border-radius:8px;background:var(--accent);color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.section-title-text{font-size:18px;font-weight:600;color:var(--fg)}
+/* CARDS */
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin-bottom:14px}
+.card-title{font-size:14px;font-weight:600;color:var(--fg);margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.card-body{font-size:13px;color:var(--fg2);line-height:1.65}
+.badge-pill{font-size:11px;font-weight:600;padding:2px 10px;border-radius:12px;white-space:nowrap}
+.pill-blue{background:var(--blue-bg);color:var(--blue-text);border:1px solid var(--blue-border)}
+.pill-teal{background:var(--teal-bg);color:var(--teal-text);border:1px solid var(--teal-border)}
+.pill-amber{background:var(--amber-bg);color:var(--amber-text);border:1px solid var(--amber-border)}
+.pill-purple{background:var(--purple-bg);color:var(--purple-text);border:1px solid var(--purple-border)}
+.pill-green{background:var(--green-bg);color:var(--green-text);border:1px solid var(--green-border)}
+.pill-forms{background:#f3e8ff;color:#5b21b6;border:1px solid #7c3aed}
+/* STEP LIST */
+.step-list{list-style:none;counter-reset:steps;margin-top:10px}
+.step-list li{counter-increment:steps;display:flex;gap:14px;padding:10px 0;border-bottom:1px solid var(--border)}
+.step-list li:last-child{border-bottom:none}
+.step-list li::before{content:counter(steps);width:24px;height:24px;border-radius:50%;background:var(--blue-bg);border:1.5px solid var(--blue-border);color:var(--blue-text);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.step-list li .step-text{font-size:13px;color:var(--fg2);line-height:1.6}
+.step-list li .step-text strong{color:var(--fg);font-weight:600}
+/* INFO BOX */
+.info-box{background:var(--blue-bg);border:1px solid var(--blue-border);border-radius:8px;padding:12px 16px;font-size:13px;color:var(--blue-text);margin-bottom:14px}
+.info-box strong{font-weight:600;display:block;margin-bottom:3px}
+.warn-box{background:var(--amber-bg);border:1px solid var(--amber-border);border-radius:8px;padding:12px 16px;font-size:13px;color:var(--amber-text);margin-bottom:14px}
+.warn-box strong{font-weight:600;display:block;margin-bottom:3px}
+.tip-box{background:var(--teal-bg);border:1px solid var(--teal-border);border-radius:8px;padding:12px 16px;font-size:13px;color:var(--teal-text);margin-bottom:14px}
+.tip-box strong{font-weight:600;display:block;margin-bottom:3px}
+/* VISUAL MOCK */
+.mock{background:var(--bg3);border:1.5px dashed var(--border);border-radius:10px;padding:14px 18px;margin:12px 0;font-size:12px;color:var(--fg3)}
+.mock-nav{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.mock-btn{padding:4px 12px;border-radius:16px;border:1.5px solid var(--border);background:var(--bg2);color:var(--fg2);font-size:11px;font-family:inherit}
+.mock-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+.mock-block{background:var(--bg2);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:8px}
+.mock-header{padding:8px 12px;background:var(--bg3);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;font-size:12px}
+.mock-body{padding:10px 12px}
+.mock-task{display:flex;gap:8px;padding:5px 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.mock-task:last-child{border-bottom:none}
+.mock-check{width:12px;height:12px;border:1.5px solid var(--border);border-radius:3px;flex-shrink:0;margin-top:2px}
+.mock-check.done{background:var(--accent);border-color:var(--accent)}
+.mock-tag{font-size:10px;background:var(--tag-bg,var(--blue-bg));color:var(--tag-fg,var(--blue-text));border-radius:4px;padding:1px 6px;text-decoration:none;white-space:nowrap}
+:root{--tag-bg:#e6f1fb;--tag-fg:#0c447c}
+/* TABLE */
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
+th{background:var(--bg3);color:var(--fg2);font-weight:600;text-align:left;padding:8px 12px;border:1px solid var(--border)}
+td{padding:8px 12px;border:1px solid var(--border);color:var(--fg2);vertical-align:top}
+tr:nth-child(even) td{background:var(--bg3)}
+/* QUICK REF */
+.qr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:10px}
+.qr-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px 14px}
+.qr-card .qr-icon{font-size:20px;margin-bottom:6px}
+.qr-card .qr-label{font-size:12px;font-weight:600;color:var(--fg);margin-bottom:4px}
+.qr-card .qr-desc{font-size:11px;color:var(--fg3);line-height:1.5}
+/* DL BTN */
+.dl-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:8px;background:var(--accent);color:#fff;font-size:13px;font-weight:500;border:none;cursor:pointer;font-family:inherit;transition:opacity .15s;text-decoration:none}
+.dl-btn:hover{opacity:.88}
+.dl-btn svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.dl-btn.outline{background:var(--bg2);color:var(--accent);border:1.5px solid var(--accent)}
+.dl-btn.outline svg{stroke:var(--accent)}
+/* DIVIDER */
+hr{border:none;border-top:1px solid var(--border);margin:28px 0}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="seal">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+    </div>
+    <h1>How to Navigate the<br>Civilian Training Task List</h1>
+    <p>A complete user guide for civilian employees, supervisors, section chiefs, and trainers using the GS-2102 / GS-2130 Training Tool</p>
+    <div class="meta">
+      <span>GS-2102 · GS-2130</span>
+      <span>Personal Property · Manning · Operational Guidance</span>
+      <span>GS-05 through GS-15</span>
+    </div>
+  </div>
+
+  <!-- TOC -->
+  <div class="toc">
+    <h2>Table of Contents</h2>
+    <ul class="toc-list">
+      <li><a href="#s1"><span>01</span> What Is This Tool?</a></li>
+      <li><a href="#s2"><span>02</span> Who Should Use It?</a></li>
+      <li><a href="#s3"><span>03</span> Understanding the Layout</a></li>
+      <li><a href="#s4"><span>04</span> Navigating the Tabs</a></li>
+      <li><a href="#s5"><span>05</span> Using the Tier Blocks</a></li>
+      <li><a href="#s6"><span>06</span> Checking Off Tasks</a></li>
+      <li><a href="#s7"><span>07</span> Using Regulatory Links</a></li>
+      <li><a href="#s8"><span>08</span> Personal Property Forms Tab</a></li>
+      <li><a href="#s9"><span>09</span> Downloading &amp; Printing</a></li>
+      <li><a href="#s10"><span>10</span> Trainer &amp; Supervisor Guide</a></li>
+      <li><a href="#s11"><span>11</span> Quick Reference Summary</a></li>
+    </ul>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="guide-section section-anchor" id="s1">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div class="section-title-text">What Is This Tool?</div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        The <strong>Civilian Training Task List</strong> is an interactive, browser-based training management guide designed specifically for Department of the Air Force civilian employees in the <strong>Transportation Clerk &amp; Assistant (GS-2102)</strong> and <strong>Traffic Management Specialist (GS-2130)</strong> series. It covers the full career spectrum from <strong>GS-05 through GS-15</strong> and is focused on Personal Property operations, Manning management, and Operational Guidance.
+        <br><br>
+        The tool consolidates regulatory references, task checklists, onboarding steps, career progression frameworks, and trainer guidance into a single document — eliminating the need to search across multiple publications to manage a training program.
+      </div>
+    </div>
+    <div class="info-box">
+      <strong>Key publications integrated into this tool:</strong>
+      DAFI 24-602V4 (2026) · DTR Part IV Chapters A-401 through A-413 · JTR · OCONUS PPCIG (Sept 2025) · OPM GS-2102 &amp; GS-2130 Standards · DoW PPA Business Rules · DTR Appendix A-M Forms
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="guide-section section-anchor" id="s2">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div class="section-title-text">Who Should Use It?</div>
+    </div>
+    <table>
+      <thead><tr><th>User</th><th>Primary Use</th><th>Recommended Starting Tab</th></tr></thead>
+      <tbody>
+        <tr><td><strong>New Hire (GS-05/06)</strong></td><td>Complete onboarding checklist, access ID card and security steps, identify mandatory training</td><td>Onboarding → Development Framework → Apprentice</td></tr>
+        <tr><td><strong>Journeyman (GS-07/09)</strong></td><td>Track OJT task certification progress, process complex moves, conduct QA inspections</td><td>Intermediate</td></tr>
+        <tr><td><strong>Advanced / Lead (GS-11/12)</strong></td><td>Manage QA program, develop SOPs, manage section training plans</td><td>Advanced</td></tr>
+        <tr><td><strong>Senior / Expert (GS-13–15)</strong></td><td>Policy recommendations, workforce development, enterprise TSP oversight</td><td>Expert</td></tr>
+        <tr><td><strong>Supervisor / Section Chief</strong></td><td>Plan and document OJT, build MTL/MTP, conduct evaluations</td><td>Trainer Guidance</td></tr>
+        <tr><td><strong>Trainer / Certifier</strong></td><td>Follow four-step OJT method, document task completions, provide feedback</td><td>Trainer Guidance</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="guide-section section-anchor" id="s3">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div class="section-title-text">Understanding the Layout</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Overall Structure</div>
+      <div class="card-body">The tool is organized into <strong>7 tabbed sections</strong> at the top of the page. Within each section, content is grouped into collapsible <strong>Tier Blocks</strong> (expandable panels), which are further organized into <strong>Task Groups</strong> and individual <strong>Task Items</strong>.</div>
+    </div>
+
+    <div class="mock">
+      <div style="font-size:11px;color:var(--fg3);margin-bottom:8px;font-weight:600">VISUAL EXAMPLE — Top Navigation Bar</div>
+      <div class="mock-nav">
+        <div class="mock-btn active">Onboarding</div>
+        <div class="mock-btn">Development Framework</div>
+        <div class="mock-btn">Apprentice / Entry</div>
+        <div class="mock-btn">Intermediate</div>
+        <div class="mock-btn">Advanced</div>
+        <div class="mock-btn">Expert</div>
+        <div class="mock-btn">Trainer Guidance</div>
+      </div>
+      <div style="font-size:11px;color:var(--fg3)">↑ Click any tab to switch sections. The active tab is highlighted in blue.</div>
+    </div>
+
+    <div class="mock" style="margin-top:12px">
+      <div style="font-size:11px;color:var(--fg3);margin-bottom:8px;font-weight:600">VISUAL EXAMPLE — Tier Block (expandable panel)</div>
+      <div class="mock-block">
+        <div class="mock-header">
+          <span class="badge-pill pill-blue">Personal Property</span>
+          <span style="font-size:12px;font-weight:600;flex:1">Personal Property Operations — Apprentice</span>
+          <span style="font-size:13px;color:var(--fg3)">▾</span>
+        </div>
+        <div class="mock-body">
+          <div style="font-size:11px;color:var(--fg3);margin-bottom:8px;font-weight:600;text-transform:uppercase;letter-spacing:.04em">Order Verification &amp; Entitlement Determination</div>
+          <div class="mock-task">
+            <div class="mock-check done"></div>
+            <div><div style="font-size:12px;font-weight:500;color:var(--fg)">Verify travel order validity</div><div style="font-size:11px;color:var(--fg3)">Check funding citations, order number, and weight allowances...</div><div style="margin-top:4px;display:flex;gap:4px"><span class="mock-tag">JTR Ch. 5</span><span class="mock-tag">DAFI 24-602V4</span><span class="mock-tag">DTR Ch. A-401</span></div></div>
+          </div>
+          <div class="mock-task">
+            <div class="mock-check"></div>
+            <div><div style="font-size:12px;font-weight:500;color:var(--fg)">Analyze travel orders to determine entitlements</div><div style="font-size:11px;color:var(--fg3)">Determine authorized HHG weight allowances, POV entitlements...</div></div>
+          </div>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--fg3)">↑ Click the block header to expand/collapse. Checkbox marks a task complete (turns blue ✓).</div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="guide-section section-anchor" id="s4">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div class="section-title-text">Navigating the Tabs</div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="badge-pill pill-green">Onboarding</span></div>
+      <div class="card-body">Start here on your <strong>first day</strong>. Contains five sequential steps covering HR actions (benefits, PD review, IDP), Federal ID card and CAC/PIV setup, building access, computer/network access, and all mandatory federal training (Cyber Awareness, CUI, CTIP, Antiterrorism, EEO, Ethics). Work through Steps 1–5 in order during your first 30 days.</div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="badge-pill pill-blue">Development Framework</span></div>
+      <div class="card-body">Review <strong>after completing onboarding</strong>. Contains two resources: (1) the <strong>DAF Foundational Competency Model</strong> — four domains (Developing Self, Developing Others, Developing Organizations, Developing Ideas) showing the competencies expected of all civilians; and (2) the <strong>GS Career Progression Pyramid</strong> — a visual roadmap of training, education, and development from GS-05 entry level through GS-15 senior leader. Use this to understand where you are and where you are going.</div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="badge-pill pill-blue">Apprentice / Entry <span style="font-weight:400;margin-left:4px">GS-05–07</span></span></div>
+      <div class="card-body">Contains <strong>six sub-sections</strong>: Regulatory Guidance (with full DTR Chapter Index), Personal Property Forms (all 33 forms from DTR App A-M), Personal Property Operations (counseling, shipment management outbound/inbound, storage SIT/NTS, QA foundational, PPM, specialized shipments, BLUEBARK/Safety Moves), and Manning &amp; Operational Guidance. This is the starting point for all task certification at entry level.</div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="badge-pill pill-teal">Intermediate <span style="font-weight:400;margin-left:4px">GS-07–09</span></span></div>
+      <div class="card-body">Builds on apprentice content. Covers complex counseling, CONUS/OCONUS exceptions, DPM shipments, independent QA inspections, PPM GCC calculation, full specialized move processing (POV, firearms, boats, mobile homes, specialized), BLUEBARK and Safety Move processing, and section-level manning management.</div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="badge-pill pill-amber">Advanced <span style="font-weight:400;margin-left:4px">GS-11–12</span></span></div>
+      <div class="card-body">Focuses on program management. Covers section-level regulatory authority, SOP development, QA program management (residential/warehouse inspections, TSP punitive actions, invoice reconciliation, carrier violation reporting), and section-level manning (MTL/MTP, duty schedules, PD revisions).</div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="badge-pill pill-purple">Expert <span style="font-weight:400;margin-left:4px">GS-13–15</span></span></div>
+      <div class="card-body">Enterprise-level responsibilities. Covers publication change recommendations, SME representation at DAF PPA HQ working groups, QCI training program development, command-level TSP oversight, strategic manning, and career field training feedback.</div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="badge-pill pill-amber">Trainer Guidance</span></div>
+      <div class="card-body">Four-phase training management framework for supervisors and certified trainers: (1) Planning the Training Program, (2) Conducting OJT using the four-step method, (3) Training Documentation &amp; Certification, and (4) Program Evaluation &amp; Continuous Improvement. Use this section to manage every trainee in your section.</div>
+    </div>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="guide-section section-anchor" id="s5">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <div class="section-title-text">Using the Tier Blocks</div>
+    </div>
+    <div class="card">
+      <div class="card-body">Each section contains multiple <strong>Tier Blocks</strong> — collapsible panels that group related tasks. Each block has a colored badge identifying its category (e.g., Regulatory Guidance, Personal Property, Manning &amp; Ops, Forms).</div>
+    </div>
+    <ul class="step-list">
+      <li><div class="step-text"><strong>Click the block header</strong> to expand or collapse it. The arrow (▾) rotates when expanded. Blocks default to open/closed based on typical workflow order.</div></li>
+      <li><div class="step-text"><strong>Read the badge color</strong> to quickly identify content type. Blue = Apprentice. Teal = Intermediate. Amber = Advanced. Purple = Expert. Green = Onboarding. Violet = Forms.</div></li>
+      <li><div class="step-text"><strong>Review the Task Group title</strong> (gray uppercase header inside the block) to understand which functional area the tasks below belong to (e.g., "Shipment Management — Outbound," "Quality Assurance," "Storage — SIT and NTS").</div></li>
+      <li><div class="step-text"><strong>Read the task title and description</strong> for each item. The description provides procedural context, regulatory authority, and instructions for completing the task.</div></li>
+      <li><div class="step-text"><strong>Check for orange Trainer Action boxes</strong> at the bottom of some tasks. These provide specific instructions to supervisors and trainers on how to teach and certify that task.</div></li>
+    </ul>
+    <div class="warn-box">
+      <strong>Important — Tier Blocks do not auto-save state:</strong> The tool runs entirely in your browser. If you close or refresh the page, checkbox completions will reset. Use the <strong>Download as HTML</strong> button to save a local copy that preserves all content. Track official task completions in your agency's training management system (e.g., training record folder / DAF Form 623 equivalent).
+    </div>
+  </div>
+
+  <!-- SECTION 6 -->
+  <div class="guide-section section-anchor" id="s6">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <div class="section-title-text">Checking Off Tasks</div>
+    </div>
+    <div class="card">
+      <div class="card-body">Each task item has a <strong>checkbox</strong> on the left side. Clicking it marks the task as complete — the task title will strike through and the row will dim to indicate completion. Clicking again unchecks the task.</div>
+    </div>
+    <div class="tip-box">
+      <strong>Best practice — how to use checkboxes effectively:</strong>
+      Checkboxes are a visual progress tracker for the current session only. For official training documentation, your supervisor or certifier must sign off in the agency training record system. Use the checklist during counseling sessions, self-reviews, or trainer-led walkthroughs to visually track what has been covered.
+    </div>
+    <div class="mock">
+      <div style="font-size:11px;color:var(--fg3);margin-bottom:8px;font-weight:600">VISUAL EXAMPLE — Task before and after checking</div>
+      <div class="mock-block">
+        <div class="mock-body">
+          <div class="mock-task">
+            <div class="mock-check"></div>
+            <div><div style="font-size:12px;font-weight:500;color:var(--fg)">Verify travel order validity</div><div style="font-size:11px;color:var(--fg3)">Unchecked — task not yet completed</div></div>
+          </div>
+          <div class="mock-task" style="opacity:.55">
+            <div class="mock-check done"></div>
+            <div><div style="font-size:12px;font-weight:500;color:var(--fg);text-decoration:line-through">Analyze travel orders to determine entitlements</div><div style="font-size:11px;color:var(--fg3)">Checked — task marked complete (struck through, dimmed)</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7 -->
+  <div class="guide-section section-anchor" id="s7">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <div class="section-title-text">Using Regulatory Reference Links</div>
+    </div>
+    <div class="card">
+      <div class="card-body">Every task includes one or more <strong>blue reference tags</strong> below the task description. Each tag is a clickable hyperlink that opens the referenced regulation, publication, or system in a new browser tab. These links are your direct access to the authoritative source for each task.</div>
+    </div>
+
+    <div class="mock">
+      <div style="font-size:11px;color:var(--fg3);margin-bottom:8px;font-weight:600">VISUAL EXAMPLE — Reference tags on a task</div>
+      <div class="mock-block">
+        <div class="mock-body">
+          <div class="mock-task">
+            <div class="mock-check"></div>
+            <div>
+              <div style="font-size:12px;font-weight:500;color:var(--fg)">Process SIT extensions and coordinate conversion to NTS</div>
+              <div style="font-size:11px;color:var(--fg3);margin:3px 0">Determine eligibility for SIT extensions. Initiate and document conversion of SIT to NTS...</div>
+              <div style="display:flex;gap:4px;flex-wrap:wrap">
+                <span class="mock-tag">DTR Ch. A-406</span>
+                <span class="mock-tag">DAFI 24-602V4</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <table style="margin-top:16px">
+      <thead><tr><th>Tag Label</th><th>What It Opens</th><th>When to Use</th></tr></thead>
+      <tbody>
+        <tr><td><strong>DTR Ch. A-4XX</strong></td><td>DTR Part IV Index at business.ustranscom.mil — search for the chapter by name</td><td>For specific shipment type procedures (storage, POV, PPM, QA, etc.)</td></tr>
+        <tr><td><strong>DAFI 24-602V4</strong></td><td>AF e-Publishing site — search for DAFI 24-602 Volume 4</td><td>For Air Force-specific policy and entitlement authority</td></tr>
+        <tr><td><strong>JTR / JTR Ch. 5</strong></td><td>Official JTR website at travel.dod.mil</td><td>For personal property weight allowances and travel entitlements</td></tr>
+        <tr><td><strong>OCONUS PPCIG (Sept 2025)</strong></td><td>Direct PDF download from media.defense.gov</td><td>For OCONUS shipment counseling and operational reference</td></tr>
+        <tr><td><strong>DoW PPA / DPS</strong></td><td>DoW PPA portal at ppa.mil</td><td>For DPS system access, advisories, business rules, and forms</td></tr>
+        <tr><td><strong>Service-Specific Assistance</strong></td><td>ppa.mil/Resources/Service-Specific-Assistance/</td><td>For Air Force-specific program office contacts and supplements</td></tr>
+        <tr><td><strong>OPM GS-2102 / GS-2130</strong></td><td>OPM position classification standard PDFs</td><td>For understanding grade-level duties and qualification requirements</td></tr>
+      </tbody>
+    </table>
+
+    <div class="tip-box" style="margin-top:16px">
+      <strong>DTR Part IV Tip:</strong> All DTR chapter links open the DTR Index at <strong>business.ustranscom.mil/dtr/index.cfm</strong>. Once there, use the search bar or browse the Part IV table of contents to locate the specific chapter (e.g., "A-406 Storage," "A-411 PPM"). Bookmark the DTR Index for daily use.
+    </div>
+  </div>
+
+  <!-- SECTION 8 -->
+  <div class="guide-section section-anchor" id="s8">
+    <div class="section-header">
+      <div class="section-num">8</div>
+      <div class="section-title-text">Personal Property Forms Tab</div>
+    </div>
+    <div class="card">
+      <div class="card-body">Located within the <strong>Apprentice / Entry</strong> tab, the <span class="badge-pill pill-forms">Personal Property Forms</span> block contains all required forms organized into four groups based on their source in DTR Part IV Appendix A-M and supporting chapters.</div>
+    </div>
+    <ul class="step-list">
+      <li><div class="step-text"><strong>Figures A-M-1 through A-M-8</strong> — Entitlement, Extension &amp; Specialty Worksheets (DD Forms 3151–3158). Use these during counseling to document entitlement extensions, firearms, FRV coverage, pests, home of record/selection, HHG checklist, and food imports.</div></li>
+      <li><div class="step-text"><strong>Figures A-M-9 through A-M-16</strong> — Specialty, Storage &amp; PPM Forms (DD Forms 3159–3166). Use for motorcycles, NTS releases and changes, pre-counseling worksheets, POV shipping/storage counseling and authorization, and PPM checklist.</div></li>
+      <li><div class="step-text"><strong>Figures A-M-17 through A-M-23</strong> — Authorization, Specialty &amp; Final Counseling Forms (DD Forms 3167–3170, 3178, 1299, 1797). Use for releasing agent authorization, PBP&amp;E, alcoholic beverages, shipper's certification, boat counseling, shipment application, and the final counseling checklist.</div></li>
+      <li><div class="step-text"><strong>Additional Required Forms</strong> — DD Forms 2278, 1252, 1252-1, 1164, 619, 788, 1780, 1840, 1840R, 1844, and 1162-1. These are used throughout shipment processing, QA inspections, loss/damage reporting, customs, and storage actions.</div></li>
+    </ul>
+    <div class="info-box">
+      <strong>How to access forms:</strong> Each form card links to the DTR Index at business.ustranscom.mil. From the DTR Index, navigate to Appendix A-M or the relevant chapter to download the current fillable PDF version. Always verify you are using the current edition date before use.
+    </div>
+  </div>
+
+  <!-- SECTION 9 -->
+  <div class="guide-section section-anchor" id="s9">
+    <div class="section-header">
+      <div class="section-num">9</div>
+      <div class="section-title-text">Downloading &amp; Printing</div>
+    </div>
+    <div class="card">
+      <div class="card-body">Two export options are available at the <strong>top of the Civilian Training Task List</strong>, next to the title. Use these to save or share the guide.</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0">
+      <div class="card" style="margin:0">
+        <div class="card-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download as HTML
+        </div>
+        <div class="card-body">Saves a complete, self-contained <strong>.html file</strong> to your computer. Contains all content, links, and formatting. Open in any browser — no internet connection required. Ideal for saving to a shared drive, emailing to trainees, or using offline on a government network.</div>
+      </div>
+      <div class="card" style="margin:0">
+        <div class="card-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Print / Save as PDF
+        </div>
+        <div class="card-body">Opens your browser's print dialog with all sections expanded and navigation hidden. Select <strong>"Save as PDF"</strong> as the printer destination to generate a clean PDF. Ideal for printing physical binders, IG inspection records, or digital filing in official folders.</div>
+      </div>
+    </div>
+    <ul class="step-list">
+      <li><div class="step-text">Click <strong>Download as HTML</strong> in the Training Task List header → a file named <code>Civilian_Training_Task_List_GS2102_GS2130_PersonalProperty_Manning_Ops.html</code> will download automatically.</div></li>
+      <li><div class="step-text">Open the downloaded file in <strong>Chrome, Edge, or Firefox</strong> for best results. All tabs, checkboxes, and links will work identically to the original.</div></li>
+      <li><div class="step-text">To save as PDF: click <strong>Print / Save as PDF</strong> → browser print dialog opens → set <strong>Destination</strong> to "Save as PDF" → adjust margins to "Minimum" for best layout → click Save.</div></li>
+      <li><div class="step-text">For physical binders, print in <strong>landscape orientation</strong> if the forms grid or chapter index appears cut off.</div></li>
+    </ul>
+  </div>
+
+  <!-- SECTION 10 -->
+  <div class="guide-section section-anchor" id="s10">
+    <div class="section-header">
+      <div class="section-num">10</div>
+      <div class="section-title-text">Trainer &amp; Supervisor Guide</div>
+    </div>
+    <div class="card">
+      <div class="card-body">The <strong>Trainer Guidance tab</strong> provides a complete OJT management framework. It is intended for use by supervisors, section chiefs, and certified trainers responsible for developing civilian employees. Below is how to use it effectively.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Phase 1 — Planning Before Training Begins</div>
+      <div class="card-body">
+        Before starting any OJT with a new employee:<br>
+        1. Confirm your appointment as trainer in writing from the section supervisor.<br>
+        2. Review the trainee's background, IDP, and existing qualifications.<br>
+        3. Open the applicable skill level tab (Apprentice/Intermediate/Advanced/Expert) and match task groups to the trainee's duty position.<br>
+        4. Pull the relevant TTGs from the HAF Traffic Management Portal, DTR chapters via the DTR Index, and DAFI 24-602V4.<br>
+        5. Build a written training schedule with target completion dates. Share with trainee and supervisor.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Phase 2 — Conducting OJT (Four-Step Method)</div>
+      <div class="card-body">
+        For each task, follow the four steps in Trainer Guidance → Phase 2:<br><br>
+        <strong>Step 1 — Prepare:</strong> Brief the trainee on the objective and relevance.<br>
+        <strong>Step 2 — Demonstrate:</strong> Perform the task at full pace, then step-by-step while narrating. Reference the applicable DTR chapter and DAFI 24-602V4.<br>
+        <strong>Step 3 — Supervised Practice:</strong> Have the trainee perform while you observe. Do not intervene unless safety, data integrity, or customer harm is at risk.<br>
+        <strong>Step 4 — Evaluate &amp; Document:</strong> Apply the go/no-go standard. Document completion in the training record system within 5 business days.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Orange Trainer Action Boxes</div>
+      <div class="card-body">Throughout the Apprentice, Intermediate, Advanced, and Expert tabs, some tasks contain an <span style="background:var(--amber-bg);border:1px solid var(--amber-border);border-radius:4px;padding:1px 6px;font-size:12px;color:var(--amber-text);font-weight:600">Trainer action:</span> callout box. These provide specific trainer instructions for that task — such as how many supervised repetitions are required before certification, what documentation to verify, or what error types to watch for. <strong>Read these before attempting to certify the task.</strong></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Phase 3 — Documentation Requirements</div>
+      <div class="card-body">
+        Every task completion must be documented in the agency training management system (DAF Form 623 equivalent or electronic equivalent):<br><br>
+        • Record: task start date, completion date, trainee initials, trainer initials, certifier initials (for core tasks).<br>
+        • Certifier must be a <strong>separately qualified individual</strong> from the trainer for core tasks.<br>
+        • Never backdate entries.<br>
+        • If a civilian is later found unqualified on a certified task, line through the entry, note the reason, and retrain before recertifying.
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <strong>Supervisor tip — building the MTL and MTP:</strong> Use the Advanced tab → Manning &amp; Ops section as a template for what to include in your Master Task List (MTL) and Master Training Plan (MTP). Every task group in the applicable skill level tabs represents a category for your MTL. Review and update both documents at minimum semi-annually.
+    </div>
+  </div>
+
+  <!-- SECTION 11 -->
+  <div class="guide-section section-anchor" id="s11">
+    <div class="section-header">
+      <div class="section-num">11</div>
+      <div class="section-title-text">Quick Reference Summary</div>
+    </div>
+    <div class="qr-grid">
+      <div class="qr-card">
+        <div class="qr-icon">🗂️</div>
+        <div class="qr-label">7 Tabs</div>
+        <div class="qr-desc">Onboarding · Dev Framework · Apprentice · Intermediate · Advanced · Expert · Trainer Guidance</div>
+      </div>
+      <div class="qr-card">
+        <div class="qr-icon">📋</div>
+        <div class="qr-label">Task Checkboxes</div>
+        <div class="qr-desc">Click to mark tasks complete. Session-only — document official completions in training records.</div>
+      </div>
+      <div class="qr-card">
+        <div class="qr-icon">🔗</div>
+        <div class="qr-label">Blue Reference Tags</div>
+        <div class="qr-desc">Each tag opens the authoritative regulation in a new tab. DTR links open the DTR Index for chapter search.</div>
+      </div>
+      <div class="qr-card">
+        <div class="qr-icon">🟠</div>
+        <div class="qr-label">Orange Trainer Boxes</div>
+        <div class="qr-desc">Trainer-specific instructions for certifying each task. Read before attempting certification.</div>
+      </div>
+      <div class="qr-card">
+        <div class="qr-icon">📑</div>
+        <div class="qr-label">Forms Tab</div>
+        <div class="qr-desc">All 33 personal property forms from DTR App A-M + additional chapter forms. Found in Apprentice tab.</div>
+      </div>
+      <div class="qr-card">
+        <div class="qr-icon">⬇️</div>
+        <div class="qr-label">Download / Print</div>
+        <div class="qr-desc">Download as HTML to save offline. Print/Save as PDF for binders or records. Both buttons in the header.</div>
+      </div>
+      <div class="qr-card">
+        <div class="qr-icon">🏛️</div>
+        <div class="qr-label">DTR Index</div>
+        <div class="qr-desc">business.ustranscom.mil/dtr/index.cfm — all DTR chapter links go here. Bookmark it.</div>
+      </div>
+      <div class="qr-card">
+        <div class="qr-icon">📐</div>
+        <div class="qr-label">Career Pyramid</div>
+        <div class="qr-desc">Development Framework tab. Shows training, education, and broadening expectations for each GS band.</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div style="text-align:center;padding:20px 0 8px">
+      <div style="font-size:13px;color:var(--fg3);margin-bottom:14px">Save or print this How-To Guide for your training binder</div>
+      <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap">
+        <button class="dl-btn" onclick="window.print()">
+          <svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Print / Save as PDF
+        </button>
+        <button class="dl-btn outline" onclick="downloadGuide()">
+          <svg viewBox="0 0 24 24" style="stroke:var(--accent)"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download as HTML
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>
+<script>
+function downloadGuide(){
+  const html=document.documentElement.outerHTML;
+  const blob=new Blob([html],{type:'text/html'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='How_to_Navigate_Civilian_Training_Task_List.html';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+</script>
+</body>
+</html>
