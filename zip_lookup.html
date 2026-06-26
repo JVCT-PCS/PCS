@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zip Code Lookup</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --bg-color: #f3f4f6;
+            --card-bg: #ffffff;
+            --text-color: #1f2937;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            color: var(--text-color);
+        }
+
+        p.subtitle {
+            color: #6b7280;
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1rem;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+        }
+
+        button:disabled {
+            background-color: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        #result {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 6px;
+            display: none;
+        }
+
+        .success {
+            background-color: #ecfdf5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+
+        .error {
+            background-color: #fef2f2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        .data-label {
+            font-weight: bold;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.25rem;
+            display: block;
+        }
+
+        .data-value {
+            font-size: 1.1rem;
+        }
+
+        .loading {
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Zip Code Lookup</h1>
+    <p class="subtitle">Enter a US ZIP code to find the location.</p>
+    
+    <div class="input-group">
+        <input type="text" id="zipInput" placeholder="e.g., 90210" maxlength="5" pattern="\d*">
+    </div>
+    
+    <button id="lookupBtn" onclick="fetchLocation()">Find Location</button>
+
+    <div id="result"></div>
+</div>
+
+<script>
+    const input = document.getElementById('zipInput');
+    const resultDiv = document.getElementById('result');
+    const btn = document.getElementById('lookupBtn');
+
+    // Allow "Enter" key to trigger search
+    input.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            fetchLocation();
+        }
+    });
+
+	async function fetchLocation() {
+	    const zip = input.value.trim();
+	    
+	    // Basic validation
+	    if (!/^\d{5}$/.test(zip)) {
+	        showError("Please enter a valid 5-digit US ZIP code.");
+	        return;
+	    }
+
+	    // UI State: Loading
+	    setLoading(true);
+	    hideResult();
+
+	    try {
+	        // Using Zippopotam.us (Free, Public, No Key Required)
+	        const response = await fetch(`https://api.zippopotam.us/us/${zip}`);
+
+	        if (!response.ok) {
+	            if (response.status === 404) {
+	                throw new Error("ZIP code not found in the database.");
+	            }
+	            throw new Error("Network error or service unavailable.");
+	        }
+
+	        const data = await response.json();
+
+	        // Display Result
+	        // Note: Some Zips have multiple places, we take the first one
+	        const place = data.places[0];
+	        
+	        // FIX: 'state' is inside the place object, not at data root
+	        const state = place.state; 
+	        const city = place['place name'];
+
+	        showSuccess(`${city}, ${state}`);
+
+	    } catch (error) {
+	        showError(error.message);
+	    } finally {
+	        setLoading(false);
+	    }
+	}
+
+    function showSuccess(text) {
+        resultDiv.className = 'success';
+        resultDiv.innerHTML = `
+            <span class="data-label">City & State</span>
+            <div class="data-value">${text}</div>
+        `;
+        resultDiv.style.display = 'block';
+    }
+
+    function showError(text) {
+        resultDiv.className = 'error';
+        resultDiv.innerHTML = `<div class="data-value">${text}</div>`;
+        resultDiv.style.display = 'block';
+    }
+
+    function hideResult() {
+        resultDiv.style.display = 'none';
+    }
+
+    function setLoading(isLoading) {
+        if (isLoading) {
+            btn.disabled = true;
+            btn.textContent = 'Searching...';
+            btn.classList.add('loading');
+            input.disabled = true;
+        } else {
+            btn.disabled = false;
+            btn.textContent = 'Find Location';
+            btn.classList.remove('loading');
+            input.disabled = false;
+            input.focus();
+        }
+    }
+</script>
+
+</body>
+</html>
